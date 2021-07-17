@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const axios = require('axios');
 const config = require('../config');
 
-app.use(express.static('client'));
+app.use(express.static(`${__dirname} /../client/dist`));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -15,16 +15,19 @@ const getAPI = (params, cb) => {
   axios({
     method: 'GET',
     url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/${params}`,
-    headers: { Authorization: config.gitToken },
+    headers: { Authorization: config.TOKEN },
   }).then((response) => {
     cb(response);
-  });
+  })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 app.get('/', (req, res) => {
   getAPI('products', (err, results) => {
     if (err) {
-      res.end();
+      console.log(err);
     } else {
       res.send(results);
     }
