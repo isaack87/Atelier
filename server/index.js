@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const axios = require('axios');
 const config = require('../config');
 
-app.use(express.static('client'));
+app.use(express.static(`${__dirname} /../client/dist`));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
