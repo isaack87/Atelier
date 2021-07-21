@@ -12,23 +12,56 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // pass in string to get from that endpoint
 const getAPI = (params, cb) => {
-  axios({
-    method: 'GET',
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/${params}`,
-    headers: { Authorization: config.gitToken },
-  }).then((response) => {
-    cb(response);
-  });
-};
+
+let options = {
+  method: 'get',
+  url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/${params}`,
+  headers: {
+    'User-Agent': 'request',
+    'Authorization': `token ${config.gitToken}`
+  }
+}
+
+axios(options)
+.then ((repo) => {
+  cb(repo)
+console.log('axios get success')
+})
+.catch (() => {
+  console.log('error auth')
+})
+}
+
 
 app.get('/', (req, res) => {
   getAPI('products', (err, results) => {
     if (err) {
-      res.end();
+      console.log('errpro');
     } else {
       res.send(results);
     }
   });
+});
+
+app.post('/', (req, res) => {
+  res.send('successs');
+});
+
+// Questions Routes
+app.get('/questions', (req, res) => {
+  let searched = req.body.search;
+  getAPI(`${searched}`, (err, results) => {
+    if (err) {
+      console.log('errquest');
+    } else {
+      console.log(result)
+      res.send(results);
+    }
+  });
+});
+
+app.post('/questions', (req, res) => {
+  res.send('successs');
 });
 
 app.listen(port, () => {

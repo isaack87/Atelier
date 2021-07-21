@@ -1,25 +1,45 @@
-import React from 'react'
+import React from 'react';
 
-var SearchBar = (props) => {
+class SearchBar extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchTerm: '',
+    };
+    this.search = this.search.bind(this);
+    this.onChange = this.onChange.bind(this);
+  }
 
-  return (
-    <div className='searchbar'>
-      <form action="/" method="post">
-        <label className='searchbartitle'>QUESTIONS & ANSWERS</label>
-          <br/>
+  onChange(e) {
+    this.setState({
+      searchTerm: e.target.value,
+    });
+  }
+
+  search(e) {
+    const { searchTerm } = this.state;
+    e.preventDefault();
+    this.props.onSearch(searchTerm);
+  }
+
+  render() {
+    return (
+      <div className="searchbar">
+        <form>
+          <p className="searchbartitle">QUESTIONS & ANSWERS</p>
+          <br />
           <input
-            type="text"
-            id="search"
+            onChange={this.onChange}
             className="searchfield"
-            placeholder='HAVE A QUESTION? SEARCH FOR ANSWERS ...'
-            name='searchBar'
-            />
-          <button type='submit' className="searchbutton">
-          <img className="imgmag" src="search.png"></img>
+            placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS ..."
+          />
+          <button type="submit" className="searchbutton" onClick={this.search}>
+            <img className="imgmag" src="search.png" alt="searchlogo" />
           </button>
-      </form>
+        </form>
       </div>
-  )
+    );
+  }
 }
 
 export default SearchBar;
