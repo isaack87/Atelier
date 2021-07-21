@@ -21,5 +21,5 @@ module.exports = {
   rules: {
     'no-console': 0,
   },
-  ignorePatterns: ['client/dist'],
+  ignorePatterns: ['client/dist', 'test'],
 };
