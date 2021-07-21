@@ -1,19 +1,17 @@
 import React from 'react';
 import testdata from './exampleData.jsx'
 
-var AnswerPhotos = (props) => {
-  var test = 'appear'
-  var data = testdata.map( (data) => (
-    <img src={data.Photos.length === 0 ? console.log('hi') : data.Photos}/>
-  )
-  )
+const AnswerPhotos = () => {
+  const test = 'appear';
+  const data = testdata.map((pics) => (
+    <img key={pics.id} alt="pics" src={pics.Photos.length === 0 ? { test } : pics.Photos} />
+  ));
 
   return (
-  <div>
-    {data}
-  </div>
-  )
-
-}
+    <div>
+      {data}
+    </div>
+  );
+};
 
 export default AnswerPhotos;

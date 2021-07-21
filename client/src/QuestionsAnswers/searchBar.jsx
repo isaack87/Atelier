@@ -17,8 +17,8 @@ class SearchBar extends React.Component {
   }
 
   search(e) {
-    const { searchTerm } = this.state;
     e.preventDefault();
+    const { searchTerm } = this.state;
     this.props.onSearch(searchTerm);
   }
 

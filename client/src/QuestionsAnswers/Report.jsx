@@ -1,15 +1,15 @@
 import React from 'react';
 
-var Report = (props) => {
-
-  var testbutton = () => {
-    alert('testing button')
-  }
+const Report = () => {
+  const testbutton = () => {
+    alert('testing button');
+  };
 
   return (
-  <div>
-    <button onClick={testbutton} className='reporthelpful-btn'>Report</button>
-  </div>
-  )
-}
+    <div>
+      <button type="submit" onClick={testbutton} className="reporthelpful-btn">Report</button>
+    </div>
+  );
+};
+
 export default Report;
