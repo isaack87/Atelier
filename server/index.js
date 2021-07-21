@@ -51,9 +51,10 @@ app.get('/QA', (req, res) => {
 });
 
 app.post('/QA', (req, res) => {
-  getAPI('products', (err) => {
+  const params = req.body;
+  isaacAPI.postquestionAPI(params, (err) => {
     if (err) {
-      console.log('qa-err');
+      console.log('qa-post-err');
     }
     res.send('success');
   });
@@ -65,9 +66,10 @@ app.get('/Answers', (req, res) => {
 });
 
 app.post('/Answers', (req, res) => {
-  getAPI('products', (err) => {
+  const params = req.body;
+  isaacAPI.postanswerAPI(params, (err) => {
     if (err) {
-      console.log('answer-err');
+      console.log('answer-post-err');
     }
     res.send('success');
   });
@@ -76,7 +78,6 @@ app.post('/Answers', (req, res) => {
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
-
 
 // Louis Routes
 
