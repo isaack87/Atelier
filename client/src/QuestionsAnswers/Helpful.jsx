@@ -1,14 +1,15 @@
 import React from 'react';
 import $ from 'jquery';
 
-const Helpful = () => {
+const Helpful = (props) => {
   const helpfulCounterAjaxPost = () => {
     $.ajax({
       method: 'POST',
       url: 'http://localhost:3000/QuestionHelpful',
       contentType: 'application/json',
       success: () => {
-        console.log('success belpful counter++');
+        props.ajaxgethelpful();
+        console.log('success helpful counter++');
       },
       error: (err) => {
         console.log(err);
@@ -16,21 +17,12 @@ const Helpful = () => {
     });
   };
 
-  // helpfulCounterAjaxGet() {
-  //   fetch('http://localhost:3000/QuestionHelpful')
-  //     .then((response) => response.json())
-  //     .then((questions) => {
-  //       console.log(questions.helpful[0])
-  //     });
-  // }
-
-   const count = 11 //helpfulCounterAjaxGet();
-
   return (
     <div>
       Helpful?
       <button type="submit" onClick={helpfulCounterAjaxPost} className="reporthelpful-btn">Yes</button>
-      {count}
+      {/* should be the helpfulcount state from questionsanswerbox file but not workinging */}
+      {props.counter}
     </div>
   );
 };

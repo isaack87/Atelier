@@ -135,7 +135,7 @@ const putQuestionHelpful = (params, cb) => {
     method: 'PUT',
     // replace 213364 with a questio param query for no hardcoded for testing
     // when this put is run it just increments helpfu counter by +1
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions/213365/helpful`,
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions/213364/helpful`,
     headers: { Authorization: config.gitToken },
   };
   axios(options)

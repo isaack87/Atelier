@@ -1,8 +1,8 @@
 import React from 'react';
-import AskQuestions from './AskQuestionButtons.jsx'
+import $ from 'jquery';
 import Answers from './AnswerData.jsx'
 import SearchBar from './searchBar.jsx'
-import $ from 'jquery';
+import Helpful from './Helpful.jsx';
 
 class QuestionsAnswersBox extends React.Component {
   constructor(props) {
@@ -11,16 +11,19 @@ class QuestionsAnswersBox extends React.Component {
       questionsList: [],
       questionResults: [],
       answersList: [],
-      answersResults: []
+      answersResults: [],
+      helpfulCount: [],
     };
     this.search = this.search.bind(this);
     this.getQuestions = this.getQuestions.bind(this);
     this.getAnswers = this.getAnswers.bind(this);
+    this.helpfulCounterAjaxGet = this.helpfulCounterAjaxGet.bind(this);
   }
 
   componentDidMount() {
     this.getQuestions();
     this.getAnswers();
+    this.helpfulCounterAjaxGet();
   }
 
   getQuestions() {
@@ -41,6 +44,16 @@ class QuestionsAnswersBox extends React.Component {
         this.setState({
           answersList: answers,
           answersResults: answers.results
+        });
+      });
+  }
+
+  helpfulCounterAjaxGet() {
+    fetch('http://localhost:3000/QuestionHelpful')
+      .then((response) => response.json())
+      .then((helpfulCounter) => {
+        this.setState({
+          helpfulCount: helpfulCounter[0].helpful,
         });
       });
   }
@@ -66,7 +79,7 @@ class QuestionsAnswersBox extends React.Component {
       <div>
         <div className="AnswerQuestionBoxContainer">
           <SearchBar onSearch={this.search} />
-          <Answers />
+          <Answers counter={this.state.helpfulCount} ajaxgethelpful={this.helpfulCounterAjaxGet} />
         </div>
       </div>
     );
