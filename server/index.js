@@ -13,6 +13,7 @@ app.use(express.static(`${__dirname} /../client/dist`));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+
 // pass in string to get from that endpoint
 const getAPI = (params, cb) => {
   const options = {
@@ -44,17 +45,24 @@ app.post('/', (req, res) => {
   });
 });
 
+
+
+
+
 // Isaac Routes
 // Questions Routes
-app.get('/QA', (req, res) => {
-  res.status(200).send(isaacAPI.getquestionAPI());
+app.get('/Questions', (req, res) => {
+  const params = '';
+  isaacAPI.getquestionAPI(params, (cb) => {
+    res.status(200).send(cb);
+  });
 });
 
-app.post('/QA', (req, res) => {
-  const params = req.body;
+app.post('/Questions', (req, res) => {
+  //const params = req.body;
   isaacAPI.postquestionAPI(params, (err) => {
     if (err) {
-      console.log('qa-post-err');
+      console.log('Questions-post-err');
     }
     res.send('success');
   });
@@ -62,7 +70,10 @@ app.post('/QA', (req, res) => {
 
 // Answers Routes
 app.get('/Answers', (req, res) => {
-  res.status(200).send(isaacAPI.getanswerAPI());
+  const params = '';
+  isaacAPI.getanswerAPI(params, (cb) => {
+    res.status(200).send(cb);
+  });
 });
 
 app.post('/Answers', (req, res) => {
@@ -78,6 +89,31 @@ app.post('/Answers', (req, res) => {
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
+
+// Helpful Routes
+
+app.get('/QuestionHelpful', (req, res) => {
+  const params = '';
+  isaacAPI.getHelpfulCount(params, (cb) => {
+    res.status(200).send(cb);
+  });
+});
+
+app.post('/QuestionHelpful', (req, res) => {
+  const params = '';
+  isaacAPI.putQuestionHelpful(params, (err) => {
+    if (err) {
+      console.log('answer-post-err');
+    }
+    res.send('success');
+  });
+});
+
+
+
+
+
+
 
 // Louis Routes
 

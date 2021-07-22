@@ -10,17 +10,14 @@ const getquestionAPI = (params, cb) => {
   };
   axios(options)
     .then((response) => {
-      // write a function here that grabs data from questions api coming back
-      console.log(response.data);
-    })
-    .then((data) => {
       console.log('axios get success');
-      return cb(data);
+      return cb(response.data);
     })
     .catch(() => {
-      console.log('catch questionAPI err');
+      console.log('getquestionapi error');
     });
-  /*
+};
+/*
     this api returns this structure
   product_id: '28215',
   results: [
@@ -34,7 +31,6 @@ const getquestionAPI = (params, cb) => {
       answers: [Object]
     },
     */
-};
 
 const getanswerAPI = (params, cb) => {
   const options = {
@@ -44,16 +40,13 @@ const getanswerAPI = (params, cb) => {
   };
   axios(options)
     .then((response) => {
-      // write function that handles what you want to do with answers API data coming back
-      console.log(response.data);
-    })
-    .then((data) => {
       console.log('axios get success');
-      return cb(data);
+      return cb(response.data);
     })
     .catch(() => {
-      console.log('catch answerAPI err');
+      console.log('getquestionapi error');
     });
+};
   /*
     this api returns this structure
     question: '213364',
@@ -69,6 +62,30 @@ const getanswerAPI = (params, cb) => {
       photos: []
     },
     */
+
+const getHelpfulCount = (params, cb) => {
+  const options = {
+    method: 'GET',
+    url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions?product_id=28215',
+    headers: { Authorization: config.gitToken },
+  };
+  axios(options)
+    .then((response) => {
+      console.log('axios get success');
+      console.log(response.data.results);
+      return response.data.results.map((helpful) => {
+        const isHelpful = ({
+          helpful: helpful.question_helpfulness,
+        });
+        return isHelpful;
+      });
+    })
+    .then((data) => {
+      cb(data);
+    })
+    .catch(() => {
+      console.log('getquestionapi error');
+    });
 };
 
 /// POSTING API FUNCTIONS
@@ -113,24 +130,24 @@ const postanswerAPI = (params, cb) => {
 };
 
 // PUT REQUEST APIS
-
 const putQuestionHelpful = (params, cb) => {
   const options = {
     method: 'PUT',
-    url: `/qa/questions/${params}/helpful/`,
+    // replace 213364 with a questio param query for no hardcoded for testing
+    // when this put is run it just increments helpfu counter by +1
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions/213365/helpful`,
     headers: { Authorization: config.gitToken },
   };
   axios(options)
     .then((response) => {
       //create function finds product ID and updates helpful counter
-      console.log(response.data);
     })
     .then((data) => {
       console.log('axios get success');
       return cb(data);
     })
     .catch(() => {
-      console.log('catch answerAPI err');
+      console.log('catch putQuestionHelpful err');
     });
 };
 
@@ -203,4 +220,5 @@ module.exports = {
   putReportQuestion,
   putAnswerHelpful,
   putReportAnswer,
+  getHelpfulCount,
 };
