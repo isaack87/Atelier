@@ -1,13 +1,16 @@
 import React from 'react';
+import serverhelper from '../../../server/QuestionAnswerAPI.js'
 
 const Report = () => {
-  const testbutton = () => {
-    alert('testing button');
+  let reportStatus = 'Report';
+  const reportedBtn = () => {
+    reportStatus = 'Reported';
+    serverhelper.putReportQuestion();
   };
 
   return (
     <div>
-      <button type="submit" onClick={testbutton} className="reporthelpful-btn">Report</button>
+      <button type="submit" onClick={reportedBtn} className="reporthelpful-btn">{reportStatus}</button>
     </div>
   );
 };

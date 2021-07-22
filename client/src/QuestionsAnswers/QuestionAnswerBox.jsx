@@ -13,6 +13,7 @@ class QuestionsAnswersBox extends React.Component {
       answersList: [],
       answersResults: [],
       helpfulCount: [],
+      isReported: false,
     };
     this.search = this.search.bind(this);
     this.getQuestions = this.getQuestions.bind(this);

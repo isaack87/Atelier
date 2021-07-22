@@ -5,7 +5,7 @@ const config = require('../config');
 const getquestionAPI = (params, cb) => {
   const options = {
     method: 'GET',
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions?product_id=28215`,
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions?product_id=28217`,
     headers: { Authorization: config.gitToken },
   };
   axios(options)
@@ -35,7 +35,7 @@ const getquestionAPI = (params, cb) => {
 const getanswerAPI = (params, cb) => {
   const options = {
     method: 'GET',
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions/213364/answers`,
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions/213372/answers`,
     headers: { Authorization: config.gitToken },
   };
   axios(options)
@@ -66,7 +66,7 @@ const getanswerAPI = (params, cb) => {
 const getHelpfulCount = (params, cb) => {
   const options = {
     method: 'GET',
-    url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions?product_id=28215',
+    url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions?product_id=28217',
     headers: { Authorization: config.gitToken },
   };
   axios(options)
@@ -88,11 +88,38 @@ const getHelpfulCount = (params, cb) => {
     });
 };
 
+const getIsReportedStatus = (params, cb) => {
+  const options = {
+    method: 'GET',
+    // change the hardcoded product id with param later
+    url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions?product_id=28217',
+    headers: { Authorization: config.gitToken },
+  };
+  axios(options)
+    .then((response) => {
+      console.log('axios get success');
+      console.log(response.data.results);
+      return response.data.results.map((report) => {
+        const reported = {
+          reported: report.reported,
+        };
+        console.log(reported);
+        return reported;
+      });
+    })
+    .then((data) => {
+      cb(data);
+    })
+    .catch(() => {
+      console.log('get isreported error');
+    });
+};
+
 /// POSTING API FUNCTIONS
 const postquestionAPI = (params, cb) => {
   const options = {
     method: 'POST',
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions?product_id=28215${params}`,
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions?product_id=28217${params}`,
     headers: { Authorization: config.gitToken },
   };
   axios(options)
@@ -135,7 +162,7 @@ const putQuestionHelpful = (params, cb) => {
     method: 'PUT',
     // replace 213364 with a questio param query for no hardcoded for testing
     // when this put is run it just increments helpfu counter by +1
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions/213364/helpful`,
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions/213372/helpful`,
     headers: { Authorization: config.gitToken },
   };
   axios(options)
@@ -154,7 +181,11 @@ const putQuestionHelpful = (params, cb) => {
 const putReportQuestion = (params, cb) => {
   const options = {
     method: 'PUT',
-    url: `/qa/questions/{":question_id"}/report`,
+    // replace number  with a param {} for question id
+    //
+    //
+    // change the number here everytime u report sinc eit goes away
+    url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions/2133722/report',
     headers: { Authorization: config.gitToken },
   };
   axios(options)
@@ -167,7 +198,7 @@ const putReportQuestion = (params, cb) => {
       return cb(data);
     })
     .catch(() => {
-      console.log('catch answerAPI err');
+      console.log('catch putReportQuestion err');
     });
 };
 
@@ -221,4 +252,5 @@ module.exports = {
   putAnswerHelpful,
   putReportAnswer,
   getHelpfulCount,
+  getIsReportedStatus,
 };
