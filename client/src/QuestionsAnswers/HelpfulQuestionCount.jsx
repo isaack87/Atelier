@@ -1,15 +1,15 @@
 import React from 'react';
 import $ from 'jquery';
 
-const Helpful = (props) => {
-  const helpfulCounterAjaxPost = () => {
+const HelpfulQuestionCount = (props) => {
+  const helpfulQuestionAjax = () => {
     $.ajax({
       method: 'POST',
       url: 'http://localhost:3000/QuestionHelpful',
       contentType: 'application/json',
       success: () => {
-        props.ajaxgethelpful();
-        console.log('success helpful counter++');
+        props.ajaxGetQuestionHelpful();
+        console.log('success question counter++');
       },
       error: (err) => {
         console.log(err);
@@ -18,13 +18,13 @@ const Helpful = (props) => {
   };
 
   return (
-    <div>
+    <div className='helpfulQuestionCounter'>
       Helpful?
-      <button type="submit" onClick={helpfulCounterAjaxPost} className="reporthelpful-btn">Yes</button>
+      <button type="submit" onClick={helpfulQuestionAjax} className="reporthelpful-btn">Yes</button>
       {/* should be the helpfulcount state from questionsanswerbox file but not workinging */}
-      {props.counter}
+      {props.questionhelpfulCount}
     </div>
   );
 };
 
-export default Helpful;
+export default HelpfulQuestionCount;

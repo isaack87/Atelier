@@ -1,9 +1,11 @@
 import React from 'react';
+import $ from 'jquery';
 import testdata from './exampleData.jsx';
 import AnswerPhotos from './AnswerPhotos.jsx';
 import AskQuestions from './AskQuestionButtons.jsx';
 import Report from './Report.jsx';
-import Helpful from './Helpful.jsx';
+import HelpfulAnswerCount from './HelpfulAnswerCount.jsx';
+import HelpfulQuestionCount from './HelpfulQuestionCount.jsx';
 
 const Answers = (props) => {
   const AnswerQuestionBox = testdata.map((data) => (
@@ -12,8 +14,14 @@ const Answers = (props) => {
         <ul>
           <b>
             Q:
-            { data.Question }
           </b>
+          <span className="questiontext">
+            { data.Question }
+            <HelpfulQuestionCount
+              questionhelpfulCount={props.questionhelpfulCount}
+              ajaxGetQuestionHelpful={props.ajaxGetQuestionHelpful}
+            />
+          </span>
         </ul>
         <ul>
           <b>
@@ -31,7 +39,10 @@ const Answers = (props) => {
           {data.User}
           {data.Date}
           |
-          <Helpful counter={props.counter} ajaxgethelpful={props.ajaxgethelpful} />
+          <HelpfulAnswerCount
+            answerhelpfulCount={props.answerhelpfulCount}
+            ajaxGetAnswerHelpful={props.ajaxGetAnswerHelpful}
+          />
           |
           <Report />
         </ul>
@@ -51,3 +62,4 @@ const Answers = (props) => {
 };
 
 export default Answers;
+

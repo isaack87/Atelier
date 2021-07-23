@@ -92,9 +92,27 @@ app.listen(port, () => {
 
 // Helpful Routes
 
+app.get('/AnswerHelpful', (req, res) => {
+  const params = '';
+  isaacAPI.getAnswerCounter(params, (cb) => {
+    res.status(200).send(cb);
+  });
+});
+
+app.post('/AnswerHelpful', (req, res) => {
+  const params = '';
+  isaacAPI.putAnswerHelpful(params, (err) => {
+    if (err) {
+      console.log('answer-post-err');
+    }
+    res.send('success');
+  });
+});
+
+
 app.get('/QuestionHelpful', (req, res) => {
   const params = '';
-  isaacAPI.getHelpfulCount(params, (cb) => {
+  isaacAPI.getQuestionCounter(params, (cb) => {
     res.status(200).send(cb);
   });
 });
@@ -108,7 +126,6 @@ app.post('/QuestionHelpful', (req, res) => {
     res.send('success');
   });
 });
-
 
 
 

@@ -63,7 +63,32 @@ const getanswerAPI = (params, cb) => {
     },
     */
 
-const getHelpfulCount = (params, cb) => {
+const getAnswerCounter = (params, cb) => {
+  const options = {
+    method: 'GET',
+    url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions/213355/answers',
+    headers: { Authorization: config.gitToken },
+  };
+  axios(options)
+    .then((response) => {
+      console.log('axios get success');
+      console.log(response.data.results);
+      return response.data.results.map((helpful) => {
+        const isHelpful = ({
+          helpful: helpful.helpfulness,
+        });
+        return isHelpful;
+      });
+    })
+    .then((data) => {
+      cb(data);
+    })
+    .catch(() => {
+      console.log('getquestionapi error');
+    });
+};
+
+const getQuestionCounter = (params, cb) => {
   const options = {
     method: 'GET',
     url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions?product_id=28217',
@@ -168,6 +193,7 @@ const putQuestionHelpful = (params, cb) => {
   axios(options)
     .then((response) => {
       //create function finds product ID and updates helpful counter
+      console.log(response.data);
     })
     .then((data) => {
       console.log('axios get success');
@@ -175,6 +201,26 @@ const putQuestionHelpful = (params, cb) => {
     })
     .catch(() => {
       console.log('catch putQuestionHelpful err');
+    });
+};
+
+const putAnswerHelpful = (params, cb) => {
+  const options = {
+    method: 'PUT',
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/answers/1992407/helpful`,
+    headers: { Authorization: config.gitToken },
+  };
+  axios(options)
+    .then((response) => {
+      //create function that finds answer id and updates helpful answer counter
+      console.log(response.data);
+    })
+    .then((data) => {
+      console.log('axios get success');
+      return cb(data);
+    })
+    .catch(() => {
+      console.log('catch answerAPI err');
     });
 };
 
@@ -202,26 +248,6 @@ const putReportQuestion = (params, cb) => {
     });
 };
 
-const putAnswerHelpful = (params, cb) => {
-  const options = {
-    method: 'PUT',
-    url: `/qa/answers/{":answer_id"}/helpful`,
-    headers: { Authorization: config.gitToken },
-  };
-  axios(options)
-    .then((response) => {
-      //create function that finds answer id and updates helpful answer counter
-      console.log(response.data);
-    })
-    .then((data) => {
-      console.log('axios get success');
-      return cb(data);
-    })
-    .catch(() => {
-      console.log('catch answerAPI err');
-    });
-};
-
 const putReportAnswer = (params, cb) => {
   const options = {
     method: 'PUT',
@@ -245,12 +271,13 @@ const putReportAnswer = (params, cb) => {
 module.exports = {
   getquestionAPI,
   getanswerAPI,
+  getQuestionCounter,
+  getAnswerCounter,
+  getIsReportedStatus,
   postanswerAPI,
   postquestionAPI,
   putQuestionHelpful,
   putReportQuestion,
   putAnswerHelpful,
   putReportAnswer,
-  getHelpfulCount,
-  getIsReportedStatus,
 };

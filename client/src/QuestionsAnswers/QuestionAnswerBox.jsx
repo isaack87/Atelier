@@ -2,7 +2,6 @@ import React from 'react';
 import $ from 'jquery';
 import Answers from './AnswerData.jsx'
 import SearchBar from './searchBar.jsx'
-import Helpful from './Helpful.jsx';
 
 class QuestionsAnswersBox extends React.Component {
   constructor(props) {
@@ -12,21 +11,25 @@ class QuestionsAnswersBox extends React.Component {
       questionResults: [],
       answersList: [],
       answersResults: [],
-      helpfulCount: [],
+      answerhelpfulCount: [],
+      questionhelpfulCount: [],
       isReported: false,
     };
     this.search = this.search.bind(this);
     this.getQuestions = this.getQuestions.bind(this);
     this.getAnswers = this.getAnswers.bind(this);
-    this.helpfulCounterAjaxGet = this.helpfulCounterAjaxGet.bind(this);
+    this.ajaxGetAnswerHelpful = this.ajaxGetAnswerHelpful.bind(this);
+    this.ajaxGetQuestionHelpful = this.ajaxGetQuestionHelpful.bind(this);
   }
 
   componentDidMount() {
     this.getQuestions();
     this.getAnswers();
-    this.helpfulCounterAjaxGet();
+    this.ajaxGetAnswerHelpful();
+    this.ajaxGetQuestionHelpful();
   }
 
+  // need to use current product id state to get current product questions and limit to rendering 2 as current state on page load
   getQuestions() {
     fetch('http://localhost:3000/Questions')
       .then((response) => response.json())
@@ -38,6 +41,7 @@ class QuestionsAnswersBox extends React.Component {
       });
   }
 
+    // need to use current questions id state to get current product answers matched to shown questions
   getAnswers() {
     fetch('http://localhost:3000/Answers')
       .then((response) => response.json())
@@ -49,12 +53,22 @@ class QuestionsAnswersBox extends React.Component {
       });
   }
 
-  helpfulCounterAjaxGet() {
+  ajaxGetAnswerHelpful() {
+    fetch('http://localhost:3000/AnswerHelpful')
+      .then((response) => response.json())
+      .then((helpfulCounter) => {
+        this.setState({
+          answerhelpfulCount: helpfulCounter[0].helpful,
+        });
+      });
+  }
+
+  ajaxGetQuestionHelpful() {
     fetch('http://localhost:3000/QuestionHelpful')
       .then((response) => response.json())
       .then((helpfulCounter) => {
         this.setState({
-          helpfulCount: helpfulCounter[0].helpful,
+          questionhelpfulCount: helpfulCounter[0].helpful,
         });
       });
   }
@@ -80,7 +94,12 @@ class QuestionsAnswersBox extends React.Component {
       <div>
         <div className="AnswerQuestionBoxContainer">
           <SearchBar onSearch={this.search} />
-          <Answers counter={this.state.helpfulCount} ajaxgethelpful={this.helpfulCounterAjaxGet} />
+          <Answers
+            answerhelpfulCount={this.state.answerhelpfulCount}
+            questionhelpfulCount={this.state.questionhelpfulCount}
+            ajaxGetAnswerHelpful={this.ajaxGetAnswerHelpful}
+            ajaxGetQuestionHelpful={this.ajaxGetQuestionHelpful}
+          />
         </div>
       </div>
     );
