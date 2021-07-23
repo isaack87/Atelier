@@ -12,7 +12,7 @@ const HelpfulAnswerCount = (props) => {
         console.log('success answer counter++');
       },
       error: (err) => {
-        console.log(err);
+        console.log('err in helpfulanswerocount');
       },
     });
   };

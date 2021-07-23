@@ -13,6 +13,8 @@ app.use(express.static(`${__dirname} /../client/dist`));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+//this variable will be the current this.state.productID (the item the page is now)
+let currentproductID;
 
 // pass in string to get from that endpoint
 const getAPI = (params, cb) => {
@@ -36,7 +38,7 @@ app.get('/', (req, res) => {
 });
 
 app.post('/', (req, res) => {
-  this.getAPI(`products`, (err, results) => {
+  getAPI(`products`, (err, results) => {
     if (err) {
       console.log('/ err');
     } else {
@@ -45,27 +47,22 @@ app.post('/', (req, res) => {
   });
 });
 
-
-
-
-
 // Isaac Routes
 // Questions Routes
 app.get('/Questions', (req, res) => {
-  const params = '';
-  isaacAPI.getquestionAPI(params, (cb) => {
+  isaacAPI.getquestionAPI(currentproductID, (cb) => {
     res.status(200).send(cb);
   });
 });
 
 app.post('/Questions', (req, res) => {
-  //const params = req.body;
-  isaacAPI.postquestionAPI(params, (err) => {
+  currentproductID = req.body.pid;
+  isaacAPI.postquestionAPI(currentproductID, (err) => {
     if (err) {
       console.log('Questions-post-err');
     }
-    res.send('success');
   });
+  res.send('success');
 });
 
 // Answers Routes
@@ -108,7 +105,6 @@ app.post('/AnswerHelpful', (req, res) => {
     res.send('success');
   });
 });
-
 
 app.get('/QuestionHelpful', (req, res) => {
   const params = '';

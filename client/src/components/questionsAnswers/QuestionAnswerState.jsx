@@ -8,14 +8,14 @@ class QuestionsAnswersState extends React.Component {
     super(props);
     this.state = {
       questionsList: [],
-      questionResults: [],
       answersList: [],
-      answersResults: [],
       answerhelpfulCount: [],
       questionhelpfulCount: [],
       isReported: false,
+      mainProductID: props.mainProductId
     };
     this.search = this.search.bind(this);
+    this.sendProductIdToServer = this.sendProductIdToServer.bind(this);
     this.getQuestions = this.getQuestions.bind(this);
     this.getAnswers = this.getAnswers.bind(this);
     this.ajaxGetAnswerHelpful = this.ajaxGetAnswerHelpful.bind(this);
@@ -23,6 +23,7 @@ class QuestionsAnswersState extends React.Component {
   }
 
   componentDidMount() {
+    this.sendProductIdToServer();
     this.getQuestions();
     this.getAnswers();
     this.ajaxGetAnswerHelpful();
@@ -34,9 +35,10 @@ class QuestionsAnswersState extends React.Component {
     fetch('http://localhost:3000/Questions')
       .then((response) => response.json())
       .then((questions) => {
+        console.log('questiontest')
+        console.log(questions)
         this.setState({
-          questionsList: questions,
-          questionResults: questions.results
+          questionsList: questions
         });
       });
   }
@@ -46,9 +48,10 @@ class QuestionsAnswersState extends React.Component {
     fetch('http://localhost:3000/Answers')
       .then((response) => response.json())
       .then((answers) => {
+        console.log('answertest')
+        console.log(answers)
         this.setState({
-          answersList: answers,
-          answersResults: answers.results
+          answersList: answers
         });
       });
   }
@@ -73,6 +76,22 @@ class QuestionsAnswersState extends React.Component {
       });
   }
 
+  sendProductIdToServer() {
+    this.productID = { pid: this.state.mainProductID };
+    $.ajax({
+      method: 'POST',
+      url: 'http://localhost:3000/Questions',
+      contentType: 'application/json',
+      data: JSON.stringify(this.productID),
+      success: () => {
+        console.log(`sendproductidworks`);
+      },
+      error: (err) => {
+        console.log('err sendProductIdToServer');
+      },
+    });
+  }
+
   search(term) {
     this.searchTerm = { search: term };
     $.ajax({
@@ -81,10 +100,10 @@ class QuestionsAnswersState extends React.Component {
       contentType: 'application/json',
       data: JSON.stringify(this.searchTerm),
       success: (data) => {
-        console.log(`success ${data} posted Questions`);
+        console.log(`success posted Questions`);
       },
       error: (err) => {
-        console.log(err);
+        console.log('err search');
       },
     });
   }
@@ -99,6 +118,8 @@ class QuestionsAnswersState extends React.Component {
             questionhelpfulCount={this.state.questionhelpfulCount}
             ajaxGetAnswerHelpful={this.ajaxGetAnswerHelpful}
             ajaxGetQuestionHelpful={this.ajaxGetQuestionHelpful}
+            questionsList={this.state.questionsList}
+            //getQuestions={this.getQuestions}
           />
         </div>
       </div>

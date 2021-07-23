@@ -9,7 +9,7 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      productId: '',
+      productId: '28299',
       user: '',
       stars: '',
       reportedArray: [],
@@ -20,7 +20,7 @@ class App extends React.Component {
     return (
       <div>
         Hello World
-        <QuestionsAnswersState />
+        <QuestionsAnswersState mainProductId={this.state.productId} />
       </div>
     );
   }

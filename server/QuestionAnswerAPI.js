@@ -5,7 +5,7 @@ const config = require('../config');
 const getquestionAPI = (params, cb) => {
   const options = {
     method: 'GET',
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions?product_id=28217`,
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions?product_id=${params}`,
     headers: { Authorization: config.gitToken },
   };
   axios(options)
@@ -72,7 +72,6 @@ const getAnswerCounter = (params, cb) => {
   axios(options)
     .then((response) => {
       console.log('axios get success');
-      console.log(response.data.results);
       return response.data.results.map((helpful) => {
         const isHelpful = ({
           helpful: helpful.helpfulness,
@@ -97,7 +96,6 @@ const getQuestionCounter = (params, cb) => {
   axios(options)
     .then((response) => {
       console.log('axios get success');
-      console.log(response.data.results);
       return response.data.results.map((helpful) => {
         const isHelpful = ({
           helpful: helpful.question_helpfulness,
@@ -117,7 +115,7 @@ const getIsReportedStatus = (params, cb) => {
   const options = {
     method: 'GET',
     // change the hardcoded product id with param later
-    url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions?product_id=28217',
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions?product_id=${params}`,
     headers: { Authorization: config.gitToken },
   };
   axios(options)
@@ -144,20 +142,20 @@ const getIsReportedStatus = (params, cb) => {
 const postquestionAPI = (params, cb) => {
   const options = {
     method: 'POST',
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions?product_id=28217${params}`,
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions?product_id=${params}`,
     headers: { Authorization: config.gitToken },
   };
   axios(options)
     .then((response) => {
       //create function that takes in user question asked and post to server API
-      console.log(response.data);
+      //console.log(response.data);
     })
     .then((data) => {
       console.log('axios get success');
       return cb(data);
     })
     .catch(() => {
-      console.log('catch questionAPI err');
+      console.log('catch postquestionAPI err');
     });
 };
 
@@ -170,7 +168,7 @@ const postanswerAPI = (params, cb) => {
   axios(options)
     .then((response) => {
       //create function that post user answer to a question to API
-      console.log(response.data);
+      //console.log(response.data);
     })
     .then((data) => {
       console.log('axios get success');
@@ -193,7 +191,7 @@ const putQuestionHelpful = (params, cb) => {
   axios(options)
     .then((response) => {
       //create function finds product ID and updates helpful counter
-      console.log(response.data);
+      //console.log(response.data);
     })
     .then((data) => {
       console.log('axios get success');
@@ -213,7 +211,7 @@ const putAnswerHelpful = (params, cb) => {
   axios(options)
     .then((response) => {
       //create function that finds answer id and updates helpful answer counter
-      console.log(response.data);
+      //console.log(response.data);
     })
     .then((data) => {
       console.log('axios get success');
@@ -237,7 +235,7 @@ const putReportQuestion = (params, cb) => {
   axios(options)
     .then((response) => {
       //create function finds product ID and makes a report form
-      console.log(response.data);
+      //console.log(response.data);
     })
     .then((data) => {
       console.log('axios get success');
@@ -257,7 +255,7 @@ const putReportAnswer = (params, cb) => {
   axios(options)
     .then((response) => {
       //create function finds answer product ID and reports it
-      console.log(response.data);
+      //console.log(response.data);
     })
     .then((data) => {
       console.log('axios get success');

@@ -12,7 +12,7 @@ const HelpfulQuestionCount = (props) => {
         console.log('success question counter++');
       },
       error: (err) => {
-        console.log(err);
+        console.log('err helpfulQuestionAjax');
       },
     });
   };
