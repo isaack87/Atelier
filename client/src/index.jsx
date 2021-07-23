@@ -1,5 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import $ from 'jquery';
+import SearchBar from '/Users/isaackim/Desktop/AtelierProject/Atelier/client/src/components/questionsAnswers/searchBar.jsx';
+import QuestionsAnswersState from './components/questionsAnswers/QuestionAnswerState.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -15,7 +18,10 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>Hello World</div>
+      <div>
+        Hello World
+        <QuestionsAnswersState />
+      </div>
     );
   }
 }
