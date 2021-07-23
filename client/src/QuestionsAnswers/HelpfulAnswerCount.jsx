@@ -19,7 +19,7 @@ const HelpfulAnswerCount = (props) => {
 
   return (
     <div className='helpfulAnswerCounter'>
-      Helpful?
+      Answer Helpful?
       <button type="submit" onClick={helpfulAnswerAjax} className="reporthelpful-btn">Yes</button>
       {/* should be the helpfulcount state from questionsanswerbox file but not workinging */}
       {props.answerhelpfulCount}

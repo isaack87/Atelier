@@ -7,20 +7,22 @@ import Report from './Report.jsx';
 import HelpfulAnswerCount from './HelpfulAnswerCount.jsx';
 import HelpfulQuestionCount from './HelpfulQuestionCount.jsx';
 
-const Answers = (props) => {
+const MainAnswerQuestionBox = (props) => {
   const AnswerQuestionBox = testdata.map((data) => (
     <div key={data.id}>
       <div className="questions-asked">
         <ul>
-          <b>
-            Q:
-          </b>
           <span className="questiontext">
+            <b>
+              Q:
+            </b>
             { data.Question }
-            <HelpfulQuestionCount
-              questionhelpfulCount={props.questionhelpfulCount}
-              ajaxGetQuestionHelpful={props.ajaxGetQuestionHelpful}
-            />
+            <div className='HelpfulQuestionCount'>
+              <HelpfulQuestionCount
+                questionhelpfulCount={props.questionhelpfulCount}
+                ajaxGetQuestionHelpful={props.ajaxGetQuestionHelpful}
+              />
+            </div>
           </span>
         </ul>
         <ul>
@@ -61,5 +63,4 @@ const Answers = (props) => {
   );
 };
 
-export default Answers;
-
+export default MainAnswerQuestionBox;

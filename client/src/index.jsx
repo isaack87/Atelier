@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import SearchBar from './QuestionsAnswers/searchBar.jsx';
-import QuestionsAnswersBox from './QuestionsAnswers/QuestionAnswerBox.jsx';
+import QuestionsAnswersState from '../src/QuestionsAnswers/QuestionAnswerState.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -14,7 +14,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <QuestionsAnswersBox />
+        <QuestionsAnswersState />
       </div>
     );
   }

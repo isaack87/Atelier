@@ -1,9 +1,9 @@
 import React from 'react';
 import $ from 'jquery';
-import Answers from './AnswerData.jsx'
+import MainAnswerQuestionBox from './MainAnswerQuestionBox.jsx'
 import SearchBar from './searchBar.jsx'
 
-class QuestionsAnswersBox extends React.Component {
+class QuestionsAnswersState extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -94,7 +94,7 @@ class QuestionsAnswersBox extends React.Component {
       <div>
         <div className="AnswerQuestionBoxContainer">
           <SearchBar onSearch={this.search} />
-          <Answers
+          <MainAnswerQuestionBox
             answerhelpfulCount={this.state.answerhelpfulCount}
             questionhelpfulCount={this.state.questionhelpfulCount}
             ajaxGetAnswerHelpful={this.ajaxGetAnswerHelpful}
@@ -106,4 +106,4 @@ class QuestionsAnswersBox extends React.Component {
   }
 }
 
-export default QuestionsAnswersBox;
+export default QuestionsAnswersState;
