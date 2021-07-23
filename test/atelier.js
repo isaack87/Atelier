@@ -1,11 +1,4 @@
-
-//Isaac
-
-
-// Helena
-
-// Louis
-
+// Main Test File
 
 // Sample test
 function sum(a, b) {
