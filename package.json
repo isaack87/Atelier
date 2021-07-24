@@ -7,7 +7,7 @@
     "test": "jest",
     "webpack": "webpack --mode development --watch",
     "server": "nodemon server/index.js",
-    "testproduct": "jest client/src/testing/product.test.js"
+    "testproduct": "jest test/ProductOverview.test.js"
   },
   "repository": {
     "type": "git",

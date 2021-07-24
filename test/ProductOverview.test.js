@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
-import ProductOverview from '../components/productDetails/products.jsx';
+import ProductOverview from '../client/src/components/productDetails/products.jsx';
 
 Enzyme.configure({ adapter: new Adapter() });
 
