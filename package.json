@@ -7,7 +7,9 @@
     "test": "jest test",
     "webpack": "webpack --mode development --watch",
     "server": "nodemon server/index.js",
-    "testproduct": "jest test/ProductOverview.test.js"
+    "testproduct": "jest test/ProductOverview.test.js",
+    "testquestions": "jest test/QuestionsAnswers.test.js",
+    "testreviews": "jest test/RatingsReviews.test.js"
   },
   "repository": {
     "type": "git",
@@ -28,6 +30,8 @@
     "enzyme-adapter-react-16": "^1.15.6",
     "express": "^4.17.1",
     "jquery": "^3.6.0",
+    "moment": "^2.29.1",
+    "multer": "^1.4.2",
     "react": "16.14.0",
     "react-dom": "16.14.0"
   },
