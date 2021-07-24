@@ -35,7 +35,7 @@ const getquestionAPI = (params, cb) => {
 const getanswerAPI = (params, cb) => {
   const options = {
     method: 'GET',
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions/213372/answers`,
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions/214137/answers`,
     headers: { Authorization: config.gitToken },
   };
   axios(options)
@@ -66,7 +66,7 @@ const getanswerAPI = (params, cb) => {
 const getAnswerCounter = (params, cb) => {
   const options = {
     method: 'GET',
-    url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions/213355/answers',
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions/${params}/answers`,
     headers: { Authorization: config.gitToken },
   };
   axios(options)
@@ -90,14 +90,16 @@ const getAnswerCounter = (params, cb) => {
 const getQuestionCounter = (params, cb) => {
   const options = {
     method: 'GET',
-    url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions?product_id=28217',
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions?product_id=${params}`,
     headers: { Authorization: config.gitToken },
   };
+
   axios(options)
     .then((response) => {
       console.log('axios get success');
       return response.data.results.map((helpful) => {
         const isHelpful = ({
+          questionid: helpful.question_id,
           helpful: helpful.question_helpfulness,
         });
         return isHelpful;
@@ -185,7 +187,7 @@ const putQuestionHelpful = (params, cb) => {
     method: 'PUT',
     // replace 213364 with a questio param query for no hardcoded for testing
     // when this put is run it just increments helpfu counter by +1
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions/213372/helpful`,
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions/${params}/helpful`,
     headers: { Authorization: config.gitToken },
   };
   axios(options)
@@ -205,7 +207,7 @@ const putQuestionHelpful = (params, cb) => {
 const putAnswerHelpful = (params, cb) => {
   const options = {
     method: 'PUT',
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/answers/1992407/helpful`,
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/answers/${params}/helpful`,
     headers: { Authorization: config.gitToken },
   };
   axios(options)

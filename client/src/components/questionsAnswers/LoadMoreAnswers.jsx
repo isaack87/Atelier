@@ -1,18 +1,9 @@
 import React from 'react';
 
-var LoadMoreAnswers = (props) => {
-
-
-  var testbutton = () => {
-    alert('testing button')
-  }
-
-  return (
+const LoadMoreAnswers = (props) => (
   <div>
-    <button onClick={testbutton} className='loadmoreanswers'>LOAD MORE ANSWERS</button>
+    <button type="submit" onClick={props.getAnswers} className="loadmoreanswers">LOAD MORE ANSWERS</button>
   </div>
-  )
-}
-
+);
 
 export default LoadMoreAnswers;

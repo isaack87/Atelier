@@ -2,6 +2,7 @@ import React from 'react';
 import $ from 'jquery';
 
 const HelpfulQuestionCount = (props) => {
+  
   const helpfulQuestionAjax = () => {
     $.ajax({
       method: 'POST',

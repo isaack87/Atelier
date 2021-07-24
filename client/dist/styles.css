@@ -103,15 +103,16 @@ body {
 
 /* question/answer section */
 
-.AnswerQuestionBoxContainer {
-  margin: 0 auto;
-}
-
 .container {
   margin: 0 auto;
   width: 960px;
 }
 .questions-asked {
+  font-size: 20px;
+  margin-left: 7%
+}
+
+.answer-asked {
   font-size: 20px;
   margin-left: 7%
 }
@@ -141,7 +142,7 @@ img {
 }
 
 .user-data {
-  margin-left: 10%;
+  margin-left: 5%;
   font-size: 15px;
 }
 

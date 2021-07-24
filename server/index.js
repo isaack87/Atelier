@@ -50,7 +50,8 @@ app.post('/', (req, res) => {
 // Isaac Routes
 // Questions Routes
 app.get('/Questions', (req, res) => {
-  isaacAPI.getquestionAPI(currentproductID, (cb) => {
+  const params = currentproductID
+  isaacAPI.getquestionAPI(params, (cb) => {
     res.status(200).send(cb);
   });
 });
@@ -90,14 +91,14 @@ app.listen(port, () => {
 // Helpful Routes
 
 app.get('/AnswerHelpful', (req, res) => {
-  const params = '';
+  const params = '213355'
   isaacAPI.getAnswerCounter(params, (cb) => {
     res.status(200).send(cb);
   });
 });
 
 app.post('/AnswerHelpful', (req, res) => {
-  const params = '';
+  const params = '1992407';
   isaacAPI.putAnswerHelpful(params, (err) => {
     if (err) {
       console.log('answer-post-err');
@@ -107,14 +108,14 @@ app.post('/AnswerHelpful', (req, res) => {
 });
 
 app.get('/QuestionHelpful', (req, res) => {
-  const params = '';
+  const params = currentproductID;
   isaacAPI.getQuestionCounter(params, (cb) => {
-    res.status(200).send(cb);
+    res.send(JSON.stringify(cb));
   });
 });
 
 app.post('/QuestionHelpful', (req, res) => {
-  const params = '';
+  const params = '214137';
   isaacAPI.putQuestionHelpful(params, (err) => {
     if (err) {
       console.log('answer-post-err');

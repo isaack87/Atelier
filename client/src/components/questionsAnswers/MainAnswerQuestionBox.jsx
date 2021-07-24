@@ -1,6 +1,5 @@
 import React from 'react';
-import $ from 'jquery';
-import testdata from './exampleData.jsx';
+//import testdata from './exampleData.jsx';
 import AnswerPhotos from './AnswerPhotos.jsx';
 import AskQuestions from './AskQuestionButtons.jsx';
 import Report from './Report.jsx';
@@ -9,17 +8,16 @@ import HelpfulQuestionCount from './HelpfulQuestionCount.jsx';
 
 const MainAnswerQuestionBox = (props) => {
 
-
-  const AnswerQuestionBox = testdata.map((data) => (
-    <div key={data.id}>
+  const QuestionBox = props.questionsList.slice(0, 2).map((data) => (
+    <div key={data.question_id}>
       <div className="questions-asked">
         <ul>
           <span className="questiontext">
             <b>
               Q:
             </b>
-            { data.Question }
-            <div className='HelpfulQuestionCount'>
+            { data.question_body }
+            <div className="HelpfulQuestionCount">
               <HelpfulQuestionCount
                 questionhelpfulCount={props.questionhelpfulCount}
                 ajaxGetQuestionHelpful={props.ajaxGetQuestionHelpful}
@@ -27,21 +25,34 @@ const MainAnswerQuestionBox = (props) => {
             </div>
           </span>
         </ul>
+      </div>
+    </div>
+  ));
+
+
+  const AnswerBox = props.answersList.map((data, index) => (
+    <div key={index}>
+    <div className="questions-asked">
+      <div>
         <ul>
           <b>
             A:
           </b>
           <span className="answertext">
-            { data.Answer }
+            { data.body }
           </span>
         </ul>
       </div>
 
+
+
+
+
       <span className="user-data">
         <ul>
           by:
-          {data.User}
-          {data.Date}
+          { data.answerer_name }
+          { data.date }
           |
           <HelpfulAnswerCount
             answerhelpfulCount={props.answerhelpfulCount}
@@ -51,16 +62,24 @@ const MainAnswerQuestionBox = (props) => {
           <Report />
         </ul>
       </span>
+
       <div className="answerPhotos">
         <AnswerPhotos />
       </div>
     </div>
-  ),
-)
+
+
+    </div>
+
+
+
+  ));
+
   return (
     <div className="container">
-      {AnswerQuestionBox}
-      <AskQuestions />
+      {QuestionBox}
+      {AnswerBox}
+      <AskQuestions getAnswers={props.getAnswers} />
     </div>
   );
 };

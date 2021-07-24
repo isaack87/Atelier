@@ -7,6 +7,7 @@ class QuestionsAnswersState extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      visibleAnswers: 2,
       questionsList: [],
       answersList: [],
       answerhelpfulCount: [],
@@ -20,6 +21,7 @@ class QuestionsAnswersState extends React.Component {
     this.getAnswers = this.getAnswers.bind(this);
     this.ajaxGetAnswerHelpful = this.ajaxGetAnswerHelpful.bind(this);
     this.ajaxGetQuestionHelpful = this.ajaxGetQuestionHelpful.bind(this);
+    this.loadMoreAnswers = this.loadMoreAnswers.bind(this);
   }
 
   componentDidMount() {
@@ -35,10 +37,8 @@ class QuestionsAnswersState extends React.Component {
     fetch('http://localhost:3000/Questions')
       .then((response) => response.json())
       .then((questions) => {
-        console.log('questiontest')
-        console.log(questions)
         this.setState({
-          questionsList: questions
+          questionsList: questions.results,
         });
       });
   }
@@ -48,12 +48,17 @@ class QuestionsAnswersState extends React.Component {
     fetch('http://localhost:3000/Answers')
       .then((response) => response.json())
       .then((answers) => {
-        console.log('answertest')
-        console.log(answers)
+        console.log('getanswers works');
         this.setState({
-          answersList: answers
+          answersList: answers.results,
         });
       });
+  }
+
+  loadMoreAnswers() {
+    this.setState((prev) => {
+      return {visibleAnswers: prev.visibleAnswers + 4}
+    });
   }
 
   ajaxGetAnswerHelpful() {
@@ -86,7 +91,7 @@ class QuestionsAnswersState extends React.Component {
       success: () => {
         console.log(`sendproductidworks`);
       },
-      error: (err) => {
+      error: () => {
         console.log('err sendProductIdToServer');
       },
     });
@@ -119,9 +124,18 @@ class QuestionsAnswersState extends React.Component {
             ajaxGetAnswerHelpful={this.ajaxGetAnswerHelpful}
             ajaxGetQuestionHelpful={this.ajaxGetQuestionHelpful}
             questionsList={this.state.questionsList}
-            //getQuestions={this.getQuestions}
+            answersList={this.state.answersList}
+            getAnswers={this.getAnswers}
+            visibleAnswers={this.state.visibleAnswers}
+            loadMoreAnswers={this.loadMoreAnswers}
           />
         </div>
+
+
+
+
+
+
       </div>
     );
   }
