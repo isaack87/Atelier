@@ -35,7 +35,7 @@ app.get('/', (req, res) => {
 });
 
 app.post('/', (req, res) => {
-  this.getAPI(`products`, (err, results) => {
+  getAPI('products', (err, results) => {
     if (err) {
       console.log('/ err');
     } else {
