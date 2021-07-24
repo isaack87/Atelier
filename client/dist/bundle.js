@@ -432,7 +432,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var reac
   \*******************/
 /***/ ((module) => {
 
-eval("module.exports = {\n  gitToken: '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'\n};\n\n//# sourceURL=webpack://atelier/./config.js?");
+eval("module.exports = {\n  gitToken: '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'\n};\n\n//# sourceURL=webpack://atelier/./config.js?");
 
 /***/ }),
 
