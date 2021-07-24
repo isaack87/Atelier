@@ -93,7 +93,7 @@ app.listen(port, () => {
 app.get('/AnswerHelpful', (req, res) => {
   const params = '213355'
   isaacAPI.getAnswerCounter(params, (cb) => {
-    res.status(200).send(cb);
+    res.json(cb);
   });
 });
 
@@ -110,7 +110,7 @@ app.post('/AnswerHelpful', (req, res) => {
 app.get('/QuestionHelpful', (req, res) => {
   const params = currentproductID;
   isaacAPI.getQuestionCounter(params, (cb) => {
-    res.send(JSON.stringify(cb));
+    res.json(cb);
   });
 });
 

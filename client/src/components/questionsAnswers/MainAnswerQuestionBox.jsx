@@ -3,13 +3,13 @@ import React from 'react';
 import AnswerPhotos from './AnswerPhotos.jsx';
 import AskQuestions from './AskQuestionButtons.jsx';
 import Report from './Report.jsx';
+import $ from 'jquery';
 import HelpfulAnswerCount from './HelpfulAnswerCount.jsx';
 import HelpfulQuestionCount from './HelpfulQuestionCount.jsx';
 
 const MainAnswerQuestionBox = (props) => {
-
-  const QuestionBox = props.questionsList.slice(0, 2).map((data) => (
-    <div key={data.question_id}>
+  const QuestionBox = props.questionsList.slice(0, 2).map((data, index) => (
+    <div key={index}>
       <div className="questions-asked">
         <ul>
           <span className="questiontext">
@@ -29,9 +29,8 @@ const MainAnswerQuestionBox = (props) => {
     </div>
   ));
 
-
-  const AnswerBox = props.answersList.map((data, index) => (
-    <div key={index}>
+  const AnswerBox = props.answersList.slice(0, props.visibleAnswers).map((data, index) => (
+    <div key={data.answer_id}>
     <div className="questions-asked">
       <div>
         <ul>
@@ -43,18 +42,14 @@ const MainAnswerQuestionBox = (props) => {
           </span>
         </ul>
       </div>
-
-
-
-
-
       <span className="user-data">
         <ul>
           by:
           { data.answerer_name }
           { data.date }
+          {' ' } HelpFul? {data.helpfulness}
           |
-          <HelpfulAnswerCount
+           <HelpfulAnswerCount
             answerhelpfulCount={props.answerhelpfulCount}
             ajaxGetAnswerHelpful={props.ajaxGetAnswerHelpful}
           />
@@ -67,20 +62,19 @@ const MainAnswerQuestionBox = (props) => {
         <AnswerPhotos />
       </div>
     </div>
-
-
     </div>
-
-
-
   ));
 
   return (
     <div className="container">
       {QuestionBox}
       {AnswerBox}
-      <AskQuestions getAnswers={props.getAnswers} />
+      <AskQuestions
+        loadMoreAnswers={props.loadMoreAnswers}
+        btnvisible={props.btnvisible}
+      />
     </div>
+
   );
 };
 

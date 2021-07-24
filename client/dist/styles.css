@@ -154,6 +154,12 @@ img {
 
 }
 
+.btndisappear{
+  background: transparent;
+  border: none !important;
+  font-size:0;
+}
+
 .loadmoreanswers {
   border: none;
   padding: 0;
@@ -188,4 +194,8 @@ img {
   padding: 0;
   background: none;
   text-decoration:underline;
+}
+
+.false {
+  visibility: hidden;
 }

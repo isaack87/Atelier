@@ -7,6 +7,7 @@ class QuestionsAnswersState extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      btnvisible: true,
       visibleAnswers: 2,
       questionsList: [],
       answersList: [],
@@ -56,8 +57,13 @@ class QuestionsAnswersState extends React.Component {
   }
 
   loadMoreAnswers() {
+    if (this.state.visibleAnswers >= this.state.answersList.length) {
+      this.setState({
+        btnvisible: false
+      });
+    }
     this.setState((prev) => {
-      return {visibleAnswers: prev.visibleAnswers + 4}
+      return {visibleAnswers: prev.visibleAnswers + 2}
     });
   }
 
@@ -75,6 +81,7 @@ class QuestionsAnswersState extends React.Component {
     fetch('http://localhost:3000/QuestionHelpful')
       .then((response) => response.json())
       .then((helpfulCounter) => {
+        console.log(helpfulCounter)
         this.setState({
           questionhelpfulCount: helpfulCounter[0].helpful,
         });
@@ -125,9 +132,9 @@ class QuestionsAnswersState extends React.Component {
             ajaxGetQuestionHelpful={this.ajaxGetQuestionHelpful}
             questionsList={this.state.questionsList}
             answersList={this.state.answersList}
-            getAnswers={this.getAnswers}
-            visibleAnswers={this.state.visibleAnswers}
             loadMoreAnswers={this.loadMoreAnswers}
+            visibleAnswers={this.state.visibleAnswers}
+            btnvisible={this.state.btnvisible}
           />
         </div>
 

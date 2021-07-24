@@ -3,7 +3,10 @@ import LoadMoreAnswers from './LoadMoreAnswers.jsx'
 
 const AskQuestions = (props) => (
   <div>
-    <LoadMoreAnswers getAnswers={props.getAnswers} />
+    <LoadMoreAnswers
+      loadMoreAnswers={props.loadMoreAnswers}
+      btnvisible={props.btnvisible}
+    />
     <div className="buttons">
       <button className="add-q-btn" type="submit"> MORE ANSWERED QUESTIONS</button>
       <button className="add-q-btn" type="submit">
