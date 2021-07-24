@@ -4,7 +4,7 @@
   "description": "FEC",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest test",
     "webpack": "webpack --mode development --watch",
     "server": "nodemon server/index.js",
     "testproduct": "jest test/ProductOverview.test.js"
