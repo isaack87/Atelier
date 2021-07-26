@@ -16,9 +16,10 @@ class QuestionsAnswersState extends React.Component {
       answersList: [],
       isReported: false,
       mainProductID: props.mainProductId,
-      questionId: props.questionId
+      qid: []
     };
     this.search = this.search.bind(this);
+    this.sendProductIdToServer = this.sendProductIdToServer.bind(this);
     this.getQuestions = this.getQuestions.bind(this);
     this.getAnswers = this.getAnswers.bind(this);
     this.loadMoreAnswers = this.loadMoreAnswers.bind(this);
@@ -26,6 +27,7 @@ class QuestionsAnswersState extends React.Component {
   }
 
   componentDidMount() {
+    this.sendProductIdToServer();
     this.getQuestions();
     this.getAnswers();
   }
@@ -36,6 +38,9 @@ class QuestionsAnswersState extends React.Component {
       .then((questions) => {
         this.setState({
           questionsList: questions.results,
+          qid: questions.results.map(data => {
+            return data.question_id
+          })
         });
       });
   }
@@ -50,6 +55,24 @@ class QuestionsAnswersState extends React.Component {
         });
       });
   }
+
+
+  sendProductIdToServer() {
+    this.productID = { pid: this.state.mainProductID, qid: this.state.qid };
+    $.ajax({
+      method: 'POST',
+      url: 'http://localhost:3000/Questions',
+      contentType: 'application/json',
+      data: JSON.stringify(this.productID),
+      success: () => {
+        console.log(`sendproductidworks`);
+      },
+      error: () => {
+        console.log('err sendProductIdToServer');
+      },
+    });
+  }
+
 
   loadMoreAnswers() {
     if (this.state.visibleAnswers >= this.state.questionsList.length) {
