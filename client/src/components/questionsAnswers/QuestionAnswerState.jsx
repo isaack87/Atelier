@@ -8,13 +8,14 @@ class QuestionsAnswersState extends React.Component {
     super(props);
     this.state = {
       btnvisible: true,
+      btnvisibleq: true,
       visibleAnswers: 2,
+      visibleQuestions: 2,
       questionsList: [],
       answersList: [],
-      answerhelpfulCount: [],
-      questionhelpfulCount: [],
       isReported: false,
-      mainProductID: props.mainProductId
+      mainProductID: props.mainProductId,
+      questionId: props.questionId
     };
     this.search = this.search.bind(this);
     this.sendProductIdToServer = this.sendProductIdToServer.bind(this);
@@ -23,6 +24,7 @@ class QuestionsAnswersState extends React.Component {
     this.ajaxGetAnswerHelpful = this.ajaxGetAnswerHelpful.bind(this);
     this.ajaxGetQuestionHelpful = this.ajaxGetQuestionHelpful.bind(this);
     this.loadMoreAnswers = this.loadMoreAnswers.bind(this);
+    this.loadMoreQuestions = this.loadMoreQuestions.bind(this);
   }
 
   componentDidMount() {
@@ -65,6 +67,15 @@ class QuestionsAnswersState extends React.Component {
     this.setState((prev) => {
       return {visibleAnswers: prev.visibleAnswers + 2}
     });
+  }
+
+  loadMoreQuestions() {
+    if (this.state.visibleQuestions >= this.state.questionsList.length) {
+      this.setState({
+        btnvisibleq: false,
+      });
+    }
+    this.setState((prev) => ({ visibleQuestions: prev.visibleQuestions + 2, visibleAnswers: 2 }));
   }
 
   ajaxGetAnswerHelpful() {
@@ -135,6 +146,9 @@ class QuestionsAnswersState extends React.Component {
             loadMoreAnswers={this.loadMoreAnswers}
             visibleAnswers={this.state.visibleAnswers}
             btnvisible={this.state.btnvisible}
+            loadMoreQuestions={this.loadMoreQuestions}
+            visibleQuestions={this.state.visibleQuestions}
+            btnvisibleq={this.state.btnvisibleq}
           />
         </div>
 

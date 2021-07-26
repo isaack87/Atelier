@@ -8,28 +8,7 @@ import HelpfulAnswerCount from './HelpfulAnswerCount.jsx';
 import HelpfulQuestionCount from './HelpfulQuestionCount.jsx';
 
 const MainAnswerQuestionBox = (props) => {
-  const QuestionBox = props.questionsList.slice(0, 2).map((data, index) => (
-    <div key={index}>
-      <div className="questions-asked">
-        <ul>
-          <span className="questiontext">
-            <b>
-              Q:
-            </b>
-            { data.question_body }
-            <div className="HelpfulQuestionCount">
-              <HelpfulQuestionCount
-                questionhelpfulCount={props.questionhelpfulCount}
-                ajaxGetQuestionHelpful={props.ajaxGetQuestionHelpful}
-              />
-            </div>
-          </span>
-        </ul>
-      </div>
-    </div>
-  ));
-
-  const AnswerBox = props.answersList.slice(0, props.visibleAnswers).map((data, index) => (
+  const AnswerBox = props.answersList.slice(0, props.visibleQuestions).map((data, index) => (
     <div key={data.answer_id}>
     <div className="questions-asked">
       <div>
@@ -64,6 +43,28 @@ const MainAnswerQuestionBox = (props) => {
     </div>
     </div>
   ));
+  const QuestionBox = props.questionsList.slice(0, 2).map((data, index) => (
+    <div key={index}>
+      <div className="questions-asked">
+        <ul>
+          <span className="questiontext">
+            <b>
+              Q:
+            </b>
+            { data.question_body }
+            <div className="HelpfulQuestionCount">
+              <HelpfulQuestionCount
+                questionhelpfulCount={props.questionhelpfulCount}
+                ajaxGetQuestionHelpful={props.ajaxGetQuestionHelpful}
+              />
+            </div>
+          </span>
+        </ul>
+      </div>
+      {AnswerBox}
+    </div>
+  ));
+
 
   return (
     <div className="container">
@@ -72,6 +73,9 @@ const MainAnswerQuestionBox = (props) => {
       <AskQuestions
         loadMoreAnswers={props.loadMoreAnswers}
         btnvisible={props.btnvisible}
+        loadMoreQuestions={props.loadMoreQuestions}
+        visibleQuestions={props.visibleQuestions}
+        btnvisibleq={props.btnvisibleq}
       />
     </div>
 
