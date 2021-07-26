@@ -118,10 +118,6 @@ const postquestionAPI = (params, cb) => {
     headers: { Authorization: config.gitToken },
   };
   axios(options)
-    .then((response) => {
-      //create function that takes in user question asked and post to server API
-      //console.log(response.data);
-    })
     .then((data) => {
       console.log('axios get success');
       return cb(data);
@@ -138,10 +134,6 @@ const postanswerAPI = (params, cb) => {
     headers: { Authorization: config.gitToken },
   };
   axios(options)
-    .then((response) => {
-      //create function that post user answer to a question to API
-      //console.log(response.data);
-    })
     .then((data) => {
       console.log('axios get success');
       return cb(data);
@@ -159,10 +151,6 @@ const putQuestionHelpful = (params, cb) => {
     headers: { Authorization: config.gitToken },
   };
   axios(options)
-    .then((response) => {
-      //create function finds product ID and updates helpful counter
-      //console.log(response.data);
-    })
     .then((data) => {
       console.log('axios get success');
       return cb(data);
@@ -179,10 +167,6 @@ const putAnswerHelpful = (params, cb) => {
     headers: { Authorization: config.gitToken },
   };
   axios(options)
-    .then((response) => {
-      //create function that finds answer id and updates helpful answer counter
-      //console.log(response.data);
-    })
     .then((data) => {
       console.log('axios get success');
       return cb(data);
@@ -203,10 +187,6 @@ const putReportQuestion = (params, cb) => {
     headers: { Authorization: config.gitToken },
   };
   axios(options)
-    .then((response) => {
-      //create function finds product ID and makes a report form
-      //console.log(response.data);
-    })
     .then((data) => {
       console.log('axios get success');
       return cb(data);
@@ -223,10 +203,6 @@ const putReportAnswer = (params, cb) => {
     headers: { Authorization: config.gitToken },
   };
   axios(options)
-    .then((response) => {
-      //create function finds answer product ID and reports it
-      //console.log(response.data);
-    })
     .then((data) => {
       console.log('axios get success');
       return cb(data);

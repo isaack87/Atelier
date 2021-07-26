@@ -1,10 +1,12 @@
 import React from 'react';
-import testdata from './exampleData.jsx'
+// import testdata from './exampleData.jsx'
+import QuestionsAnswersState from './QuestionAnswerState.jsx'
 
-const AnswerPhotos = () => {
+const AnswerPhotos = (props) => {
   const test = 'appear';
-  const data = testdata.map((pics) => (
-    <img key={pics.id} alt="pics" src={pics.Photos.length === 0 ? { test } : pics.Photos} />
+  const data = props.answersList.map((pics, index) => (
+    <img key={index} alt="pics" src={pics.photos} />
+    // <img key={index} alt="pics" src={pics.photos.length === 0 ? { test } : pics.photos} />
   ));
 
   return (

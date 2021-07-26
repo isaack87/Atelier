@@ -108,14 +108,15 @@ body {
   width: 960px;
 }
 .questions-asked {
-  font-size: 20px;
+  font-size: 22px;
   margin-left: 7%
 }
 
 .answer-asked {
-  font-size: 20px;
+  font-size: 22px;
   margin-left: 7%
 }
+
 
 ul {
   padding: 15px;
@@ -137,13 +138,14 @@ img {
 }
 
 .answertext {
- font-size: 16px;
+  color: blue;
+ font-size: 22px;
  max-width: 40ch;
 }
 
 .user-data {
   margin-left: 5%;
-  font-size: 15px;
+  font-size: 20px;
 }
 
 .reporthelpful-btn {
@@ -175,15 +177,21 @@ img {
   padding-left: 15px;
 }
 
+.q-a-box {
+  padding-left:25px;
+}
+
 .answerPhotos {
   margin-left: 8%
 }
 
 .questiontext {
+  color: red;
   display: flex;
 }
 
 .HelpfulQuestionCount {
+  display:flex;
   margin-left: 50%;
   font-size: 12px;
 }
@@ -196,6 +204,18 @@ img {
   text-decoration:underline;
 }
 
+.answerhelpfulbtn {
+  font-size:20px;
+  border: none;
+  padding: 0;
+  background: none;
+  text-decoration:underline;
+}
+
 .false {
   visibility: hidden;
+}
+
+.questionhelpfont {
+  font-size:15px
 }

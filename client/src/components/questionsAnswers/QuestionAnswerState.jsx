@@ -8,21 +8,24 @@ class QuestionsAnswersState extends React.Component {
     super(props);
     this.state = {
       btnvisible: true,
+      btnvisibleq: true,
       visibleAnswers: 2,
+      visibleQuestions: 2,
+      visibleQuestions: 2,
       questionsList: [],
       answersList: [],
       isReported: false,
-      mainProductID: props.mainProductId
+      mainProductID: props.mainProductId,
+      questionId: props.questionId
     };
     this.search = this.search.bind(this);
-    this.sendProductIdToServer = this.sendProductIdToServer.bind(this);
     this.getQuestions = this.getQuestions.bind(this);
     this.getAnswers = this.getAnswers.bind(this);
     this.loadMoreAnswers = this.loadMoreAnswers.bind(this);
+    this.loadMoreQuestions = this.loadMoreQuestions.bind(this);
   }
 
   componentDidMount() {
-    this.sendProductIdToServer();
     this.getQuestions();
     this.getAnswers();
   }
@@ -49,35 +52,22 @@ class QuestionsAnswersState extends React.Component {
   }
 
   loadMoreAnswers() {
-    if (this.state.visibleAnswers >= this.state.answersList.length) {
+    if (this.state.visibleAnswers >= this.state.questionsList.length) {
       this.setState({
-        btnvisible: false
+        btnvisible: false,
       });
     }
-    this.setState((prev) => {
-      return {visibleAnswers: prev.visibleAnswers + 2}
-    });
+    this.setState((prev) => ({ visibleAnswers: prev.visibleAnswers + 2 }));
   }
 
-  sendProductIdToServer() {
-    this.productID = { pid: this.state.mainProductID };
-    $.ajax({
-      method: 'POST',
-      url: 'http://localhost:3000/Question',
-      contentType: 'application/json',
-      data: JSON.stringify(this.productID),
-      success: () => {
-        console.log(`sendproductidworks`);
-      },
-      error: () => {
-        console.log('err sendProductIdToServer');
-      },
-    });
+  loadMoreQuestions() {
+    if (this.state.visibleQuestions >= this.state.questionsList.length) {
+      this.setState({
+        btnvisibleq: false,
+      });
+    }
+    this.setState((prev) => ({ visibleQuestions: prev.visibleQuestions + 2, visibleAnswers: 2 }));
   }
-
-
-
-
 
   search(term) {
     this.searchTerm = { search: term };
@@ -104,8 +94,12 @@ class QuestionsAnswersState extends React.Component {
             questionsList={this.state.questionsList}
             answersList={this.state.answersList}
             loadMoreAnswers={this.loadMoreAnswers}
+            loadMoreQuestions={this.loadMoreQuestions}
             visibleAnswers={this.state.visibleAnswers}
+            visibleQuestions={this.state.visibleQuestions}
+            btnvisibleq={this.state.btnvisibleq}
             btnvisible={this.state.btnvisible}
+            photos={this.state.photos}
           />
         </div>
       </div>

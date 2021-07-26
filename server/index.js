@@ -50,33 +50,35 @@ let currentproductID;
 
 // Isaac Routes
 // Questions Routes
-app.get('/question', (req, res) => {
-  isaacAPI.putQuestionHelpful('213336');
-  isaacAPI.getquestionAPI(currentproductID, (cb) => {
+app.get('/questions', (req, res) => {
+  const id = currentproductID;
+
+  isaacAPI.getquestionAPI(id, (cb) => {
+    isaacAPI.putQuestionHelpful('214137');
     res.status(200).send(cb);
   });
 });
 
-app.post('/question', (req, res) => {
+app.post('/questions', (req, res) => {
   currentproductID = req.body.pid;
   isaacAPI.postquestionAPI(currentproductID, (err) => {
     if (err) {
       console.log('Questions-post-err');
     }
+    res.send('success');
   });
-  res.send('success');
 });
 
 // Answers Routes
-app.get('/Answer', (req, res) => {
-  const params = '213336';
-  isaacAPI.putAnswerHelpful('1992416');
+app.get('/answer', (req, res) => {
+  const params = '214137';
   isaacAPI.getanswerAPI(params, (cb) => {
+    isaacAPI.putAnswerHelpful('1992416');
     res.status(200).send(cb);
   });
 });
 
-app.post('/Answer', (req, res) => {
+app.post('/answer', (req, res) => {
   const params = req.body;
   isaacAPI.postanswerAPI(params, (err) => {
     if (err) {
