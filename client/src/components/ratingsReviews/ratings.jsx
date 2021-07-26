@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+ import Images from './images.jsx'
 
 class Reviews extends React.Component {
     constructor(props) {
@@ -42,11 +43,12 @@ class Reviews extends React.Component {
         let generateReview = review => {
             let paragraph = <div key={review.review_id}> 
                 <div id= 'review-heading'>
-                <h3>{review.summary}</h3> <p>{review.reviewer_name}</p>
+                <h3>{review.summary}</h3> <p>{review.reviewer_name}</p> <p>{review.date}</p>
                 </div>
-                <p>{review.rating}
+               {review.rating}
                 {review.body}
-                helpfulness: {review.helpfulness}</p>
+                <div><Images props= {review.photos}/></div>
+                helpfulness: {review.helpfulness}
                 </div>;
           return paragraph;
         };
@@ -114,6 +116,7 @@ class Reviews extends React.Component {
                 </select>
                 {this.state.reviewsDiv}
                 {this.state.moreReviewsButton}
+           
             </div>
         )
     }
