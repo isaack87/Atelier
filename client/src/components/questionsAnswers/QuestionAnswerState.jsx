@@ -31,7 +31,7 @@ class QuestionsAnswersState extends React.Component {
   }
 
   getQuestions() {
-    fetch('http://localhost:3000/question')
+    fetch('http://localhost:3000/questions')
       .then((response) => response.json())
       .then((questions) => {
         this.setState({

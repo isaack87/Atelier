@@ -33,10 +33,8 @@ class App extends React.Component {
         this.setState({
           questionId: qids.results.map((data) => data.question_id),
         });
-
       });
   }
-
   sendProductIdToServer() {
     const productID = { pid: this.state.productId, qid: this.state.questionId };
     $.ajax({
