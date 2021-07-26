@@ -8,6 +8,7 @@ import HelpfulAnswerCount from './HelpfulAnswerCount.jsx';
 import HelpfulQuestionCount from './HelpfulQuestionCount.jsx';
 
 const MainAnswerQuestionBox = (props) => {
+
   const QuestionBox = props.questionsList.slice(0, 2).map((data, index) => (
     <div key={index}>
       <div className="questions-asked">
@@ -19,8 +20,6 @@ const MainAnswerQuestionBox = (props) => {
             { data.question_body }
             <div className="HelpfulQuestionCount">
               <HelpfulQuestionCount
-                questionhelpfulCount={props.questionhelpfulCount}
-                ajaxGetQuestionHelpful={props.ajaxGetQuestionHelpful}
               />
             </div>
           </span>
@@ -28,6 +27,7 @@ const MainAnswerQuestionBox = (props) => {
       </div>
     </div>
   ));
+
 
   const AnswerBox = props.answersList.slice(0, props.visibleAnswers).map((data, index) => (
     <div key={data.answer_id}>
@@ -49,10 +49,7 @@ const MainAnswerQuestionBox = (props) => {
           { data.date }
           {' ' } HelpFul? {data.helpfulness}
           |
-           <HelpfulAnswerCount
-            answerhelpfulCount={props.answerhelpfulCount}
-            ajaxGetAnswerHelpful={props.ajaxGetAnswerHelpful}
-          />
+           <HelpfulAnswerCount/>
           |
           <Report />
         </ul>
@@ -67,7 +64,9 @@ const MainAnswerQuestionBox = (props) => {
 
   return (
     <div className="container">
-      {QuestionBox}
+      {QuestionBox[0]}
+      {AnswerBox}
+      {QuestionBox[1]}
       {AnswerBox}
       <AskQuestions
         loadMoreAnswers={props.loadMoreAnswers}
