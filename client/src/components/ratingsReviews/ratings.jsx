@@ -107,6 +107,11 @@ class Reviews extends React.Component {
         return (
             <div>
                 <h1>reviews module</h1>
+                <select id="review-dropdown">
+                    <option value="helpful">helpful</option>
+                    <option value="newest">newest</option>
+                    <option value="relevant">relevant</option>
+                </select>
                 {this.state.reviewsDiv}
                 {this.state.moreReviewsButton}
             </div>
