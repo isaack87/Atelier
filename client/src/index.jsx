@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ProductOverview from './components/productDetails/products.jsx'
+import $ from 'jquery';
 
 class App extends React.Component {
   constructor(props) {
