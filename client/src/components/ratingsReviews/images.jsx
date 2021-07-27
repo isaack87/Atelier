@@ -4,15 +4,29 @@ class Images extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            images: []
 
         }
+         this.createImageDiv = this.createImageDiv.bind(this);
+    }
+    createImageDiv(imageArr) {
+      
+        let imagesDiv = [];
+        imageArr.forEach(image => {
+            imagesDiv.push(<img id= {image.id} key= {image.id} src= {image.url}/>)
+        })
+        let div = <div>{imagesDiv}</div>
+        this.setState({images: div});
+
     }
     componentDidMount() {
-        console.log('the props for the images', this.props)
+
+        this.createImageDiv(this.props.props);
     }
     render() {
         return <div>
-            <h3>image here</h3>
+
+            {this.state.images}
         </div>
     }
 }
