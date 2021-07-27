@@ -46,9 +46,9 @@ const MainAnswerQuestionBox = (props) => {
           </ul>
         </span>
 
-        {/* <div className="answerPhotos">
+        <div className="answerPhotos">
           <AnswerPhotos answersList={props.answersList} />
-        </div> */}
+        </div>
       </div>
     </div>
   ));
@@ -72,7 +72,6 @@ const MainAnswerQuestionBox = (props) => {
       </div>
       {AnswerBox}
     </div>
-
   ));
 
   return (
@@ -83,6 +82,7 @@ const MainAnswerQuestionBox = (props) => {
         loadMoreQuestions={props.loadMoreQuestions}
         btnvisible={props.btnvisible}
         btnvisibleq={props.btnvisibleq}
+        mainProductId={props.mainProductId}
       />
     </div>
 

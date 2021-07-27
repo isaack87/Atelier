@@ -11,12 +11,11 @@ class QuestionsAnswersState extends React.Component {
       btnvisibleq: true,
       visibleAnswers: 2,
       visibleQuestions: 2,
-      visibleQuestions: 2,
       questionsList: [],
       answersList: [],
+      listofanswers: [],
       isReported: false,
-      mainProductID: props.mainProductId,
-      qid: []
+      qid: [],
     };
     this.search = this.search.bind(this);
     this.sendProductIdToServer = this.sendProductIdToServer.bind(this);
@@ -24,10 +23,11 @@ class QuestionsAnswersState extends React.Component {
     this.getAnswers = this.getAnswers.bind(this);
     this.loadMoreAnswers = this.loadMoreAnswers.bind(this);
     this.loadMoreQuestions = this.loadMoreQuestions.bind(this);
+    this.sendQidToServer = this.sendQidToServer.bind(this);
+    //this.mapobject = this.mapobject.bind(this);
   }
 
   componentDidMount() {
-    this.sendProductIdToServer();
     this.getQuestions();
     this.getAnswers();
   }
@@ -38,11 +38,20 @@ class QuestionsAnswersState extends React.Component {
       .then((questions) => {
         this.setState({
           questionsList: questions.results,
-          qid: questions.results.map(data => {
-            return data.question_id
-          })
         });
+      })
+      .then(() => {
+        this.setState({
+          qid: this.state.questionsList.map((data) => data.question_id),
+        });
+      })
+      .then(() => {
+        this.sendProductIdToServer();
       });
+      // .then(() => {
+      //   //this.mapobject();
+      // });
+    console.log('getquestions test');
   }
 
   getAnswers() {
@@ -54,16 +63,61 @@ class QuestionsAnswersState extends React.Component {
           answersList: answers.results,
         });
       });
+    console.log('get answers test');
   }
+
+  // mapobject() {
+  //   this.state.questionsList.map((data) => {
+  //     console.log(data.answers);
+  //     return data.answers;
+  //   }).then((data) => {
+  //     this.setState({
+  //       answersList: data,
+  //     });
+  //   });
+  // }
+
+  // getAnswers() {
+  //   fetch('http://localhost:3000/Answer')
+  //     .then((response) => response.json())
+  //     .then((answers) => {
+  //       console.log('getanswers works');
+  //       this.setState({
+  //         answersList: answers.results,
+  //       });
+  //     });
+  //   console.log('get answers test');
+  // }
+
+
+
+
 
 
   sendProductIdToServer() {
-    this.productID = { pid: this.state.mainProductID, qid: this.state.qid };
+    const productID = { pid: '28213' };
     $.ajax({
       method: 'POST',
-      url: 'http://localhost:3000/Questions',
+      url: 'http://localhost:3000/questions',
       contentType: 'application/json',
-      data: JSON.stringify(this.productID),
+      data: JSON.stringify(productID),
+      success: (data) => {
+        console.log(`sendproductidworks`);
+      },
+      error: () => {
+        console.log('err sendProductIdToServer');
+      },
+    });
+    this.sendQidToServer();
+  }
+
+  sendQidToServer() {
+    const qID = { qid: this.state.qid };
+    $.ajax({
+      method: 'POST',
+      url: 'http://localhost:3000/answer',
+      contentType: 'application/json',
+      data: JSON.stringify(qID),
       success: () => {
         console.log(`sendproductidworks`);
       },
@@ -72,7 +126,6 @@ class QuestionsAnswersState extends React.Component {
       },
     });
   }
-
 
   loadMoreAnswers() {
     if (this.state.visibleAnswers >= this.state.questionsList.length) {
@@ -96,7 +149,7 @@ class QuestionsAnswersState extends React.Component {
     this.searchTerm = { search: term };
     $.ajax({
       method: 'POST',
-      url: 'http://localhost:3000/Question',
+      url: 'http://localhost:3000/questions',
       contentType: 'application/json',
       data: JSON.stringify(this.searchTerm),
       success: (data) => {

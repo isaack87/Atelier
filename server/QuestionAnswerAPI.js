@@ -1,7 +1,9 @@
 const axios = require('axios');
 const config = require('../config');
+const qs = require('qs');
 
 // GET API FUNCTIONS
+
 const getquestionAPI = (params, cb) => {
   const options = {
     method: 'GET',
@@ -10,7 +12,7 @@ const getquestionAPI = (params, cb) => {
   };
   axios(options)
     .then((response) => {
-      console.log('axios get success');
+      console.log('axios get getquestionAPI success');
       return cb(response.data);
     })
     .catch(() => {
@@ -27,12 +29,16 @@ const getanswerAPI = (params, cb) => {
   axios(options)
     .then((response) => {
       console.log('axios get success');
+      if (response.data.answers === null) {
+        response.data.answers = null
+      }
       return cb(response.data);
     })
     .catch(() => {
-      console.log('getanswerAPI error');
+      console.log(`getanswerAPI ${params} error`);
     });
 };
+
 
 const getAnswerCounter = (params, cb) => {
   const options = {
@@ -98,7 +104,7 @@ const getIsReportedStatus = (params, cb) => {
         const reported = {
           reported: report.reported,
         };
-        console.log(reported);
+        //console.log(reported);
         return reported;
       });
     })
@@ -128,19 +134,19 @@ const postquestionAPI = (params, cb) => {
 };
 
 const postanswerAPI = (params, cb) => {
-  const options = {
-    method: 'POST',
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions${params}&count=100`,
-    headers: { Authorization: config.gitToken },
-  };
-  axios(options)
-    .then((data) => {
-      console.log('axios get success');
-      return cb(data);
-    })
-    .catch(() => {
-      console.log('catch answerAPI err');
-    });
+  // const options = {
+  //   method: 'POST',
+  //   url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions${params}&count=100`,
+  //   headers: { Authorization: config.gitToken },
+  // };
+  // axios(options)
+  //   .then((data) => {
+  //     console.log('axios get success');
+  //     return cb(data);
+  //   })
+  //   .catch(() => {
+  //     console.log('catch answerAPI err');
+  //   });
 };
 
 // PUT REQUEST APIS
@@ -172,7 +178,7 @@ const putAnswerHelpful = (params, cb) => {
       return cb(data);
     })
     .catch(() => {
-      console.log('catch answerAPI err');
+      console.log('catch putAnswerHelpful err');
     });
 };
 
