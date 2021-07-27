@@ -47,7 +47,7 @@ class Reviews extends React.Component {
                 </div>
                {review.rating}
                 {review.body}
-                <div><Images props= {review.photos}/></div>
+                {/* <div><Images props= {review.photos}/></div> */}
                 helpfulness: {review.helpfulness}
                 </div>;
           return paragraph;
@@ -114,7 +114,7 @@ class Reviews extends React.Component {
                     <option value="newest">newest</option>
                     <option value="relevant">relevant</option>
                 </select>
-                {this.state.reviewsDiv}
+               <div id='reviewsList'> {this.state.reviewsDiv}</div>
                 {this.state.moreReviewsButton}
            
             </div>

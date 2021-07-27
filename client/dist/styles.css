@@ -4,8 +4,13 @@
 
 /* Helena - CSS */
 body {
-    background-color: lightblue;
-  }
+    background-color:  blue;
+}
+#reviewsList {
+    background-color: cadetblue;
+    height: 340px;
 
+    overflow: auto;
 
+}
 /* Isaac - CSS */
