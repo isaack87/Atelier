@@ -5,7 +5,7 @@ const HelpfulQuestionCount = () => {
   const helpfulQincrementer = () => {
     $.ajax({
       method: 'POST',
-      url: 'http://localhost:3000/questions',
+      url: 'http://localhost:3000/qhelpful',
       contentType: 'application/json',
       success: () => {
         console.log('helpfulQincrementer++ ');
@@ -13,7 +13,20 @@ const HelpfulQuestionCount = () => {
       error: () => {
         console.log('err helpfulAnswerAjax');
       },
-    });
+    })
+    // .then (() => {
+    //   $.ajax({
+    //     method: 'GET',
+    //     url: 'http://localhost:3000/qhelpful',
+    //     contentType: 'application/json',
+    //     success: () => {
+    //       console.log('helpfulQincrementer++ ');
+    //     },
+    //     error: () => {
+    //       console.log('err helpfulAnswerAjax');
+    //     },
+    //   })
+    // })
   };
 
   return (

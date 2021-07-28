@@ -28,17 +28,14 @@ const getanswerAPI = (params, cb) => {
   };
   axios(options)
     .then((response) => {
-      console.log('axios get success');
-      if (response.data.answers === null) {
-        response.data.answers = null
-      }
+      console.log(`getanswerAPI ${params}  success`);
       return cb(response.data);
     })
+
     .catch(() => {
       console.log(`getanswerAPI ${params} error`);
     });
 };
-
 
 const getAnswerCounter = (params, cb) => {
   const options = {
@@ -120,6 +117,10 @@ const getIsReportedStatus = (params, cb) => {
 const postquestionAPI = (params, cb) => {
   const options = {
     method: 'POST',
+    data: {
+      "body": "testing 123412412",
+      "name": "isaac"
+    },
     url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions?product_id=${params}&count=100`,
     headers: { Authorization: config.gitToken },
   };
@@ -133,20 +134,23 @@ const postquestionAPI = (params, cb) => {
     });
 };
 
-const postanswerAPI = (params, cb) => {
-  // const options = {
-  //   method: 'POST',
-  //   url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions${params}&count=100`,
-  //   headers: { Authorization: config.gitToken },
-  // };
-  // axios(options)
-  //   .then((data) => {
-  //     console.log('axios get success');
-  //     return cb(data);
-  //   })
-  //   .catch(() => {
-  //     console.log('catch answerAPI err');
-  //   });
+const postanswerAPI = (params) => {
+  const options = {
+    method: 'POST',
+    data: {
+      question_body: 'Hello testing',
+      asker_name: 'isaac',
+    },
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions${params}&count=100`,
+    headers: { Authorization: config.gitToken },
+  };
+  axios(options)
+    .then((data) => {
+      console.log('answer post works');
+    })
+    .catch(() => {
+      console.log('catch answerAPI err');
+    });
 };
 
 // PUT REQUEST APIS
@@ -185,10 +189,6 @@ const putAnswerHelpful = (params, cb) => {
 const putReportQuestion = (params, cb) => {
   const options = {
     method: 'PUT',
-    // replace number  with a param {} for question id
-    //
-    //
-    // change the number here everytime u report sinc eit goes away
     url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions/2133722/report?count=100',
     headers: { Authorization: config.gitToken },
   };

@@ -70,13 +70,13 @@ const MainAnswerQuestionBox = (props) => {
           </span>
         </ul>
       </div>
-      {AnswerBox}
     </div>
   ));
 
   return (
     <div className="container">
       {QuestionBox}
+      {AnswerBox}
       <AskQuestions
         loadMoreAnswers={props.loadMoreAnswers}
         loadMoreQuestions={props.loadMoreQuestions}

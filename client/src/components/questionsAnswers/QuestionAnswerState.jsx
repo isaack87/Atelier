@@ -16,6 +16,7 @@ class QuestionsAnswersState extends React.Component {
       listofanswers: [],
       isReported: false,
       qid: [],
+      mainProductId: props.mainProductId,
     };
     this.search = this.search.bind(this);
     this.sendProductIdToServer = this.sendProductIdToServer.bind(this);
@@ -24,7 +25,6 @@ class QuestionsAnswersState extends React.Component {
     this.loadMoreAnswers = this.loadMoreAnswers.bind(this);
     this.loadMoreQuestions = this.loadMoreQuestions.bind(this);
     this.sendQidToServer = this.sendQidToServer.bind(this);
-    //this.mapobject = this.mapobject.bind(this);
   }
 
   componentDidMount() {
@@ -33,7 +33,7 @@ class QuestionsAnswersState extends React.Component {
   }
 
   getQuestions() {
-    fetch('http://localhost:3000/questions')
+    fetch(`http://localhost:3000/questions?qid=${this.state.mainProductId}`)
       .then((response) => response.json())
       .then((questions) => {
         this.setState({
@@ -41,21 +41,13 @@ class QuestionsAnswersState extends React.Component {
         });
       })
       .then(() => {
-        this.setState({
-          qid: this.state.questionsList.map((data) => data.question_id),
-        });
-      })
-      .then(() => {
         this.sendProductIdToServer();
       });
-      // .then(() => {
-      //   //this.mapobject();
-      // });
     console.log('getquestions test');
   }
 
   getAnswers() {
-    fetch('http://localhost:3000/Answer')
+    fetch(`http://localhost:3000/Answer?aid=${this.state.qid}`)
       .then((response) => response.json())
       .then((answers) => {
         console.log('getanswers works');
@@ -65,34 +57,6 @@ class QuestionsAnswersState extends React.Component {
       });
     console.log('get answers test');
   }
-
-  // mapobject() {
-  //   this.state.questionsList.map((data) => {
-  //     console.log(data.answers);
-  //     return data.answers;
-  //   }).then((data) => {
-  //     this.setState({
-  //       answersList: data,
-  //     });
-  //   });
-  // }
-
-  // getAnswers() {
-  //   fetch('http://localhost:3000/Answer')
-  //     .then((response) => response.json())
-  //     .then((answers) => {
-  //       console.log('getanswers works');
-  //       this.setState({
-  //         answersList: answers.results,
-  //       });
-  //     });
-  //   console.log('get answers test');
-  // }
-
-
-
-
-
 
   sendProductIdToServer() {
     const productID = { pid: '28213' };

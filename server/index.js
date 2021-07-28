@@ -14,57 +14,56 @@ app.use(express.static(`${__dirname} /../client/dist`));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
 // Isaac Routes
 // Questions Routes
 app.get('/questions', (req, res) => {
-  let id = 28213;
-
-  isaacAPI.putQuestionHelpful('214137');
-  isaacAPI.getquestionAPI(id, (cb) => {
+   let pid = req.query.qid
+  isaacAPI.getquestionAPI(pid, (cb) => {
     res.send(cb);
   });
 });
 
 app.post('/questions', (req, res) => {
-  currentproductID = req.body.pid;
-  res.send('success');
+  let currentproductID = req.body.pid;
+  res.send('post questtion route success');
 });
 
 // Answers Routes
 app.post('/answer', (req, res) => {
-  currentQuestionIDS = req.body.qid;
+  let currentQuestionIDS = req.body.qid;
   res.send('answer post success');
 });
 
 app.get('/answer', (req, res) => {
-  // let params = [213345, 213346, 213341, 213344, 213339, 232432]
-  isaacAPI.getanswerAPI('213345', (cb) => {
-   res.send(cb);
-  })
+  // console.log('answer test get');
+  // console.log(req.query)
+  //const params = [213356, 213355, 213349, 213357, 213350, 213351];
+  // for (let i = 0; i < params.length; i++) {
+    isaacAPI.getanswerAPI(213356, (cb) => {
+      res.send(cb);
+    });
+  // }
 });
 
+app.get('/qhelpful', (req, res) => {
+  res.send('qhelpful post success');
+});
 
-// app.post('/answer', (req, res) => {
-//   currentQuestionIDS = req.body.qid;
-//     isaacAPI.putAnswerHelpful('1992416');
-//     const data = currentQuestionIDS;
-//     const newData = [];
-//     for (let i = 0; i < data.length; i++) {
-//       isaacAPI.getanswerAPI(data[i], (cb) => {
-//         newData.push(cb);
-//       });
-//       return newData;
-//     }
-//     res.send(newData);
-// });
+app.post('/qhelpful', (req, res) => {
+  isaacAPI.putQuestionHelpful('213336', cb => {
+    res.send(cb);
+  });
+});
 
-// isaacAPI.postanswerAPI(params, (err) => {
-//   if (err) {
-//     console.log('answer-post-err');
-//   }
-// });
+app.get('/addAnswer', (req, res) => {
+  res.send('answer post success');
+});
 
+app.post('/addAnswer', (req, res) => {
+  let test = '28212';
+  isaacAPI.postanswerAPI(test);
+  res.send('answer post success');
+});
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
