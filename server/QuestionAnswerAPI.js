@@ -20,22 +20,24 @@ const getquestionAPI = (params, cb) => {
     });
 };
 
-const getanswerAPI = (params, cb) => {
-  const options = {
-    method: 'GET',
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions/${params}/answers?count=100`,
-    headers: { Authorization: config.gitToken },
-  };
-  axios(options)
-    .then((response) => {
-      console.log(`getanswerAPI ${params}  success`);
-      return cb(response.data);
-    })
+////////////////////////
+// const getanswerAPI = (params, cb) => {
+//   const options = {
+//     method: 'GET',
+//     url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions/${params}/answers?count=100`,
+//     headers: { Authorization: config.gitToken },
+//   };
+//   axios(options)
+//     .then((response) => {
+//       console.log(`getanswerAPI ${params}  success`);
+//       return cb(response.data);
+//     })
 
-    .catch(() => {
-      console.log(`getanswerAPI ${params} error`);
-    });
-};
+//     .catch(() => {
+//       console.log(`getanswerAPI ${params} error`);
+//     });
+// };
+////////////////////////
 
 const getAnswerCounter = (params, cb) => {
   const options = {
@@ -220,7 +222,7 @@ const putReportAnswer = (params, cb) => {
 
 module.exports = {
   getquestionAPI,
-  getanswerAPI,
+  //getanswerAPI,
   getQuestionCounter,
   getAnswerCounter,
   getIsReportedStatus,

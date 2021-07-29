@@ -12,8 +12,8 @@ class QuestionsAnswersState extends React.Component {
       visibleAnswers: 2,
       visibleQuestions: 2,
       questionsList: [],
+      questionanswerslist: [],
       answersList: [],
-      listofanswers: [],
       isReported: false,
       qid: [],
       mainProductId: props.mainProductId,
@@ -21,15 +21,31 @@ class QuestionsAnswersState extends React.Component {
     this.search = this.search.bind(this);
     this.sendProductIdToServer = this.sendProductIdToServer.bind(this);
     this.getQuestions = this.getQuestions.bind(this);
-    this.getAnswers = this.getAnswers.bind(this);
     this.loadMoreAnswers = this.loadMoreAnswers.bind(this);
     this.loadMoreQuestions = this.loadMoreQuestions.bind(this);
     this.sendQidToServer = this.sendQidToServer.bind(this);
+    this.getQuestionAnswerList = this.getQuestionAnswerList.bind(this);
   }
 
   componentDidMount() {
     this.getQuestions();
-    this.getAnswers();
+  }
+
+  getQuestionAnswerList() {
+    const list = this.state.questionsList
+    const newObj = [];
+
+    list.map(e => {
+      newObj.push({
+        qID: e.question_id,
+        question: e.question_body,
+        answers: Object.values(e.answers)
+      });
+    })
+      console.log(newObj)
+      this.setState({
+        questionanswerslist: newObj
+      });
   }
 
   getQuestions() {
@@ -42,20 +58,9 @@ class QuestionsAnswersState extends React.Component {
       })
       .then(() => {
         this.sendProductIdToServer();
+        this.getQuestionAnswerList();
       });
     console.log('getquestions test');
-  }
-
-  getAnswers() {
-    fetch(`http://localhost:3000/Answer?aid=${this.state.qid}`)
-      .then((response) => response.json())
-      .then((answers) => {
-        console.log('getanswers works');
-        this.setState({
-          answersList: answers.results,
-        });
-      });
-    console.log('get answers test');
   }
 
   sendProductIdToServer() {
@@ -140,6 +145,7 @@ class QuestionsAnswersState extends React.Component {
             btnvisibleq={this.state.btnvisibleq}
             btnvisible={this.state.btnvisible}
             photos={this.state.photos}
+            questionanswerslist={this.state.questionanswerslist}
           />
         </div>
       </div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import Moment from 'react-moment';
+import LoadMoreAnswers from './LoadMoreAnswers.jsx'
 
 
 //import testdata from './exampleData.jsx';
@@ -11,17 +12,39 @@ import HelpfulAnswerCount from './HelpfulAnswerCount.jsx';
 import HelpfulQuestionCount from './HelpfulQuestionCount.jsx';
 
 const MainAnswerQuestionBox = (props) => {
-  const AnswerBox = props.answersList.slice(0, props.visibleAnswers).map((data) => (
-    <div key={data.answer_id}>
+
+
+  const QABOX = props.questionanswerslist.slice(0, props.visibleQuestions).map((data, index) => (
+    <div key={index}>
+
+      <div className="questions-asked">
+        <ul>
+          <span className="questiontext">
+            <b>
+              Q:
+            </b>
+            { data.question }
+            <div className="HelpfulQuestionCount">
+              <HelpfulQuestionCount />
+              <p className="questionhelpfont">{ data.question_helpfulness }</p>
+            </div>
+          </span>
+        </ul>
+      </div>
+
+
       <div className="questions-asked">
         <div>
           <ul>
+
             <b>
               A:
             </b>
-            <span className="answertext">
-              { data.body }
-            </span>
+            <div className="answertext">
+              {data.answers.map(a => {
+                 <p>{a.body}</p>
+              })}
+            </div>
           </ul>
         </div>
         <span className="user-data">
@@ -34,6 +57,7 @@ const MainAnswerQuestionBox = (props) => {
             |
             _
             HelpFul?
+
             _
             <HelpfulAnswerCount />
             _
@@ -42,41 +66,19 @@ const MainAnswerQuestionBox = (props) => {
             |
             _
             <Report />
-
           </ul>
         </span>
-
-        <div className="answerPhotos">
+        {/* <div className="answerPhotos">
           <AnswerPhotos answersList={props.answersList} />
-        </div>
+        </div> */}
       </div>
     </div>
-  ));
 
-  const QuestionBox = props.questionsList.slice(0, props.visibleQuestions).map((data, index) => (
-    <div key={index}>
-      <div className="questions-asked">
-        <ul>
-          <span className="questiontext">
-            <b>
-              Q:
-            </b>
-            { data.question_body }
-
-            <div className="HelpfulQuestionCount">
-              <HelpfulQuestionCount />
-              <p className="questionhelpfont">{ data.question_helpfulness }</p>
-            </div>
-          </span>
-        </ul>
-      </div>
-    </div>
   ));
 
   return (
     <div className="container">
-      {QuestionBox}
-      {AnswerBox}
+      {QABOX}
       <AskQuestions
         loadMoreAnswers={props.loadMoreAnswers}
         loadMoreQuestions={props.loadMoreQuestions}
