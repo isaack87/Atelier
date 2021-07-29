@@ -1,37 +1,25 @@
 import React from 'react';
 import $ from 'jquery';
 
-const HelpfulQuestionCount = () => {
+const HelpfulQuestionCount = (props) => {
   const helpfulQincrementer = () => {
     $.ajax({
       method: 'POST',
       url: 'http://localhost:3000/qhelpful',
       contentType: 'application/json',
-      success: () => {
+      data: JSON.stringify( {qhelpid: props.id } ),
+      success: (data) => {
         console.log('helpfulQincrementer++ ');
       },
       error: () => {
         console.log('err helpfulAnswerAjax');
       },
-    })
-    // .then (() => {
-    //   $.ajax({
-    //     method: 'GET',
-    //     url: 'http://localhost:3000/qhelpful',
-    //     contentType: 'application/json',
-    //     success: () => {
-    //       console.log('helpfulQincrementer++ ');
-    //     },
-    //     error: () => {
-    //       console.log('err helpfulAnswerAjax');
-    //     },
-    //   })
-    // })
+    });
   };
 
   return (
     <div className="helpfulQuestionCounter">
-      Question Helpful?
+      Helpful?
       <button type="submit" onClick={helpfulQincrementer} className="questionhelpfulbtn">Yes</button>
       {/* should be the helpfulcount state from questionsanswerbox file but not workinging */}
       {/* {test} */}

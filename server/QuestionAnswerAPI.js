@@ -191,12 +191,14 @@ const putAnswerHelpful = (params, cb) => {
 const putReportQuestion = (params, cb) => {
   const options = {
     method: 'PUT',
-    url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions/2133722/report?count=100',
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions/${params}/report?count=100`,
     headers: { Authorization: config.gitToken },
   };
   axios(options)
     .then((data) => {
       console.log('axios get success');
+      console.log('test hereing now')
+      console.log(data)
       return cb(data);
     })
     .catch(() => {
@@ -222,7 +224,6 @@ const putReportAnswer = (params, cb) => {
 
 module.exports = {
   getquestionAPI,
-  //getanswerAPI,
   getQuestionCounter,
   getAnswerCounter,
   getIsReportedStatus,

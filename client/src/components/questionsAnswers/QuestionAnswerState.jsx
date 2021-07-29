@@ -28,6 +28,7 @@ class QuestionsAnswersState extends React.Component {
   }
 
   componentDidMount() {
+    this.getQuestionAnswerList();
     this.getQuestions();
   }
 
@@ -39,13 +40,13 @@ class QuestionsAnswersState extends React.Component {
       newObj.push({
         qID: e.question_id,
         question: e.question_body,
-        answers: Object.values(e.answers)
+        questionHelpful: e.question_helpfulness,
+        answers: Object.values(e.answers),
       });
-    })
-      console.log(newObj)
-      this.setState({
-        questionanswerslist: newObj
-      });
+    });
+    this.setState({
+      questionanswerslist: newObj,
+    });
   }
 
   getQuestions() {

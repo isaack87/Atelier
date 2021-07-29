@@ -80,6 +80,10 @@ body {
   height:center;
 }
 
+.indent {
+  margin-left: 15px;
+}
+
 
 /* Questions&Answers css */
 
@@ -108,8 +112,9 @@ body {
   width: 960px;
 }
 .questions-asked {
-  font-size: 22px;
-  margin-left: 7%
+  font-size: 20px;
+  margin-left: 7%;
+  margin-bottom: -2%;
 }
 
 .answer-asked {
@@ -144,8 +149,11 @@ img {
 }
 
 .user-data {
+  margin-top: -3%;
+  margin-bottom: 5%;
   margin-left: 5%;
   font-size: 20px;
+  display: flex;
 }
 
 .reporthelpful-btn {
@@ -194,6 +202,10 @@ img {
   display:flex;
   margin-left: 50%;
   font-size: 12px;
+}
+
+.answers {
+  font-size: 20px;
 }
 
 .questionhelpfulbtn {

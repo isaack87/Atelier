@@ -1,11 +1,13 @@
 import React from 'react';
 import serverhelper from '../../../../server/QuestionAnswerAPI';
 
-const Report = () => {
+const QuestionReport = (props) => {
   let reportStatus = 'Report';
   const reportedBtn = () => {
     reportStatus = 'Reported';
-    serverhelper.putReportQuestion();
+    console.log('testingreported')
+    console.log(props.qid)
+    serverhelper.putReportQuestion(props.qid);
   };
 
   return (
@@ -15,4 +17,4 @@ const Report = () => {
   );
 };
 
-export default Report;
+export default QuestionReport;

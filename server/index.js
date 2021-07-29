@@ -27,34 +27,37 @@ app.post('/questions', (req, res) => {
   res.send('post questtion route success');
 });
 
+app.post('/answer', (req, res) => {
+  res.send('done');
+});
 
-/////////////////
-// Answers Routes
-// app.post('/answer', (req, res) => {
-//   let currentQuestionIDS = req.body.qid;
-//   res.send('answer post success');
-// });
+app.get('/answer', (req, res) => {
+  res.send('done');
+});
 
-// app.get('/answer', (req, res) => {
-//   // console.log('answer test get');
-//   // console.log(req.query)
-//   //const params = [213356, 213355, 213349, 213357, 213350, 213351];
-//   // for (let i = 0; i < params.length; i++) {
-//     isaacAPI.getanswerAPI(213356, (cb) => {
-//       res.send(cb);
-//     });
-//   // }
-// });
-/////////////////
 
+
+app.get('/ahelpful', (req, res) => {
+  res.send('qhelpful post success');
+});
+
+app.post('/ahelpful', (req, res) => {
+  const ahelpfulId = req.body.ahelpid;
+  console.log(req.body);
+  isaacAPI.putAnswerHelpful(ahelpfulId, () => {
+    res.send('answerhelp post success');
+  });
+});
 
 app.get('/qhelpful', (req, res) => {
   res.send('qhelpful post success');
 });
 
 app.post('/qhelpful', (req, res) => {
-  isaacAPI.putQuestionHelpful('213336', cb => {
-    res.send(cb);
+  console.log(req.body);
+  const qhelpfulId = req.body.qhelpid;
+  isaacAPI.putQuestionHelpful(qhelpfulId, () => {
+    res.send('question help post success');
   });
 });
 

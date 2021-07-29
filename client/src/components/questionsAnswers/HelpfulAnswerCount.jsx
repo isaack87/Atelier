@@ -3,14 +3,15 @@ import $ from 'jquery';
 
 // this page post on click and sents back increase count
 
-const HelpfulAnswerCount = () => {
+const HelpfulAnswerCount = (props) => {
   const helpfulAincrementer = () => {
     $.ajax({
       method: 'POST',
-      url: 'http://localhost:3000/answer',
+      url: `http://localhost:3000/ahelpful`,
       contentType: 'application/json',
-      success: () => {
-        console.log('helpfulAincrementer++')
+      data: JSON.stringify({ahelpid: props.id}),
+      success: (data) => {
+        console.log('helpfulAincrementer++');
       },
       error: () => {
         console.log('err helpfulAnswerAjax');
