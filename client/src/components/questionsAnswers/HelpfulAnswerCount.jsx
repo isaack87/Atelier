@@ -1,8 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
 
-// this page post on click and sents back increase count
-
 const HelpfulAnswerCount = (props) => {
   const helpfulAincrementer = () => {
     $.ajax({
@@ -21,8 +19,6 @@ const HelpfulAnswerCount = (props) => {
   return (
     <div className='helpfulQuestionCounter'>
       <button type="submit" onClick={helpfulAincrementer} className="answerhelpfulbtn">Yes</button>
-      {/* should be the helpfulcount state from questionsanswerbox file but not workinging */}
-      {/* {test} */}
     </div>
   );
 };

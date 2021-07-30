@@ -41,7 +41,7 @@ class AnswerForm extends React.Component {
     return (
       <div>
             <button className="addanswer" type="submit" onClick={ this.onClick }>
-              Add Answer
+                Add Answer
               {showForm && this.showForm()}
             </button>
       </div>

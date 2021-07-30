@@ -26,13 +26,3 @@ const HelpfulQuestionCount = (props) => {
 };
 
 export default HelpfulQuestionCount;
-
-// fetch('http://localhost:3000/question')
-// .then((response) => response.json())
-// .then((helpfulCounter) => {
-//    test = helpfulCounter.results.map( data => {
-//     return data.question_helpfulness
-//    })
-//    console.log('this is question count', test)
-
-// });
