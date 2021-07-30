@@ -84,13 +84,14 @@ app.listen(port, () => {
 // Louis Routes
 
 
-
-
-
-
-
-
-
-
-
 // Helena Routes
+
+app.post('/reviews', async (req, res) => {
+  let productID = req.body.productID;
+  res.status(200).send(await helenaAPI.getReviewsAPI(productID))
+})
+
+app.post('/postReview', async(req, res) => {
+  res.status(200).send(await helenaAPI.postReview(28215));
+})
+
