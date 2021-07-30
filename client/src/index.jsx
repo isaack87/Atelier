@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Reviews from './components/ratingsReviews/ratings.jsx';
-
-import SearchBar from '/Users/isaackim/Desktop/AtelierProject/Atelier/client/src/components/questionsAnswers/searchBar.jsx';
+import SearchBar from './components/questionsAnswers/searchBar.jsx';
 import QuestionsAnswersState from './components/questionsAnswers/QuestionAnswerState.jsx';
 import ProductOverview from './components/productDetails/products.jsx'
 
