@@ -1,6 +1,7 @@
 const express = require('express');
 
 const app = express();
+
 const port = 3000;
 const bodyParser = require('body-parser');
 const axios = require('axios');
@@ -13,64 +14,61 @@ app.use(express.static(`${__dirname} /../client/dist`));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// pass in string to get from that endpoint
-const getAPI = (params, cb) => {
-  const options = {
-    method: 'GET',
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/${params}?count=100`,
-    headers: { Authorization: config.gitToken },
-  };
-  axios(options)
-    .then((data) => {
-      console.log('axios get success');
-      return cb(data);
-    })
-    .catch(() => {
-      console.log('catch axois error');
-    });
-};
-
-app.get('/', (req, res) => {
-  res.send('success');
-});
-
-app.post('/', (req, res) => {
-  getAPI('products', (err, results) => {
-    if (err) {
-      console.log('/ err');
-    } else {
-      res.send(results);
-    }
-  });
-});
-
 // Isaac Routes
 // Questions Routes
-app.get('/QA', (req, res) => {
-  res.status(200).send(isaacAPI.getquestionAPI());
-});
-
-app.post('/QA', (req, res) => {
-  getAPI('products', (err) => {
-    if (err) {
-      console.log('qa-err');
-    }
-    res.send('success');
+app.get('/questions', (req, res) => {
+  const pid = req.query.qid;
+  isaacAPI.getquestionAPI(pid, (cb) => {
+    res.send(cb);
   });
 });
 
-// Answers Routes
-app.get('/Answers', (req, res) => {
-  res.status(200).send(isaacAPI.getanswerAPI());
+app.post('/questions', (req, res) => {
+  res.send('post questtion route success');
 });
 
-app.post('/Answers', (req, res) => {
-  getAPI('products', (err) => {
-    if (err) {
-      console.log('answer-err');
-    }
-    res.send('success');
+app.post('/answer', (req, res) => {
+  res.send('done');
+});
+
+app.get('/answer', (req, res) => {
+  res.send('done');
+});
+
+
+
+app.get('/ahelpful', (req, res) => {
+  res.send('qhelpful post success');
+});
+
+app.post('/ahelpful', (req, res) => {
+  const ahelpfulId = req.body.ahelpid;
+  console.log(req.body);
+  isaacAPI.putAnswerHelpful(ahelpfulId, () => {
+    res.send('answerhelp post success');
   });
+});
+
+app.get('/qhelpful', (req, res) => {
+  res.send('qhelpful post success');
+});
+
+app.post('/qhelpful', (req, res) => {
+  console.log(req.body);
+  const qhelpfulId = req.body.qhelpid;
+  isaacAPI.putQuestionHelpful(qhelpfulId, () => {
+    res.send('question help post success');
+  });
+});
+
+app.get('/addAnswer', (req, res) => {
+  res.send('answer post success');
+});
+
+app.post('/addAnswer', (req, res) => {
+  let test = '28212';
+  isaacAPI.postanswerAPI(test);
+  res.send('answer post success');
 });
 
 app.listen(port, () => {
@@ -78,7 +76,7 @@ app.listen(port, () => {
 });
 
 
-// Louis Routes
+
 
 app.get('/productdetails', (req, res) => {
   res.send('success');
@@ -100,11 +98,11 @@ app.post('/productdetails', (req, res) => {
 app.get('/product/styles', (req, res) => {
   console.log(req.query);
   louisAPI.getProductIdStyles(req.query.pid, (data) => {
-    // console.log(data)
+
     res.send(data.data);
   });
-  // console.log('🟠 res.client', req.query);
 });
+
 
 app.post('/product/styles', (req, res) => {
   louisAPI.getProductIdStyles(req.body.id, (data) => {
@@ -115,9 +113,17 @@ app.post('/product/styles', (req, res) => {
 
 
 
-
-
-
+// Louis Routes
 
 
 // Helena Routes
+
+app.post('/reviews', async (req, res) => {
+  let productID = req.body.productID;
+  res.status(200).send(await helenaAPI.getReviewsAPI(productID))
+})
+
+app.post('/postReview', async(req, res) => {
+  res.status(200).send(await helenaAPI.postReview(28215));
+})
+
