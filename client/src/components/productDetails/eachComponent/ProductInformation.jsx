@@ -2,15 +2,25 @@ import React from 'react';
 
 class ProductInformation extends React.Component {
 
+  constructor (props) {
+    super(props);
+    this.state = {
+
+    }
+
+  }
+
   render() {
+    let info = this.props.productInfo;
+
     return (
-      <div class='productInformation'>
+      <div className='productInformation'>
         <div>
-          ✭ ✭ ✭ ✭ ✭ Read all reviews
+          ✭ ✭ ✭ ✭ ✭ <u>Read all reviews</u>
         </div>
-        <div>CATEGORY</div>
-        <div>EXPANDED PRODUCT NAME</div>
-        <div>$369</div>
+        <div>{info.category}</div>
+        <div><b>{info.name}</b></div>
+        <div>${info.default_price}</div>
       </div>
     )
   }
