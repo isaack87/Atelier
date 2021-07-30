@@ -1,34 +1,13 @@
-/* Louis - CSS */
 
 
-/* Helena - CSS */
+#reviewsList {
 
+    height: 40em;
 
+    overflow: auto;
 
-
-
-
-
-
-
-
-/* Isaac - CSS */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
 }
 
-
-body {
-  background: white;
-}
-
-/* Search Bar CSS */
-.form {
-  display: flex;
-  flex-direction: row;
-}
 .searchfield {
   width: 100%;
   padding: 10px 35px 10px 15px;
@@ -83,10 +62,6 @@ body {
   margin-left: 15px;
 }
 
-
-/* Questions&Answers css */
-
-
 .add-q-btn {
   font-size: 12px;
   margin-left: 6%;
@@ -103,9 +78,6 @@ body {
   height: 20px;
 
 }
-
-
-/* question/answer section */
 
 .container {
   margin: 0 auto;
@@ -125,13 +97,6 @@ body {
 
 ul {
   padding: 15px;
-}
-
-
-img {
-  padding: 5px;
-  height: 100px;
-  width: 100px;
 }
 
 .buttons {
@@ -240,20 +205,6 @@ img {
 }
 
 
-.overlay {
-  position: center;
-  z-index: 1;
-  margin-top: 30%;
-  width: 500px;
-  height: 500px;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  cursor: pointer;
-}
-
 .q-body {
   height:200px;
   width: 500px;
@@ -267,3 +218,5 @@ img {
   margin:0 auto;
   font-size:14pt;
 }
+
+
