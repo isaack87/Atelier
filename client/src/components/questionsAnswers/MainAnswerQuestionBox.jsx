@@ -1,5 +1,5 @@
 import React from 'react';
-import Moment from 'moment';
+import Moment from 'react-moment';
 import AskQuestions from './AskQuestionButtons.jsx';
 import AnswerReport from './AnswerReport.jsx';
 import QuestionReport from './QuestionReport.jsx';
