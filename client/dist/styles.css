@@ -3,12 +3,10 @@
 
 
 /* Helena - CSS */
-body {
-    background-color:  blue;
-}
+
 #reviewsList {
-    background-color: cadetblue;
-    height: 340px;
+
+    height: 40em;
 
     overflow: auto;
 
