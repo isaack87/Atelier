@@ -4,5 +4,11 @@
 
 /* Helena - CSS */
 
+#reviewsList {
 
+    height: 40em;
+
+    overflow: auto;
+
+}
 /* Isaac - CSS */
