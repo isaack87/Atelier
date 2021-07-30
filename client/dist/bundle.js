@@ -443,7 +443,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var reac
   \*******************/
 /***/ ((module) => {
 
-eval("module.exports = {\n  gitToken: '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'\n};\n\n//# sourceURL=webpack://atelier/./config.js?");
+eval("module.exports = {\n  gitToken: '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'\n};\n\n//# sourceURL=webpack://atelier/./config.js?");
 
 /***/ }),
 
