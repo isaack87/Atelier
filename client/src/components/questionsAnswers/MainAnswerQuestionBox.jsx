@@ -1,17 +1,17 @@
 import React from 'react';
 import Moment from 'react-moment';
-import LoadMoreAnswers from './LoadMoreAnswers.jsx'
-import AnswerPhotos from './AnswerPhotos.jsx';
 import AskQuestions from './AskQuestionButtons.jsx';
 import AnswerReport from './AnswerReport.jsx';
 import QuestionReport from './QuestionReport.jsx';
-import $ from 'jquery';
 import HelpfulAnswerCount from './HelpfulAnswerCount.jsx';
 import HelpfulQuestionCount from './HelpfulQuestionCount.jsx';
+import AnswerForm from './AnswerForm.jsx';
+
+// import $ from 'jquery';
+// import AnswerPhotos from './AnswerPhotos.jsx';
+// import LoadMoreAnswers from './LoadMoreAnswers.jsx'
 
 const MainAnswerQuestionBox = (props) => {
-
-
   const QABOX = props.questionanswerslist.slice(0, props.visibleQuestions).map((data, index) => (
     <div key={data.qID}>
       <div className="questions-asked">
@@ -22,10 +22,13 @@ const MainAnswerQuestionBox = (props) => {
             </b>
             { data.question }
             <div className="HelpfulQuestionCount">
-              <HelpfulQuestionCount id={data.qID}/>
-              _{data.questionHelpful}
+              <HelpfulQuestionCount id={data.qID} />
+              _
+              {data.questionHelpful}
+              _
               <p className="questionhelpfont">{ data.question_helpfulness }</p>
-              <QuestionReport qid={data.qID}/>
+              <QuestionReport qid={data.qID} />
+              <AnswerForm qid={data.qID} />
             </div>
           </span>
         </ul>

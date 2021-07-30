@@ -27,7 +27,9 @@ class AnswerReport extends React.Component {
   render() {
     return (
       <div>
-        <button type="submit" onClick={this.reportedBtn} className="reporthelpful-btn">{this.state.reported ? 'Reported' : 'Report'}</button>
+        <button type="submit" onClick={this.reportedBtn} className="reporthelpful-btn">
+          {this.state.reported ? 'Reported' : 'Report'}
+        </button>
       </div>
     );
   }

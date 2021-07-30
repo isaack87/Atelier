@@ -35,7 +35,6 @@ class QuestionsAnswersState extends React.Component {
   getQuestionAnswerList() {
     const list = this.state.questionsList
     const newObj = [];
-
     list.map(e => {
       newObj.push({
         qID: e.question_id,
@@ -44,6 +43,7 @@ class QuestionsAnswersState extends React.Component {
         answers: Object.values(e.answers),
       });
     });
+
     this.setState({
       questionanswerslist: newObj,
     });
@@ -96,6 +96,7 @@ class QuestionsAnswersState extends React.Component {
       },
     });
   }
+
 
   loadMoreAnswers() {
     if (this.state.visibleAnswers >= this.state.questionsList.length) {

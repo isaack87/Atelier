@@ -21,8 +21,6 @@ const HelpfulQuestionCount = (props) => {
     <div className="helpfulQuestionCounter">
       Helpful?
       <button type="submit" onClick={helpfulQincrementer} className="questionhelpfulbtn">Yes</button>
-      {/* should be the helpfulcount state from questionsanswerbox file but not workinging */}
-      {/* {test} */}
     </div>
   );
 };

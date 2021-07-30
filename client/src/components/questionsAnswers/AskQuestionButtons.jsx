@@ -1,18 +1,20 @@
 import React from 'react';
 import LoadMoreAnswers from './LoadMoreAnswers.jsx'
+import QuestionForm from './QuestionForm.jsx'
 
 const AskQuestions = (props) => (
-  <div>
+  <div className='loadmore-a'>
     <LoadMoreAnswers
       loadMoreAnswers={props.loadMoreAnswers}
       btnvisible={props.btnvisible}
     />
     <div className="buttons">
-      <button className={props.btnvisibleq ? "add-q-btn" : "btndisappear"} onClick={props.loadMoreQuestions} type="submit"> MORE ANSWERED QUESTIONS</button>
-      <button className="add-q-btn" type="submit">
-        ADD A QUESTION
-        <img alt="plusimage" className="imgplus" src="plus.png" />
+      <button className={props.btnvisibleq ? "add-q-btn" : "btndisappear"}
+        onClick={props.loadMoreQuestions}
+        type="submit">
+        MORE ANSWERED QUESTIONS
       </button>
+      <QuestionForm />
     </div>
   </div>
 );
