@@ -16,7 +16,7 @@ class QuestionsAnswersState extends React.Component {
       answersList: [],
       isReported: false,
       qid: [],
-      mainProductId: props.mainProductId,
+      productId: props.productId,
     };
     this.search = this.search.bind(this);
     this.sendProductIdToServer = this.sendProductIdToServer.bind(this);
@@ -28,7 +28,6 @@ class QuestionsAnswersState extends React.Component {
   }
 
   componentDidMount() {
-    this.getQuestionAnswerList();
     this.getQuestions();
   }
 
@@ -50,7 +49,7 @@ class QuestionsAnswersState extends React.Component {
   }
 
   getQuestions() {
-    fetch(`http://localhost:3000/questions?qid=${this.state.mainProductId}`)
+    fetch(`http://localhost:3000/questions?qid=${this.state.productId}`)
       .then((response) => response.json())
       .then((questions) => {
         this.setState({
@@ -65,7 +64,7 @@ class QuestionsAnswersState extends React.Component {
   }
 
   sendProductIdToServer() {
-    const productID = { pid: '28213' };
+    const productID = { pid: this.state.productId };
     $.ajax({
       method: 'POST',
       url: 'http://localhost:3000/questions',
@@ -97,7 +96,6 @@ class QuestionsAnswersState extends React.Component {
     });
   }
 
-
   loadMoreAnswers() {
     if (this.state.visibleAnswers >= this.state.questionsList.length) {
       this.setState({
@@ -117,12 +115,12 @@ class QuestionsAnswersState extends React.Component {
   }
 
   search(term) {
-    this.searchTerm = { search: term };
+    let searchTerm = { search: term };
     $.ajax({
       method: 'POST',
       url: 'http://localhost:3000/questions',
       contentType: 'application/json',
-      data: JSON.stringify(this.searchTerm),
+      data: JSON.stringify(searchTerm),
       success: (data) => {
         console.log(`success posted Questions`);
       },

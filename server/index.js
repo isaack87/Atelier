@@ -16,8 +16,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Isaac Routes
 // Questions Routes
+
 app.get('/questions', (req, res) => {
   const pid = req.query.qid;
+  console.log('test')
+  console.log(pid)
   isaacAPI.getquestionAPI(pid, (cb) => {
     res.send(cb);
   });

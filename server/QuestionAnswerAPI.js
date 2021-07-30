@@ -2,10 +2,11 @@ const axios = require('axios');
 const config = require('../config');
 
 // GET API FUNCTIONS
+
 const getquestionAPI = (params, cb) => {
   const options = {
     method: 'GET',
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions?product_id=28215`,
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions?product_id=${params}`,
     headers: { Authorization: config.gitToken },
   };
   axios(options)
