@@ -99,5 +99,5 @@ app.post('/reviews', async (req, res) => {
 })
 
 app.post('/postReview', async(req, res) => {
-  res.status(200).send(await helenaAPI.postReview());
+  res.status(200).send(await helenaAPI.postReview(28215));
 })

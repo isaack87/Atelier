@@ -20,35 +20,38 @@ const getReviewsAPI = (productID, sortKind = 'helpful') => {
 
 }
 
-// const postReview = (productID) => {
-//     let params =  JSON.stringify({
-//         product_id: productID,
-//         rating: 3,
-//         summary: 'this is awesome!',
-//         body: 'it fits me perfectly and it has bunnies on it',
-//         name: 'helena',
-//         email: 'helena@yahoo.com',
-//         photos: [],
-//         characteristics: { "14": 5, "15": 5}
+const postReview = async (productID) => {
+    let params =  {
+        "product_id": 28215,
+        "rating": 5,
+        "summary": "this is awesome",
+        "body": "it fits me perfectly",
+        "recommend": true,
+        "name": "helena",
+        "email": "helena@yahoo.com",
+        "photos": [],
+        "characteristics":  { "14": 5, "15": 5}
    
-//     })
-//     let options = {
-//         method: 'post',
-//         url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews`,
-//         headers: { Authorization: config.gitToken, "Content-Type": "application/json" },
-//         data: params
-//       };
-//       console.log('options', options)
-//        axios(options)
-//       .then(response => {
-//           console.log('posting review', response);
-//       })
-// }
+
+    };
+ 
+
+    let options = {
+        method: 'post',
+        url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews`,
+        headers: { Authorization: config.gitToken},
+        data: params
+      };
+       await axios(options)
+      .then(response => {
+          console.log('posting review', response);
+      })
+}
 
 
 
 
 module.exports = {
     getReviewsAPI,
-    // postReview
+     postReview
 };

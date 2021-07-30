@@ -10,13 +10,15 @@ class Reviews extends React.Component {
             currentReviewIndex: 0,
             reviewsDiv: [],
             reviewsShownSoFar : [],
-            moreReviewsButton: []
+            moreReviewsButton: [],
+            reviewDropdownSortDiv: []
 
         }
         this.getReviews = this.getReviews.bind(this);
         this.renderReviews = this.renderReviews.bind(this);
         this.postReview = this.postReview.bind(this);
         this.showMoreReviewsButton = this.showMoreReviewsButton.bind(this);
+        this.showReviewDropdownSort = this.showReviewDropdownSort.bind(this);
     }
     //function to handle getting the reviews for the given product id
      getReviews(sort = 'helpful') {
@@ -31,9 +33,21 @@ class Reviews extends React.Component {
             //now take this and update reviews state
             this.setState({allReviews: response.data.results}, () => {
                 this.renderReviews();
+                this.showReviewDropdownSort();
             })
           
         })
+    }
+    //handle rendering the sort dropdown only if we have reviews to show
+    showReviewDropdownSort() {
+        if (this.state.allReviews.length > 0) {
+            let div = <select id="review-dropdown">
+            <option value="helpful">helpful</option>
+            <option value="newest">newest</option>
+            <option value="relevant">relevant</option>
+        </select>;
+            this.setState({reviewDropdownSortDiv: div });
+        }
     }
     //function to handle rendering the reviews div
     renderReviews() {
@@ -47,7 +61,7 @@ class Reviews extends React.Component {
                 </div>
                {review.rating}
                 {review.body}
-                {/* <div><Images props= {review.photos}/></div> */}
+                <div><Images props= {review.photos}/></div>
                 helpfulness: {review.helpfulness}
                 </div>;
           return paragraph;
@@ -101,7 +115,8 @@ class Reviews extends React.Component {
         })
     }
     componentDidMount() {
-         this.getReviews();
+          this.getReviews();
+        //this.postReview();
     }
 
     render() {
@@ -109,11 +124,7 @@ class Reviews extends React.Component {
         return (
             <div>
                 <h1>reviews module</h1>
-                <select id="review-dropdown">
-                    <option value="helpful">helpful</option>
-                    <option value="newest">newest</option>
-                    <option value="relevant">relevant</option>
-                </select>
+                {this.state.reviewDropdownSortDiv}
                <div id='reviewsList'> {this.state.reviewsDiv}</div>
                 {this.state.moreReviewsButton}
            
