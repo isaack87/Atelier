@@ -78,6 +78,38 @@ app.listen(port, () => {
 
 
 
+app.get('/productdetails', (req, res) => {
+  res.send('success');
+});
+
+app.post('/productdetails', (req, res) => {
+  console.log('get request')
+  // console.log(req.body);
+  louisAPI.getProductDetails(req.body.id)
+    .then((data) => {
+      // console.log('😈 data', data.data);
+      res.send(data.data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
+app.get('/product/styles', (req, res) => {
+  console.log(req.query);
+  louisAPI.getProductIdStyles(req.query.pid, (data) => {
+
+    res.send(data.data);
+  });
+});
+
+
+app.post('/product/styles', (req, res) => {
+  louisAPI.getProductIdStyles(req.body.id, (data) => {
+    res.send(data.data);
+  });
+});
+
 
 
 
