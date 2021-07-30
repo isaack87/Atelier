@@ -2,7 +2,7 @@ import React from 'react';
 import $ from 'jquery';
 import MainAnswerQuestionBox from './MainAnswerQuestionBox.jsx'
 import SearchBar from './searchBar.jsx'
-QuestionAnswerState
+
 class QuestionsAnswersState extends React.Component {
   constructor(props) {
     super(props);
