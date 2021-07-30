@@ -7,12 +7,8 @@ import HelpfulAnswerCount from './HelpfulAnswerCount.jsx';
 import HelpfulQuestionCount from './HelpfulQuestionCount.jsx';
 import AnswerForm from './AnswerForm.jsx';
 
-// import $ from 'jquery';
-// import AnswerPhotos from './AnswerPhotos.jsx';
-// import LoadMoreAnswers from './LoadMoreAnswers.jsx'
-
 const MainAnswerQuestionBox = (props) => {
-  const QABOX = props.questionanswerslist.slice(0, props.visibleQuestions).map((data, index) => (
+  const QABOX = props.questionanswerslist.slice(0, props.visibleQuestions).map((data) => (
     <div key={data.qID}>
       <div className="questions-asked">
         <ul>
@@ -39,30 +35,25 @@ const MainAnswerQuestionBox = (props) => {
           <ul>
             {data.answers.slice(0, props.visibleAnswers).map(answerlist => (
               <div key={answerlist.id}>
-              <p className='indent'> A: {answerlist.body}
-                <br/>
-                <br/>
-                <p className="user-data">by: {answerlist.answerer_name}
-                  __
-                  <Moment format="MMMM-DD-YYYY" date={answerlist.date} />
-                  __
-                  HelpFul?
-                  <HelpfulAnswerCount id={answerlist.id}/> _{answerlist.helpfulness}
-                  __
-                  <AnswerReport aID={answerlist.id} />
+                <p className="indent"> A: {answerlist.body}
+                  <br />
+                  <br />
+                  <p className="user-data">by: {answerlist.answerer_name}
+                    __
+                    <Moment format="MMMM-DD-YYYY" date={answerlist.date} />
+                    __
+                    HelpFul?
+                    <HelpfulAnswerCount id={answerlist.id}/> _{answerlist.helpfulness}
+                    __
+                    <AnswerReport aID={answerlist.id} />
+                  </p>
                 </p>
-              </p>
               </div>
             ))}
           </ul>
-          </div>
-
-        {/* <div className="answerPhotos">
-          <AnswerPhotos answersList={props.answersList} />
-        </div> */}
+        </div>
       </div>
     </div>
-
   ));
 
   return (
@@ -76,7 +67,6 @@ const MainAnswerQuestionBox = (props) => {
         mainProductId={props.mainProductId}
       />
     </div>
-
   );
 };
 

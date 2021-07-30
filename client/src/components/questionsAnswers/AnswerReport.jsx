@@ -3,7 +3,6 @@ import React from 'react';
 class AnswerReport extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       reported: false,
       reportedArray: [],
