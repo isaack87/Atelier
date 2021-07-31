@@ -9,32 +9,25 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productId: 28299,
+      productId: 28296,
       user: '',
       stars: '',
       reportedArray: [],
     };
   }
+
   render() {
     return (
-      <div>Hello World
-        <ProductOverview productId={this.state.productId}/>
+      <div>
+        Hello World
+        <ProductOverview productId={this.state.productId} />
         <QuestionsAnswersState
-        productId={this.state.productId}
+          productId={this.state.productId}
         />
-
-        <Reviews props={this.state}/>
+        <Reviews props={this.state} />
       </div>
 
     );
   }
 }
 ReactDOM.render(<App />, document.getElementById('app'));
-
-
-
-
-
-
-
-

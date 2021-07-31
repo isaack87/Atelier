@@ -5,7 +5,7 @@ const config = require('../config');
 const getReviewsAPI = (productID, sortKind = 'helpful') => {
     //makes call to the api
     //the param is what we're looking for
- 
+
 
      let options = {
         method: 'GET',
@@ -14,7 +14,7 @@ const getReviewsAPI = (productID, sortKind = 'helpful') => {
       };
       return  axios(options)
       .then(response => {
-          console.log('response.', response.data)
+          //console.log('response.', response.data)
           return response.data;
       })
 
@@ -31,10 +31,10 @@ const postReview = async (productID) => {
         "email": "helena@yahoo.com",
         "photos": [],
         "characteristics":  { "14": 5, "15": 5}
-   
+
 
     };
- 
+
 
     let options = {
         method: 'post',
@@ -44,7 +44,7 @@ const postReview = async (productID) => {
       };
        await axios(options)
       .then(response => {
-          console.log('posting review', response);
+          //console.log('posting review', response);
       })
 }
 

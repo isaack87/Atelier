@@ -15,19 +15,26 @@
   border: 1px solid grey;
   border-radius: 5px;
 }
+
 .searchbutton {
   border: 1px solid grey;
   border-radius: 5px;
   background: transparent;
   border: none;
   outline: none;
-  margin-top: 15px;
-  margin-left: -33px;
-
+  margin-left: 99%;
 }
+
+.searchbar {
+  margin: auto;
+  width: 40%;
+  padding: 10px;
+}
+
 .searchbartitle {
   font-size: 15px;
   font-family: sans-serif;
+  margin: auto
 }
 
 .button-group {
@@ -35,31 +42,12 @@
   position: relative;
 }
 
-.searchbutton {
-  width: 20px;
-  height: 20px;
-  margin-right: -30px;
-  margin-bottom: -5px;
-  object-fit:contain;
-  height:center;
-}
-
-.searchbar {
-  margin: 50px auto;
-  width: 800px;
-  height: 60px;
-}
-
 .imgmag{
   width: 20px;
   height: 20px;
   margin-top: 10px;
-  margin-left: 8px;
-  height:center;
-}
-
-.indent {
   margin-left: 15px;
+  height:center;
 }
 
 .add-q-btn {
@@ -76,24 +64,26 @@
 .imgplus{
   width: 20px;
   height: 20px;
-
 }
 
 .container {
-  margin: 0 auto;
+  margin: auto;
   width: 960px;
+  margin-left: 29%;
 }
+
 .questions-asked {
   font-size: 20px;
   margin-left: 7%;
-  margin-bottom: -2%;
+  margin-bottom: -11%;
+  margin-top: 5%;
 }
 
-.answer-asked {
-  font-size: 22px;
-  margin-left: 7%
+.answers-asked {
+  margin-left: 8%;
+  font-size: 20px;
+  margin-bottom: 10%;
 }
-
 
 ul {
   padding: 15px;
@@ -108,14 +98,15 @@ ul {
 }
 
 .answertext {
-  color: blue;
+ color: blue;
  font-size: 22px;
  max-width: 40ch;
+ margin-bottom: 5%;
 }
 
 .user-data {
-  margin-top: -3%;
-  margin-bottom: 5%;
+  margin-top: -2%;
+  margin-bottom: -5%;
   margin-left: 5%;
   font-size: 20px;
   display: flex;
@@ -150,17 +141,6 @@ ul {
   margin-left: 10%;
 }
 
-.user-data ul {
-  margin-left: 8%;
-  margin-top: -2%;
-  display: flex;
-  padding-left: 15px;
-}
-
-.q-a-box {
-  padding-left:25px;
-}
-
 .answerPhotos {
   margin-left: 8%
 }
@@ -172,8 +152,10 @@ ul {
 
 .HelpfulQuestionCount {
   display:flex;
-  margin-left: 50%;
+  font: 15px;
+  margin-left: 100%;
   font-size: 12px;
+  color:blue;
 }
 
 .answers {
@@ -199,11 +181,6 @@ ul {
 .false {
   visibility: hidden;
 }
-
-.questionhelpfont {
-  font-size:15px
-}
-
 
 .q-body {
   height:200px;
