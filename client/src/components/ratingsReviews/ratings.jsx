@@ -30,7 +30,7 @@ class Reviews extends React.Component {
             data: {productID: 28215, sortKind: sort}
 
         }).then(response => {
-            console.log('response??', response);
+ 
             //now take this and update reviews state
             this.setState({allReviews: response.data.results}, () => {
                 this.renderReviews();
@@ -80,8 +80,8 @@ class Reviews extends React.Component {
             
         }
         
-        this.setState({currentReviewIndex: index}, () => {
-            this.showMoreReviewsButton();
+        this.setState({currentReviewIndex: index}, async () => {
+            await this.showMoreReviewsButton();
         });
         let outerDiv = <div id='reviews'>{innerDiv}</div>
         this.setState({reviewsDiv: outerDiv});
@@ -109,7 +109,7 @@ class Reviews extends React.Component {
             url: 'http://localhost:3000/postreview',
            
         }).then(response => {
-            console.log('response??', response);
+       
             //now take this and update reviews state
             this.setState({allReviews: response.data.results}, ()=> {
                 this.renderReviews();

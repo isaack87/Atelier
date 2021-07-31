@@ -18,23 +18,9 @@ class App extends React.Component {
 
   render() {
     return (
-<<<<<<< HEAD
-      <div>Hello World
-        {/* <ProductOverview productId={this.state.productId}/>
-        <QuestionsAnswersState
-        productId={this.state.productId}
-        /> */}
-
-        <Reviews props={this.state}/>
-=======
       <div>
-        Hello World
-        <ProductOverview productId={this.state.productId} />
-        <QuestionsAnswersState
-          productId={this.state.productId}
-        />
+        
         <Reviews props={this.state} />
->>>>>>> 7508ff1e0f08ec32f67ece20d5e2cc5e1d6b53cf
       </div>
 
     );
