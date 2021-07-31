@@ -146,6 +146,9 @@ class QuestionsAnswersState extends React.Component {
             btnvisible={this.state.btnvisible}
             photos={this.state.photos}
             questionanswerslist={this.state.questionanswerslist}
+            productId={this.state.productId}
+            mainProductId={this.state.productId}
+
           />
         </div>
       </div>

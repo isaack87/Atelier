@@ -14,7 +14,7 @@ const AskQuestions = (props) => (
         type="submit">
         MORE ANSWERED QUESTIONs
       </button>
-      <QuestionForm />
+      <QuestionForm mainProductId={props.mainProductId}/>
     </div>
   </div>
 );

@@ -19,7 +19,7 @@ const getProductIdStyles = (productId, cb) => {
   };
   axios(options)
     .then((data) => {
-      return cb(data);
+        return cb(data);
     })
     .catch((err) => {
       console.log(err);
