@@ -8,7 +8,7 @@ import HelpfulQuestionCount from './HelpfulQuestionCount.jsx';
 import AnswerForm from './AnswerForm.jsx';
 
 const MainAnswerQuestionBox = (props) => {
-  const QABOX = props.questionanswerslist.slice(0, props.visibleQuestions).map((data, index) => (
+  const QABOX = props.questionanswerslist.slice(0, props.visibleQuestions).map((data) => (
     <div key={data.qID}>
       <div className="questions-asked">
         <ul>
@@ -18,18 +18,16 @@ const MainAnswerQuestionBox = (props) => {
             </b>
             { data.question }
             </span>
-              <p className="HelpfulQuestionCount">
-                <HelpfulQuestionCount
-                  mainProductId={props.mainProductId}
-                  id={data.qID}
-                />
-                _
-                {data.questionHelpful}
-                _
-                <p className="questionhelpfont">{ data.question_helpfulness }</p>
-                <QuestionReport qid={data.qID} />
-                <AnswerForm pid={props.productId} qid={data.qID} />
-              </p>
+            <p className="HelpfulQuestionCount">
+              <HelpfulQuestionCount
+              mainProductId={props.mainProductId}
+              id={data.qID}
+              defaulthelper={data.questionHelpful} />
+              _
+              <p className="questionhelpfont">{ data.question_helpfulness }</p>
+              <QuestionReport qid={data.qID} />
+              <AnswerForm pid={props.productId} qid={data.qID} />
+            </p>
         </ul>
       </div>
 
