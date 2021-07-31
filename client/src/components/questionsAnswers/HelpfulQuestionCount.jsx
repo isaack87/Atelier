@@ -1,23 +1,13 @@
 import React from 'react';
 import $ from 'jquery';
 
-class HelpfulQuestionCount extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      qhelpfulcounter: [],
-      qhelpid: props.id,
-      pid: props.mainProductId,
-    };
-    this.helpfulQincrementer = this.helpfulQincrementer.bind(this);
-  }
-
-  helpfulQincrementer() {
+const HelpfulQuestionCount = (props) => {
+  const helpfulQincrementer = () => {
     $.ajax({
       method: 'POST',
       url: `http://localhost:3000/qhelpful`,
       contentType: 'application/json',
-      data: JSON.stringify({qhelpid: this.state.qhelpid }),
+      data: JSON.stringify({qhelpid: props.id }),
       success: (data) => {
         console.log('helpfulQincrementer++ ');
       },
@@ -27,15 +17,13 @@ class HelpfulQuestionCount extends React.Component {
     });
   };
 
-  render() {
   return (
     <div className="helpfulQuestionCounter">
       Helpful?
-      <button type="submit" onClick={this.helpfulQincrementer} className="questionhelpfulbtn">Yes</button>
+      <button type="submit" onClick={helpfulQincrementer} className="questionhelpfulbtn">Yes</button>
     </div>
   );
 };
-}
 
 export default HelpfulQuestionCount;
 
