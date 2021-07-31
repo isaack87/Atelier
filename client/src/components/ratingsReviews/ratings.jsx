@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
- import Images from './images.jsx'
+ import Images from './images.jsx';
+ import Stars from './stars.jsx';
 
 class Reviews extends React.Component {
     constructor(props) {
@@ -63,6 +64,7 @@ class Reviews extends React.Component {
                 {review.body}
                 <div><Images props= {review.photos}/></div>
                 helpfulness: {review.helpfulness}
+                stars: <Stars rating = {review.rating}/>
                 </div>;
           return paragraph;
         };
