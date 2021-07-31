@@ -51,7 +51,7 @@ app.post('/ahelpful', (req, res) => {
 
 app.get('/qhelpful', (req, res) => {
   const pid = req.query.qid;
-  console.log(pid, '😅😅😅')
+  console.log(pid, '😅😅😅');
   isaacAPI.getQuestionHelpCounter(pid, (cb) => {
     res.send(cb);
   });
@@ -85,10 +85,6 @@ app.post('/addQuestion', (req, res) => {
   console.log(req.body, '🙂');
   isaacAPI.postquestionAPI(req.body);
   res.send('question post success');
-});
-
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
 });
 
 app.get('/productdetails', (req, res) => {
@@ -140,3 +136,6 @@ app.post('/postReview', async(req, res) => {
   res.status(200).send(await helenaAPI.postReview(28215));
 })
 
+app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}`);
+});

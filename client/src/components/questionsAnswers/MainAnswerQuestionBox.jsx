@@ -22,7 +22,7 @@ const MainAnswerQuestionBox = (props) => {
               <HelpfulQuestionCount
               mainProductId={props.mainProductId}
               id={data.qID}
-              defaulthelper={data.questionHelpful} />
+              defaultcounter={data.questionHelpful} />
               _
               <p className="questionhelpfont">{ data.question_helpfulness }</p>
               <QuestionReport qid={data.qID} />
@@ -42,13 +42,12 @@ const MainAnswerQuestionBox = (props) => {
                 <span className="user-data">by: {answerlist.answerer_name}
                   __
                   <Moment format="MMMM-DD-YYYY" date={answerlist.date} />
-                  __
-                  HelpFul?
                   <HelpfulAnswerCount
                     id={answerlist.id}
+                    mainProductId={props.mainProductId}
+                    defaultcounter={answerlist.helpfulness}
                   />
                   _
-                  {answerlist.helpfulness}
                   __
                   <AnswerReport aID={answerlist.id} />
                 </span>

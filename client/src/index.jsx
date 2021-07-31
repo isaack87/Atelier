@@ -15,26 +15,19 @@ class App extends React.Component {
       reportedArray: [],
     };
   }
+
   render() {
     return (
-      <div>Hello World
-        <ProductOverview productId={this.state.productId}/>
+      <div>
+        Hello World
+        <ProductOverview productId={this.state.productId} />
         <QuestionsAnswersState
-        productId={this.state.productId}
+          productId={this.state.productId}
         />
-
-        <Reviews props={this.state}/>
+        <Reviews props={this.state} />
       </div>
 
     );
   }
 }
 ReactDOM.render(<App />, document.getElementById('app'));
-
-
-
-
-
-
-
-

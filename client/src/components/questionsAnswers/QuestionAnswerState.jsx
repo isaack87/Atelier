@@ -42,7 +42,6 @@ class QuestionsAnswersState extends React.Component {
         answers: Object.values(e.answers),
       });
     });
-
     this.setState({
       questionanswerslist: newObj,
     });
