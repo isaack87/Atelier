@@ -335,6 +335,11 @@ ul {
   width: 35%;
   box-shadow: 0 0 20px rgb(0, 0, 0, 0.15);
   border-radius: 12px;
+  cursor: pointer;
+  border: 1px solid rgb(90, 87, 87);
+}
+.imageThumb:hover {
+  box-shadow: 0 0 12px black;
 }
 
 
@@ -372,4 +377,28 @@ ul {
   opacity: 1;
   transition-duration: 1s;
   transform: scale(1.08);
+}
+
+.styleThumbnail {
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  cursor: pointer;
+  border: 1px solid rgb(90, 87, 87);
+  margin-right: 7px;
+}
+.styleThumbnail:hover {
+  box-shadow: 0 0 12px black;
+}
+
+.removeBullets {
+  list-style-type: none;
+}
+
+.thumbnailContainer {
+  display: flex;
+  flex-direction: row;
+
+  height: 50%;
+  margin: -7%;
 }

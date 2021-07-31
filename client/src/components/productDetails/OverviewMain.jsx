@@ -7,18 +7,17 @@ import $ from 'jquery';
 import Carousel from './eachComponent/Carousel.jsx';
 
 class ProductOverview extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
     this.state = {
-      productInfo: {placeholder: 3},
+      productInfo: {placeholder: 'no data yet'},
       features: ['No data yet'],
       styles: ['No data yet'],
-      test: ['No data yet']
+      stylesArray: ['No data yet'],
 
     }
     this.getDataFromProductId = this.getDataFromProductId.bind(this);
     this.getDataFromProductIdStyle = this.getDataFromProductIdStyle.bind(this);
-
   }
 
   componentDidMount() {
@@ -27,22 +26,24 @@ class ProductOverview extends React.Component {
   }
 
   getDataFromProductId() {
-    let idNumber = JSON.stringify(this.props.productId);
+    const idNumber = this.props.productId;
     $.ajax({
       url: '/productdetails',
       type: 'POST',
       data: { id: idNumber },
-      success: (res) => {
-        // console.log('🤡👻 Product ID data 1 ', res)
+      success: (response) => {
+        // console.log('🤡👻 Product ID response 1 ', response)
         this.setState({
-          productInfo: res,
-          features: res.features,
+          productInfo: response,
+          features: response.features,
         });
+        // console.log('⚫️ this.state.productInfo', this.state.productInfo)
+        // console.log ('🔷 this.state.features', this.state.features)
       },
       error: (err) => {
-        console.log('👹 err', err)
-      }
-    })
+        console.log('👹 err', err);
+      },
+    });
   }
 
   // getDataFromProductIdStyle() {
@@ -69,17 +70,18 @@ class ProductOverview extends React.Component {
     $.ajax({
       url: `/product/styles?pid=${idNumber}`,
       type: 'GET',
-      success: (res) => {
-        console.log('🤡👻 Product ID Styles data 1 ', res)
+      success: (response) => {
+        // console.log('🤡👻 Product ID Styles data 1 ', response)
         this.setState({
-          styles: res,
-        })
+          styles: response,
+          stylesArray: response.result,
+        });
         // console.log('🟣 this.state.styles', this.state.styles)
       },
       error: (err) => {
-        console.log('👹 err', err)
-      }
-    })
+        console.log('👹 err', err);
+      },
+    });
   }
 
 
@@ -110,8 +112,8 @@ class ProductOverview extends React.Component {
 
           <div className='containerChild2'>
           <ProductInformation productInfo={this.state.productInfo}/>
-          <StyleSelector styles={this.state.styles}/>
-          <AddToCart />
+          <StyleSelector productId={this.props.productId}/>
+
           </div>
         </div>
 

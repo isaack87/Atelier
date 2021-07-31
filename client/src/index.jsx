@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import Reviews from './components/ratingsReviews/ratings.jsx';
 import SearchBar from './components/questionsAnswers/searchBar.jsx';
 import QuestionsAnswersState from './components/questionsAnswers/QuestionAnswerState.jsx';
-import ProductOverview from './components/productDetails/products.jsx'
+import ProductOverview from './components/productDetails/OverviewMain.jsx'
 
 class App extends React.Component {
   constructor(props) {
