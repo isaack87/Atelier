@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AnswerForm renders correctly 1`] = `ShallowWrapper {}`;
+
+exports[`AnswerReport renders correctly 1`] = `ShallowWrapper {}`;
+
+exports[`AskQuestions renders correctly 1`] = `ShallowWrapper {}`;
+
+exports[`HelpfulAnswerCount renders correctly 1`] = `ShallowWrapper {}`;
+
+exports[`QuestionsAnswersState renders correctly 1`] = `ShallowWrapper {}`;
