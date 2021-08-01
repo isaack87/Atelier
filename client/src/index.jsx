@@ -20,6 +20,7 @@ class App extends React.Component {
     return (
 
       <div>
+        <h1>FEC PROJECT</h1>
         <ProductOverview productId={this.state.productId} />
         <QuestionsAnswersState
           productId={this.state.productId}

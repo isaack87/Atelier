@@ -1,11 +1,12 @@
 import React from 'react';
 
 import { shallow } from 'enzyme';
+import { App } from '../client/src/index.jsx'
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
+
 import AnswerForm from '../client/src/components/questionsAnswers/AnswerForm.jsx';
-//import AnswerPhotos from '../client/src/components/questionsAnswers/AnswerPhotos.jsx.jsx';
 import AnswerReport from '../client/src/components/questionsAnswers/AnswerReport.jsx';
 import AskQuestions from '../client/src/components/questionsAnswers/AskQuestionButtons.jsx'
 import MainAnswerQuestionBox from '../client/src/components/questionsAnswers/MainAnswerQuestionBox.jsx'
@@ -14,10 +15,6 @@ import HelpfulAnswerCount from '../client/src/components/questionsAnswers/Helpfu
 import HelpfulQuestionCount from '../client/src/components/questionsAnswers/HelpfulQuestionCount.jsx'
 
 Enzyme.configure({ adapter: new Adapter() });
-
-//👻👻👻👻👻👻👻👻👻👻👻👻
-// Testing Answer Form
-//👻👻👻👻👻👻👻👻👻👻👻👻👻
 
 describe('AnswerForm', () => {
   it('should be true that AnswerForm exists', () => {
@@ -33,20 +30,6 @@ describe('AnswerForm', () => {
   });
 });
 
-// Testing AnswerPhotos Form
-// describe('AnswerPhotos', () => {
-//   it('renders correctly', () => {
-//     const wrapper = shallow(<AnswerPhotos />);
-//     expect(wrapper).toMatchSnapshot();
-//     // On the first run of this test, Jest will generate a snapshot file automatically.
-//   });
-// });
-
-
-//👻👻👻👻👻👻👻👻👻👻👻👻👻
-// Testing Answer Report
-//👻👻👻👻👻👻👻👻👻👻👻👻👻
-
 describe('AnswerReport', () => {
   it('renders correctly', () => {
     const wrapper = shallow(<AnswerReport />);
@@ -54,22 +37,17 @@ describe('AnswerReport', () => {
   });
 });
 
-
-//👻👻👻👻👻👻👻👻👻👻👻👻👻
-// Testing AskQuestionButtons Form
-//👻👻👻👻👻👻👻👻👻👻👻👻👻
-
 describe('AskQuestions', () => {
   it('renders correctly', () => {
     const wrapper = shallow(<AskQuestions />);
     expect(wrapper).toMatchSnapshot();
   });
+
+  it('should be a stateless functional component', function() {
+    expect(React.Component.isPrototypeOf(AskQuestions)).to.be.false;
+  });
+
 });
-
-
-//👻👻👻👻👻👻👻👻👻👻👻👻👻
-// Testing HelpfulAnswersCount Form
-//👻👻👻👻👻👻👻👻👻👻👻👻👻
 
 describe('HelpfulAnswerCount', () => {
   it('renders correctly', () => {
@@ -79,10 +57,6 @@ describe('HelpfulAnswerCount', () => {
 });
 
 
-//👻👻👻👻👻👻👻👻👻👻👻👻👻
-// Testing HelpfulQuestionCount Form
-//👻👻👻👻👻👻👻👻👻👻👻👻👻
-
 describe('HelpfulQuestionCount', () => {
   it('renders correctly', () => {
     const wrapper = shallow(<HelpfulQuestionCount />);
@@ -90,28 +64,28 @@ describe('HelpfulQuestionCount', () => {
   });
 });
 
-
-//👻👻👻👻👻👻👻👻👻👻👻👻👻
-// Testing LoadMoreAnswers Form
-//👻👻👻👻👻👻👻👻👻👻👻👻👻
-
-
-
-//👻👻👻👻👻👻👻👻👻👻👻👻👻
-// Testing MainAnswersQuestionBox Form
-//👻👻👻👻👻👻👻👻👻👻👻👻👻
-
 describe('MainAnswerQuestionBox', () => {
   it('renders correctly', () => {
     const wrapper = shallow(<MainAnswerQuestionBox />);
-    expect(wrapper).toMatchSnapshot();
+
+    expect(wrapper).toMatchSnapshot(child);
+  });
+});
+
+describe('Test App Entry point', function () {
+  it('should have a header tag with FEC PROJECT!', function () {
+    const wrapper = shallow(<App/>);
+    expect(wrapper.find("h1").text()).toEqual("FEC PROJECT");
   });
 });
 
 
-//👻👻👻👻👻👻👻👻👻👻👻👻👻
-// Testing QuestionAnswerState Form
-//👻👻👻👻👻👻👻👻👻👻👻👻👻
+it('renders a map items', () => {
+  const items = ['question1', 'question2'];
+  const wrapper = shallow(<MainAnswerQuestionBox items={items} />);
+  // Check if an element in the Component exists
+  expect(wrapper.contains(<li key='question1'>question1</li >)).toBeTruthy();
+});
 
 describe('QuestionsAnswersState', () => {
   it('renders correctly', () => {
@@ -120,24 +94,4 @@ describe('QuestionsAnswersState', () => {
   });
 });
 
-
-
-
-//👻👻👻👻👻👻👻👻👻👻👻👻👻
-// Testing QuestionForm Form
-//👻👻👻👻👻👻👻👻👻👻👻👻👻
-
-
-
-
-//👻👻👻👻👻👻👻👻👻👻👻👻👻
-// Testing QuestionReport Form
-//👻👻👻👻👻👻👻👻👻👻👻👻👻
-
-
-
-
-//👻👻👻👻👻👻👻👻👻👻👻👻👻
-// Testing SearchBar Form
-//👻👻👻👻👻👻👻👻👻👻👻👻👻
 

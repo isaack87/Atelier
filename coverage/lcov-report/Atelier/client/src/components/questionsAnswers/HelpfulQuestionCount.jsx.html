@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">45.45% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/11</span>
+                <span class='fraction'>5/11</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">28.57% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/7</span>
+                <span class='fraction'>2/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">45.45% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/11</span>
+                <span class='fraction'>5/11</span>
             </div>
         
             
@@ -119,21 +119,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -144,6 +138,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -153,7 +153,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -175,16 +175,16 @@
 import $ from 'jquery';
 &nbsp;
 class HelpfulQuestionCount extends React.Component {
-<span class="fstat-no" title="function not covered" >  co</span>nstructor(props) {
-<span class="cstat-no" title="statement not covered" >    super(props);</span>
-<span class="cstat-no" title="statement not covered" >    this.state = {</span>
+  constructor(props) {
+    super(props);
+    this.state = {
       qhelpid: props.id,
       pid: props.mainProductId,
       qhelpfulcount: props.defaultcounter,
     };
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    this.helpfulQincrementer = this.helpfulQincrementer.bind(this);</span>
-<span class="cstat-no" title="statement not covered" >    this.increasecounter = this.increasecounter.bind(this);</span>
+    this.helpfulQincrementer = this.helpfulQincrementer.bind(this);
+    this.increasecounter = this.increasecounter.bind(this);
   }
 &nbsp;
 <span class="fstat-no" title="function not covered" >  in</span>creasecounter() {
@@ -209,8 +209,8 @@ class HelpfulQuestionCount extends React.Component {
     });
   }
 &nbsp;
-<span class="fstat-no" title="function not covered" >  re</span>nder() {
-<span class="cstat-no" title="statement not covered" >    return (</span>
+  render() {
+    return (
       &lt;div className="helpfulQuestionCounter"&gt;
         Helpful? {this.state.qhelpfulcount}
         &lt;button
@@ -235,7 +235,7 @@ export default HelpfulQuestionCount;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Sat Jul 31 2021 12:11:09 GMT-0700 (Mountain Standard Time)
+                at Sat Jul 31 2021 13:46:45 GMT-0700 (Mountain Standard Time)
             </div>
         </div>
         <script src="../../../../../prettify.js"></script>
