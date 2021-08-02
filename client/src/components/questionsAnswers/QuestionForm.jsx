@@ -11,14 +11,19 @@ class QuestionForm extends React.Component {
       name: '',
       email: '',
       photos: [],
+      fields: {},
+      formError: {}
     };
+
     this.onClick = this.onClick.bind(this);
     this.onChangeBody = this.onChangeBody.bind(this);
     this.onChangeName = this.onChangeName.bind(this);
     this.onChangeEmail = this.onChangeEmail.bind(this);
     this.showForm = this.showForm.bind(this);
     this.addQuestion = this.addQuestion.bind(this);
-    };
+    this.formValidation = this.formValidation.bind(this);
+    this.onClose = this.onClose.bind(this);
+  }
 
   onClick() {
     this.setState({ showForm: true });
@@ -42,62 +47,109 @@ class QuestionForm extends React.Component {
     });
   }
 
-  addQuestion(e) {
-    e.preventDefault();
-    const info = {
-      body: this.state.body,
-      name: this.state.name,
-      email: this.state.email,
-      product_id: this.state.currentPID
-    };
-    $.ajax({
-      method: 'POST',
-      url: 'http://localhost:3000/addQuestion',
-      contentType: 'application/json',
-      data: JSON.stringify(info),
-      success: (data) => {
-        console.log('add question success post');
-      },
-      error: () => {
-        console.log('error in addQuestion');
-      },
+  onClose() {
+    this.setState({
+      showForm: false,
     });
   }
 
+  addQuestion() {
+    if (this.formValidation()) {
+      const info = {
+        body: this.state.body,
+        name: this.state.name,
+        email: this.state.email,
+        product_id: this.state.currentPID
+      };
+      $.ajax({
+        method: 'POST',
+        url: 'http://localhost:3000/addQuestion',
+        contentType: 'application/json',
+        data: JSON.stringify(info),
+        success: () => {
+          this.setState({
+            showForm: false,
+            body: '',
+            name: '',
+            email: '',
+            photos: []
+          })
+          alert('Question Posted');
+          console.log('addquestion success');
+        },
+        error: () => {
+          console.log('error in addQuestion');
+        },
+      });
+    } else {
+      alert('form invalid');
+    }
+  }
+
+  formValidation() {
+    const name = this.state.name;
+    const body = this.state.body;
+    const email= this.state.email;
+    let validForm = true;
+
+    if (!name) {
+      validForm = false;
+    }
+
+    if (!body) {
+      validForm = false;
+    }
+
+    if (typeof name !== 'undefined') {
+      if (!name.match(/^[a-zA-Z0-9]+$/)) {
+        validForm = false;
+      }
+    }
+    return validForm;
+  }
 
   showForm() {
     return (
-      <div className="overlay">
+      <div className="form-box">
+        <form>
+        <h1>Ask Your Question <button type="submit" className='X' onClick={this.onClose}>X</button></h1>
+          <label>
+            Enter UserName*
+            <input value={this.state.name}
+              onChange={this.onChangeName}
+              type="text"
+              name="name"
+              placeholder="Example: jackson11!**"
+            />
+          </label>
 
-        <form id="addquestion">
+          <label>
+            Enter Email*
+            <input value={this.state.email}
+              onChange={this.onChangeEmail}
+              name="email"
+              type="text"
+              placeholder="Why did you like the product or not**"
+              pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/"
+              required
+            />
+          </label>
 
-          <input value={this.state.body}
-            className="a-body"
-            placeholder="Add Question text ....."
-            type="textbox"
-            onChange={this.onChangeBody}
-          />
-
-          <input value={this.state.name}
-            className="a-name"
-            placeholder="Enter UserName ...."
-            type="text"
-            onChange={this.onChangeName}
-          />
-
-          <input email={this.state.email}
-            className="a-email"
-            placeholder="Enter Email ...."
-            type="text"
-            onChange={this.onChangeEmail}
-          />
-          <br />
-
-          <input type="submit"
-            className="a-btn-submit"
+          <label>
+            Enter Question Here*
+            <textarea value={this.state.body}
+              cols="30"
+              rows="10"
+              onChange={this.onChangeBody}
+              name="body"
+              placeholder="Type your Message**"
+            />
+          </label>
+          <input
+            type="submit"
             onClick={this.addQuestion}
+            value="Post Question"
           />
-
         </form>
       </div>
     );
@@ -107,11 +159,11 @@ class QuestionForm extends React.Component {
     const { showForm } = this.state;
     return (
       <div className="buttons">
-            <button className="add-q-btn" type="submit" onClick={ this.onClick }>
-              ADD A QUESTION
-              <img alt="plusimage" className="imgplus" src="plus.png" />
-              {showForm && this.showForm()}
-            </button>
+        <button className="add-q-btn" type="submit" onClick={ this.onClick }>
+          ADD A QUESTION
+          <img alt="plusimage" className="imgplus" src="plus.png" />
+          {showForm && this.showForm()}
+        </button>
       </div>
     );
   }

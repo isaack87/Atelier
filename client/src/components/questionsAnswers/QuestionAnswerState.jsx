@@ -16,7 +16,9 @@ class QuestionsAnswersState extends React.Component {
       questionanswerslist: [],
       answersList: [],
       isReported: false,
+      searched: false,
       qid: [],
+      searchTerm: "",
       productId: props.productId,
     };
     this.search = this.search.bind(this);
@@ -52,8 +54,20 @@ class QuestionsAnswersState extends React.Component {
     fetch(`http://localhost:3000/questions?qid=${this.state.productId}`)
       .then((response) => response.json())
       .then((questions) => {
+        if (questions.results.length > 2) {
+          this.setState({
+            btnvisibleq: true,
+          });
+        } else {
+          this.setState({
+            btnvisibleq: false,
+          });
+        }
         this.setState({
           questionsList: questions.results,
+          newtest: questions.results.map(data => {
+            return data.question_body
+          })
         });
       })
       .then(() => {
@@ -70,7 +84,7 @@ class QuestionsAnswersState extends React.Component {
       url: 'http://localhost:3000/questions',
       contentType: 'application/json',
       data: JSON.stringify(productID),
-      success: (data) => {
+      success: () => {
         console.log(`sendproductidworks`);
       },
       error: () => {
@@ -97,7 +111,7 @@ class QuestionsAnswersState extends React.Component {
   }
 
   loadMoreAnswers() {
-    if (this.state.visibleAnswers >= this.state.questionsList.length) {
+    if ((this.state.visibleAnswers >= this.state.questionsList.length) || (this.state.questionsList.length === 0)) {
       this.setState({
         btnvisible: false,
       });
@@ -115,20 +129,15 @@ class QuestionsAnswersState extends React.Component {
   }
 
   search(term) {
-    let searchTerm = { search: term };
-    $.ajax({
-      method: 'POST',
-      url: 'http://localhost:3000/questions',
-      contentType: 'application/json',
-      data: JSON.stringify(searchTerm),
-      success: (data) => {
-        console.log(`success posted Questions`);
-      },
-      error: (err) => {
-        console.log('err search');
-      },
-    });
+    let searchTerm = term;
+    if (searchTerm.length >= 3) {
+      this.setState({
+        searched: true,
+        searchTerm: searchTerm
+      });
+    }
   }
+
 
   render() {
     return (
@@ -145,10 +154,11 @@ class QuestionsAnswersState extends React.Component {
             btnvisibleq={this.state.btnvisibleq}
             btnvisible={this.state.btnvisible}
             photos={this.state.photos}
-            questionanswerslist={this.state.questionanswerslist}
             productId={this.state.productId}
             mainProductId={this.state.productId}
-
+            searched={this.state.searched}
+            searchTerm={this.state.searchTerm}
+            questionanswerslist={this.state.questionanswerslist}
           />
         </div>
       </div>
@@ -157,3 +167,19 @@ class QuestionsAnswersState extends React.Component {
 }
 
 export default QuestionsAnswersState;
+
+
+
+
+// let searchedArray = [];
+//     let questions = this.state.questionanswerslist.map(data => {
+//       console.log(data.question, '😀😀😀')
+//       if (data.question.includes(searchTerm) && searchTerm.length >= 3) {
+//         searchedArray.push(data.question);
+//         this.setState({
+//           searchedArray: searchedArray,
+//           searched: true
+//         })
+
+//       }
+//     });

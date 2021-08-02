@@ -9,6 +9,7 @@ class AnswerForm extends React.Component {
       currentQID: props.qid,
       currentPID: props.pid,
       body: '',
+      bold: false,
       name: '',
       email: '',
       photos: [],
@@ -32,9 +33,16 @@ class AnswerForm extends React.Component {
   }
 
   onChangeName(e) {
-    this.setState({
-      name: e.target.value,
-    });
+    if (e.target.value === 'Seller') {
+      this.setState({
+        name: e.target.value,
+        bold: true,
+      });
+    } else {
+      this.setState({
+        name: e.target.value,
+      });
+    }
   }
 
   onChangeEmail(e) {
@@ -45,6 +53,7 @@ class AnswerForm extends React.Component {
 
   addAnswer(e) {
     e.preventDefault();
+
     const info = {
       body: this.state.body,
       name: this.state.name,
@@ -87,7 +96,7 @@ class AnswerForm extends React.Component {
           />
 
           <input value={this.state.name}
-            className="a-name"
+            className="a-namebold"
             placeholder="Enter UserName ...."
             type="text"
             onChange={this.onChangeName}

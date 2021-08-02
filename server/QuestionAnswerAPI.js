@@ -11,7 +11,6 @@ const getquestionAPI = (params, cb) => {
   };
   axios(options)
     .then((response) => {
-      console.log('getquestionAPI success');
       return cb(response.data);
     })
     .catch(() => {
