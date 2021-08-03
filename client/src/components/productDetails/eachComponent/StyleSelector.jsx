@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import $ from 'jquery';
 import AddToCart from './AddToCart.jsx';
 
@@ -6,26 +7,37 @@ class StyleSelector extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentStyleId: 162348,
+      currentStyleIdIndex: 0,
+      currentStyleId: 162337,
       styleNames: ['placeholder data'],
       thumbnails: [],
+      styleIds: [],
       skus: [],
       skuIds: [],
       skuCounts: [],
+      currentSize: "XS",
     }
+    this.getDataFromProductIdStyle = this.getDataFromProductIdStyle.bind(this);
   }
 
   componentDidMount() {
-    $.ajax({
-      url: `/product/styles?pid=${this.props.productId}`,
-      type: 'GET',
-      success: (response) => {
-        console.log(response)
-        let names = response.results.map((item) => ( item.name ))
-        let thumbnails = response.results.map((item) => (
+    this.getDataFromProductIdStyle(this.props.productId);
+  }
+
+  getDataFromProductIdStyle(productId) {
+    axios({
+      method: 'get',
+      url: `http://localhost:3000/product/styles?pid=${productId}`,
+    })
+      .then((response) => {
+        // console.log('😵 productId', response);
+        // console.log('💩',response.data.results)
+        let names = response.data.results.map((item) => ( item.name ))
+        let thumbnails = response.data.results.map((item) => (
           item.photos[0].thumbnail_url
         ))
-        let skusObject = response.results[0].skus
+        let styleIds = response.data.results.map((item) => ( item.style_id ))
+        let skusObject = response.data.results[0].skus
         let skuIds = [];
         let skuCounts = [];
         for (let key in skusObject) {
@@ -35,28 +47,56 @@ class StyleSelector extends React.Component {
         this.setState({
           styleNames: names,
           thumbnails: thumbnails,
-          skus: [response.results[0].skus],
+          skus: [response.data.results[0].skus],
           skuIds: skuIds,
           skuCounts: skuCounts,
+          styleIds: styleIds,
         })
-        // console.log('🟣 this.state.styles', this.state.styles)
-        // console.log('🔵 skus', this.state.skuCounts)
-      },
-      error: (err) => {
-        console.log('👹 err', err)
-      }
+        // console.log('🤢', response.data.results[0]);
+      })
+      .catch((error) => {
+        console.log('Error in getting data from ProductID Styles', error);
+      });
+  }
+
+  changeStyleId(event) {
+    let currentNumber = event.target.id;
+    axios({
+      method: 'get',
+      url: `http://localhost:3000/product/styles?pid=${this.props.productId}`,
+    })
+      .then((response) => {
+        let skusObject = response.data.results[currentNumber].skus
+        let skuIds = [];
+        let skuCounts = [];
+        for (let key in skusObject) {
+          skuIds.push(key)
+          skuCounts.push(skusObject[key])
+        }
+        this.setState({
+          skus: [response.data.results[currentNumber].skus],
+          skuIds: skuIds,
+          skuCounts: skuCounts,
+          currentStyleId: response.data.results[currentNumber].style_id,
+        })
+        // console.log(this.state.currentStyleId)
+        this.props.onChangeMainPageStyle(response.data.results[currentNumber].style_id);
+      })
+      .catch((error) => {
+        console.log('Error in getting data from ProductID Styles', error);
+      });
+
+    this.setState({
+      currentStyleIdIndex: event.target.id,
+    }, () => {
+      // console.log('current id', this.state.currentStyleIdIndex)
     })
   }
 
-  changeStyleId() {
-
-  }
-
-  // if state is defined then render
   render() {
 
     const mappedArray = this.state.styleNames.map((item, index) => (
-      <li className="removeBullets" key={index}><img className="styleThumbnail" src={this.state.thumbnails[index]} title={item}/></li>
+      <li className="removeBullets" key={index}><img className="styleThumbnail" id={index} value={this.state.styleIds[index]} onClick={this.changeStyleId.bind(this)} src={this.state.thumbnails[index]} title={item}/></li>
       ))
     let thumbnailArray1 = [];
     let thumbnailArray2 = [];
