@@ -11,6 +11,9 @@ class ProductOverview extends React.Component {
       productInfo: { placeholder: 'no data yet' },
       features: ['No data yet'],
       currentSelectedStyleId: 162332,
+      fullSizePhotos: [],
+      smallSizePhotos: [],
+
     };
     this.getDataFromProductId = this.getDataFromProductId.bind(this);
     this.getDataFromProductIdStyle = this.getDataFromProductIdStyle.bind(this);
@@ -18,7 +21,7 @@ class ProductOverview extends React.Component {
 
   componentDidMount() {
     this.getDataFromProductId(this.props.productId);
-    this.getDataFromProductIdStyle(this.props.productId);
+    // this.getDataFromProductIdStyle();
   }
 
   getDataFromProductId(productId) {
@@ -31,6 +34,8 @@ class ProductOverview extends React.Component {
         this.setState({
           productInfo: response.data,
           features: response.data.features,
+        }, () => {
+          this.getDataFromProductIdStyle();
         });
       })
       .catch((error) => {
@@ -38,15 +43,35 @@ class ProductOverview extends React.Component {
       });
   }
 
-  getDataFromProductIdStyle(productId) {
+  getDataFromProductIdStyle() {
     axios({
       method: 'get',
-      url: `http://localhost:3000/product/styles?pid=${productId}`,
+      url: `http://localhost:3000/product/styles?pid=${this.props.productId}`,
     })
       .then((response) => {
-        // console.log('😵 productId yay', response);
+        const data = response.data.results;
+        const fullPhotos = [];
+        const smallPhotos = [];
+        console.log(this.props.productId)
+        console.log('current id', this.props.styleId)
+        for (let i = 0; i < response.data.results.length; i++) {
+          console.log(response.data.results[i].style_id)
+          if (response.data.results[i].style_id === this.props.styleId) {
+            for (let j = 0; j < response.data.results[i].photos.length; j++) {
+              fullPhotos.push(response.data.results[i].photos[j].url);
+              smallPhotos.push(response.data.results[i].photos[j].thumbnail_url);
+            }
+          }
+        }
+        return [fullPhotos, smallPhotos, response.data.results[0].style_id];
+      })
+      .then((response) => {
         this.setState({
-          currentSelectedStyleId: response.data.results[0].style_id,
+          fullSizePhotos: response[0],
+          smallSizePhotos: response[1],
+          currentSelectedStyleId: response[2],
+        }, () => {
+          console.log(this.state.fullSizePhotos)
         });
       })
       .catch((error) => {

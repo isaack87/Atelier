@@ -12,6 +12,19 @@ app.use(express.static(`${__dirname} /../client/dist`));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.get('/random', (req, res) => {
+
+  louisAPI.generateRandom((data) => {
+    console.log(data.data.results)
+    // let array = data.results[0];
+    let result = {
+      productId: data.data.product_id,
+      styleId: data.data.results[0].style_id,
+    }
+    res.send(result);
+  });
+})
+
 // Isaac Routes
 // Questions Routes
 

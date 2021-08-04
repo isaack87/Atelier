@@ -26,11 +26,26 @@ const getProductIdStyles = (productId, cb) => {
     });
 };
 
+const generateRandom = (cb) => {
+  const options = {
+    method: 'GET',
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/28217/styles`,
+    headers: { Authorization: config.gitToken },
+  };
+  axios(options)
+    .then((data) => {
+        return cb(data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
 
 
 
 module.exports = {
-  getProductDetails, getProductIdStyles,
+  getProductDetails, getProductIdStyles, generateRandom,
 
 
 
