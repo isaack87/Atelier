@@ -19,7 +19,10 @@ module.exports = {
     'react',
   ],
   rules: {
-    'no-console': 0,
   },
-  ignorePatterns: ['client/dist', 'test'],
+  "eslint.validate": [
+    { "language": "javascript", "autoFix": true },
+    { "language": "typescript", "autoFix": true }
+  ]
+  
 };

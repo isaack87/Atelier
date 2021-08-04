@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import moment from 'moment';
  import Images from './images.jsx';
  import Stars from './stars.jsx';
 
@@ -58,13 +59,14 @@ class Reviews extends React.Component {
         let generateReview = review => {
             let paragraph = <div key={review.review_id}> 
                 <div id= 'review-heading'>
-                <h3>{review.summary}</h3> <p>{review.reviewer_name}</p> <p>{review.date}</p>
+                <p className="review-summary">{review.summary}</p> <p>{review.reviewer_name}</p> <p>{moment(review.date).format('MMMM Do YYYY')}</p>
                 </div>
                {review.rating}
                 {review.body}
                 <div><Images props= {review.photos}/></div>
+          
                 helpfulness: {review.helpfulness}
-                stars: <Stars rating = {review.rating}/>
+                stars: <Stars rating = {review.rating} starKey = {review.review_id}/>
                 </div>;
           return paragraph;
         };
@@ -80,8 +82,8 @@ class Reviews extends React.Component {
             
         }
         
-        this.setState({currentReviewIndex: index}, async () => {
-            await this.showMoreReviewsButton();
+        this.setState({currentReviewIndex: index}, () => {
+         this.showMoreReviewsButton();
         });
         let outerDiv = <div id='reviews'>{innerDiv}</div>
         this.setState({reviewsDiv: outerDiv});
