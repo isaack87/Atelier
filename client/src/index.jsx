@@ -19,11 +19,13 @@ class App extends React.Component {
   render() {
     return (
 
+        
+
       <div>
-        <ProductOverview productId={this.state.productId} />
+        {/* <ProductOverview productId={this.state.productId} />
         <QuestionsAnswersState
           productId={this.state.productId}
-        />
+        /> */}
         <Reviews props={this.state} />
       </div>
 

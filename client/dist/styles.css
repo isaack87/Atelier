@@ -1,13 +1,88 @@
 
-
-#reviewsList {
-
-    height: 40em;
-
-    overflow: auto;
-
+#review-image {
+  border: .1em solid #ddd;
+  border-radius: .3em;
+  padding: .3em;
+  width: 5em;
 }
+#review-image:hover {
+  box-shadow: 0 0 .3em .3em rgba(7, 144, 235, 0.455)
+}
+.review-summary {
+  max-width: 60ch;
+  font-weight: bold;
+}
+#reviewsList {
+  height: 40em;
+  overflow: auto;
+}
+.full-star-empty {
+  display: inline-block;
+  position: relative;
+  font-size: 1em;
+  color: #ddd;
+}
+.full-star-empty:after {
+  font-family: FontAwesome;
+  content: "\f005";
 
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  overflow: hidden;
+  color: #ddd;
+}
+.full-star {
+  display: inline-block;
+  position: relative;
+  font-size: 1em;
+  color: #ddd;
+}
+.full-star:after {
+  font-family: FontAwesome;
+  content: "\f005";
+
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  overflow: hidden;
+  color: #f80;
+}
+#star-25 {
+  font-family: FontAwesome;
+  content: "\f005";
+
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 25%;
+  overflow: hidden;
+  color: #f80;
+}
+#star-50 {
+  font-family: FontAwesome;
+  content: "\f005";
+
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 50%;
+  overflow: hidden;
+  color: #f80;
+}
+#star-75 {
+  font-family: FontAwesome;
+  content: "\f005";
+
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 75%;
+  overflow: hidden;
+  color: #f80;
+}
 .searchfield {
   width: 100%;
   padding: 10px 35px 10px 15px;
