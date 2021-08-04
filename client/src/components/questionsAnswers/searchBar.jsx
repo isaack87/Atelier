@@ -10,7 +10,6 @@ class SearchBar extends React.Component {
     this.onChange = this.onChange.bind(this);
   }
 
-
   onChange(e) {
     this.setState({
       searchTerm: e.target.value,
@@ -20,14 +19,14 @@ class SearchBar extends React.Component {
   }
 
   search(e) {
-    e.persist();
+    e.preventDefault();
     let searchTerm = this.state.searchTerm
     this.props.onSearch(searchTerm);
   }
 
   render() {
     return (
-      <div>
+      <div className="cell">
       <div className="searchbar">
         <form>
           <p className="searchbartitle">QUESTIONS & ANSWERS</p>
@@ -41,6 +40,8 @@ class SearchBar extends React.Component {
             <img className="imgmag" src="search.png" alt="searchlogo" />
           </button>
         </form>
+      </div>
+      <div>
       </div>
       </div>
     );

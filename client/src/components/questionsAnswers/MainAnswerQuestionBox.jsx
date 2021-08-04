@@ -16,22 +16,7 @@ const MainAnswerQuestionBox = (props) => {
             <b>
               Q:
             </b>
-
-
-            {/* //////////////////////////////////// */}
-            {props.questionanswerslist.filter((val) => {
-              console.log(val, '😡')
-              if (props.searchTerm === ('')) {
-                return val;
-              } else if (val.question.toLowerCase().includes(props.searchTerm.toLowerCase())) {
-                console.log(val, '🧍‍♂️');
-                return val;
-              }
-            })
-              .map((val, index) => <div key={index}>{val.question}</div>)}
-
-                {/* //////////////////////////////////// */}
-
+            {data.question}
           </span>
           <p className="HelpfulQuestionCount">
             <HelpfulQuestionCount
@@ -67,6 +52,7 @@ const MainAnswerQuestionBox = (props) => {
                     />
                     _
                     __
+                    <div className="questions-asked"></div>
                     <AnswerReport aID={answerlist.id} />
                   </span>
                 </p>
@@ -83,6 +69,8 @@ const MainAnswerQuestionBox = (props) => {
   ));
 
   return (
+
+
     <div className="container">
       {QABOX}
       <AskQuestions

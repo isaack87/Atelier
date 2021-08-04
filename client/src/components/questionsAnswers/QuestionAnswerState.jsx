@@ -12,42 +12,25 @@ class QuestionsAnswersState extends React.Component {
       btnvisibleq: true,
       visibleAnswers: 2,
       visibleQuestions: 2,
-      questionsList: [],
       questionanswerslist: [],
-      answersList: [],
+      startinglist: [],
       isReported: false,
+      searchTerm: '',
       searched: false,
-      qid: [],
-      searchTerm: "",
       productId: props.productId,
     };
-    this.search = this.search.bind(this);
+
     this.sendProductIdToServer = this.sendProductIdToServer.bind(this);
     this.getQuestions = this.getQuestions.bind(this);
     this.loadMoreAnswers = this.loadMoreAnswers.bind(this);
     this.loadMoreQuestions = this.loadMoreQuestions.bind(this);
     this.sendQidToServer = this.sendQidToServer.bind(this);
     this.getQuestionAnswerList = this.getQuestionAnswerList.bind(this);
+    this.search = this.search.bind(this)
   }
 
   componentDidMount() {
     this.getQuestions();
-  }
-
-  getQuestionAnswerList() {
-    const list = this.state.questionsList
-    const newObj = [];
-    list.map(e => {
-      newObj.push({
-        qID: e.question_id,
-        question: e.question_body,
-        questionHelpful: e.question_helpfulness,
-        answers: Object.values(e.answers),
-      });
-    });
-    this.setState({
-      questionanswerslist: newObj,
-    });
   }
 
   getQuestions() {
@@ -64,10 +47,7 @@ class QuestionsAnswersState extends React.Component {
           });
         }
         this.setState({
-          questionsList: questions.results,
-          newtest: questions.results.map(data => {
-            return data.question_body
-          })
+          questionsList: questions.results
         });
       })
       .then(() => {
@@ -76,6 +56,32 @@ class QuestionsAnswersState extends React.Component {
       });
     console.log('getquestions test');
   }
+
+  getQuestionAnswerList() {
+    const list = this.state.questionsList
+    const newObj = [];
+    list.map(e => {
+      newObj.push({
+        qID: e.question_id,
+        question: e.question_body,
+        questionHelpful: e.question_helpfulness,
+        answers: Object.values(e.answers),
+      });
+    });
+    this.setState({
+      questionanswerslist: newObj,
+      startinglist: newObj
+    }, () => {
+      this.state.questionanswerslist.map((e, index) => {
+        if (e.question.toLowerCase().includes(this.state.searchTerm.toLowerCase())) {
+          this.setState({
+            questionanswerslist: this.state.questionanswerslist.splice(index, 2),
+          });
+        }
+      });
+    });
+  }
+
 
   sendProductIdToServer() {
     const productID = { pid: this.state.productId };
@@ -111,7 +117,7 @@ class QuestionsAnswersState extends React.Component {
   }
 
   loadMoreAnswers() {
-    if ((this.state.visibleAnswers >= this.state.questionsList.length) || (this.state.questionsList.length === 0)) {
+    if ((this.state.visibleAnswers >= this.state.questionanswerslist.length) || (this.state.questionanswerslist.length === 0)) {
       this.setState({
         btnvisible: false,
       });
@@ -120,7 +126,7 @@ class QuestionsAnswersState extends React.Component {
   }
 
   loadMoreQuestions() {
-    if (this.state.visibleQuestions >= this.state.questionsList.length) {
+    if (this.state.visibleQuestions >= this.state.questionanswerslist.length) {
       this.setState({
         btnvisibleq: false,
       });
@@ -130,13 +136,25 @@ class QuestionsAnswersState extends React.Component {
 
   search(term) {
     let searchTerm = term;
+    this.setState({
+      searchTerm: searchTerm
+    });
+
+    if (searchTerm.length < 3) {
+      this.setState({
+        questionanswerslist: this.getQuestions()
+    }, () => {
+      this.getQuestionAnswerList();
+    })
+  }
     if (searchTerm.length >= 3) {
       this.setState({
-        searched: true,
-        searchTerm: searchTerm
+        questionanswerslist: this.getQuestions()
       });
     }
-  }
+      this.getQuestions()
+      this.getQuestionAnswerList();
+    }
 
 
   render() {
@@ -171,15 +189,19 @@ export default QuestionsAnswersState;
 
 
 
-// let searchedArray = [];
-//     let questions = this.state.questionanswerslist.map(data => {
-//       console.log(data.question, '😀😀😀')
-//       if (data.question.includes(searchTerm) && searchTerm.length >= 3) {
-//         searchedArray.push(data.question);
-//         this.setState({
-//           searchedArray: searchedArray,
-//           searched: true
-//         })
 
-//       }
-//     });
+
+
+
+// this.state.questionanswerslist.filter((val) => {
+//   if (searchTerm === ('')) {
+//     return val
+//   } else if (val.question.toLowerCase().includes(searchTerm.toLowerCase())) {
+//     return val
+//   }
+// })
+//   .map((val) => {
+//     this.setState({
+//       testing: val.question
+//     })
+//   })

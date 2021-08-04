@@ -82,40 +82,51 @@ class AnswerForm extends React.Component {
     });
   }
 
+
+
+
   showForm() {
     return (
-      <div className="overlay">
+      <div className="form-box">
+        <form>
+        <h1>Ask Your Answer <button type="submit" className='X' onClick={this.onClose}>X</button></h1>
+          <label>
+            Enter UserName*
+            <input value={this.state.name}
+              onChange={this.onChangeName}
+              type="text"
+              name="name"
+              placeholder="Example: jackson11!**"
+            />
+          </label>
 
-        <form id="addquestion">
+          <label>
+            Enter Email*
+            <input value={this.state.email}
+              onChange={this.onChangeEmail}
+              name="email"
+              type="text"
+              placeholder="Why did you like the product or not**"
+              pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/"
+              required
+            />
+          </label>
 
-          <input value={this.state.body}
-            className="a-body"
-            placeholder="Add Answer text ....."
-            type="textbox"
-            onChange={this.onChangeBody}
-          />
-
-          <input value={this.state.name}
-            className="a-namebold"
-            placeholder="Enter UserName ...."
-            type="text"
-            onChange={this.onChangeName}
-          />
-
-          <input email={this.state.email}
-            className="a-email"
-            placeholder="Enter Email ...."
-            type="text"
-            onChange={this.onChangeEmail}
-          />
-          <br />
-
-          <input type="submit"
-            className="a-btn-submit"
-            value="Post Answer"
+          <label>
+            Enter Answer Here*
+            <textarea value={this.state.body}
+              cols="30"
+              rows="10"
+              onChange={this.onChangeBody}
+              name="body"
+              placeholder="Type your Message**"
+            />
+          </label>
+          <input
+            type="submit"
             onClick={this.addAnswer}
+            value="Post Answer"
           />
-
         </form>
       </div>
     );
