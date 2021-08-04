@@ -16,47 +16,50 @@ const MainAnswerQuestionBox = (props) => {
             <b>
               Q:
             </b>
-            { data.question }
-            </span>
-            <p className="HelpfulQuestionCount">
-              <HelpfulQuestionCount
-              mainProductId={props.mainProductId}
+            {data.question}
+          </span>
+          <p className="HelpfulQuestionCount">
+            <HelpfulQuestionCount
+            mainProductId={props.mainProductId}
               id={data.qID}
-              defaultcounter={data.questionHelpful} />
-              _
-              <p className="questionhelpfont">{ data.question_helpfulness }</p>
-              <QuestionReport qid={data.qID} />
-              <AnswerForm pid={props.productId} qid={data.qID} />
-            </p>
+              defaultcounter={data.questionHelpful}
+            />
+            _
+            <p className="questionhelpfont">{ data.question_helpfulness }</p>
+            <QuestionReport qid={data.qID} />
+            <AnswerForm pid={props.productId} qid={data.qID} />
+          </p>
         </ul>
       </div>
-
       <div>
         <div>
           <ul>
             {data.answers.slice(0, props.visibleAnswers).map(answerlist => (
               <div key={answerlist.id}>
-              <p className='answers-asked'> A: {answerlist.body}
-                <br/>
-                <br/>
-                <span className="user-data">by: {answerlist.answerer_name}
-                  __
-                  <Moment format="MMMM-DD-YYYY" date={answerlist.date} />
-                  <HelpfulAnswerCount
-                    id={answerlist.id}
-                    mainProductId={props.mainProductId}
-                    defaultcounter={answerlist.helpfulness}
-                  />
-                  _
-                  __
-                  <AnswerReport aID={answerlist.id} />
-                </span>
-              </p>
+                <p className='answers-asked'> A: {answerlist.body.toString().toLowerCase()}
+                  <br />
+                  <br />
+                  <span className="user-data">
+                    { answerlist.answerer_name === 'Seller'
+                      ? <b> {answerlist.answerer_name} </b>
+                      : <normal>{answerlist.answerer_name}</normal> }
+                    __
+                    <Moment format="MMMM-DD-YYYY" date={answerlist.date} />
+                    <HelpfulAnswerCount
+                      id={answerlist.id}
+                      mainProductId={props.mainProductId}
+                      defaultcounter={answerlist.helpfulness}
+                    />
+                    _
+                    __
+                    <div className="questions-asked"></div>
+                    <AnswerReport aID={answerlist.id} />
+                  </span>
+                </p>
               </div>
             ))}
           </ul>
-          </div>
-
+        </div>
         {/* <div className="answerPhotos">
           <AnswerPhotos answersList={props.answersList} />
         </div> */}
@@ -66,6 +69,8 @@ const MainAnswerQuestionBox = (props) => {
   ));
 
   return (
+
+
     <div className="container">
       {QABOX}
       <AskQuestions

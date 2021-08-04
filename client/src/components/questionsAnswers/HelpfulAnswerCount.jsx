@@ -39,7 +39,7 @@ class HelpfulAnswerCount extends React.Component {
   render() {
     return (
       <div className='helpfulQuestionCounter'>
-        elpFul? {this.state.ahelpfulcount} _
+        HelpFul? {this.state.ahelpfulcount} _
         <button type="submit" onClick={this.helpfulAincrementer} className="answerhelpfulbtn">Yes</button>
       </div>
     );

@@ -2,6 +2,7 @@ import React from 'react';
 import $ from 'jquery';
 import MainAnswerQuestionBox from './MainAnswerQuestionBox.jsx'
 import SearchBar from './searchBar.jsx'
+const fetch = require('node-fetch');
 
 class QuestionsAnswersState extends React.Component {
   constructor(props) {
@@ -11,24 +12,49 @@ class QuestionsAnswersState extends React.Component {
       btnvisibleq: true,
       visibleAnswers: 2,
       visibleQuestions: 2,
-      questionsList: [],
       questionanswerslist: [],
-      answersList: [],
+      startinglist: [],
       isReported: false,
-      qid: [],
+      searchTerm: '',
+      searched: false,
       productId: props.productId,
     };
-    this.search = this.search.bind(this);
+
     this.sendProductIdToServer = this.sendProductIdToServer.bind(this);
     this.getQuestions = this.getQuestions.bind(this);
     this.loadMoreAnswers = this.loadMoreAnswers.bind(this);
     this.loadMoreQuestions = this.loadMoreQuestions.bind(this);
     this.sendQidToServer = this.sendQidToServer.bind(this);
     this.getQuestionAnswerList = this.getQuestionAnswerList.bind(this);
+    this.search = this.search.bind(this)
   }
 
   componentDidMount() {
     this.getQuestions();
+  }
+
+  getQuestions() {
+    fetch(`http://localhost:3000/questions?qid=${this.state.productId}`)
+      .then((response) => response.json())
+      .then((questions) => {
+        if (questions.results.length > 2) {
+          this.setState({
+            btnvisibleq: true,
+          });
+        } else {
+          this.setState({
+            btnvisibleq: false,
+          });
+        }
+        this.setState({
+          questionsList: questions.results
+        });
+      })
+      .then(() => {
+        this.sendProductIdToServer();
+        this.getQuestionAnswerList();
+      });
+    console.log('getquestions test');
   }
 
   getQuestionAnswerList() {
@@ -44,23 +70,18 @@ class QuestionsAnswersState extends React.Component {
     });
     this.setState({
       questionanswerslist: newObj,
+      startinglist: newObj
+    }, () => {
+      this.state.questionanswerslist.map((e, index) => {
+        if (e.question.toLowerCase().includes(this.state.searchTerm.toLowerCase())) {
+          this.setState({
+            questionanswerslist: this.state.questionanswerslist.splice(index, 2),
+          });
+        }
+      });
     });
   }
 
-  getQuestions() {
-    fetch(`http://localhost:3000/questions?qid=${this.state.productId}`)
-      .then((response) => response.json())
-      .then((questions) => {
-        this.setState({
-          questionsList: questions.results,
-        });
-      })
-      .then(() => {
-        this.sendProductIdToServer();
-        this.getQuestionAnswerList();
-      });
-    console.log('getquestions test');
-  }
 
   sendProductIdToServer() {
     const productID = { pid: this.state.productId };
@@ -69,7 +90,7 @@ class QuestionsAnswersState extends React.Component {
       url: 'http://localhost:3000/questions',
       contentType: 'application/json',
       data: JSON.stringify(productID),
-      success: (data) => {
+      success: () => {
         console.log(`sendproductidworks`);
       },
       error: () => {
@@ -96,7 +117,7 @@ class QuestionsAnswersState extends React.Component {
   }
 
   loadMoreAnswers() {
-    if (this.state.visibleAnswers >= this.state.questionsList.length) {
+    if ((this.state.visibleAnswers >= this.state.questionanswerslist.length) || (this.state.questionanswerslist.length === 0)) {
       this.setState({
         btnvisible: false,
       });
@@ -105,7 +126,7 @@ class QuestionsAnswersState extends React.Component {
   }
 
   loadMoreQuestions() {
-    if (this.state.visibleQuestions >= this.state.questionsList.length) {
+    if (this.state.visibleQuestions >= this.state.questionanswerslist.length) {
       this.setState({
         btnvisibleq: false,
       });
@@ -114,20 +135,27 @@ class QuestionsAnswersState extends React.Component {
   }
 
   search(term) {
-    let searchTerm = { search: term };
-    $.ajax({
-      method: 'POST',
-      url: 'http://localhost:3000/questions',
-      contentType: 'application/json',
-      data: JSON.stringify(searchTerm),
-      success: (data) => {
-        console.log(`success posted Questions`);
-      },
-      error: (err) => {
-        console.log('err search');
-      },
+    let searchTerm = term;
+    this.setState({
+      searchTerm: searchTerm
     });
+
+    if (searchTerm.length < 3) {
+      this.setState({
+        questionanswerslist: this.getQuestions()
+    }, () => {
+      this.getQuestionAnswerList();
+    })
   }
+    if (searchTerm.length >= 3) {
+      this.setState({
+        questionanswerslist: this.getQuestions()
+      });
+    }
+      this.getQuestions()
+      this.getQuestionAnswerList();
+    }
+
 
   render() {
     return (
@@ -144,10 +172,11 @@ class QuestionsAnswersState extends React.Component {
             btnvisibleq={this.state.btnvisibleq}
             btnvisible={this.state.btnvisible}
             photos={this.state.photos}
-            questionanswerslist={this.state.questionanswerslist}
             productId={this.state.productId}
             mainProductId={this.state.productId}
-
+            searched={this.state.searched}
+            searchTerm={this.state.searchTerm}
+            questionanswerslist={this.state.questionanswerslist}
           />
         </div>
       </div>
@@ -156,3 +185,23 @@ class QuestionsAnswersState extends React.Component {
 }
 
 export default QuestionsAnswersState;
+
+
+
+
+
+
+
+
+// this.state.questionanswerslist.filter((val) => {
+//   if (searchTerm === ('')) {
+//     return val
+//   } else if (val.question.toLowerCase().includes(searchTerm.toLowerCase())) {
+//     return val
+//   }
+// })
+//   .map((val) => {
+//     this.setState({
+//       testing: val.question
+//     })
+//   })
