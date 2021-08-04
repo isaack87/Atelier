@@ -17,6 +17,7 @@ const AnswerPhotos = (props) => {
   //     {data}
   //   </div>
   // );
+  //
 };
 
 export default AnswerPhotos;
