@@ -82,9 +82,6 @@ class AnswerForm extends React.Component {
     });
   }
 
-
-
-
   showForm() {
     return (
       <div className="form-box">
