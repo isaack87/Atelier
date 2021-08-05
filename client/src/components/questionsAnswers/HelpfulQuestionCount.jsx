@@ -38,11 +38,12 @@ class HelpfulQuestionCount extends React.Component {
 
   render() {
     return (
-      <div className="helpfulQuestionCounter">
-        Helpful? {this.state.qhelpfulcount}
+      <div className=" helpfulQuestionCounter">
+        Helpful??
+        {this.state.qhelpfulcount}
         <button
           type="submit"
-          className="questionhelpfulbtn"
+          className="helpfulQuestionCounter questionhelpfulbtn"
           onClick={() => {
             this.helpfulQincrementer();
           }}

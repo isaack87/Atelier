@@ -138,8 +138,10 @@ class QuestionsAnswersState extends React.Component {
   render() {
     return (
       <div>
-        <div className="AnswerQuestionBoxContainer">
+        <div className="search">
           <SearchBar onSearch={this.search} />
+          </div>
+          <div className="q-a-box">
           <MainAnswerQuestionBox
             questionsList={this.state.questionsList}
             answersList={this.state.answersList}
@@ -157,7 +159,7 @@ class QuestionsAnswersState extends React.Component {
             questionanswerslist={this.state.questionanswerslist}
           />
         </div>
-      </div>
+    </div>
     );
   }
 }

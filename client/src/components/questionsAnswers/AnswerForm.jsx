@@ -52,7 +52,7 @@ class AnswerForm extends React.Component {
   }
 
   addAnswer(e) {
-    e.persist();
+    e.preven();
 
     const info = {
       body: this.state.body,
@@ -96,7 +96,6 @@ class AnswerForm extends React.Component {
               placeholder="Example: jackson11!**"
             />
           </label>
-
           <label>
             Enter Email*
             <input value={this.state.email}
@@ -108,7 +107,6 @@ class AnswerForm extends React.Component {
               required
             />
           </label>
-
           <label>
             Enter Answer Here*
             <textarea value={this.state.body}
