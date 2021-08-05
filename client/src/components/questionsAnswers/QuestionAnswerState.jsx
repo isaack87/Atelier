@@ -13,27 +13,26 @@ class QuestionsAnswersState extends React.Component {
       visibleAnswers: 2,
       visibleQuestions: 2,
       questionanswerslist: [],
+      questionsList: [],
       startinglist: [],
       isReported: false,
       searchTerm: '',
-      searched: false,
       productId: props.productId,
     };
 
     this.sendProductIdToServer = this.sendProductIdToServer.bind(this);
-    this.getQuestions = this.getQuestions.bind(this);
+    this.getQuestionsApi = this.getQuestionsApi.bind(this);
     this.loadMoreAnswers = this.loadMoreAnswers.bind(this);
     this.loadMoreQuestions = this.loadMoreQuestions.bind(this);
-    this.sendQidToServer = this.sendQidToServer.bind(this);
     this.getQuestionAnswerList = this.getQuestionAnswerList.bind(this);
     this.search = this.search.bind(this)
   }
 
   componentDidMount() {
-    this.getQuestions();
+    this.getQuestionsApi();
   }
 
-  getQuestions() {
+  getQuestionsApi() {
     fetch(`http://localhost:3000/questions?qid=${this.state.productId}`)
       .then((response) => response.json())
       .then((questions) => {
@@ -41,9 +40,10 @@ class QuestionsAnswersState extends React.Component {
           this.setState({
             btnvisibleq: true,
           });
-        } else {
+        } else if (questions.results.length === this.state.questionsList) {
           this.setState({
             btnvisibleq: false,
+            btnvisible: false,
           });
         }
         this.setState({
@@ -54,7 +54,7 @@ class QuestionsAnswersState extends React.Component {
         this.sendProductIdToServer();
         this.getQuestionAnswerList();
       });
-    console.log('getquestions test');
+    console.log('getQuestionsApi test');
   }
 
   getQuestionAnswerList() {
@@ -69,19 +69,19 @@ class QuestionsAnswersState extends React.Component {
       });
     });
     this.setState({
-      questionanswerslist: newObj,
-      startinglist: newObj
+      questionanswerslist: newObj
     }, () => {
-      this.state.questionanswerslist.map((e, index) => {
-        if (e.question.toLowerCase().includes(this.state.searchTerm.toLowerCase())) {
+      const list = this.state.questionanswerslist
+      const term = this.state.searchTerm
+      list.map((e, index) => {
+        if (e.question.toLowerCase().includes(term.toLowerCase()) && term.length >= 3 ) {
           this.setState({
-            questionanswerslist: this.state.questionanswerslist.splice(index, 2),
+            questionanswerslist: list.splice(index, this.state.visibleQuestions),
           });
         }
       });
     });
   }
-
 
   sendProductIdToServer() {
     const productID = { pid: this.state.productId };
@@ -91,24 +91,7 @@ class QuestionsAnswersState extends React.Component {
       contentType: 'application/json',
       data: JSON.stringify(productID),
       success: () => {
-        console.log(`sendproductidworks`);
-      },
-      error: () => {
-        console.log('err sendProductIdToServer');
-      },
-    });
-    this.sendQidToServer();
-  }
-
-  sendQidToServer() {
-    const qID = { qid: this.state.qid };
-    $.ajax({
-      method: 'POST',
-      url: 'http://localhost:3000/answer',
-      contentType: 'application/json',
-      data: JSON.stringify(qID),
-      success: () => {
-        console.log(`sendproductidworks`);
+        console.log(`pID sent success`);
       },
       error: () => {
         console.log('err sendProductIdToServer');
@@ -126,12 +109,14 @@ class QuestionsAnswersState extends React.Component {
   }
 
   loadMoreQuestions() {
-    if (this.state.visibleQuestions >= this.state.questionanswerslist.length) {
+    if (this.state.visibleQuestions > this.state.questionanswerslist.length) {
       this.setState({
         btnvisibleq: false,
       });
+    } else {
+      this.setState((prev) => ({ visibleQuestions: prev.visibleQuestions + 2, visibleAnswers: 2 }));
+      this.getQuestionsApi();
     }
-    this.setState((prev) => ({ visibleQuestions: prev.visibleQuestions + 2, visibleAnswers: 2 }));
   }
 
   search(term) {
@@ -139,23 +124,16 @@ class QuestionsAnswersState extends React.Component {
     this.setState({
       searchTerm: searchTerm
     });
-
-    if (searchTerm.length < 3) {
-      this.setState({
-        questionanswerslist: this.getQuestions()
-    }, () => {
-      this.getQuestionAnswerList();
-    })
-  }
     if (searchTerm.length >= 3) {
       this.setState({
-        questionanswerslist: this.getQuestions()
+        questionanswerslist: this.getQuestionsApi(),
+        visibleQuestions: 2,
+        visibleAnswers: 2
       });
     }
-      this.getQuestions()
-      this.getQuestionAnswerList();
-    }
-
+    this.getQuestionsApi()
+    this.getQuestionAnswerList();
+  }
 
   render() {
     return (
@@ -185,23 +163,3 @@ class QuestionsAnswersState extends React.Component {
 }
 
 export default QuestionsAnswersState;
-
-
-
-
-
-
-
-
-// this.state.questionanswerslist.filter((val) => {
-//   if (searchTerm === ('')) {
-//     return val
-//   } else if (val.question.toLowerCase().includes(searchTerm.toLowerCase())) {
-//     return val
-//   }
-// })
-//   .map((val) => {
-//     this.setState({
-//       testing: val.question
-//     })
-//   })
