@@ -52,7 +52,7 @@ class AnswerForm extends React.Component {
   }
 
   addAnswer(e) {
-    e.preventDefault();
+    e.persist();
 
     const info = {
       body: this.state.body,
@@ -81,9 +81,6 @@ class AnswerForm extends React.Component {
       },
     });
   }
-
-
-
 
   showForm() {
     return (

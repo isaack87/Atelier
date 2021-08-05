@@ -19,7 +19,7 @@ class SearchBar extends React.Component {
   }
 
   search(e) {
-    e.preventDefault();
+    e.persist();
     let searchTerm = this.state.searchTerm
     this.props.onSearch(searchTerm);
   }
