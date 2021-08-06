@@ -10,28 +10,23 @@ class Images extends React.Component {
         }
          this.createImageDiv = this.createImageDiv.bind(this);
          this.modalClick = this.modalClick.bind(this);
+         this.closeModalClick = this.closeModalClick.bind(this);
     }
     modalClick = (imageID, imageSrc)=> {
-            //test
-            // $("#app").on("click", ()=> {
-            //     console.log('apop is click')
-            // })
-
 
         let modal = document.getElementById('mymodal' + imageID)
-     
-        let img = document.getElementsByClassName(imageID);
         let modalImg = document.getElementById('modalImg' + imageID)
-        console.log('img', img, "modalimg", modalImg);
+  
+        modalImg.src = imageSrc;
+        modal.style.display = "block";
 
-             modalImg.src = imageSrc;
-             modal.style.display = "block"
 
-        let span = document.getElementsByClassName('close-modal');
-        span.onclick = () => {
-            modal.style.display = 'none';
-        }
-
+    }
+    closeModalClick(modal, id) {
+       
+            $("#" + modal).css('display', 'none');
+            $('#' + id).css("display", "none");
+            $('#' + id).css("display", "block");
     }
     createImageDiv(imageArr) {
         let imagesDiv = [];
@@ -45,7 +40,9 @@ class Images extends React.Component {
                 }} key= {image.id} src= {image.url}/>
 
                 <div id= {"mymodal" + image.id} className = 'modal'>
-                    {/* <span className = 'close-modal'>x</span> */}
+                    <span className = {'close-modal'} id = {'close-modal'+ image.id}onClick = { () => {
+                        this.closeModalClick("mymodal" + image.id, 'close-modal'+ image.id );
+                    }}>X</span>
                     <img className="modal-content" id= {"modalImg" + image.id}/>
                 </div>
             </div>)
