@@ -8,6 +8,7 @@ class HelpfulQuestionCount extends React.Component {
       qhelpid: props.id,
       pid: props.mainProductId,
       qhelpfulcount: props.defaultcounter,
+      questionVoted: false,
     };
 
     this.helpfulQincrementer = this.helpfulQincrementer.bind(this);
@@ -17,30 +18,32 @@ class HelpfulQuestionCount extends React.Component {
   increasecounter() {
     this.setState({
       qhelpfulcount: this.state.qhelpfulcount + 1,
+      questionVoted: true,
     });
   }
 
   helpfulQincrementer() {
-    $.ajax({
-      method: 'POST',
-      url: `http://localhost:3000/qhelpful`,
-      contentType: 'application/json',
-      data: JSON.stringify({ qhelpid: this.state.qhelpid }),
-      success: () => {
-        this.increasecounter();
-        console.log('helpfulQincrementer++ ');
-      },
-      error: () => {
-        console.log('err helpfulAnswerAjax');
-      },
-    });
+    if (!this.state.questionVoted) {
+      $.ajax({
+        method: 'POST',
+        url: `http://localhost:3000/qhelpful`,
+        contentType: 'application/json',
+        data: JSON.stringify({ qhelpid: this.state.qhelpid }),
+        success: () => {
+          this.increasecounter();
+          console.log('helpfulQincrementer++ ');
+        },
+        error: () => {
+          console.log('err helpfulAnswerAjax');
+        },
+      });
+    }
   }
 
   render() {
     return (
       <div className=" helpfulQuestionCounter">
-        Helpful??
-        {this.state.qhelpfulcount}
+        Helpful?
         <button
           type="submit"
           className="helpfulQuestionCounter questionhelpfulbtn"
@@ -50,6 +53,7 @@ class HelpfulQuestionCount extends React.Component {
         >
           Yes
         </button>
+        ({this.state.qhelpfulcount})
       </div>
     );
   }

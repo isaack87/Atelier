@@ -146,19 +146,7 @@
   flex-direction: column;
   grid-row-gap: 1em;
 }
-.answerbox {
-  align-items: center;
-  justify-content: center;
-  display: block;
-  width: 59em;
-  height: 2em;
-  justify-content: left;
-  align-self: left;
-  padding: 1em;
-  font-size: .5em;
-  border: .3em dotted green;
-  flex-direction: row;
-}
+
 .userinfobox {
   display: inline-flex;
   flex-wrap: wrap;
@@ -170,6 +158,8 @@
   flex-direction: row;
   margin-left: auto;
 }
+
+
 .questionbox {
   align-items: center;
   justify-content: center;
@@ -182,7 +172,24 @@
   font-size: .5em;
   border: .3em dotted orange;
   flex-direction: row;
+  margin: -1em;
 }
+.answerbox {
+  align-items: center;
+  justify-content: center;
+  display: block;
+  width: 59em;
+  height: 2em;
+  justify-content: left;
+  align-self: left;
+  padding: 1em;
+  font-size: .5em;
+  border: .3em dotted green;
+  flex-direction: row;
+  margin: -1em;
+}
+
+
 .horizontal {
   flex-direction: row;
 }

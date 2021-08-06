@@ -52,7 +52,7 @@ class AnswerForm extends React.Component {
   }
 
   addAnswer(e) {
-    e.preven();
+    e.preventDefault();
 
     const info = {
       body: this.state.body,
@@ -84,7 +84,7 @@ class AnswerForm extends React.Component {
 
   showForm() {
     return (
-      <div className="form-box">
+      <div className="box">
         <form>
         <h1>Ask Your Answer <button type="submit" className='X' onClick={this.onClose}>X</button></h1>
           <label>
