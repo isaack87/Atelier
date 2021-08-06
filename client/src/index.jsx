@@ -23,12 +23,10 @@ class App extends React.Component {
 
       <div className="App-container">
         <ProductOverview productId={this.state.productId} />
-        <div className="q-a-box">
-          <div className="qacontainer">
+        <div>
         <QuestionsAnswersState
           productId={this.state.productId}
         />
-        </div>
         </div>
         <Reviews props={this.state} />
       </div>

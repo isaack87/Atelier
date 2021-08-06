@@ -10,52 +10,48 @@ import AnswerForm from './AnswerForm.jsx';
 const MainAnswerQuestionBox = (props) => {
   const QABOX = props.questionanswerslist.slice(0, props.visibleQuestions).map((data) => (
     <div key={data.qID}>
-      <div className="questions-asked">
         <ul>
-          <span className="questiontext">
+          <div className="questionbox">
+          <div className="horizontal">
             <b>
-              Q:
+              Q:  {data.question}
             </b>
-            {data.question}
-          </span>
-          <p className="HelpfulQuestionCount">
+          </div>
+          <p className="questionuserbar horizontal">
             <HelpfulQuestionCount
             mainProductId={props.mainProductId}
               id={data.qID}
               defaultcounter={data.questionHelpful}
             />
-            _
-            <p className="questionhelpfont">{ data.question_helpfulness }</p>
+
+            <p>{ data.question_helpfulness}</p>
             <QuestionReport qid={data.qID} />
             <AnswerForm pid={props.productId} qid={data.qID} />
           </p>
+          </div>
         </ul>
-      </div>
+
       <div>
         <div>
           <ul>
             {data.answers.slice(0, props.visibleAnswers).map(answerlist => (
               <div key={answerlist.id}>
-                <p className='answers-asked'> A: {answerlist.body.toString().toLowerCase()}
+                <p className='answerbox'> A: {answerlist.body.toString().toLowerCase()}
                   <br />
                   <br />
-                  <span className="user-data">
+                </p>
+                  <div className="userinfobox">
                     { answerlist.answerer_name === 'Seller'
                       ? <b> {answerlist.answerer_name} </b>
                       : <normal>{answerlist.answerer_name}</normal> }
-                    __
                     <Moment format="MMMM-DD-YYYY" date={answerlist.date} />
                     <HelpfulAnswerCount
                       id={answerlist.id}
                       mainProductId={props.mainProductId}
                       defaultcounter={answerlist.helpfulness}
                     />
-                    _
-                    __
-                    <div className="questions-asked"></div>
                     <AnswerReport aID={answerlist.id} />
-                  </span>
-                </p>
+                  </div>
               </div>
             ))}
           </ul>
@@ -71,7 +67,7 @@ const MainAnswerQuestionBox = (props) => {
   return (
 
 
-    <div className="container">
+    <div className="flex-container">
       {QABOX}
       <AskQuestions
         loadMoreAnswers={props.loadMoreAnswers}

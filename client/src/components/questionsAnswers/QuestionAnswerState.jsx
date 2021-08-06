@@ -61,11 +61,18 @@ class QuestionsAnswersState extends React.Component {
     const list = this.state.questionsList
     const newObj = [];
     list.map(e => {
+
+      // //helpful countsort broken!
+      // let sorted = Object.values(e.answers)
+      // sorted.map(e => {
+      //   return e.answers.sort((a, b) => (a.helpfulness > b.helpfulness) ? 1 : -1)
+      // })
+
       newObj.push({
         qID: e.question_id,
         question: e.question_body,
         questionHelpful: e.question_helpfulness,
-        answers: Object.values(e.answers),
+        answers: Object.values(e.answers)
       });
     });
     this.setState({
@@ -138,8 +145,10 @@ class QuestionsAnswersState extends React.Component {
   render() {
     return (
       <div>
-        <div className="AnswerQuestionBoxContainer">
+        <div className="search">
           <SearchBar onSearch={this.search} />
+          </div>
+          <div className="q-a-box">
           <MainAnswerQuestionBox
             questionsList={this.state.questionsList}
             answersList={this.state.answersList}
@@ -157,7 +166,7 @@ class QuestionsAnswersState extends React.Component {
             questionanswerslist={this.state.questionanswerslist}
           />
         </div>
-      </div>
+    </div>
     );
   }
 }

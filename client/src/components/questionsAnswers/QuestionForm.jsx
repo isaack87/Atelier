@@ -15,17 +15,17 @@ class QuestionForm extends React.Component {
       formError: {}
     };
 
-    this.onClick = this.onClick.bind(this);
+    this.onOpenForm = this.onOpenForm.bind(this);
     this.onChangeBody = this.onChangeBody.bind(this);
     this.onChangeName = this.onChangeName.bind(this);
     this.onChangeEmail = this.onChangeEmail.bind(this);
     this.showForm = this.showForm.bind(this);
     this.addQuestion = this.addQuestion.bind(this);
     this.formValidation = this.formValidation.bind(this);
-    this.onClose = this.onClose.bind(this);
+    this.onCloseForm = this.onCloseForm.bind(this);
   }
 
-  onClick() {
+  onOpenForm() {
     this.setState({ showForm: true });
   }
 
@@ -47,10 +47,14 @@ class QuestionForm extends React.Component {
     });
   }
 
-  onClose() {
-    this.setState({
-      showForm: false,
-    });
+  onCloseForm() {
+    if (this.state.showForm === true) {
+      console.log('clciked')
+      this.setState({
+        showForm: false,
+      });
+    }
+
   }
 
   addQuestion() {
@@ -112,7 +116,7 @@ class QuestionForm extends React.Component {
     return (
       <div className="form-box">
         <form>
-        <h1>Ask Your Question <button type="submit" className='X' onClick={this.onClose}>X</button></h1>
+        <h1>Ask Your Question</h1>
           <label>
             Enter UserName*
             <input value={this.state.name}
@@ -159,7 +163,7 @@ class QuestionForm extends React.Component {
     const { showForm } = this.state;
     return (
       <div className="buttons">
-        <button className="add-q-btn" type="submit" onClick={ this.onClick }>
+        <button className="add-q-btn" type="submit" onClick={ this.onOpenForm }>
           ADD A QUESTION
           <img alt="plusimage" className="imgplus" src="plus.png" />
           {showForm && this.showForm()}
