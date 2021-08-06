@@ -82,12 +82,9 @@ class AnswerForm extends React.Component {
     });
   }
 
-
-
-
   showForm() {
     return (
-      <div className="form-box">
+      <div className="box">
         <form>
         <h1>Ask Your Answer <button type="submit" className='X' onClick={this.onClose}>X</button></h1>
           <label>
@@ -99,7 +96,6 @@ class AnswerForm extends React.Component {
               placeholder="Example: jackson11!**"
             />
           </label>
-
           <label>
             Enter Email*
             <input value={this.state.email}
@@ -111,7 +107,6 @@ class AnswerForm extends React.Component {
               required
             />
           </label>
-
           <label>
             Enter Answer Here*
             <textarea value={this.state.body}

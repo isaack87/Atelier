@@ -29,16 +29,14 @@ class SearchBar extends React.Component {
       <div className="cell">
       <div className="searchbar">
         <form>
-          <p className="searchbartitle">QUESTIONS & ANSWERS</p>
+          <p className="searchbartitle ">QUESTIONS & ANSWERS
           <br />
           <input
             onChange={this.onChange}
-            className="searchfield"
+            className="searchfield search parent defaultfont"
             placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS ..."
           />
-          <button type="submit" className="searchbutton" onClick={this.search}>
-            <img className="imgmag" src="search.png" alt="searchlogo" />
-          </button>
+          </p>
         </form>
       </div>
       <div>
