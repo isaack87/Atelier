@@ -1,3 +1,10 @@
+.App-container {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  border: .5em solid orange;
+  flex-direction: column;
+}
 
 #review-image {
   border: .1em solid #ddd;

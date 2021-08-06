@@ -21,7 +21,7 @@ class App extends React.Component {
 
 
 
-      <div>
+      <div className="App-container">
         <ProductOverview productId={this.state.productId} />
         <div className="q-a-box">
           <div className="qacontainer">

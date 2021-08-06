@@ -42,7 +42,7 @@ app.get('/ahelpful', (req, res) => {
 
 app.post('/ahelpful', (req, res) => {
   const ahelpfulId = req.body.ahelpid;
-  console.log(req.body);
+  // console.log(req.body);
   isaacAPI.putAnswerHelpful(ahelpfulId, () => {
     res.send('answerhelp post success');
   });
@@ -51,7 +51,7 @@ app.post('/ahelpful', (req, res) => {
 
 app.get('/qhelpful', (req, res) => {
   const pid = req.query.qid;
-  console.log(pid, '😅😅😅');
+  // console.log(pid, '😅😅😅');
   isaacAPI.getQuestionHelpCounter(pid, (cb) => {
     res.send(cb);
   });
@@ -71,7 +71,7 @@ app.get('/addAnswer', (req, res) => {
 
 app.post('/addAnswer', (req, res) => {
   const data = req.body;
-  console.log(data, '😁');
+  // console.log(data, '😁');
   isaacAPI.postanswerAPI(data);
   res.send('answer post success');
 });
@@ -82,7 +82,7 @@ app.get('/addQuestion', (req, res) => {
 });
 
 app.post('/addQuestion', (req, res) => {
-  console.log(req.body, '🙂');
+  // console.log(req.body, '🙂');
   isaacAPI.postquestionAPI(req.body);
   res.send('question post success');
 });
@@ -92,7 +92,7 @@ app.get('/productdetails', (req, res) => {
 });
 
 app.post('/productdetails', (req, res) => {
-  console.log('get request');
+  // console.log('get request');
   // console.log(req.body);
   louisAPI.getProductDetails(req.body.id)
     .then((data) => {
@@ -105,7 +105,7 @@ app.post('/productdetails', (req, res) => {
 });
 
 app.get('/product/styles', (req, res) => {
-  console.log(req.query);
+  // console.log(req.query);
   louisAPI.getProductIdStyles(req.query.pid, (data) => {
 
     res.send(data.data);
