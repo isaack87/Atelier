@@ -1,4 +1,5 @@
 module.exports = {
+
     "env": {
         "es6": true
     },
@@ -24,4 +25,7 @@ module.exports = {
     ],
     "rules": {
     }
+
+  extends: './node_modules/eslint-config-hackreactor/index.js'
+
 };
