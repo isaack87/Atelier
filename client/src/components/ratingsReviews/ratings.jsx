@@ -3,6 +3,7 @@ import axios from 'axios';
 import moment from 'moment';
  import Images from './images.jsx';
  import Stars from './stars.jsx';
+ import helpers from './ReviewsHelperFunc.jsx';
 
 class Reviews extends React.Component {
     constructor(props) {
@@ -55,18 +56,24 @@ class Reviews extends React.Component {
     renderReviews() {
         let reviews = this.state.allReviews;
         let innerDiv = this.state.reviewsShownSoFar;
+        
         //helper func to generate 1 review
         let generateReview = review => {
+            console.log('review', review)
             let paragraph = <div key={review.review_id}> 
                 <div id= 'review-heading'>
-                <p className="review-summary">{review.summary}</p> <p>{review.reviewer_name}</p> <p>{moment(review.date).format('MMMM Do YYYY')}</p>
+                <p className="review-summary">{review.summary}</p> 
+                <p id= 'review-username'>{review.reviewer_name}</p> 
+                <p>{moment(review.date).format('MMMM Do YYYY')}</p>
                 </div>
                {review.rating}
                 {review.body}
                 <div><Images props= {review.photos}/></div>
           
                 helpfulness: {review.helpfulness}
-                stars: <Stars rating = {review.rating} starKey = {review.review_id}/>
+                <Stars rating = {review.rating} starKey = {review.review_id}/>
+                {helpers.generateRecommend(review.recommend)}
+                {helpers.reviewResponse(review.response)}
                 </div>;
           return paragraph;
         };
@@ -126,7 +133,7 @@ class Reviews extends React.Component {
     render() {
         
         return (
-            <div>
+            <div id = 'reviews'>
                 <h1>reviews module</h1>
                 {this.state.reviewDropdownSortDiv}
                <div id='reviewsList'> {this.state.reviewsDiv}</div>

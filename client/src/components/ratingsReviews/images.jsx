@@ -32,7 +32,7 @@ class Images extends React.Component {
         let imagesDiv = [];
         imageArr.forEach(image => {
             imagesDiv.push(
-            <div>
+            <div id ='review-images'>
                 <img id= "review-image" className = {image.id} onClick = { (e)=> {
                     e.preventDefault();
                     this.modalClick(image.id, image.url);
