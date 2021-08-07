@@ -2,7 +2,8 @@ import React from 'react';
 const helpers = {
 
     reviewResponse: (response) => {
-        if (response !== null || response !== '') {
+        
+        if (response !== null && response !== "") {
             return (<div id = 'response'>
                 <h3>Response from seller</h3>
                 <p>{response}</p>

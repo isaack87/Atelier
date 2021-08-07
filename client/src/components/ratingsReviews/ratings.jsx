@@ -25,11 +25,12 @@ class Reviews extends React.Component {
     }
     //function to handle getting the reviews for the given product id
      getReviews(sort = 'helpful') {
+         const productID = this.props.props.productId;
           axios({
             method: 'post',
             url: 'http://localhost:3000/reviews',
             //for testing purposes we use this default productID
-            data: {productID: 28215, sortKind: sort}
+            data: {productID, sortKind: sort}
 
         }).then(response => {
  
@@ -72,6 +73,7 @@ class Reviews extends React.Component {
           
                 helpfulness: {review.helpfulness}
                 <Stars rating = {review.rating} starKey = {review.review_id}/>
+             
                 {helpers.generateRecommend(review.recommend)}
                 {helpers.reviewResponse(review.response)}
                 </div>;
