@@ -9,7 +9,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productId: 28212,
+      productId: 28250,
       user: '',
       stars: '',
       reportedArray: [],
@@ -23,7 +23,7 @@ class App extends React.Component {
 
 
 
-        
+
 
       <div className="App-container">
          <h1>FEC PROJECT</h1>

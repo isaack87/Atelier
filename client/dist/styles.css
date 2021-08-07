@@ -16,7 +16,7 @@
   box-shadow: 0 0 .3em .3em rgba(7, 144, 235, 0.455)
 }
 .modal {
-  display: none; 
+  display: none;
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
   padding-top: 100px; /* Location of the box */
@@ -26,7 +26,7 @@
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
   background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(179, 179, 179, 0.9); 
+  background-color: rgba(179, 179, 179, 0.9);
 }
 
 .modal-content {
@@ -125,11 +125,17 @@
 
 /* isaac */
 
+
+/* Main cs box div */
+.QABOX {
+  display: flex;
+  margin-top: -3em;
+}
+
 .searchfield {
   width: 100%;
   padding: 10px 35px 10px 15px;
   outline: black;
-  border: 1px solid grey;
   border-radius: 5px;
 }
 .parent {
@@ -138,24 +144,23 @@
 .search {
   margin: 10px;
   padding: 20px;
-  font-size: 30px;
-  border: .1em dotted green;
+  font-size: 2em;
   flex-direction: column;
 }
 .searchbar {
-  margin: auto;
-  width: 40%;
-  padding: 10px;
-  float: middle;
+  width: 100%;
+  padding: .5em;
+  align-items: center;
+  justify-content: center;
+  margin-left: -1.5em;
 }
 .searchbartitle {
-  font-size: 1em;
+  font-size: .6em;
   font-family: sans-serif;
   margin: auto
 }
 .searchbutton {
   float: right;
-  border: 1px solid grey;
   border-radius: 5px;
   background: transparent;
   border: none;
@@ -168,7 +173,6 @@
   justify-content: center;
   padding: .1em;
   font-size: 2em;
-  border: .1em solid blue;
   flex-direction: column;
 }
 .q-a-box {
@@ -177,68 +181,75 @@
   justify-content: center;
   margin: 10px;
   padding: .1em;
-  border: .1em dotted purple;
   flex-direction: column;
   grid-row-gap: 1em;
 }
 
 .userinfobox {
-  display: inline-flex;
+  display: flex;
   flex-wrap: wrap;
   gap: 1em;
   font-size: .5em;
   height: 1em;
   padding: .2em;
-  border: .1em dotted green;
   flex-direction: row;
-  margin-left: auto;
+  margin-left: 1.5em;
+  margin-top: -3em;
 }
 
 
+/* answer image flexboxes  */
+.img {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: .2em;
+  height: 4em;
+  width: 4em;
+  padding: .1em;
+  flex-direction: row;
+  margin-left: auto;
+}
+.img-spacing{
+  margin-left: 1em;
+  padding: .1em;
+}
 .questionbox {
   align-items: center;
   justify-content: center;
   display: flex;
   width: 59em;
   height: 2em;
-  justify-content: left;
-  align-self: left;
   padding: 1em;
   font-size: .5em;
-  border: .3em dotted orange;
   flex-direction: row;
-  margin: -1em;
+  margin-bottom: -7em;
+  margin-left: -2em;
 }
 .answerbox {
-  align-items: center;
-  justify-content: center;
-  display: block;
+  display: flex;
   width: 59em;
   height: 2em;
-  justify-content: left;
-  align-self: left;
+  margin-top: -1em;
   padding: 1em;
   font-size: .5em;
-  border: .3em dotted green;
-  flex-direction: row;
-  margin: -1em;
-}
-
-
-.horizontal {
   flex-direction: row;
 }
 
 .defaultfont {
   font-size: .3em;
 }
+
+.qbarspacing {
+  margin-right: -6em;
+}
 .questionuserbar {
+  flex-direction: row;
   display: flex;
   flex-wrap: nowrap;
   gap: 1em;
+  margin-bottom: .1em;
   height: 2em;
   padding: 2em;
-  border: .1em dotted green;
   flex-direction: row;
   margin-left: auto;
 }
