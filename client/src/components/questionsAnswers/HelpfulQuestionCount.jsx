@@ -10,7 +10,6 @@ class HelpfulQuestionCount extends React.Component {
       qhelpfulcount: props.defaultcounter,
       questionVoted: false,
     };
-
     this.helpfulQincrementer = this.helpfulQincrementer.bind(this);
     this.increasecounter = this.increasecounter.bind(this);
   }

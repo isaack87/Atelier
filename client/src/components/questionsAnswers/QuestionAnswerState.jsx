@@ -2,6 +2,7 @@ import React from 'react';
 import $ from 'jquery';
 import MainAnswerQuestionBox from './MainAnswerQuestionBox.jsx'
 import SearchBar from './searchBar.jsx'
+
 const fetch = require('node-fetch');
 
 class QuestionsAnswersState extends React.Component {
@@ -160,7 +161,6 @@ class QuestionsAnswersState extends React.Component {
             btnvisible={this.state.btnvisible}
             photos={this.state.photos}
             productId={this.state.productId}
-            mainProductId={this.state.productId}
             searched={this.state.searched}
             searchTerm={this.state.searchTerm}
             questionanswerslist={this.state.questionanswerslist}
