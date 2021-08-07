@@ -43,9 +43,28 @@
   font-size: 3em;
   font-weight: 2em;
 }
+#review-images {
+  display: inline-block;
+}
+#reviews {
+  width: 100%;
+}
+#review-heading {
+  display: inline;
+}
+#response {
+  background-color: grey;
+}
 .review-summary {
   max-width: 60ch;
   font-weight: bold;
+  display: inline;
+}
+#review-username {
+  display: inline;
+  float:right;
+  padding-right: 9em;
+ 
 }
 #reviewsList {
   height: 40em;
