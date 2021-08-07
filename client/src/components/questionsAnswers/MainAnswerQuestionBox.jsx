@@ -72,8 +72,7 @@ const MainAnswerQuestionBox = (props) => {
 
 
               </div>
-            ))}
-          </ul>
+
         </div>
         <AnswerPhotos />
         {/* <div className="answerPhotos">
@@ -81,8 +80,7 @@ const MainAnswerQuestionBox = (props) => {
         </div> */}
 
       </div>
-    </div>
-    </div>
+
 
   ));
 
