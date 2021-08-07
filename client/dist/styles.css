@@ -466,6 +466,11 @@ label {
 /* Louis CSS */
 
 /* Louis - CSS */
+.overviewContainer {
+  display: flex;
+  flex-flow: column wrap;
+  border: .2em solid purple;
+}
 .navigationBar {
   display: flex;
   width: 702px;
@@ -545,10 +550,12 @@ label {
   margin: auto;
 
   padding: 2%;
-  height: 90%
+  height: 90%;
+  border: .2em dotted rgb(78, 78, 47);
 }
 .containerChild2 {
   margin: auto;
+  border: .2em dotted darkolivegreen;
 }
 
 .carouselContainer {
@@ -573,6 +580,7 @@ label {
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
+  border: .2em dotted magenta;
 }
 
 .descriptionChild1 {

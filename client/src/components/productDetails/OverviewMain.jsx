@@ -2,6 +2,8 @@ import React from 'react';
 import $ from 'jquery';
 import axios from 'axios';
 import ProductDescription from './eachComponent/ProductDescription.jsx';
+import ProductInformation from './eachComponent/ProductInformation.jsx';
+import StyleSelector from './eachComponent/StyleSelector.jsx';
 import Container from './eachComponent/Container.jsx';
 
 class ProductOverview extends React.Component {
@@ -11,14 +13,18 @@ class ProductOverview extends React.Component {
       productInfo: { placeholder: 'no data yet' },
       features: ['No data yet'],
       currentSelectedStyleId: 162332,
+      fullSizePhotos: [],
+      smallSizePhotos: [],
     };
     this.getDataFromProductId = this.getDataFromProductId.bind(this);
-    this.getDataFromProductIdStyle = this.getDataFromProductIdStyle.bind(this);
+    // this.getDataFromProductIdStyle = this.getDataFromProductIdStyle.bind(this);
+    this.renderPhotos = this.renderPhotos.bind(this);
   }
 
   componentDidMount() {
     this.getDataFromProductId(this.props.productId);
-    this.getDataFromProductIdStyle(this.props.productId);
+    // this.getDataFromProductIdStyle(this.props.productId);
+    this.renderPhotos(this.props.productId, this.state.currentSelectedStyleId);
   }
 
   getDataFromProductId(productId) {
@@ -38,15 +44,32 @@ class ProductOverview extends React.Component {
       });
   }
 
-  getDataFromProductIdStyle(productId) {
+
+  renderPhotos(productId, styleId) {
     axios({
       method: 'get',
       url: `http://localhost:3000/product/styles?pid=${productId}`,
     })
       .then((response) => {
-        // console.log('😵 productId yay', response);
+        const fullPhotos = [];
+        const smallPhotos = [];
+        // console.log('current id', this.props.currentSelectedStyleId)
+        for (let i = 0; i < response.data.results.length; i++) {
+          // console.log(response.data.results[i].style_id)
+          if (response.data.results[i].style_id === styleId) {
+            for (let j = 0; j < response.data.results[i].photos.length; j++) {
+              fullPhotos.push(response.data.results[i].photos[j].url);
+              smallPhotos.push(response.data.results[i].photos[j].thumbnail_url);
+            }
+          }
+        }
+        return [fullPhotos, smallPhotos];
+      })
+      .then((response) => {
+        // console.log(response)
         this.setState({
-          currentSelectedStyleId: response.data.results[0].style_id,
+          fullSizePhotos: response[0],
+          smallSizePhotos: response[1],
         });
       })
       .catch((error) => {
@@ -58,29 +81,27 @@ class ProductOverview extends React.Component {
     // console.log('changeMainPageStyle has been called', passInStyleId)
     this.setState({
       currentSelectedStyleId: passInStyleId,
+    }, () => {
+      // console.log('after setting state', this.state.currentSelectedStyleId)
+      this.renderPhotos(this.props.productId, this.state.currentSelectedStyleId)
     });
   }
 
   render() {
     return (
-      <div className='products'>
+      <div className='products overviewContainer'>
 
-        <div className='navigationBar'>
-            <ul className='navigation navigation1'>
-              <li><a href="/">Logo ⍙</a></li>
-            </ul>
-            <ul className='navigation navigation2'>
-              <li><a href="http://www.google.com">_________ 🔍 </a></li>
-            </ul>
+        <div className='containerProducts'>
+        <Container fullSizePhotos={this.state.fullSizePhotos} smallSizePhotos={this.state.smallSizePhotso} currentSelectedStyleId={this.state.currentSelectedStyleId} productId={this.props.productId} productInfo={this.state.productInfo} changeMainPageStyle={this.changeMainPageStyle.bind(this)} />
+
+        <div className='containerChild2'>
+          <ProductInformation productInfo={this.state.productInfo}/>
+          <StyleSelector productId={this.props.productId} onChangeMainPageStyle={this.changeMainPageStyle.bind(this)}/>
         </div>
 
-        <div className='announce'>
-          <p><i>SIDE-WIDE ANNOUNCEMENT MESSAGE!</i> - SALE / DISCOUNT <b>OFFER</b> - <u>NEW PRODUCT HIGHLIGHT</u></p>
         </div>
 
-        <Container currentSelectedStyleId={this.state.currentSelectedStyleId} productId={this.props.productId} productInfo={this.state.productInfo}/>
-
-        <ProductDescription productInfo={this.state.productInfo} features={this.state.features}/>
+        <ProductDescription productInfo={this.state.productInfo} features={this.state.features} />
 
       </div>
     );
