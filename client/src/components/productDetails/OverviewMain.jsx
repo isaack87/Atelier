@@ -44,21 +44,6 @@ class ProductOverview extends React.Component {
       });
   }
 
-  // getDataFromProductIdStyle(productId) {
-  //   axios({
-  //     method: 'get',
-  //     url: `http://localhost:3000/product/styles?pid=${productId}`,
-  //   })
-  //     .then((response) => {
-  //       // console.log('😵 productId yay', response);
-  //       this.setState({
-  //         currentSelectedStyleId: response.data.results[0].style_id,
-  //       });
-  //     })
-  //     .catch((error) => {
-  //       console.log('Error in getting data from ProductID Styles', error);
-  //     });
-  // }
 
   renderPhotos(productId, styleId) {
     axios({
