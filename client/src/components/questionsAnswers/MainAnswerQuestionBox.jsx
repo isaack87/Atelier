@@ -92,9 +92,4 @@ const MainAnswerQuestionBox = (props) => {
 };
 
 export default MainAnswerQuestionBox;
-
-
-
-        {/* <div className="answerPhotos">
-          <AnswerPhotos answersList={props.answersList} />
-        </div> */}
+//
