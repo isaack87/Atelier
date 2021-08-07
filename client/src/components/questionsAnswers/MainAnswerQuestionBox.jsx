@@ -72,11 +72,15 @@ const MainAnswerQuestionBox = (props) => {
 
 
               </div>
-            ))}
+
         </div>
         <AnswerPhotos />
+        {/* <div className="answerPhotos">
+          <AnswerPhotos answersList={props.answersList} />
+        </div> */}
 
       </div>
+
 
   ));
 

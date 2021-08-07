@@ -15,7 +15,7 @@ const AnswerPhotos = () => {
 
   return (
     <div>
-  <h3>{productId}</h3>
+  {/* <h3>{productId}</h3> */}
     </div>
   );
 };
