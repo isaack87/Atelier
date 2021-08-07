@@ -10,15 +10,14 @@ import AnswerPhotos from  './AnswerPhotos.jsx'
 
 const MainAnswerQuestionBox = (props) => {
   const QABOX = props.questionanswerslist.slice(0, props.visibleQuestions).map((data) => (
+    <div className='QABOX'>
     <div key={data.qID}>
         <ul>
           <div className="questionbox">
-          <div className="horizontal">
             <b>
               Q:  {data.question}
             </b>
-          </div>
-          <p className="questionuserbar horizontal">
+          <p className="questionuserbar qbarspacing">
             <HelpfulQuestionCount
             mainProductId={props.mainProductId}
               id={data.qID}
@@ -37,10 +36,12 @@ const MainAnswerQuestionBox = (props) => {
           <ul>
             {data.answers.slice(0, props.visibleAnswers).map(answerlist => (
               <div key={answerlist.id}>
+
                 <p className='answerbox'> A: {answerlist.body.toString().toLowerCase()}
                   <br />
                   <br />
                 </p>
+
                   <div className="userinfobox">
                     { answerlist.answerer_name === 'Seller'
                       ? <b> {answerlist.answerer_name} </b>
@@ -53,6 +54,23 @@ const MainAnswerQuestionBox = (props) => {
                     />
                     <AnswerReport aID={answerlist.id} />
                   </div>
+
+
+                  <div>
+                    {answerlist.photos.map((photo, index) => {
+                         return (
+                          <div className='img img-spacing' key={index}>
+                              <img src={photo} className="img"/>
+                          </div>
+                        );
+                    })}
+                    </div>
+                  </div>
+        ))}
+        </ul>
+      </div>
+
+
               </div>
             ))}
           </ul>
@@ -61,7 +79,9 @@ const MainAnswerQuestionBox = (props) => {
         {/* <div className="answerPhotos">
           <AnswerPhotos answersList={props.answersList} />
         </div> */}
+
       </div>
+    </div>
     </div>
 
   ));
@@ -84,3 +104,9 @@ const MainAnswerQuestionBox = (props) => {
 };
 
 export default MainAnswerQuestionBox;
+
+
+
+        {/* <div className="answerPhotos">
+          <AnswerPhotos answersList={props.answersList} />
+        </div> */}

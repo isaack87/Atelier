@@ -10,7 +10,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productId: 28212,
+      productId: 28250,
       user: '',
       stars: '',
       reportedArray: [],
@@ -19,6 +19,23 @@ class App extends React.Component {
 
   render() {
     return (
+
+
+
+
+
+
+
+
+      <div className="App-container">
+         <h1>FEC PROJECT</h1>
+
+        <ProductOverview productId={this.state.productId} />
+        <div>
+        <QuestionsAnswersState
+          productId={this.state.productId}
+        />
+
       <ProductMainStateProvider productId ={this.state.productId}>
         <div className="App-container">
           <h1>FEC PROJECT</h1>
@@ -29,6 +46,7 @@ class App extends React.Component {
           />
           </div>
           <Reviews props={this.state} />
+
         </div>
       </ProductMainStateProvider>
     );
