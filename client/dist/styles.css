@@ -64,7 +64,7 @@
   display: inline;
   float:right;
   padding-right: 9em;
- 
+
 }
 #reviewsList {
   height: 40em;
@@ -479,6 +479,7 @@ label {
 .false {
   visibility: hidden;
 }
+
 
 
 
