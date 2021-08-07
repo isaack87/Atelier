@@ -4,7 +4,7 @@ import Reviews from './components/ratingsReviews/ratings.jsx';
 import SearchBar from './components/questionsAnswers/searchBar.jsx';
 import QuestionsAnswersState from './components/questionsAnswers/QuestionAnswerState.jsx';
 import ProductOverview from './components/productDetails/OverviewMain.jsx'
-import { ProductMainStateProvider } from './components/productState.jsx'
+import { ProductMainStateProvider } from './components/questionsAnswers/productState.jsx'
 
 class App extends React.Component {
   constructor(props) {
