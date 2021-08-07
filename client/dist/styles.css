@@ -142,7 +142,7 @@
 
 
 
-/* isaac */
+* isaac */
 
 
 /* Main cs box div */
@@ -161,24 +161,17 @@
   display: flex;
 }
 .search {
-  margin: .25em;
+  margin: 10px;
   padding: 20px;
   font-size: 2em;
   flex-direction: column;
 }
 .searchbar {
-
   width: 100%;
   padding: .5em;
   align-items: center;
   justify-content: center;
   margin-left: -1.5em;
-
-  margin: auto;
-  width: 85%;
-  padding: 10px;
-  float: middle;
-
 }
 .searchbartitle {
   font-size: .6em;
@@ -201,7 +194,6 @@
   font-size: 2em;
   flex-direction: column;
 }
-
 .q-a-box {
   display: flex;
   flex-wrap: wrap;
@@ -212,8 +204,6 @@
   grid-row-gap: 1em;
 }
 
-
-
 .userinfobox {
   display: flex;
   flex-wrap: wrap;
@@ -221,7 +211,6 @@
   font-size: .5em;
   height: 1em;
   padding: .2em;
-
   flex-direction: row;
   margin-left: 1.5em;
   margin-top: -3em;
@@ -242,13 +231,6 @@
 .img-spacing{
   margin-left: 1em;
   padding: .1em;
-
-  margin: 1em;
-  border: .1em dotted green;
-  flex-direction: column;
-
-
-
 }
 .questionbox {
   align-items: center;
@@ -256,7 +238,6 @@
   display: flex;
   width: 59em;
   height: 2em;
-
   padding: 1em;
   font-size: .5em;
   flex-direction: row;
@@ -270,28 +251,6 @@
   margin-top: -1em;
   padding: 1em;
   font-size: .5em;
-
-  justify-content: center;
-  align-self: center;
-  padding: 1em;
-  font-size: .6em;
-  margin: -1em;
-  border: .3em dotted orange;
-  flex-direction: row;
-}
-.answerbox {
-  display: flex;
-  width: 60%;
-  height: 2em;
-  padding: 1em;
-  font-size: .7em;
-  border: .1em dotted green;
-  flex-direction: row;
-  margin: 1.2em;
-}
-
-.horizontal {
-
   flex-direction: row;
 }
 
