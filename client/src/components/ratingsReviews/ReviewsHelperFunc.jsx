@@ -15,9 +15,16 @@ const helpers = {
             return (<p>✓ I recommend this product</p>);
         }
     },
-    helpfulness: (helpNum) => {
+    generateHelpfulness: (helpNum) => {
         if (helpNum > 0) {
-            return (<div>
+            return (<div id="helpful">
+                <span><p id="helpful-question">Helpful? </p>
+                <p id= "helpful-link" onClick = {
+                    () => {
+                        
+                    }
+                }>Yes ({helpNum})</p>
+                </span>
                 
             </div>)
         }

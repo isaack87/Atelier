@@ -71,7 +71,7 @@ class Reviews extends React.Component {
                 {review.body}
                 <div><Images props= {review.photos}/></div>
           
-                helpfulness: {review.helpfulness}
+                {helpers.generateHelpfulness(review.helpfulness)}
                 <Stars rating = {review.rating} starKey = {review.review_id}/>
              
                 {helpers.generateRecommend(review.recommend)}
