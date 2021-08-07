@@ -142,12 +142,14 @@
   display: flex;
 }
 .search {
+  padding: 6px 10px;
   margin: 10px;
   padding: 20px;
   font-size: 2em;
   flex-direction: column;
 }
 .searchbar {
+  position: relative;
   width: 100%;
   padding: .5em;
   align-items: center;
@@ -169,7 +171,6 @@
 .flex-container {
   flex-wrap: wrap;
   display: flex;
-  align-items: center;
   justify-content: center;
   padding: .1em;
   font-size: 2em;
