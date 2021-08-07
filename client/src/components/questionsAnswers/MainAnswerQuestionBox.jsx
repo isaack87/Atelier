@@ -6,7 +6,6 @@ import QuestionReport from './QuestionReport.jsx';
 import HelpfulAnswerCount from './HelpfulAnswerCount.jsx';
 import HelpfulQuestionCount from './HelpfulQuestionCount.jsx';
 import AnswerForm from './AnswerForm.jsx';
-import AnswerPhotos from  './AnswerPhotos.jsx'
 
 const MainAnswerQuestionBox = (props) => {
   const QABOX = props.questionanswerslist.slice(0, props.visibleQuestions).map((data) => (
@@ -55,7 +54,6 @@ const MainAnswerQuestionBox = (props) => {
                     <AnswerReport aID={answerlist.id} />
                   </div>
 
-
                   <div>
                     {answerlist.photos.map((photo, index) => {
                          return (
@@ -69,16 +67,6 @@ const MainAnswerQuestionBox = (props) => {
         ))}
         </ul>
       </div>
-
-
-              </div>
-            ))}
-          </ul>
-        </div>
-        <AnswerPhotos />
-        {/* <div className="answerPhotos">
-          <AnswerPhotos answersList={props.answersList} />
-        </div> */}
 
       </div>
     </div>
