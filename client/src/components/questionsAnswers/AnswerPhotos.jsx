@@ -11,7 +11,7 @@ const AnswerPhotos = () => {
   //   pics.photos.map( )
 
   //   <img key={index} alt="pics" src={pics.photos.length === 0 ? pics.photos : { test } } />
-  // });
+  // //});
 
   return (
     <div>
