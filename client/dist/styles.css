@@ -141,7 +141,7 @@
 
   display: inline;
 }
-#helpful-link {
+.helpful-link {
   text-decoration: underline;
   cursor: pointer;
   display: inline-block;

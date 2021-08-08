@@ -31,15 +31,12 @@ class Reviews extends React.Component {
             url: 'http://localhost:3000/reviews',
             //for testing purposes we use this default productID
             data: {productID, sortKind: sort}
-
         }).then(response => {
- 
             //now take this and update reviews state
             this.setState({allReviews: response.data.results}, () => {
                 this.renderReviews();
                 this.showReviewDropdownSort();
             })
-          
         })
     }
     //handle rendering the sort dropdown only if we have reviews to show
@@ -71,7 +68,7 @@ class Reviews extends React.Component {
                 {review.body}
                 <div><Images props= {review.photos}/></div>
           
-                {helpers.generateHelpfulness(review.helpfulness)}
+                {helpers.generateHelpfulness(review.helpfulness, review.review_id)}
                 <Stars rating = {review.rating} starKey = {review.review_id}/>
              
                 {helpers.generateRecommend(review.recommend)}

@@ -1,7 +1,7 @@
 const axios = require('axios');
 const config = require('../config');
 
-
+const apiURL = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/`
 const getReviewsAPI = (productID, sortKind = 'helpful') => {
     //makes call to the api
     //the param is what we're looking for
@@ -44,8 +44,25 @@ const postReview = async (productID) => {
       };
        await axios(options)
       .then(response => {
-          //console.log('posting review', response);
+          console.log('posting review', response);
       })
+}
+const postMarkHelpful= async (productID) => {
+  
+    const options = {
+        method: 'PUT',
+        url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/${productID}/helpful?count=100`,
+        headers: { Authorization: config.gitToken },
+      };
+      axios(options)
+        .then((data) => {
+          return data;
+        })
+        .catch((err) => {
+          console.log( err);
+        });
+
+
 }
 
 
@@ -53,5 +70,6 @@ const postReview = async (productID) => {
 
 module.exports = {
     getReviewsAPI,
-     postReview
+     postReview,
+     postMarkHelpful
 };
