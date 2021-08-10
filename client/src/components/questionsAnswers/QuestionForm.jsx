@@ -163,9 +163,8 @@ class QuestionForm extends React.Component {
     const { showForm } = this.state;
     return (
       <div>
-        <button className="add-q-btn" type="submit" onClick={ this.onOpenForm }>
-          ADD A QUESTION
-          <img alt="plusimage" className="imgplus" src="plus.png" />
+        <button className="add-q-btn btnmarginaddq" type="submit" onClick={ this.onOpenForm }>
+          ADD A QUESTION ➕
           {showForm && this.showForm()}
         </button>
       </div>

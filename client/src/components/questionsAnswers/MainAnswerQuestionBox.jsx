@@ -36,7 +36,7 @@ const MainAnswerQuestionBox = (props) => {
             {data.answers.slice(0, props.visibleAnswers).map(answerlist => (
               <div key={answerlist.id}>
 
-                <p className='answerbox'> A: {answerlist.body.toString().toLowerCase()}
+                <p className='answerbox userinfobox'> A: {answerlist.body.toString().toLowerCase()}
                   <br />
                   <br />
                 </p>

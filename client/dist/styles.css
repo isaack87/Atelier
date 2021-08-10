@@ -153,10 +153,11 @@
 
 .searchfield {
   display: flex;
-  width: 90em;
+  width: 83%;
   outline: black;
+  justify-content: center;
   border-radius: 5px;
-  border: solid .1em red
+  border: solid .1em black
 }
 .parent {
   display: flex;
@@ -168,12 +169,12 @@
   flex-direction: column;
 }
 .searchbar {
-  width: 45em;
+  width: 50em;
   display: flex;
   padding: .5em;
-  align-items: center;
+  margin-left: .3em;
+  flex-flow: column wrap;
   justify-content: center;
-  border: solid .1em black;
 }
 .searchbartitle {
   font-size: .6em;
@@ -198,7 +199,7 @@
 .q-a-box {
   display: flex;
   flex-wrap: wrap;
-  margin-right: 40em;
+  margin-right: 2em;
   padding: .1em;
   flex-direction: column;
   grid-row-gap: 1em;
@@ -212,7 +213,7 @@
   height: 1em;
   padding: .2em;
   flex-direction: row;
-  margin-left: 1.5em;
+  margin-left: -10em;
   margin-top: -3em;
 }
 
@@ -226,7 +227,7 @@
   width: 4em;
   padding: .1em;
   flex-direction: row;
-  margin-left: auto;
+  margin-left: -5em;
 }
 .img-spacing{
   margin-left: 1em;
@@ -241,8 +242,8 @@
   padding: 1em;
   font-size: .7em;
   flex-direction: row;
-  margin-bottom: -7em;
-  margin-left: -2em;
+  margin-bottom: -3em;
+  margin-left: -11em;
 }
 .answerbox {
   display: flex;
@@ -313,15 +314,23 @@ ul {
   display: flex;
   margin-top: -2em;
   margin-bottom: 2em;
-  margin-left: -11em;
+  margin-left: -12em;
   width: 30em;
   flex-direction: column;
-  border: black solid .2em;
 }
 
 .btnmargin {
   display: flex;
-  margin-top: 15em;
+  margin-bottom: -15em;
+}
+
+.btnmarginaddq {
+  margin-top: -20em;
+  margin-left: 30em;
+}
+.btnmarginmoreaq {
+  margin-top: 1em;
+  margin-left: 30em;
 }
 .X {
   margin-left: 90%;
@@ -404,6 +413,9 @@ label {
   padding: 0;
   background: none;
   text-decoration:underline;
+}
+.redtext {
+  color: red;
 }
 .addanswer {
   border: none;

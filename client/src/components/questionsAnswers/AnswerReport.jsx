@@ -27,11 +27,12 @@ class AnswerReport extends React.Component {
   render() {
     return (
       <div>
-        <button type="submit" onClick={this.reportedBtn} className=" reporthelpful-btn">
+        <button type="submit" onClick={this.reportedBtn}
+          className={this.state.reported ? "reporthelpful-btn redtext" : "reporthelpful-btn "}>
           {this.state.reported ? 'Reported' : 'Report'}
         </button>
       </div>
-    );
+    )
   }
 }
 

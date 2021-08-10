@@ -9,7 +9,7 @@ class QuestionsAnswersState extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      btnvisible: true,
+      btnvisible: false,
       btnvisibleq: true,
       visibleAnswers: 2,
       visibleQuestions: 2,
@@ -44,14 +44,12 @@ class QuestionsAnswersState extends React.Component {
       });
     }
     // no answers then no load more answer button appears
-    this.state.questionanswerslist.map(e => {
-      if (e.answers.length === 0) {
+      if (this.state.questionanswerslist) {
         this.setState({
           btnvisible: false,
         });
       }
-    });
-  }
+    };
 
   getQuestionsApi() {
     fetch(`http://localhost:3000/questions?qid=${this.state.productId}`)
@@ -60,6 +58,7 @@ class QuestionsAnswersState extends React.Component {
         if (questions.results.length > 2) {
           this.setState({
             btnvisibleq: true,
+            btnvisible: true,
           });
         } else if (questions.results.length === this.state.questionsList) {
           this.setState({
