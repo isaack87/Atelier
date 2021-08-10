@@ -137,7 +137,16 @@
   overflow: hidden;
   color: #f80;
 }
+#helpful-question {
 
+  display: inline;
+}
+.helpful-link {
+  text-decoration: underline;
+  cursor: pointer;
+  display: inline-block;
+
+}
 
 
 

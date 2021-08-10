@@ -25,26 +25,33 @@ class Reviews extends React.Component {
     }
     //function to handle getting the reviews for the given product id
      getReviews(sort = 'helpful') {
+         const productID = this.props.props.productId;
           axios({
             method: 'post',
             url: 'http://localhost:3000/reviews',
             //for testing purposes we use this default productID
-            data: {productID: 28215, sortKind: sort}
-
+            data: {productID, sortKind: sort}
         }).then(response => {
- 
             //now take this and update reviews state
-            this.setState({allReviews: response.data.results}, () => {
-                this.renderReviews();
-                this.showReviewDropdownSort();
-            })
           
+            this.setState({allReviews: response.data, reviewsShownSoFar: [], currentReviewIndex: 0}, () => {
+                this.renderReviews();
+                
+            })
+
         })
     }
     //handle rendering the sort dropdown only if we have reviews to show
     showReviewDropdownSort() {
         if (this.state.allReviews.length > 0) {
-            let div = <select id="review-dropdown">
+            let div = <select id="review-dropdown" onChange = {(e) => {
+                //wipe the current reviews
+                this.setState({allReviews: []})
+                this.setState({reviewsDiv: []})
+                let dropdownChoice = e.target.value.toString();
+                this.getReviews(dropdownChoice)
+
+            }}>
             <option value="helpful">helpful</option>
             <option value="newest">newest</option>
             <option value="relevant">relevant</option>
@@ -56,8 +63,9 @@ class Reviews extends React.Component {
     renderReviews() {
         let reviews = this.state.allReviews;
         let innerDiv = this.state.reviewsShownSoFar;
-        
-        //helper func to generate 1 review
+        console.log('all reviews inside renderreviews', reviews, 'inner dive', innerDiv )
+        if (reviews.length) {
+            //helper func to generate 1 review
         let generateReview = review => {
             console.log('review', review)
             let paragraph = <div key={review.review_id}> 
@@ -70,15 +78,17 @@ class Reviews extends React.Component {
                 {review.body}
                 <div><Images props= {review.photos}/></div>
           
-                helpfulness: {review.helpfulness}
+                {helpers.generateHelpfulness(review.helpfulness)}
                 <Stars rating = {review.rating} starKey = {review.review_id}/>
-                {helpers.generateRecommend(review.recommend)}
+             
+                {helpers.generateRecommend(review.recommend, )}
                 {helpers.reviewResponse(review.response)}
                 </div>;
           return paragraph;
         };
         //display only 2 at a time
         let index = this.state.currentReviewIndex;
+      
         for(let i = 0; i < 2; i++) {
             //get current review
             let review = reviews[index];
@@ -86,14 +96,18 @@ class Reviews extends React.Component {
                 innerDiv.push(generateReview(review));
                 index ++;
             }
-            
         }
-        
         this.setState({currentReviewIndex: index}, () => {
          this.showMoreReviewsButton();
         });
         let outerDiv = <div id='reviews'>{innerDiv}</div>
-        this.setState({reviewsDiv: outerDiv});
+        this.setState({reviewsDiv: outerDiv}, () => {
+            this.showReviewDropdownSort();
+        });
+
+
+        }
+        
 
     }
     //handles showing the 'more reviews' button
@@ -126,7 +140,7 @@ class Reviews extends React.Component {
         })
     }
     componentDidMount() {
-          this.getReviews();
+       this.getReviews();
         //this.postReview();
     }
 
