@@ -104,7 +104,13 @@
   overflow: hidden;
   color: #f80;
 }
-#star-25 {
+#star-25, #star-50, #star-75 {
+  display: inline-block;
+  position: relative;
+  font-size: 1em;
+  color: #ddd;
+}
+#star-25:after {
   font-family: FontAwesome;
   content: "\f005";
 
@@ -115,7 +121,7 @@
   overflow: hidden;
   color: #f80;
 }
-#star-50 {
+#star-50:after {
   font-family: FontAwesome;
   content: "\f005";
 
@@ -126,7 +132,7 @@
   overflow: hidden;
   color: #f80;
 }
-#star-75 {
+#star-75:after {
   font-family: FontAwesome;
   content: "\f005";
 

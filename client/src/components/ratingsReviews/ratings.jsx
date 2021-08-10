@@ -24,7 +24,7 @@ class Reviews extends React.Component {
         this.showReviewDropdownSort = this.showReviewDropdownSort.bind(this);
     }
     //function to handle getting the reviews for the given product id
-     getReviews(sort = 'helpful') {
+     getReviews(sort = 'relevant') {
          const productID = this.props.props.productId;
           axios({
             method: 'post',
@@ -52,9 +52,10 @@ class Reviews extends React.Component {
                 this.getReviews(dropdownChoice)
 
             }}>
+            <option value="relevant">relevant</option>
             <option value="helpful">helpful</option>
             <option value="newest">newest</option>
-            <option value="relevant">relevant</option>
+           
         </select>;
             this.setState({reviewDropdownSortDiv: div });
         }
