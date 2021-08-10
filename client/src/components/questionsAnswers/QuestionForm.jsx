@@ -49,12 +49,11 @@ class QuestionForm extends React.Component {
 
   onCloseForm() {
     if (this.state.showForm === true) {
-      console.log('clciked')
+      console.log('clciked');
       this.setState({
         showForm: false,
       });
     }
-
   }
 
   addQuestion() {
@@ -77,7 +76,7 @@ class QuestionForm extends React.Component {
             name: '',
             email: '',
             photos: []
-          })
+          });
           alert('Question Posted');
           console.log('addquestion success');
         },
@@ -94,6 +93,7 @@ class QuestionForm extends React.Component {
     const name = this.state.name;
     const body = this.state.body;
     const email= this.state.email;
+
     let validForm = true;
 
     if (!name) {
@@ -114,41 +114,63 @@ class QuestionForm extends React.Component {
 
   showForm() {
     return (
-      <div className="form-box">
+      <div className="qboxcenter">
         <form>
-        <h1>Ask Your Question</h1>
-          <label>
-            Enter UserName*
-            <input value={this.state.name}
+          <button type="submit" className='X' onClick={this.onCloseForm}>X</button>
+          <h1>Ask Your Question</h1>
+
+          <label className="field field_v1">
+            <input
+              value={this.state.name}
+              className="field__input"
               onChange={this.onChangeName}
               type="text"
               name="name"
-              placeholder="Example: jackson11!**"
+              placeholder="Example: Isaac123!**"
             />
+            <span class="field__label-wrap">
+              <span class="field__label">Enter UserName*</span>
+            </span>
           </label>
 
-          <label>
-            Enter Email*
-            <input value={this.state.email}
+          < br/>
+
+          <label className="field field_v1">
+            <input
+              value={this.state.email}
+              className="field__input"
               onChange={this.onChangeEmail}
               name="email"
               type="text"
               placeholder="Why did you like the product or not**"
               pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/"
-              required
             />
+
+            <span class="field__label-wrap">
+              <span class="field__label">Enter Email*</span>
+            </span>
+
           </label>
 
-          <label>
-            Enter Question Here*
-            <textarea value={this.state.body}
-              cols="30"
+          < br/>
+
+          <label className="field field_v1">
+            <textarea
+              value={this.state.body}
               rows="10"
+              className="field__input"
               onChange={this.onChangeBody}
               name="body"
               placeholder="Type your Message**"
             />
+
+            <span class="field__label-wrap">
+              <span class="field__label"> Enter Question Here*</span>
+            </span>
           </label>
+
+          < br/>
+
           <input
             type="submit"
             onClick={this.addQuestion}

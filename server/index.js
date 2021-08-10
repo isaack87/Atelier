@@ -34,8 +34,6 @@ app.get('/answer', (req, res) => {
   res.send('done');
 });
 
-
-
 app.get('/ahelpful', (req, res) => {
   res.send('')
 });
@@ -47,7 +45,6 @@ app.post('/ahelpful', (req, res) => {
     res.send('answerhelp post success');
   });
 });
-
 
 app.get('/qhelpful', (req, res) => {
   const pid = req.query.qid;
@@ -86,6 +83,27 @@ app.post('/addQuestion', (req, res) => {
   isaacAPI.postquestionAPI(req.body);
   res.send('question post success');
 });
+
+app.get('/uploadphoto', (req, res) => {
+  res.send('answer post success');
+});
+
+app.post('/uploadphoto', (req, res) => {
+  // console.log(req.body, '🙂');
+  isaacAPI.postquestionAPI(req.body);
+  res.send('question post success');
+});
+
+
+
+
+
+
+
+
+
+
+
 
 app.get('/productdetails', (req, res) => {
   res.send('success');

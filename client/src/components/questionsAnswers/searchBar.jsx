@@ -20,27 +20,28 @@ class SearchBar extends React.Component {
 
   search(e) {
     e.preventDefault();
-    let searchTerm = this.state.searchTerm
+    let searchTerm = this.state.searchTerm;
     this.props.onSearch(searchTerm);
+
   }
 
   render() {
     return (
       <div className="cell">
-      <div className="searchbar">
-        <form>
-          <p className="searchbartitle ">QUESTIONS & ANSWERS
-          <br />
-          <input
-            onChange={this.onChange}
-            className="searchfield search parent defaultfont"
-            placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS ..."
-          />
-          </p>
-        </form>
-      </div>
-      <div>
-      </div>
+        <div className="searchbar">
+          <form>
+            <p className="searchbartitle">QUESTIONS & ANSWERS
+              <br />
+              <input
+                onChange={this.onChange}
+                className="searchfield search parent largefont"
+                placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS ..."
+              />
+            </p>
+          </form>
+        </div>
+        <div>
+        </div>
       </div>
     );
   }

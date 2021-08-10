@@ -92,6 +92,7 @@ const postquestionAPI = (data) => {
     email: data.email,
     product_id: data.product_id,
   };
+  console.log([params, '🤙'])
 
   axios.post(`${apiURL}qa/questions`, params, {
     headers: {
