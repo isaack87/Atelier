@@ -6,7 +6,7 @@ class HelpfulAnswerCount extends React.Component {
     super(props);
     this.state = {
       ahelpid: props.id,
-      pid: props.mainProductId,
+      pid: props.pid,
       ahelpfulcount: props.defaultcounter,
     };
 

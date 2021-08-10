@@ -6,7 +6,7 @@ class HelpfulQuestionCount extends React.Component {
     super(props);
     this.state = {
       qhelpid: props.id,
-      pid: props.mainProductId,
+      pid: props.pid,
       qhelpfulcount: props.defaultcounter,
       questionVoted: false,
     };
