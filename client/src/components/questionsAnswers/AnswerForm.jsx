@@ -1,5 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
+import config from '../../../../config.js'
 
 class AnswerForm extends React.Component {
   constructor(props) {
@@ -12,7 +13,8 @@ class AnswerForm extends React.Component {
       bold: false,
       name: '',
       email: '',
-      photos: [],
+      photo: [],
+      selectedFile: '',
     };
     this.onClick = this.onClick.bind(this);
     this.onChangeBody = this.onChangeBody.bind(this);
@@ -20,7 +22,42 @@ class AnswerForm extends React.Component {
     this.onChangeEmail = this.onChangeEmail.bind(this);
     this.showForm = this.showForm.bind(this);
     this.addAnswer = this.addAnswer.bind(this);
+    this.onCloseForm = this.onCloseForm.bind(this);
+    this.fileSelectorHandler = this.fileSelectorHandler.bind(this);
+    this.fileUploaderHandler = this.fileUploaderHandler.bind(this);
   }
+
+  fileSelectorHandler = (e) => {
+    this.setState({
+      selectedFile: e.target.files[0]
+    })
+  }
+
+  fileUploaderHandler(e){
+    e.preventDefault();
+    var form = new FormData();
+    form.append("image", this.state.selectedFile)
+    var options = {
+      "url": `https://api.imgbb.com/1/upload?key=${config.imgBBTokeb}`,
+      "method": "POST",
+      "timeout": 0,
+      "processData": false,
+      "mimeType": "multipart/form-data",
+      "contentType": false,
+      "data": form
+    };
+
+    $.ajax(options).done((response)  => {
+      var res = JSON.parse(response);
+      if (this.state.photo.length <= 1) {
+        this.setState({
+          photo: [...this.state.photo, res.data.url]
+        })
+      } else {
+        alert('5 photos max')
+      }
+    })
+}
 
   onClick() {
     this.setState({ showForm: true });
@@ -30,6 +67,15 @@ class AnswerForm extends React.Component {
     this.setState({
       body: e.target.value,
     });
+  }
+
+  onCloseForm() {
+    if (this.state.showForm === true) {
+      console.log('clciked');
+      this.setState({
+        showForm: false,
+      });
+    }
   }
 
   onChangeName(e) {
@@ -58,7 +104,7 @@ class AnswerForm extends React.Component {
       body: this.state.body,
       name: this.state.name,
       email: this.state.email,
-      photos: this.state.photos,
+      photos: this.state.photo,
       question_id: this.state.currentQID
     };
 
@@ -72,6 +118,7 @@ class AnswerForm extends React.Component {
           body: '',
           name: '',
           email: '',
+          photos: [],
           showForm: false,
         });
         console.log('add answer success post');
@@ -84,48 +131,83 @@ class AnswerForm extends React.Component {
 
   showForm() {
     return (
-      <div className="box">
+      <div className="aboxcenter">
         <form>
-        <h1>Ask Your Answer <button type="submit" className='X' onClick={this.onClose}>X</button></h1>
-          <label>
-            Enter UserName*
-            <input value={this.state.name}
+          <button type="submit" className='X' onClick={this.onCloseForm}>X</button>
+          <h1 className='answerboxtitle'>Ask Your Answer</h1>
+
+          <label className="field field_v1">
+            <input
+              className="field__input"
+              value={this.state.name}
               onChange={this.onChangeName}
               type="text"
               name="name"
-              placeholder="Example: jackson11!**"
+              placeholder="Example: Isaac123!**"
             />
+            <span className="field__label-wrap">
+              <span className="field__label">Enter UserName*</span>
+            </span>
           </label>
-          <label>
-            Enter Email*
-            <input value={this.state.email}
+
+          < br/>
+
+          <label className="field field_v1">
+            <input
+              className="field__input"
+              value={this.state.email}
               onChange={this.onChangeEmail}
-              name="email"
               type="text"
-              placeholder="Why did you like the product or not**"
+              name="Email"
+              placeholder="Example: isaac123@live.com**"
               pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/"
-              required
             />
+            <span className="field__label-wrap">
+              <span className="field__label">Enter Email Here*</span>
+            </span>
           </label>
-          <label>
-            Enter Answer Here*
-            <textarea value={this.state.body}
-              cols="30"
-              rows="10"
+
+          < br/>
+
+          <label className="field field_v1">
+            <textarea
+              className="field__input"
+              value={this.state.body}
               onChange={this.onChangeBody}
+              type="text"
               name="body"
-              placeholder="Type your Message**"
+              cols="50"
+              rows="50"
+              placeholder="Example: Is this pretty!**"
             />
+            <span className="field__label-wrap">
+              <span className="field__label center"> Enter Answer Here*</span>
+            </span>
           </label>
-          <input
+
+          < br/>
+
+          <input className='answerbutton upload'
             type="submit"
             onClick={this.addAnswer}
             value="Post Answer"
           />
+
+          <div className="upload">
+          <div className="App">
+            <label> Max up to 5 Photos**</label>
+            < br/>
+            <input type="file" onChange={this.fileSelectorHandler} accept="image/*" />
+            <button onClick={this.fileUploaderHandler}> Upload Photo</button>
+          </div>
+          </div>
+
+
         </form>
       </div>
     );
   }
+
 
   render() {
     const { showForm } = this.state;
