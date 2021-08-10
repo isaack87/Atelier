@@ -26,11 +26,32 @@ class QuestionsAnswersState extends React.Component {
     this.loadMoreAnswers = this.loadMoreAnswers.bind(this);
     this.loadMoreQuestions = this.loadMoreQuestions.bind(this);
     this.getQuestionAnswerList = this.getQuestionAnswerList.bind(this);
-    this.search = this.search.bind(this)
+    this.buttonIntialLoader = this.buttonIntialLoader.bind(this);
+    this.search = this.search.bind(this);
   }
 
   componentDidMount() {
     this.getQuestionsApi();
+    this.buttonIntialLoader();
+  }
+
+  // function checks to see if any questions or answers are present on intial load
+  buttonIntialLoader() {
+    // no questions more question button does not appear
+    if (this.state.questionanswerslist.length === 0) {
+      this.setState({
+        btnvisibleq: false,
+      });
+    }
+
+    // no answers then no load more answer button appears
+    if (this.state.questionanswerslist.map(e => {
+      e.answers.length === 0;
+    })) {
+      this.setState({
+        btnvisible: false,
+      });
+    }
   }
 
   getQuestionsApi() {
