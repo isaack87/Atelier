@@ -1,7 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
-import MainAnswerQuestionBox from './MainAnswerQuestionBox.jsx'
-import SearchBar from './searchBar.jsx'
+import MainAnswerQuestionBox from './MainAnswerQuestionBox.jsx';
+import SearchBar from './searchBar.jsx';
 
 const fetch = require('node-fetch');
 
@@ -26,7 +26,7 @@ class QuestionsAnswersState extends React.Component {
     this.loadMoreAnswers = this.loadMoreAnswers.bind(this);
     this.loadMoreQuestions = this.loadMoreQuestions.bind(this);
     this.getQuestionAnswerList = this.getQuestionAnswerList.bind(this);
-    this.search = this.search.bind(this)
+    this.search = this.search.bind(this);
   }
 
   componentDidMount() {
@@ -37,11 +37,13 @@ class QuestionsAnswersState extends React.Component {
     fetch(`http://localhost:3000/questions?qid=${this.state.productId}`)
       .then((response) => response.json())
       .then((questions) => {
+        // more than 2 questions, load more question button will not appear
         if (questions.results.length > 2) {
           this.setState({
             btnvisibleq: true,
           });
-        } else if (questions.results.length === this.state.questionsList) {
+        // less than 2 questions, load more question button will not appear
+        } else if (questions.results.length < 2) {
           this.setState({
             btnvisibleq: false,
             btnvisible: false,
@@ -59,7 +61,7 @@ class QuestionsAnswersState extends React.Component {
   }
 
   getQuestionAnswerList() {
-    const list = this.state.questionsList
+    const list = this.state.questionsList;
     const newObj = [];
     list.map(e => {
 
@@ -79,8 +81,8 @@ class QuestionsAnswersState extends React.Component {
     this.setState({
       questionanswerslist: newObj
     }, () => {
-      const list = this.state.questionanswerslist
-      const term = this.state.searchTerm
+      const list = this.state.questionanswerslist;
+      const term = this.state.searchTerm;
       list.map((e, index) => {
         if (e.question.toLowerCase().includes(term.toLowerCase()) && term.length >= 3 ) {
           this.setState({
@@ -91,6 +93,7 @@ class QuestionsAnswersState extends React.Component {
     });
   }
 
+  //Function sends main app current productID to server
   sendProductIdToServer() {
     const productID = { pid: this.state.productId };
     $.ajax({
@@ -108,7 +111,16 @@ class QuestionsAnswersState extends React.Component {
   }
 
   loadMoreAnswers() {
-    if ((this.state.visibleAnswers >= this.state.questionanswerslist.length) || (this.state.questionanswerslist.length === 0)) {
+    //Sorts the answer array of all questions to get max length
+    const answersArray = this.state.questionanswerslist.map(e => {
+      return e.answers.length;
+    });
+    const sorted = answersArray.sort(function(a,b) {
+      return b - a;
+    });
+
+    //Check if any more answers left if not load answers button disappears
+    if ((this.state.visibleAnswers >= sorted[0]) || (answersArray.length === 0)) {
       this.setState({
         btnvisible: false,
       });
@@ -116,22 +128,27 @@ class QuestionsAnswersState extends React.Component {
     this.setState((prev) => ({ visibleAnswers: prev.visibleAnswers + 2 }));
   }
 
+
   loadMoreQuestions() {
+    // checks to see question displayed length is equal or greater than list of questions
     if (this.state.visibleQuestions > this.state.questionanswerslist.length) {
+      // if there no more questions make more question button disappear
       this.setState({
         btnvisibleq: false,
       });
     } else {
-      this.setState((prev) => ({ visibleQuestions: prev.visibleQuestions + 2, visibleAnswers: 2 }));
+      this.setState((prev) => ({ visibleQuestions: prev.visibleQuestions + 2 }));
       this.getQuestionsApi();
     }
   }
 
   search(term) {
+    //sets search term as variable
     let searchTerm = term;
     this.setState({
       searchTerm: searchTerm
     });
+    // check if at least 3 charactor type before searching questions/keywords match
     if (searchTerm.length >= 3) {
       this.setState({
         questionanswerslist: this.getQuestionsApi(),
@@ -139,7 +156,7 @@ class QuestionsAnswersState extends React.Component {
         visibleAnswers: 2
       });
     }
-    this.getQuestionsApi()
+    this.getQuestionsApi();
     this.getQuestionAnswerList();
   }
 
@@ -148,8 +165,8 @@ class QuestionsAnswersState extends React.Component {
       <div>
         <div className="search">
           <SearchBar onSearch={this.search} />
-          </div>
-          <div className="q-a-box">
+        </div>
+        <div className="q-a-box">
           <MainAnswerQuestionBox
             questionsList={this.state.questionsList}
             answersList={this.state.answersList}
@@ -166,9 +183,8 @@ class QuestionsAnswersState extends React.Component {
             questionanswerslist={this.state.questionanswerslist}
           />
         </div>
-    </div>
+      </div>
     );
   }
 }
-
 export default QuestionsAnswersState;
