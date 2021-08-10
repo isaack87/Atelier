@@ -43,15 +43,14 @@ class QuestionsAnswersState extends React.Component {
         btnvisibleq: false,
       });
     }
-
     // no answers then no load more answer button appears
-    if (this.state.questionanswerslist.map(e => {
-      e.answers.length === 0;
-    })) {
-      this.setState({
-        btnvisible: false,
-      });
-    }
+    this.state.questionanswerslist.map(e => {
+      if (e.answers.length === 0) {
+        this.setState({
+          btnvisible: false,
+        });
+      }
+    });
   }
 
   getQuestionsApi() {
@@ -160,7 +159,7 @@ class QuestionsAnswersState extends React.Component {
         visibleAnswers: 2
       });
     }
-    this.getQuestionsApi()
+    this.getQuestionsApi();
     this.getQuestionAnswerList();
   }
 
@@ -169,8 +168,8 @@ class QuestionsAnswersState extends React.Component {
       <div>
         <div className="search">
           <SearchBar onSearch={this.search} />
-          </div>
-          <div className="q-a-box">
+        </div>
+        <div className="q-a-box">
           <MainAnswerQuestionBox
             questionsList={this.state.questionsList}
             answersList={this.state.answersList}
@@ -187,7 +186,7 @@ class QuestionsAnswersState extends React.Component {
             questionanswerslist={this.state.questionanswerslist}
           />
         </div>
-    </div>
+      </div>
     );
   }
 }

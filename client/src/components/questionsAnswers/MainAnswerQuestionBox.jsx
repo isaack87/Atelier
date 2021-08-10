@@ -16,7 +16,7 @@ const MainAnswerQuestionBox = (props) => {
             <b>
               Q:  {data.question}
             </b>
-          <p className="questionuserbar qbarspacing">
+          <p className="questionuserbar qbarspacing defaultfont">
             <HelpfulQuestionCount
             mainProductId={props.mainProductId}
               id={data.qID}
