@@ -102,7 +102,7 @@ class QuestionsAnswersState extends React.Component {
       contentType: 'application/json',
       data: JSON.stringify(productID),
       success: () => {
-        console.log(`pID sent success`);
+        console.log('pID sent success');
       },
       error: () => {
         console.log('err sendProductIdToServer');

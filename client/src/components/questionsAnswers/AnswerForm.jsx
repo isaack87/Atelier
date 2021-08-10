@@ -27,13 +27,13 @@ class AnswerForm extends React.Component {
     this.fileUploaderHandler = this.fileUploaderHandler.bind(this);
   }
 
-  fileSelectorHandler = (e) => {
+  fileSelectorHandler (e) {
     this.setState({
       selectedFile: e.target.files[0]
     })
   }
 
-  fileUploaderHandler(e){
+  fileUploaderHandler(e) {
     e.preventDefault();
     var form = new FormData();
     form.append("image", this.state.selectedFile)
@@ -52,12 +52,12 @@ class AnswerForm extends React.Component {
       if (this.state.photo.length <= 5) {
         this.setState({
           photo: [...this.state.photo, res.data.url]
-        })
+        });
       } else {
-        alert('5 photos max')
+        alert('5 photos max');
       }
-    })
-}
+    });
+  }
 
   onClick() {
     this.setState({ showForm: true });
@@ -194,20 +194,24 @@ class AnswerForm extends React.Component {
           />
 
           <div className="upload">
-          <div className="App">
-            <label> Max up to 5 Photos**</label>
-            < br/>
-            <input type="file" onChange={this.fileSelectorHandler} accept="image/*" />
-            <button onClick={this.fileUploaderHandler}> Upload Photo</button>
-          </div>
-          </div>
+            <div className="">
+              <input type="file" onChange={this.fileSelectorHandler} accept="image/*" />
+              <button onClick={this.fileUploaderHandler}> Upload Photo</button>
+              < br/>
 
-
+              {this.state.photo.map((photo, index) => {
+                return (
+                  <div className='uploadimg img-spacing' key={index}>
+                    <img src={photo} className='uploadimg' />
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </form>
       </div>
     );
   }
-
 
   render() {
     const { showForm } = this.state;
