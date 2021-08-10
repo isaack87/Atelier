@@ -49,7 +49,7 @@ class AnswerForm extends React.Component {
 
     $.ajax(options).done((response)  => {
       var res = JSON.parse(response);
-      if (this.state.photo.length <= 1) {
+      if (this.state.photo.length <= 5) {
         this.setState({
           photo: [...this.state.photo, res.data.url]
         })
