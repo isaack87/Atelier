@@ -16,12 +16,12 @@ const MainAnswerQuestionBox = (props) => {
             <div className="questions">
               <b>
 
-              <p className={data.answers[0] ? 'questions' : 'questions'}> Q:  {data.question} </p>
+                <p className={data.answers[0] ? 'questions' : 'questions'}> Q:  {data.question} </p>
               </b>
             </div>
             <p className="questionuserbar qbarspacing">
               <HelpfulQuestionCount
-                mainProductId={props.mainProductId}
+                pid={props.productId}
                 id={data.qID}
                 defaultcounter={data.questionHelpful}
               />
@@ -48,7 +48,7 @@ const MainAnswerQuestionBox = (props) => {
                     <Moment format="MMMM-DD-YYYY" date={answerlist.date} />
                     <HelpfulAnswerCount
                       id={answerlist.id}
-                      mainProductId={props.mainProductId}
+                      pid={props.productId}
                       defaultcounter={answerlist.helpfulness}
                     />
                     <AnswerReport aID={answerlist.id} />
