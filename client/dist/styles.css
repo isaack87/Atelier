@@ -851,3 +851,29 @@ label {
   height: 50%;
   margin: -7%;
 }
+
+.clickedMarker {
+  box-shadow: 0 0 12px purple;
+}
+
+.salePrice {
+  color: red;
+  font-weight: bold;
+}
+
+.checkMark {
+  --borderWidth: 7px;
+  --height: 12px;
+  --width: 6px;
+  --borderColor: #78b13f;
+
+  transform: rotate(45deg);
+  height: var(--height);
+  width: var(--width);
+  border-bottom: var(--borderWidth) solid var(--borderColor);
+  border-right: var(--borderWidth) solid var(--borderColor);
+
+  position: relative;
+  left: 65%;
+  top: -80%;
+}
