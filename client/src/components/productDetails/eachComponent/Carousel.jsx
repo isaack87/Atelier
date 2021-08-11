@@ -9,16 +9,8 @@ class Carousel extends React.Component {
     };
     this.nextSlide = this.nextSlide.bind(this);
     this.prevSlide = this.prevSlide.bind(this);
-    this.addFirstMarket = this.addFirstMarket.bind(this);
   }
 
-  componentDidMount() {
-    this.addFirstMarket();
-  }
-
-  addFirstMarket() {
-    // document.getElementsByClassName('150108843').classList.add('clickedMarker');
-  }
   nextSlide() {
     const length = this.props.fullSizePhotos.length;
     let placeholder = this.state.current + 1;

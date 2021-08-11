@@ -35,7 +35,7 @@ class ProductOverview extends React.Component {
     this.renderQuantity = this.renderQuantity.bind(this);
   }
 
-  componentDidMount() {
+  componentDidUpdate() {
     this.getDataFromProductId(this.props.productId);
   }
 
