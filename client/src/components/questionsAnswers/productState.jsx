@@ -6,9 +6,11 @@ export const ProductMainStateProvider = (props) => {
   const productId = useState(props.productId);
 
   return (
-    <ProductStateContext.Provider
-      value={{ productId }}>
-      {props.children}
-    </ProductStateContext.Provider>
-  );
-};
+
+  <ProductStateContext.Provider
+  value={{ productId }}>
+
+    {props.children}
+  </ProductStateContext.Provider>
+  )
+

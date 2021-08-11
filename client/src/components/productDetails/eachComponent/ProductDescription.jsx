@@ -5,7 +5,7 @@ class ProductDescription extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-    }
+    };
   }
 
   render() {
@@ -17,10 +17,10 @@ class ProductDescription extends React.Component {
         </div>
         <div className='descriptionChild2'>
           <ul className="removeBullets">
-            {this.props.features.map((item, index) => (
-            <li key={index}>
+            {this.props.productInfo.features.map((item, index) => (
+              <li key={index}>
               ✓ {item.feature} - {item.value}
-            </li>))}
+              </li>))}
           </ul>
         </div>
       </div>
