@@ -4,6 +4,7 @@ import moment from 'moment';
  import Images from './images.jsx';
  import Stars from './stars.jsx';
  import helpers from './ReviewsHelperFunc.jsx';
+ import RatingsBreakdown from './ratingsBreakdown.jsx';
 
 class Reviews extends React.Component {
     constructor(props) {
@@ -25,7 +26,10 @@ class Reviews extends React.Component {
     }
     //function to handle getting the reviews for the given product id
      getReviews(sort = 'relevant') {
-         const productID = this.props.props.productId;
+           //const productID = this.props.props.productId;
+           //uncomment below for testing purpose only
+           const productID = 28221;
+
           axios({
             method: 'post',
             url: 'http://localhost:3000/reviews',
@@ -64,7 +68,6 @@ class Reviews extends React.Component {
     renderReviews() {
         let reviews = this.state.allReviews;
         let innerDiv = this.state.reviewsShownSoFar;
-        console.log('all reviews inside renderreviews', reviews, 'inner dive', innerDiv )
         if (reviews.length) {
             //helper func to generate 1 review
         let generateReview = review => {
@@ -150,9 +153,12 @@ class Reviews extends React.Component {
         return (
             <div id = 'reviews'>
                 <h1>reviews module</h1>
+                 <RatingsBreakdown/> 
+                 <div id='reviews-scrollable'>
                 {this.state.reviewDropdownSortDiv}
                <div id='reviewsList'> {this.state.reviewsDiv}</div>
                 {this.state.moreReviewsButton}
+                </div>
            
             </div>
         )

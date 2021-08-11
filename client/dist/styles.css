@@ -48,6 +48,16 @@
 }
 #reviews {
   width: 100%;
+
+}
+#ratings-breakdown {
+  
+  margin-right: 10em;
+float: left;
+}
+#reviews-scrollable {
+  width: 60%;
+  float: right;
 }
 #review-heading {
   display: inline;
