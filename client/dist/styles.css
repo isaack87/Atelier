@@ -152,7 +152,7 @@
 .QABOX {
   display: flex;
   margin-top: -2.5em;
-  margin-left: 14em;
+  margin-left: 19em;
 }
 
 
@@ -174,10 +174,9 @@
 /*               */
 .searchfield {
   display: flex;
-  width: 90em;
+  width: 75em;
   outline: black;
   border-radius: 5px;
-
 }
 .parent {
   display: flex;
@@ -189,7 +188,6 @@
   flex-direction: column;
 }
 .searchbar {
-  width: 60em;
   display: flex;
   padding: .5em;
   align-items: center;
