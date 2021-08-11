@@ -6,15 +6,27 @@ import QuestionsAnswersState from './components/questionsAnswers/QuestionAnswerS
 import ProductOverview from './components/productDetails/OverviewMain.jsx';
 import { ProductMainStateProvider } from './components/questionsAnswers/productState.jsx';
 
+import TopSearchBar from './components/TopSearchBar.jsx';
+
+
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productId: 28212,
+
+      productId: 28299,
+
       user: '',
       stars: '',
       reportedArray: [],
     };
+    this.search = this.search.bind(this);
+  }
+
+  search(term) {
+    this.setState({
+      productId: term
+    });
   }
 
   random(cb) {
@@ -30,6 +42,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App-container">
+
         <h1>FEC PROJECT</h1>
         <div className='navigationBar'>
           <ul className='navigation navigation1'>
@@ -43,8 +56,11 @@ class App extends React.Component {
           <p><i>SIDE-WIDE ANNOUNCEMENT MESSAGE!</i> - SALE / DISCOUNT <b>OFFER</b> - <u>NEW PRODUCT HIGHLIGHT</u></p>
         </div>
 
+
+
         <ProductMainStateProvider productId ={this.state.productId}>
-          <ProductOverview productId={this.state.productId} random={this.random.bind(this)}/>
+          <TopSearchBar onSearch={this.search}/>
+          <ProductOverview productId={this.state.productId} />
           <QuestionsAnswersState productId={this.state.productId} />
           <Reviews props={this.state} />
         </ProductMainStateProvider>

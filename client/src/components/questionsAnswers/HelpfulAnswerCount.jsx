@@ -6,8 +6,9 @@ class HelpfulAnswerCount extends React.Component {
     super(props);
     this.state = {
       ahelpid: props.id,
-      pid: props.mainProductId,
+      pid: props.pid,
       ahelpfulcount: props.defaultcounter,
+      answerVoted: false,
     };
 
     this.helpfulAincrementer = this.helpfulAincrementer.bind(this);
@@ -17,24 +18,27 @@ class HelpfulAnswerCount extends React.Component {
   increasecounter() {
     this.setState({
       ahelpfulcount: this.state.ahelpfulcount + 1,
+      answerVoted: true,
     });
   }
 
   helpfulAincrementer() {
-    $.ajax({
-      method: 'POST',
-      url: `http://localhost:3000/ahelpful`,
-      contentType: 'application/json',
-      data: JSON.stringify({ ahelpid: this.state.ahelpid }),
-      success: () => {
-        this.increasecounter();
-        console.log('helpfulAincrementer++');
-      },
-      error: () => {
-        console.log('err helpfulAnswerAjax');
-      },
-    });
-  };
+    if (!this.state.answerVoted) {
+      $.ajax({
+        method: 'POST',
+        url: 'http://localhost:3000/ahelpful',
+        contentType: 'application/json',
+        data: JSON.stringify({ ahelpid: this.state.ahelpid }),
+        success: () => {
+          this.increasecounter();
+          console.log('helpfulAincrementer++');
+        },
+        error: () => {
+          console.log('err helpfulAnswerAjax');
+        },
+      });
+    }
+  }
 
   render() {
     return (
@@ -44,7 +48,7 @@ class HelpfulAnswerCount extends React.Component {
         ({this.state.ahelpfulcount})
       </div>
     );
-  };
+  }
 }
 
 export default HelpfulAnswerCount;

@@ -132,9 +132,7 @@ class QuestionForm extends React.Component {
               <span class="field__label">Enter UserName*</span>
             </span>
           </label>
-
           < br/>
-
           <label className="field field_v1">
             <input
               value={this.state.email}
@@ -145,15 +143,11 @@ class QuestionForm extends React.Component {
               placeholder="Why did you like the product or not**"
               pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/"
             />
-
             <span class="field__label-wrap">
               <span class="field__label">Enter Email*</span>
             </span>
-
           </label>
-
           < br/>
-
           <label className="field field_v1">
             <textarea
               value={this.state.body}
@@ -163,14 +157,11 @@ class QuestionForm extends React.Component {
               name="body"
               placeholder="Type your Message**"
             />
-
             <span class="field__label-wrap">
               <span class="field__label"> Enter Question Here*</span>
             </span>
           </label>
-
           < br/>
-
           <input
             type="submit"
             onClick={this.addQuestion}

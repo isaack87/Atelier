@@ -64,18 +64,31 @@ class QuestionsAnswersState extends React.Component {
     const list = this.state.questionsList;
     const newObj = [];
     list.map(e => {
+      let answersList = Object.values(e.answers);
+      let sortedAnswersByHelpfulCount = [];
 
-      // //helpful countsort broken!
-      // let sorted = Object.values(e.answers)
-      // sorted.map(e => {
-      //   return e.answers.sort((a, b) => (a.helpfulness > b.helpfulness) ? 1 : -1)
-      // })
-
+      //create new answer list to be sorted
+      answersList.map(e => {
+        sortedAnswersByHelpfulCount.push({
+          answerername: e.answerer_name,
+          body: e.body,
+          date: e.date,
+          helpfulness: e.helpfulness,
+          id: e.id,
+          photos: e.photos
+        });
+        // sorting answer list by helpful counter
+        sortedAnswersByHelpfulCount.sort(function(a,b) {
+          return b.helpfulness - a.helpfulness;
+        });
+        return sortedAnswersByHelpfulCount;
+      });
+      // setting the current react state with sorted answers list
       newObj.push({
         qID: e.question_id,
         question: e.question_body,
         questionHelpful: e.question_helpfulness,
-        answers: Object.values(e.answers)
+        answers: sortedAnswersByHelpfulCount
       });
     });
     this.setState({
@@ -83,6 +96,7 @@ class QuestionsAnswersState extends React.Component {
     }, () => {
       const list = this.state.questionanswerslist;
       const term = this.state.searchTerm;
+      // Checks searched term and filters list to show only searched questions if 3 charactors are entered
       list.map((e, index) => {
         if (e.question.toLowerCase().includes(term.toLowerCase()) && term.length >= 3 ) {
           this.setState({
@@ -102,7 +116,7 @@ class QuestionsAnswersState extends React.Component {
       contentType: 'application/json',
       data: JSON.stringify(productID),
       success: () => {
-        console.log(`pID sent success`);
+        console.log('pID sent success');
       },
       error: () => {
         console.log('err sendProductIdToServer');
