@@ -155,6 +155,23 @@
   margin-left: 14em;
 }
 
+
+/*               */
+/* TOP SEACH BAR */
+/*               */
+.topbartitle {
+  display: flex;
+  margin-left: -1.7em;
+}
+.topsearchbar {
+  margin-right: 1em;
+  margin-top: 1.3em;
+  width: 15em;
+}
+
+/*               */
+/* Q SEACH BAR   */
+/*               */
 .searchfield {
   display: flex;
   width: 90em;
