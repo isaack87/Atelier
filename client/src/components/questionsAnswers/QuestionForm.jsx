@@ -11,8 +11,6 @@ class QuestionForm extends React.Component {
       name: '',
       email: '',
       photos: [],
-      fields: {},
-      formError: {}
     };
 
     this.onOpenForm = this.onOpenForm.bind(this);
@@ -49,14 +47,35 @@ class QuestionForm extends React.Component {
 
   onCloseForm() {
     if (this.state.showForm === true) {
-      console.log('clciked');
+      console.log('clicked');
       this.setState({
         showForm: false,
       });
     }
   }
 
+  formValidation() {
+    const name = this.state.name;
+    const body = this.state.body;
+    const email= this.state.email;
+    let validForm = true;
+    if (!name) {
+      validForm = false;
+    }
+    if (!body) {
+      validForm = false;
+    }
+    if (name === 'undefined') {
+      if (!name.match(/^[a-zA-Z0-9]+$/)) {
+        validForm = false;
+      }
+    }
+    console.log(validForm, '💬')
+  return validForm
+  }
+
   addQuestion() {
+
     if (this.formValidation()) {
       const info = {
         body: this.state.body,
@@ -81,39 +100,30 @@ class QuestionForm extends React.Component {
           console.log('addquestion success');
         },
         error: () => {
+          alert('incorret email format');
           console.log('error in addQuestion');
         },
       });
     } else {
-      alert('form invalid');
+      alert('NOT VALID FORM')
     }
-  }
-
-  formValidation() {
-    const name = this.state.name;
-    const body = this.state.body;
-    const email= this.state.email;
-
-    let validForm = true;
-
-    if (!name) {
-      validForm = false;
-    }
-
-    if (!body) {
-      validForm = false;
-    }
-
-    if (typeof name !== 'undefined') {
-      if (!name.match(/^[a-zA-Z0-9]+$/)) {
-        validForm = false;
-      }
-    }
-    return validForm;
   }
 
   showForm() {
+
+    const divStyle = {
+      margin: '0px',
+      height: '119px',
+      width: '279px',
+      fontSize: '1em'
+    };
+    const text = {
+      fontSize: '1em'
+
+    }
+
     return (
+      <div className="qformcontainer">
       <div className="qboxcenter">
         <form>
           <button type="submit" className='X' onClick={this.onCloseForm}>X</button>
@@ -125,13 +135,20 @@ class QuestionForm extends React.Component {
               className="field__input"
               onChange={this.onChangeName}
               type="text"
+              maxLength="60"
               name="name"
-              placeholder="Example: Isaac123!**"
+              placeholder="Example: jackson11!**"
             />
             <span class="field__label-wrap">
               <span class="field__label">Enter UserName*</span>
             </span>
           </label>
+          < br/>
+
+          < br/>
+          <label style={text}> For privacy reasons, do not use your full name or email address**</label>
+          < br/>
+
           < br/>
           <label className="field field_v1">
             <input
@@ -140,14 +157,21 @@ class QuestionForm extends React.Component {
               onChange={this.onChangeEmail}
               name="email"
               type="text"
+              maxLength="60"
               placeholder="Why did you like the product or not**"
-              pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/"
+
             />
             <span class="field__label-wrap">
               <span class="field__label">Enter Email*</span>
             </span>
           </label>
           < br/>
+
+          < br/>
+          <label style={text}> For authentication reason, you will not be emailed** </label>
+          < br/>
+
+          <br />
           <label className="field field_v1">
             <textarea
               value={this.state.body}
@@ -156,6 +180,7 @@ class QuestionForm extends React.Component {
               onChange={this.onChangeBody}
               name="body"
               placeholder="Type your Message**"
+              style={divStyle}
             />
             <span class="field__label-wrap">
               <span class="field__label"> Enter Question Here*</span>
@@ -163,12 +188,14 @@ class QuestionForm extends React.Component {
           </label>
           < br/>
           <input
+            className='Qsubmit'
             type="submit"
             onClick={this.addQuestion}
             value="Post Question"
           />
         </form>
       </div>
+    </div>
     );
   }
 
