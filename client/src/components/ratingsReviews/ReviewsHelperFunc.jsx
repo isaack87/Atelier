@@ -117,35 +117,34 @@ const helpers = {
         //now create five star bar
         const displayFive = Math.abs(((fiveStar.length-1)/(reviewsArray.length - 1)*100)).toFixed(0);
         const displayFour = Math.abs(((fourStar.length-1)/(reviewsArray.length - 1)*100)).toFixed(0);
-        const fiveStarBar = <div>
-           <span id ='bar-type'>5 Stars</span>
-           <div id = 'bar'>
-           <div class="w3-light-grey">
-                <div className='w3-grey' style={{height:"1em", width:`${displayFive + "%"}`}}>
-                </div>
-            </div>
-           </div>
-        </div>
+        const allReviewsDiv = [];
+        allReviewsDiv.push(helpers.getBar(fiveStar, reviewsArray.length, '5'), helpers.getBar(fourStar, reviewsArray.length, '4'),
+        helpers.getBar(threeStar, reviewsArray.length, '3'), helpers.getBar(twoStar, reviewsArray.length, '2'), 
+        helpers.getBar(oneStar, reviewsArray.length, '1') )
        
       
-        let example = <div class="w3-light-grey">
-        <div class="w3-grey" style={{height:"3em",width:"25%"}}></div>
-      </div>;
-       return <div>{helpers.getBar(fiveStar,reviewsArray.length - 1, '5')} </div>;
+        
+       return <div>{allReviewsDiv} </div>;
 
     },
     getBar: (starArr, totalReviews, starAmount) => {
-        const widthAmount = Math.abs(((starArr.length-1)/(totalReviews)*100)).toFixed(0);
+        const widthAmount = Math.abs(((starArr.length)/(totalReviews)*100)).toFixed(0);
         const returnDiv = 
-<div>
-           <span id ='bar-type'>{starAmount} Stars</span>
-           <div id = 'bar'>
-           <div class="w3-light-grey">
-                <div className='w3-green' style={{height:"1em", width:`${widthAmount + "%"}`}}>
+            <div>
+                <span id ='bar-type'>{starAmount} Stars</span>
+                <div id = 'bar'>
+                    <div class="w3-light-grey">
+                        <div className='w3-green' style={{height:"1em", width:`${widthAmount + "%"}`}}>
+                            
+                        </div>
+                        
+                    </div>
+                    
                 </div>
-            </div>
-           </div>
-        </div>;
+                <span id ='reviews-total-bar'>{starArr.length + 'reviews total'}</span>
+                
+                <br></br>
+            </div>;
         return returnDiv;
     }
 
