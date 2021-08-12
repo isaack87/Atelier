@@ -129,13 +129,17 @@ app.post('/product/styles', (req, res) => {
 
 app.post('/reviews', async (req, res) => {
   let productID = req.body.productID;
-  res.status(200).send(await helenaAPI.getReviewsAPI(productID))
+  let sortKind = req.body.sortKind;
+  res.status(200).send(await helenaAPI.getReviewsAPI(productID, sortKind))
 })
 
 app.post('/postReview', async(req, res) => {
   res.status(200).send(await helenaAPI.postReview(28215));
 })
-
+app.post('/markHelpful', async (req, res)=> {
+  let productID = req.body.productID;
+  res.status(200).send(await helenaAPI.postMarkHelpful(productID))
+})
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
