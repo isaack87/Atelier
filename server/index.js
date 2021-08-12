@@ -119,6 +119,11 @@ app.post('/product/styles', (req, res) => {
   });
 });
 
+app.post('/addToCart', (req, res) => {
+  louisAPI.addItemToCart(parseInt(req.body.sku_id), (data) => {
+    res.sendStatus(200);
+  });
+});
 
 
 

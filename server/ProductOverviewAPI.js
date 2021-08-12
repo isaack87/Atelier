@@ -19,7 +19,24 @@ const getProductIdStyles = (productId, cb) => {
   };
   axios(options)
     .then((data) => {
-        return cb(data);
+      return cb(data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+const addItemToCart = (skuId, cb) => {
+  const params = { sku_id: skuId };
+  const options = {
+    method: 'POST',
+    url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/cart',
+    data: params,
+    headers: { Authorization: config.gitToken },
+  };
+  axios(options)
+    .then((data) => {
+      return cb(data);
     })
     .catch((err) => {
       console.log(err);
@@ -28,9 +45,8 @@ const getProductIdStyles = (productId, cb) => {
 
 
 
-
 module.exports = {
-  getProductDetails, getProductIdStyles,
+  getProductDetails, getProductIdStyles, addItemToCart,
 
 
 

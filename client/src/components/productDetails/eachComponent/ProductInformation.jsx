@@ -9,6 +9,10 @@ class ProductInformation extends React.Component {
     };
   }
 
+  moveToReviews() {
+    document.getElementById('review-dropdown').scrollIntoView();
+
+  }
   render() {
 
     let displayPrice;
@@ -22,9 +26,10 @@ class ProductInformation extends React.Component {
 
     return (
       <div className='productInformation'>
-        <div>
-          ✭ ✭ ✭ ✭ ✭ <u>Read all reviews</u>
+        <div onClick={this.moveToReviews.bind(this)} className='readAllReviews'>
+          ✭ ✭ ✭ ✭ ✭ <u><a >Read all reviews</a></u>
         </div>
+
         <div>{this.props.productInfo.category}</div>
         <div><b>{this.props.productInfo.name}</b></div>
         {displayPrice}
