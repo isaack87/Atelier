@@ -1,6 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
-import config from '../../../../config.js'
+import config from '../../../../config.js';
 
 class AnswerForm extends React.Component {
   constructor(props) {
@@ -15,7 +15,11 @@ class AnswerForm extends React.Component {
       email: '',
       photo: [],
       selectedFile: '',
+      nameValid: true,
+      emailValid: true,
+      bodyValid: true
     };
+
     this.onClick = this.onClick.bind(this);
     this.onChangeBody = this.onChangeBody.bind(this);
     this.onChangeName = this.onChangeName.bind(this);
@@ -25,18 +29,19 @@ class AnswerForm extends React.Component {
     this.onCloseForm = this.onCloseForm.bind(this);
     this.fileSelectorHandler = this.fileSelectorHandler.bind(this);
     this.fileUploaderHandler = this.fileUploaderHandler.bind(this);
+    this.formValidation = this.formValidation.bind(this);
   }
 
   fileSelectorHandler (e) {
     this.setState({
       selectedFile: e.target.files[0]
-    })
+    });
   }
 
   fileUploaderHandler(e) {
     e.preventDefault();
     var form = new FormData();
-    form.append("image", this.state.selectedFile)
+    form.append("image", this.state.selectedFile);
     var options = {
       "url": `https://api.imgbb.com/1/upload?key=${config.imgBBTokeb}`,
       "method": "POST",
@@ -47,7 +52,7 @@ class AnswerForm extends React.Component {
       "data": form
     };
 
-    $.ajax(options).done((response)  => {
+    $.ajax(options).done((response) => {
       var res = JSON.parse(response);
       if (this.state.photo.length <= 5) {
         this.setState({
@@ -97,44 +102,101 @@ class AnswerForm extends React.Component {
     });
   }
 
+  formValidation() {
+    const name = this.state.name;
+    const body = this.state.body;
+    const email = this.state.email;
+
+    let validForm = true;
+
+    if (!name) {
+      validForm = false;
+      this.setState({
+        nameValid: false
+      });
+    }
+
+    if (!body) {
+      validForm = false;
+      this.setState({
+        bodyValid: false
+      });
+    }
+
+    if (!email) {
+      validForm = false;
+      this.setState({
+        emailValid: false
+      });
+    }
+
+    if (name === 'undefined') {
+      if (!name.match(/^[a-zA-Z0-9]+$/)) {
+        validForm = false;
+        this.setState({
+          nameValid: false
+        });
+      }
+    }
+
+    if ( name && body && email) {
+      return validForm;
+    }
+  }
+
   addAnswer(e) {
     e.preventDefault();
 
-    const info = {
-      body: this.state.body,
-      name: this.state.name,
-      email: this.state.email,
-      photos: this.state.photo,
-      question_id: this.state.currentQID
-    };
+    if (this.formValidation()) {
+      const info = {
+        body: this.state.body,
+        name: this.state.name,
+        email: this.state.email,
+        photos: this.state.photo,
+        question_id: this.state.currentQID
+      };
 
-    $.ajax({
-      method: 'POST',
-      url: 'http://localhost:3000/addAnswer',
-      contentType: 'application/json',
-      data: JSON.stringify(info),
-      success: () => {
-        this.setState({
-          body: '',
-          name: '',
-          email: '',
-          photos: [],
-          showForm: false,
-        });
-        console.log('add answer success post');
-      },
-      error: () => {
-        console.log('error in addAnswers');
-      },
-    });
-  }
+      $.ajax({
+        method: 'POST',
+        url: 'http://localhost:3000/addAnswer',
+        contentType: 'application/json',
+        data: JSON.stringify(info),
+        success: () => {
+          this.setState({
+            body: '',
+            name: '',
+            email: '',
+            photos: [],
+            showForm: false,
+          });
+          console.log('add answer success post');
+        },
+        error: () => {
+          console.log('error in addAnswers');
+        },
+      });
+    } else {
+      alert('NOT VALID FORM');
+    }
+    }
+
 
   showForm() {
+    const divStyle = {
+      margin: '0px',
+      height: '200px',
+      width: '279px',
+      fontSize: '1em'
+    };
+    const text = {
+      fontSize: '1em'
+    };
+
     return (
       <div className="aboxcenter">
         <form>
           <button type="submit" className='X' onClick={this.onCloseForm}>X</button>
-          <h1 className='answerboxtitle'>Ask Your Answer</h1>
+          <h1 className='answerboxtitle'>Add Answer</h1>
 
           <label className="field field_v1">
             <input
@@ -143,15 +205,21 @@ class AnswerForm extends React.Component {
               onChange={this.onChangeName}
               type="text"
               name="name"
-              placeholder="Example: Isaac123!**"
+              maxLength="60"
+              placeholder="Example: jack543!**"
             />
             <span className="field__label-wrap">
               <span className="field__label">Enter UserName*</span>
             </span>
           </label>
-
           < br/>
 
+          < br/>
+          <label style={text}> For privacy reasons, do not use your full name or email address**</label>
+          < br/>
+
+
+          < br/>
           <label className="field field_v1">
             <input
               className="field__input"
@@ -159,16 +227,21 @@ class AnswerForm extends React.Component {
               onChange={this.onChangeEmail}
               type="text"
               name="Email"
-              placeholder="Example: isaac123@live.com**"
+              placeholder="Example: jack@gmail.com*"
               pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/"
             />
             <span className="field__label-wrap">
               <span className="field__label">Enter Email Here*</span>
             </span>
           </label>
-
           < br/>
 
+          < br/>
+          <label style={text}> For authentication reasons, you will not be emailed**</label>
+          < br/>
+
+
+          < br/>
           <label className="field field_v1">
             <textarea
               className="field__input"
@@ -178,6 +251,7 @@ class AnswerForm extends React.Component {
               name="body"
               cols="50"
               rows="50"
+              style={divStyle}
               placeholder="Example: Is this pretty!**"
             />
             <span className="field__label-wrap">

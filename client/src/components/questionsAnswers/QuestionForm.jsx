@@ -11,6 +11,9 @@ class QuestionForm extends React.Component {
       name: '',
       email: '',
       photos: [],
+      nameValid: true,
+      emailValid: true,
+      bodyValid: true
     };
 
     this.onOpenForm = this.onOpenForm.bind(this);
@@ -57,25 +60,47 @@ class QuestionForm extends React.Component {
   formValidation() {
     const name = this.state.name;
     const body = this.state.body;
-    const email= this.state.email;
+    const email = this.state.email;
+
     let validForm = true;
+
     if (!name) {
       validForm = false;
+      this.setState({
+        nameValid: false
+      });
     }
+
     if (!body) {
       validForm = false;
+      this.setState({
+        bodyValid: false
+      });
     }
+
+    if (!email) {
+      validForm = false;
+      this.setState({
+        emailValid: false
+      });
+    }
+
     if (name === 'undefined') {
       if (!name.match(/^[a-zA-Z0-9]+$/)) {
         validForm = false;
+        this.setState({
+          nameValid: false
+        });
       }
     }
-    console.log(validForm, '💬')
-  return validForm
+
+    if ( name && body && email) {
+      return validForm;
+    }
   }
 
-  addQuestion() {
-
+  addQuestion(e) {
+    e.preventDefault();
     if (this.formValidation()) {
       const info = {
         body: this.state.body,
@@ -105,7 +130,7 @@ class QuestionForm extends React.Component {
         },
       });
     } else {
-      alert('NOT VALID FORM')
+      alert('NOT VALID FORM');
     }
   }
 
@@ -119,83 +144,82 @@ class QuestionForm extends React.Component {
     };
     const text = {
       fontSize: '1em'
-
-    }
+    };
 
     return (
       <div className="qformcontainer">
-      <div className="qboxcenter">
-        <form>
-          <button type="submit" className='X' onClick={this.onCloseForm}>X</button>
-          <h1>Ask Your Question</h1>
+        <div className="qboxcenter">
+          <form>
+            <button type="submit" className='X' onClick={this.onCloseForm}>X</button>
+            <h1>Ask Your Question</h1>
 
-          <label className="field field_v1">
+            <label className="field field_v1">
+              <input
+                value={this.state.name}
+                className="field__input"
+                onChange={this.onChangeName}
+                type="text"
+                maxLength="60"
+                name="name"
+                placeholder="Example: jackson11!**"
+              />
+              <span class="field__label-wrap">
+                <span class="field__label">Enter UserName*</span>
+              </span>
+            </label>
+            < br/>
+
+            < br/>
+            <label style={text}> For privacy reasons, do not use your full name or email address**</label>
+            < br/>
+
+            < br/>
+            <label className="field field_v1">
+              <input
+                value={this.state.email}
+                className="field__input"
+                onChange={this.onChangeEmail}
+                name="email"
+                type="text"
+                maxLength="60"
+                placeholder="Why did you like the product or not**"
+
+              />
+              <span class="field__label-wrap">
+                <span class="field__label">Enter Email*</span>
+              </span>
+            </label>
+            < br/>
+
+            < br/>
+            <label style={text}> For authentication reason, you will not be emailed** </label>
+            < br/>
+
+            <br />
+            <label className="field field_v1">
+              <textarea
+                value={this.state.body}
+                rows="10"
+                className="field__input"
+                onChange={this.onChangeBody}
+                name="body"
+                placeholder="Type your Message**"
+                style={divStyle}
+              />
+              <span class="field__label-wrap">
+                <span class="field__label"> Enter Question Here*</span>
+              </span>
+            </label>
+            < br/>
             <input
-              value={this.state.name}
-              className="field__input"
-              onChange={this.onChangeName}
-              type="text"
-              maxLength="60"
-              name="name"
-              placeholder="Example: jackson11!**"
+              className='Qsubmit'
+              type="submit"
+              onClick={this.addQuestion}
+              value="Post Question"
             />
-            <span class="field__label-wrap">
-              <span class="field__label">Enter UserName*</span>
-            </span>
-          </label>
-          < br/>
-
-          < br/>
-          <label style={text}> For privacy reasons, do not use your full name or email address**</label>
-          < br/>
-
-          < br/>
-          <label className="field field_v1">
-            <input
-              value={this.state.email}
-              className="field__input"
-              onChange={this.onChangeEmail}
-              name="email"
-              type="text"
-              maxLength="60"
-              placeholder="Why did you like the product or not**"
-
-            />
-            <span class="field__label-wrap">
-              <span class="field__label">Enter Email*</span>
-            </span>
-          </label>
-          < br/>
-
-          < br/>
-          <label style={text}> For authentication reason, you will not be emailed** </label>
-          < br/>
-
-          <br />
-          <label className="field field_v1">
-            <textarea
-              value={this.state.body}
-              rows="10"
-              className="field__input"
-              onChange={this.onChangeBody}
-              name="body"
-              placeholder="Type your Message**"
-              style={divStyle}
-            />
-            <span class="field__label-wrap">
-              <span class="field__label"> Enter Question Here*</span>
-            </span>
-          </label>
-          < br/>
-          <input
-            className='Qsubmit'
-            type="submit"
-            onClick={this.addQuestion}
-            value="Post Question"
-          />
-        </form>
+          </form>
+        </div>
       </div>
-    </div>
     );
   }
 
