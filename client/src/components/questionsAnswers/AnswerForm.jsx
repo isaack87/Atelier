@@ -79,7 +79,7 @@ class AnswerForm extends React.Component {
   }
 
   onChangeName(e) {
-    if (e.target.value === 'Seller') {
+    if (e.target.value.toLowerCase() === 'seller') {
       this.setState({
         name: e.target.value,
         bold: true,

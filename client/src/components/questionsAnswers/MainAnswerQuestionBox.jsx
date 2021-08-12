@@ -42,9 +42,9 @@ const MainAnswerQuestionBox = (props) => {
                     <br />
                   </p>
                   <div className="userinfobox">
-                    { answerlist.answerer_name === 'Seller'
-                      ? <b> {answerlist.answerer_name} </b>
-                      : <normal>{answerlist.answerer_name}</normal> }
+                    { answerlist.answerername.toLowerCase() === 'seller'
+                      ? <b> {answerlist.answerername} </b>
+                      : <normal>{answerlist.answerername}</normal> }
                     <Moment format="MMMM-DD-YYYY" date={answerlist.date} />
                     <HelpfulAnswerCount
                       id={answerlist.id}

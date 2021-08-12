@@ -59,14 +59,29 @@ class QuestionsAnswersState extends React.Component {
   }
 
   getQuestionAnswerList() {
+
     const list = this.state.questionsList;
     const newObj = [];
     list.map(e => {
       let answersList = Object.values(e.answers);
+      let sellerListPriority = []
       let sortedAnswersByHelpfulCount = [];
+      let sellerAndHelpfulCounterSorted =[];
 
       //create new answer list to be sorted
       answersList.map(e => {
+        //if seller add to priority array
+        if (e.answerer_name.toLowerCase() === 'seller') {
+          sellerListPriority.push({
+            answerername: e.answerer_name,
+            body: e.body,
+            date: e.date,
+            helpfulness: e.helpfulness,
+            id: e.id,
+            photos: e.photos
+          });
+        } else {
+        // if not seller push to array
         sortedAnswersByHelpfulCount.push({
           answerername: e.answerer_name,
           body: e.body,
@@ -75,18 +90,21 @@ class QuestionsAnswersState extends React.Component {
           id: e.id,
           photos: e.photos
         });
+      }
         // sorting answer list by helpful counter
         sortedAnswersByHelpfulCount.sort(function(a,b) {
           return b.helpfulness - a.helpfulness;
         });
-        return sortedAnswersByHelpfulCount;
+        //merge seller list with sorted helpful array to get final list
+        sellerAndHelpfulCounterSorted = sellerListPriority.concat(sortedAnswersByHelpfulCount);
+        return sellerAndHelpfulCounterSorted;
       });
       // setting the current react state with sorted answers list
       newObj.push({
         qID: e.question_id,
         question: e.question_body,
         questionHelpful: e.question_helpfulness,
-        answers: sortedAnswersByHelpfulCount
+        answers: sellerAndHelpfulCounterSorted
       });
     });
     this.setState({
