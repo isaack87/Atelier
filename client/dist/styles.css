@@ -59,6 +59,25 @@ float: left;
   width: 60%;
   float: right;
 }
+#reviews-sorted-by-info {
+  display: inline;
+
+} 
+#w3-border {
+  background-color: grey;
+  
+}
+#bar-type {
+  display: inline;
+  float:left;
+}
+#bar {
+  display: inline;
+  float: none;
+  position:relative;
+  left: 7em;
+
+}
 #review-heading {
   display: inline;
 }
