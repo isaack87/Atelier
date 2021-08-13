@@ -19,7 +19,6 @@ class Stars extends React.Component {
     componentDidMount() {
         this.calculateStarDiv();
     }
-
     render () {
         return <div>
             {this.state.star}
