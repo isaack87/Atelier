@@ -13,12 +13,9 @@ const MainAnswerQuestionBox = (props) => {
       <div key={data.qID}>
         <ul>
           <div className="questionbox">
-            <div className="questions">
               <b>
-
-                <p className={data.answers[0] ? 'questions' : 'questions'}> Q:  {data.question} </p>
+                <p className={data.answers[0] ? 'question' : 'question'}> Q:  {data.question} </p>
               </b>
-            </div>
             <p className="questionuserbar qbarspacing">
               <HelpfulQuestionCount
                 pid={props.productId}
@@ -36,7 +33,6 @@ const MainAnswerQuestionBox = (props) => {
             <ul>
               {data.answers.slice(0, props.visibleAnswers).map(answerlist => (
                 <div key={answerlist.id}>
-
                   <p className={answerlist.body[0] ? 'answerbox' : 'answerbox'}> A: {answerlist.body.toString().toLowerCase()}
                     <br />
                     <br />
