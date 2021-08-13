@@ -15,10 +15,15 @@ class App extends React.Component {
       user: '',
       stars: '',
       reportedArray: [],
+      avgRating: 0
     };
     this.search = this.search.bind(this);
+    this.updateAvgRatingForProduct = this.updateAvgRatingForProduct.bind(this);
   }
-
+    //handles updating avg rating for a product
+    updateAvgRatingForProduct(rating){
+      this.setState({avgRating:rating});
+  }
   search(term) {
     this.setState({
       productId: term

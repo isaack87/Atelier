@@ -15,7 +15,8 @@ class Reviews extends React.Component {
             reviewsDiv: [],
             reviewsShownSoFar : [],
             moreReviewsButton: [],
-            reviewDropdownSortDiv: []
+            reviewDropdownSortDiv: [],
+            avgRating: 0,
 
         }
         this.getReviews = this.getReviews.bind(this);
@@ -23,7 +24,9 @@ class Reviews extends React.Component {
         this.postReview = this.postReview.bind(this);
         this.showMoreReviewsButton = this.showMoreReviewsButton.bind(this);
         this.showReviewDropdownSort = this.showReviewDropdownSort.bind(this);
+    
     }
+
     //function to handle getting the reviews for the given product id
      getReviews(sort = 'relevant') {
            const productID = this.props.props.productId;
@@ -149,8 +152,7 @@ class Reviews extends React.Component {
             return (
                 <div id = 'reviews'>
                     <h1>{`Ratings & Reviews`}</h1>
-                     <RatingsBreakdown props = {this.state}/> 
-
+                     <RatingsBreakdown props = {this.state} getAvgRating = {this.updateAvgRatingForProduct}/> 
                      <div id='reviews-scrollable'>
                          <p id='reviews-sorted-by-info'>{this.state.allReviews.length} reviews, sorted by </p>
                     {this.state.reviewDropdownSortDiv}
