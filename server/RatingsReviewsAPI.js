@@ -15,6 +15,9 @@ const getReviewsAPI = (productID, sortKind = 'helpful') => {
       return axios(options)
       .then(response => {
           let sortedArr;
+          if (response.data === undefined) {
+              return;
+          }
         if (sortKind === 'helpful') {
             sortedArr = response.data.results.sort((a,b) => {
                 return a.helpfulness > b.helpfulness;
@@ -29,6 +32,9 @@ const getReviewsAPI = (productID, sortKind = 'helpful') => {
                 return new Date(b.date).getTime() - new Date(a.date).getTime(); 
             });
             let length = sortOne.length;
+            if (sortOne === undefined) {
+                return;
+            }
             //now we run our relevance sort for half the length of the sortOne array. that will push up the helpful reviews, but not all the way up
             for (let i = 0; i < (Math.floor(sortOne.length / 2)); i++) {
                 for (let a = 0; a < length; a+=2) {
@@ -106,11 +112,7 @@ const postMarkHelpful= async (productID) => {
           console.log( err);
         });
 
-
 }
-
-
-
 
 module.exports = {
     getReviewsAPI,
