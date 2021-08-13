@@ -95,7 +95,7 @@ const helpers = {
         return starDiv;
 
     },
-    createStarBar: (reviewsArray) => {
+    createStarBar: (reviewsArray, onClickFuncSortStars) => {
         if (!reviewsArray || reviewsArray.length === 0) {
             return;
         }
@@ -118,7 +118,7 @@ const helpers = {
         const displayFive = Math.abs(((fiveStar.length-1)/(reviewsArray.length - 1)*100)).toFixed(0);
         const displayFour = Math.abs(((fourStar.length-1)/(reviewsArray.length - 1)*100)).toFixed(0);
         const allReviewsDiv = [];
-        allReviewsDiv.push(helpers.getBar(fiveStar, reviewsArray.length, '5'), helpers.getBar(fourStar, reviewsArray.length, '4'),
+        allReviewsDiv.push(helpers.getBar(fiveStar, reviewsArray.length, '5', onClickFuncSortStars), helpers.getBar(fourStar, reviewsArray.length, '4'),
         helpers.getBar(threeStar, reviewsArray.length, '3'), helpers.getBar(twoStar, reviewsArray.length, '2'), 
         helpers.getBar(oneStar, reviewsArray.length, '1') )
        
@@ -127,11 +127,13 @@ const helpers = {
        return <div>{allReviewsDiv} </div>;
 
     },
-    getBar: (starArr, totalReviews, starAmount) => {
+    getBar: (starArr, totalReviews, starAmount, onClickFuncSortStars) => {
         const widthAmount = Math.abs(((starArr.length)/(totalReviews)*100)).toFixed(0);
         const returnDiv = 
             <div>
-                <span id ='bar-type'>{starAmount} Stars</span>
+                <span id ='bar-type' onClick = {() => {
+                    onClickFuncSortStars(starAmount);
+                }}>{starAmount} Stars</span>
                 <div id = 'bar'>
                     <div class="w3-light-grey">
                         <div className='w3-green' style={{height:"1em", width:`${widthAmount + "%"}`}}>

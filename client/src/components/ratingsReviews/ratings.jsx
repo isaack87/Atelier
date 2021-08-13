@@ -15,7 +15,8 @@ class Reviews extends React.Component {
             reviewsDiv: [],
             reviewsShownSoFar : [],
             moreReviewsButton: [],
-            reviewDropdownSortDiv: []
+            reviewDropdownSortDiv: [],
+            showReviewsByStarCountContainer: {}
 
         }
         this.getReviews = this.getReviews.bind(this);
@@ -23,6 +24,26 @@ class Reviews extends React.Component {
         this.postReview = this.postReview.bind(this);
         this.showMoreReviewsButton = this.showMoreReviewsButton.bind(this);
         this.showReviewDropdownSort = this.showReviewDropdownSort.bind(this);
+        this.showReviewsByStarCount = this.showReviewsByStarCount.bind(this);
+    }
+    //handles filtering the reviews by star count
+    showReviewsByStarCount(starCount) {
+        
+        if (this.state.showReviewsByStarCountContainer[starCount]) {
+            this.setState(prevState => {
+                let oldState = Object.assign({}, prevState.showReviewsByStarCountContainer);
+                oldState[starCount] = false;
+                return {oldState};
+            })
+        } else {
+            this.setState(prevState => {
+                let oldState = Object.assign({}, prevState.showReviewsByStarCountContainer);
+                oldState[starCount] = true;
+                return {oldState};
+            })
+        }
+        console.log('the state after starcount reviews', this.state);
+
     }
     //function to handle getting the reviews for the given product id
      getReviews(sort = 'relevant') {
@@ -61,6 +82,7 @@ class Reviews extends React.Component {
                 
 
             }}>
+            <option disabled selected value> -- select an option -- </option>
             <option value="relevant">relevant</option>
             <option value="helpful">helpful</option>
             <option value="newest">newest</option>
@@ -156,7 +178,7 @@ class Reviews extends React.Component {
             return (
                 <div id = 'reviews'>
                     <h1>{`Ratings & Reviews`}</h1>
-                     <RatingsBreakdown props = {this.state}/> 
+                     <RatingsBreakdown props = {this.state} func = {this.showReviewsByStarCount}/> 
 
                      <div id='reviews-scrollable'>
                          <p id='reviews-sorted-by-info'>{this.state.allReviews.length} reviews, sorted by </p>

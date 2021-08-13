@@ -33,11 +33,11 @@ class App extends React.Component {
           <p><i>SIDE-WIDE ANNOUNCEMENT MESSAGE!</i> - SALE / DISCOUNT <b>OFFER</b> - <u>NEW PRODUCT HIGHLIGHT</u></p>
         </div>
 
-      <ProductMainStateProvider productId ={this.state.productId}>
+      {/* <ProductMainStateProvider productId ={this.state.productId}>
           <ProductOverview productId={this.state.productId} />
-          <QuestionsAnswersState productId={this.state.productId} />
+          <QuestionsAnswersState productId={this.state.productId} /> */}
           <Reviews props={this.state} />
-      </ProductMainStateProvider>
+      {/* </ProductMainStateProvider> */}
 
       </div>
     );
