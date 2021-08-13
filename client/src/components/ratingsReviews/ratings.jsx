@@ -152,7 +152,7 @@ class Reviews extends React.Component {
             return (
                 <div id = 'reviews'>
                     <h1>{`Ratings & Reviews`}</h1>
-                     <RatingsBreakdown props = {this.state} getAvgRating = {this.updateAvgRatingForProduct}/> 
+                     <RatingsBreakdown props = {this.state} getAvgRating = {this.props.avgRatingFunc}/> 
                      <div id='reviews-scrollable'>
                          <p id='reviews-sorted-by-info'>{this.state.allReviews.length} reviews, sorted by </p>
                     {this.state.reviewDropdownSortDiv}
