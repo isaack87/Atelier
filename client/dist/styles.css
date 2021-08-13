@@ -225,7 +225,7 @@ display: inline-block;
   margin-bottom: -4em;
 }
 .search {
-  margin: 10px;
+  margin: 1.5em;
   padding: 20px;
   font-size: 2em;
   flex-direction: column;
