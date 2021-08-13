@@ -27,8 +27,9 @@ class RatingsBreakdown extends React.Component {
                 recommendations++;
             }
         });
-
+        //need to put this in normal state
         let avgRating = (totalRating/(reviewsArray.length));
+        this.props.getAvgRating(avgRating);
         
 
         const avgStars = helpers.calculateStarDiv(avgRating, 'avg-rating');
