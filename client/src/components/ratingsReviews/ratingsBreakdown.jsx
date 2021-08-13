@@ -27,15 +27,18 @@ class RatingsBreakdown extends React.Component {
                 recommendations++;
             }
         });
-        let avgRating = (totalRating/(reviewsArray.length - 1));
+
+        let avgRating = (totalRating/(reviewsArray.length));
+        
+
         const avgStars = helpers.calculateStarDiv(avgRating, 'avg-rating');
         const avgDiv = <div><p id='avg-rating'>
             {avgStars}
             </p></div>;
         avgRating = avgRating.toFixed(1);
-        
+ 
         recommendations = <span>{((recommendations/reviewsArray.length) * 100) + '% of reviews recommend this product'}</span>;
-        console.log('recommendations', recommendations)
+   
         this.setState({avgReviewDiv:avgDiv, avgRating, percentageRec: recommendations}
 
         )
