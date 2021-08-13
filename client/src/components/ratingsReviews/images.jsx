@@ -52,7 +52,6 @@ class Images extends React.Component {
 
     }
     componentDidMount() {
-
         this.createImageDiv(this.props.props);
     }
     render() {
