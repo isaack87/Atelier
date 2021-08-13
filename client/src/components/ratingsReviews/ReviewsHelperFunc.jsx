@@ -53,8 +53,6 @@ const helpers = {
             url:'http://localhost:3000/markHelpful',
             data: {productID}
         }).then(response => {
-    
-            
             return true;
         })
 
