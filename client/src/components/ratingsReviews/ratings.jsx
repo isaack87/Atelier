@@ -4,6 +4,7 @@ import moment from 'moment';
  import Images from './images.jsx';
  import Stars from './stars.jsx';
  import helpers from './ReviewsHelperFunc.jsx';
+ import RatingsBreakdown from './ratingsBreakdown.jsx';
 
 class Reviews extends React.Component {
     constructor(props) {
@@ -25,7 +26,10 @@ class Reviews extends React.Component {
     }
     //function to handle getting the reviews for the given product id
      getReviews(sort = 'relevant') {
-         const productID = this.props.props.productId;
+         console.log('get reviews being called')
+           const productID = this.props.props.productId;
+           //uncomment below for testing purpose only
+        //    const productID = 28221;
           axios({
             method: 'post',
             url: 'http://localhost:3000/reviews',
@@ -33,10 +37,11 @@ class Reviews extends React.Component {
             data: {productID, sortKind: sort}
         }).then(response => {
             //now take this and update reviews state
-          
+            console.log('sort', sort, this.state);
             this.setState({allReviews: response.data, reviewsShownSoFar: [], currentReviewIndex: 0}, () => {
+            
                 this.renderReviews();
-                
+
             })
 
         })
@@ -45,11 +50,15 @@ class Reviews extends React.Component {
     showReviewDropdownSort() {
         if (this.state.allReviews.length > 0) {
             let div = <select id="review-dropdown" onChange = {(e) => {
+                e.preventDefault();
+                const dropdownChoice = e.target.value.toString();
+   
                 //wipe the current reviews
-                this.setState({allReviews: []})
-                this.setState({reviewsDiv: []})
-                let dropdownChoice = e.target.value.toString();
-                this.getReviews(dropdownChoice)
+                this.setState({allReviews: [], reviewsDiv: []}, ()=> {
+                    this.getReviews(dropdownChoice)
+                })
+                
+                
 
             }}>
             <option value="relevant">relevant</option>
@@ -64,11 +73,11 @@ class Reviews extends React.Component {
     renderReviews() {
         let reviews = this.state.allReviews;
         let innerDiv = this.state.reviewsShownSoFar;
-        console.log('all reviews inside renderreviews', reviews, 'inner dive', innerDiv )
+        console.log('rendering reviews by sort', reviews);
         if (reviews.length) {
             //helper func to generate 1 review
         let generateReview = review => {
-            console.log('review', review)
+   
             let paragraph = <div key={review.review_id}> 
                 <div id= 'review-heading'>
                 <p className="review-summary">{review.summary}</p> 
@@ -79,7 +88,7 @@ class Reviews extends React.Component {
                 {review.body}
                 <div><Images props= {review.photos}/></div>
           
-                {helpers.generateHelpfulness(review.helpfulness)}
+                {helpers.generateHelpfulness(review.helpfulness, review.review_id)}
                 <Stars rating = {review.rating} starKey = {review.review_id}/>
              
                 {helpers.generateRecommend(review.recommend, )}
@@ -89,7 +98,6 @@ class Reviews extends React.Component {
         };
         //display only 2 at a time
         let index = this.state.currentReviewIndex;
-      
         for(let i = 0; i < 2; i++) {
             //get current review
             let review = reviews[index];
@@ -98,14 +106,12 @@ class Reviews extends React.Component {
                 index ++;
             }
         }
-        this.setState({currentReviewIndex: index}, () => {
-         this.showMoreReviewsButton();
-        });
         let outerDiv = <div id='reviews'>{innerDiv}</div>
-        this.setState({reviewsDiv: outerDiv}, () => {
-            this.showReviewDropdownSort();
+        console.log('reviews div ', outerDiv)
+        this.setState({currentReviewIndex: index, reviewsDiv: outerDiv}, () => {
+         this.showMoreReviewsButton();
+         this.showReviewDropdownSort();
         });
-
 
         }
         
@@ -142,20 +148,29 @@ class Reviews extends React.Component {
     }
     componentDidMount() {
        this.getReviews();
-        //this.postReview();
+    
     }
 
     render() {
-        
-        return (
-            <div id = 'reviews'>
-                <h1>reviews module</h1>
-                {this.state.reviewDropdownSortDiv}
-               <div id='reviewsList'> {this.state.reviewsDiv}</div>
-                {this.state.moreReviewsButton}
-           
-            </div>
-        )
+        if (this.state.allReviews.length > 0) {
+            return (
+                <div id = 'reviews'>
+                    <h1>{`Ratings & Reviews`}</h1>
+                     <RatingsBreakdown props = {this.state}/> 
+
+                     <div id='reviews-scrollable'>
+                         <p id='reviews-sorted-by-info'>{this.state.allReviews.length} reviews, sorted by </p>
+                    {this.state.reviewDropdownSortDiv}
+                   <div id='reviewsList'> {this.state.reviewsDiv}</div>
+                    {this.state.moreReviewsButton}
+                    </div>
+               
+                </div>
+            )
+
+        }
+        return null;
+ 
     }
 }
 export default Reviews;

@@ -51,6 +51,44 @@
 }
 #reviews {
   width: 100%;
+
+}
+#ratings-breakdown {
+  
+  margin-right: 5em;
+
+display: inline-block;
+}
+#reviews-scrollable {
+  width: 60%;
+  float: right;
+}
+#reviews-sorted-by-info {
+  display: inline;
+
+} 
+#w3-border {
+  background-color: grey;
+  
+}
+#bar-type {
+  display: inline;
+  float:left;
+}
+#bar {
+  display: inline-block;
+  width: 40%;
+  /* position:relative; */
+}
+  /* left: 7em;
+} */
+/* .w3-light-grey, .w3-green {
+  display:inline;
+  
+} */
+#reviews-total-bar {
+  display: inline;
+  float: right;
 }
 #review-heading {
   display: inline;

@@ -42,7 +42,7 @@ const getReviewsAPI = (productID, sortKind = 'helpful') => {
             }
             sortedArr = sortOne;
         }
-
+        // console.log('sorted array', sortedArr)
          return sortedArr;
 
       });

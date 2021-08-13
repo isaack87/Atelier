@@ -7,6 +7,8 @@ import Adapter from 'enzyme-adapter-react-16';
 
 import Reviews from '../client/src/components/ratingsReviews/ratings';
 import Images from '../client/src/components/ratingsReviews/images';
+import Stars from '../client/src/components/ratingsReviews/stars';
+import RatingsBreakdown from '../client/src/components/ratingsReviews/ratingsBreakdown';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -22,14 +24,13 @@ describe('Basic test', () => {
 
 
 describe('Reviews',  () => {
-  it('should be true that Reviews component exists', () => {
-    const wrapper = shallow(<Reviews />)
+    // const wrapper = mount(<Reviews />)
+    //   expect(wrapper).toMatchSnapshot()
+    test('renders', () => {
+      const wrapper = shallow(<Reviews/>);
+      expect(wrapper.exists()).toBe(true);
+    })
 
-      expect(wrapper).toMatchSnapshot()
-  
-    // expect(wrapper.find(Images)).toBeTruthy();
-
-  });
 });
 
 describe('Images', () => {
@@ -40,22 +41,21 @@ describe('Images', () => {
     // expect(wrapper.find(Images)).toBeTruthy();
     expect(imagesElem).toBeTruthy();
     //now we want to test the props of images
-
-    console.log(imagesElem.instance())
     
-
+  });
+});
+describe('Stars', () => {
+  it('should be true that stars component exists', () => {
+    const wrapper =  mount(<Reviews><Stars/></Reviews>  );
+    const starsElem = wrapper.find('Stars');
+    expect(starsElem).toBeTruthy();
+  });
+});
+describe('RatingsBreakdown', () => {
+  it('should be true that the ratingsbreakdown component exists', () => {
+    const wrapper =  mount(<Reviews><RatingsBreakdown/></Reviews>  );
+    const ratingsElem = wrapper.find('RatingsBreakdown');
+    expect(ratingsElem).toBeTruthy();
   });
 });
 
-
-// describe('Ratings', function () {
-//   it('should render Ratings component without crashing', function () {
-//     const wrapper = shallow(<Ratings characteristics={[]}/>);
-//     expect(wrapper.hasClass('reviewRatings')).toBeTruthy();
-//   });
-//   it('should render characterstics lists', function () {
-//     const characteristics = [{ fit: 4 }];
-//     const wrapper = shallow(<Ratings characteristics={characteristics}/>);
-//     expect(wrapper.find('input')).toHaveLength(characteristics.length);
-//   });
-// });
