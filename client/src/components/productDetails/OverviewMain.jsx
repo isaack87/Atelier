@@ -35,9 +35,13 @@ class ProductOverview extends React.Component {
     this.renderQuantity = this.renderQuantity.bind(this);
   }
 
-  componentDidUpdate() {
+  componentDidMount() {
     this.getDataFromProductId(this.props.productId);
   }
+
+  // componentDidUpdate() {
+  //   this.getDataFromProductId(this.props.productId);
+  // }
 
   getDataFromProductId(productId) {
     axios({
@@ -188,6 +192,14 @@ console.log(response.data.results)
           document.getElementsByClassName(currentCheckMark)[0].classList.remove('checkMark');
           document.getElementsByClassName(newCheckMark)[0].classList.add('checkMark');
           document.getElementsByClassName(this.state.currentMainThumbnail)[0].classList.add('clickedMarker');
+
+          // reset size and quantity to default
+          if (document.getElementById('selectedSize')) {
+            document.getElementById('selectedSize').selectedIndex = 0;
+            document.getElementById('selectedQuantity').selectedIndex = 0;
+            const tooltip = document.getElementsByClassName('tooltiptext')[0];
+            tooltip.style.visibility = 'hidden';
+          }
         });
       })
       .catch((error) => {
@@ -215,6 +227,22 @@ console.log(response.data.results)
     });
   }
 
+  onAddToCart(skuId, size, quantity) {
+    $.ajax({
+      method: 'POST',
+      url: '/addToCart',
+      data: { sku_id: skuId, count: quantity, size: size },
+      success: () => {
+        console.log('🛒 ', quantity + 'x - Size: ' + size + ' -', this.state.styleNames[this.state.currentStyleIndex], '| ' + this.state.productInfo.name, 'added to the shopping cart!');
+        document.getElementById('selectedSize').selectedIndex = 0;
+        document.getElementById('selectedQuantity').selectedIndex = 0;
+      },
+      error: (error) => {
+        console.log('Failed to add to cart', error);
+      },
+    });
+  }
+
   render() {
     return (
       <div className='products overviewContainer'>
@@ -227,7 +255,7 @@ console.log(response.data.results)
 
             <div className='styleSelector'>
               <StyleSelector styleNames={this.state.styleNames} thumbnails={this.state.thumbnails} styleIds={this.state.styleIds} currentStyleIndex={this.state.currentStyleIndex} changeStyleId={this.changeStyleId.bind(this)} />
-              <AddToCart currentQuantity={this.state.currentQuantity} skuIds={this.state.skuIds} skuCounts={this.state.skuCounts} renderQuantity={this.renderQuantity.bind(this)} />
+              <AddToCart currentQuantity={this.state.currentQuantity} skuIds={this.state.skuIds} skuCounts={this.state.skuCounts} renderQuantity={this.renderQuantity.bind(this)} onAddToCart={this.onAddToCart.bind(this)} />
             </div>
           </div>
         </div>

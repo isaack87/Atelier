@@ -856,8 +856,9 @@ label {
 
 }
 .imageThumb {
-  height: 35%;
-  width: 35%;
+  object-fit: cover;
+  height: 3em;
+  width: 3em;
   box-shadow: 0 0 20px rgb(0, 0, 0, 0.15);
   border-radius: 12px;
   cursor: pointer;
@@ -905,9 +906,10 @@ label {
 }
 
 .styleThumbnail {
+  object-fit: cover;
   border-radius: 50%;
-  height: 40px;
-  width: 40px;
+  height: 3em;
+  width: 3em;
   cursor: pointer;
   border: 1px solid rgb(90, 87, 87);
   margin-right: 7px;
@@ -952,4 +954,37 @@ label {
   position: relative;
   left: 65%;
   top: -80%;
+}
+
+.tooltip {
+  position: absolute;
+  top: 25%;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+
+.cartButton {
+  visibility: visible;
+}
+
+.readAllReviews {
+  cursor: pointer;
+}
+
+.readAllReviews:hover {
+  color: skyblue;
 }

@@ -33,7 +33,7 @@ class App extends React.Component {
       productId: number,
     }, () => {
       console.log('product id changed to: ', this.state.productId);
-      // cb();
+      cb();
     });
   }
 
