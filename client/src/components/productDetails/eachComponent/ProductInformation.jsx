@@ -1,5 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
+import helpers from '../../ratingsReviews/ReviewsHelperFunc.jsx';
 
 class ProductInformation extends React.Component {
 
@@ -14,7 +15,7 @@ class ProductInformation extends React.Component {
 
   }
   render() {
-
+    console.log('the props for product info',this.props.avgRating)
     let displayPrice;
     if (this.props.allResultsArray[this.props.currentStyleIndex]) {
       if (this.props.allResultsArray[this.props.currentStyleIndex].sale_price) {
@@ -28,6 +29,7 @@ class ProductInformation extends React.Component {
       <div className='productInformation'>
         <div onClick={this.moveToReviews.bind(this)} className='readAllReviews'>
           ✭ ✭ ✭ ✭ ✭ <u><a >Read all reviews</a></u>
+          {helpers.calculateStarDiv(this.props.avgRating, 'test key')}
         </div>
 
         <div>{this.props.productInfo.category}</div>

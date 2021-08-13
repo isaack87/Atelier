@@ -47,9 +47,9 @@ class App extends React.Component {
       <div className="App-container">
         <ProductMainStateProvider productId ={this.state.productId}>
           <TopSearchBar onSearch={this.search}/>
-          <ProductOverview productId={this.state.productId} random={this.random.bind(this)}/>
+          <ProductOverview productId={this.state.productId} random={this.random.bind(this)} avgRating = {this.state.avgRating}/>
           <QuestionsAnswersState productId={this.state.productId} />
-          <Reviews props={this.state} />
+          <Reviews props={this.state} avgRatingFunc = {this.updateAvgRatingForProduct} />
         </ProductMainStateProvider>
       </div>
     );

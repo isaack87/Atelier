@@ -251,7 +251,7 @@ console.log(response.data.results)
           <Carousel fullSizePhotos={this.state.fullSizePhotos} smallSizePhotos={this.state.smallSizePhotos} currentMainThumbnail={this.state.currentMainThumbnail} />
 
           <div className='containerChild2'>
-            <ProductInformation productInfo={this.state.productInfo} allResultsArray={this.state.allResultsArray} currentStyleIndex={this.state.currentStyleIndex} />
+            <ProductInformation productInfo={this.state.productInfo} allResultsArray={this.state.allResultsArray} currentStyleIndex={this.state.currentStyleIndex} avgRating = {this.props.avgRating}/>
 
             <div className='styleSelector'>
               <StyleSelector styleNames={this.state.styleNames} thumbnails={this.state.thumbnails} styleIds={this.state.styleIds} currentStyleIndex={this.state.currentStyleIndex} changeStyleId={this.changeStyleId.bind(this)} />
