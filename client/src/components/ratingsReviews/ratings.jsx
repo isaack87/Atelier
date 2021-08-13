@@ -26,7 +26,6 @@ class Reviews extends React.Component {
     }
     //function to handle getting the reviews for the given product id
      getReviews(sort = 'relevant') {
-         console.log('get reviews being called')
            const productID = this.props.props.productId;
            //uncomment below for testing purpose only
         //    const productID = 28221;
@@ -39,9 +38,7 @@ class Reviews extends React.Component {
             //now take this and update reviews state
             console.log('sort', sort, this.state);
             this.setState({allReviews: response.data, reviewsShownSoFar: [], currentReviewIndex: 0}, () => {
-            
                 this.renderReviews();
-
             })
 
         })
@@ -73,11 +70,9 @@ class Reviews extends React.Component {
     renderReviews() {
         let reviews = this.state.allReviews;
         let innerDiv = this.state.reviewsShownSoFar;
-        console.log('rendering reviews by sort', reviews);
         if (reviews.length) {
             //helper func to generate 1 review
         let generateReview = review => {
-   
             let paragraph = <div key={review.review_id}> 
                 <div id= 'review-heading'>
                 <p className="review-summary">{review.summary}</p> 
@@ -107,7 +102,6 @@ class Reviews extends React.Component {
             }
         }
         let outerDiv = <div id='reviews'>{innerDiv}</div>
-        console.log('reviews div ', outerDiv)
         this.setState({currentReviewIndex: index, reviewsDiv: outerDiv}, () => {
          this.showMoreReviewsButton();
          this.showReviewDropdownSort();
@@ -139,7 +133,6 @@ class Reviews extends React.Component {
             url: 'http://localhost:3000/postreview',
            
         }).then(response => {
-       
             //now take this and update reviews state
             this.setState({allReviews: response.data.results}, ()=> {
                 this.renderReviews();
