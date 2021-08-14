@@ -136,17 +136,65 @@ const helpers = {
                 <div id = 'bar'>
                     <div class="w3-light-grey">
                         <div className='w3-green' style={{height:"1em", width:`${widthAmount + "%"}`}}>
-                            
                         </div>
-                        
                     </div>
-                    
                 </div>
                 <span id ='reviews-total-bar'>{starArr.length + 'reviews total'}</span>
                 
                 <br></br>
             </div>;
         return returnDiv;
+    },
+    getProductBreakdownBar: (title, info) => {
+        console.log('reaching get product breakdown bar')
+        //now get the characteristics
+        let firstCharacterstic, secondCharacteristic, thirdCharacteristic;
+        if (title === 'Width' || title ==='Comfort' || title === 'Quality' ) {
+            firstCharacterstic = 'poor';
+            secondCharacteristic = '';
+            thirdCharacteristic = 'great'
+
+        } else {
+            firstCharacterstic = 'too small';
+            secondCharacteristic = '';
+            thirdCharacteristic = 'too big'
+
+        }
+        console.log('first', firstCharacterstic, 'second', secondCharacteristic)
+        return(<div>
+            <p>{title}</p>
+            <div id = 'metadata-bar'>
+                <div id = 'metadata-bar-individual'>
+                    <div className="w3-light-grey">
+                        <div className='w3-green metadata-bar-individual' style={{height:"2em", width:"0%"}}/>
+                    </div>  
+                 </div>
+
+                 
+                <div id = 'metadata-bar-individual'>
+                    <div className="w3-light-grey">
+                        <div className='w3-green metadata-bar-individual' style={{height:"2em", width:"0%"}}/>
+                    </div>  
+            
+                </div>
+                <div id = 'metadata-bar-individual'>
+                    <div className="w3-light-grey">
+                        <div className='w3-green metadata-bar-individual' style={{height:"2em", width:"0%"}}/>
+                    </div>  
+                  
+                </div>
+                <br></br>
+               <span>
+
+                   
+                   </span> 
+            </div>
+            <div id = 'first-characteristic'>{firstCharacterstic}</div> 
+               <div id = 'third-characteristic'>{thirdCharacteristic}</div>
+
+        </div>)
+        
+
     }
 
 }
