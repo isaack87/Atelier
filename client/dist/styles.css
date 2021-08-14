@@ -59,6 +59,9 @@
 
 display: inline-block;
 }
+#breakdown-star-count:hover{
+  background-color: green;
+}
 #reviews-scrollable {
   width: 60%;
   float: right;
