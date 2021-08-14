@@ -5,6 +5,7 @@ import moment from 'moment';
  import Stars from './stars.jsx';
  import helpers from './ReviewsHelperFunc.jsx';
  import RatingsBreakdown from './ratingsBreakdown.jsx';
+import ReviewProductBreakdown from './reviewProductBreakdown.jsx';
 
 class Reviews extends React.Component {
     constructor(props) {
@@ -247,7 +248,12 @@ class Reviews extends React.Component {
                 <div id = 'reviews'>
                     <h1>{`Ratings & Reviews`}</h1>
                     {this.state.filterMessage} 
-                     <RatingsBreakdown props = {this.state} getAvgRating = {this.props.avgRatingFunc} handleFilter = {this.handleClickFilterReviews}/>
+                    <div id ='breakdown-div'>
+                    <RatingsBreakdown props = {this.state} getAvgRating = {this.props.avgRatingFunc} handleFilter = {this.handleClickFilterReviews}/>
+                    <ReviewProductBreakdown product = {this.props.props.productId}/>
+
+                    </div>
+                     
                      
                      <div id='reviews-scrollable'>
                          <p id='reviews-sorted-by-info'>{this.state.reviewsToBeShown.length} reviews, sorted by </p>

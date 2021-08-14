@@ -113,24 +113,8 @@ display: inline-block;
   height: 40em;
   overflow: auto;
 }
-.full-star-empty {
-  display: inline-block;
-  position: relative;
-  font-size: 1em;
-  color: #ddd;
-}
-.full-star-empty:after {
-  font-family: FontAwesome;
-  content: "\f005";
 
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  overflow: hidden;
-  color: #ddd;
-}
-.full-star {
+.empty-star {
   display: inline-block;
   position: relative;
   font-size: 1em;
@@ -147,7 +131,7 @@ display: inline-block;
   overflow: hidden;
   color: #f80;
 }
-#star-25 {
+#star-25:after {
   font-family: FontAwesome;
   content: "\f005";
 
@@ -158,7 +142,7 @@ display: inline-block;
   overflow: hidden;
   color: #f80;
 }
-#star-50 {
+#star-50:after {
   font-family: FontAwesome;
   content: "\f005";
 
