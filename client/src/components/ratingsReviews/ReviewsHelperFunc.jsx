@@ -129,7 +129,7 @@ const helpers = {
         const returnDiv = 
             <div onClick = {()=> {
                 filterFunc(starAmount)
-            }}>
+            }} id='breakdown-star-count'>
                 <span id ='bar-type'>{starAmount} Stars</span>
                 <div id = 'bar'>
                     <div class="w3-light-grey">

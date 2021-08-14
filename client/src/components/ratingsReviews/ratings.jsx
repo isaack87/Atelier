@@ -28,7 +28,9 @@ class Reviews extends React.Component {
                 3: false,
                 2: false,
                 1: false
-            }
+            },
+            //displays a message saying which filters are on
+            filterMessage: []
 
         }
         this.getReviews = this.getReviews.bind(this);
@@ -39,7 +41,39 @@ class Reviews extends React.Component {
         this.handleClickFilterReviews = this.handleClickFilterReviews.bind(this);
         this.grabReviewsForFilter = this.grabReviewsForFilter.bind(this);
         this.doWeDisplayAllReviews = this.doWeDisplayAllReviews.bind(this);
+        this.generateFilterMessage = this.generateFilterMessage.bind(this);
     
+    }
+    //loops through the reviewsFilter and generates a message for each 'true' value
+    generateFilterMessage() {
+        let reviewsFilter = this.state.reviewsFilter;
+        let messageDiv = []
+        for (let elem in reviewsFilter) {
+            if (reviewsFilter[elem]) {
+                messageDiv.unshift(<span>{elem + ' '}</span>)
+            }
+        }
+        let totalMessageDiv = <div>Filter/s applied: {messageDiv}
+        <div id='remove-filters'>
+            <p onClick = {() => {
+                console.log('remove all filters');
+                this.setState({reviewsFilter: {
+                    5: false,
+                    4: false,
+                    3: false,
+                    2: false,
+                    1: false
+                }, filterMessage: []} );
+                let allReview = this.state.allReviews;
+                this.setState({reviewsToBeShown: allReview, reviewsShownSoFar: [], currentReviewIndex: 0}, () => {
+                    //now we will render these reviews to be shown
+                    this.renderReviews();
+                })
+            }}>Remove all filters</p>
+            </div>
+        </div>
+        this.setState({filterMessage: totalMessageDiv})
+
     }
     handleClickFilterReviews(rating) {
         let newFilterView = !this.state.reviewsFilter[rating];
@@ -52,16 +86,13 @@ class Reviews extends React.Component {
                 this.renderReviews()
             });
             return;
-
-
         }
-
+        
         this.setState({reviewsFilter: prevState}, () => {
-            console.log('filter', this.state.reviewsFilter)
+            this.generateFilterMessage();
             //now we have a filter of which reviews we want to see
             //loop through all reviews and grab the reviews with 'true' in our reviewsFilter
             const filteredReviews = this.grabReviewsForFilter();
-            console.log('filtered reviews list', filteredReviews)
             this.setState({reviewsToBeShown: filteredReviews, reviewsShownSoFar: [], currentReviewIndex: 0}, () => {
                 //now we will render these reviews to be shown
                 this.renderReviews();
@@ -71,9 +102,7 @@ class Reviews extends React.Component {
     }
     doWeDisplayAllReviews(){
         let display = true;
-        console.log('this.state.reviewsFilter', this.state.reviewsFilter)
         for (let elem in this.state.reviewsFilter) {
-            console.log('this.state.reviewsFilter[elem]', this.state.reviewsFilter[elem])
             if (this.state.reviewsFilter[elem]) {
                 display = false;
                 break;
@@ -217,7 +246,9 @@ class Reviews extends React.Component {
             return (
                 <div id = 'reviews'>
                     <h1>{`Ratings & Reviews`}</h1>
-                     <RatingsBreakdown props = {this.state} getAvgRating = {this.props.avgRatingFunc} handleFilter = {this.handleClickFilterReviews}/> 
+                    {this.state.filterMessage} 
+                     <RatingsBreakdown props = {this.state} getAvgRating = {this.props.avgRatingFunc} handleFilter = {this.handleClickFilterReviews}/>
+                     
                      <div id='reviews-scrollable'>
                          <p id='reviews-sorted-by-info'>{this.state.reviewsToBeShown.length} reviews, sorted by </p>
                     {this.state.reviewDropdownSortDiv}
