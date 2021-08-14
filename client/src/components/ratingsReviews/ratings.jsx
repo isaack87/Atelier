@@ -38,12 +38,24 @@ class Reviews extends React.Component {
         this.showReviewDropdownSort = this.showReviewDropdownSort.bind(this);
         this.handleClickFilterReviews = this.handleClickFilterReviews.bind(this);
         this.grabReviewsForFilter = this.grabReviewsForFilter.bind(this);
+        this.doWeDisplayAllReviews = this.doWeDisplayAllReviews.bind(this);
     
     }
     handleClickFilterReviews(rating) {
         let newFilterView = !this.state.reviewsFilter[rating];
         let prevState = this.state.reviewsFilter;
         prevState[rating] = newFilterView;
+        //now if all the filters are false, display the normal review
+        if (this.doWeDisplayAllReviews()) {
+            let normalReviews = this.state.allReviews;
+            this.setState({reviewsToBeShown: normalReviews, reviewsDiv: [],reviewsShownSoFar: [], currentReviewIndex: 0}, () => {
+                this.renderReviews()
+            });
+            return;
+
+
+        }
+
         this.setState({reviewsFilter: prevState}, () => {
             console.log('filter', this.state.reviewsFilter)
             //now we have a filter of which reviews we want to see
@@ -55,6 +67,20 @@ class Reviews extends React.Component {
                 this.renderReviews();
             })
         });
+
+    }
+    doWeDisplayAllReviews(){
+        let display = true;
+        console.log('this.state.reviewsFilter', this.state.reviewsFilter)
+        for (let elem in this.state.reviewsFilter) {
+            console.log('this.state.reviewsFilter[elem]', this.state.reviewsFilter[elem])
+            if (this.state.reviewsFilter[elem]) {
+                display = false;
+                break;
+            }
+        }
+
+        return display;
 
     }
     grabReviewsForFilter() {
