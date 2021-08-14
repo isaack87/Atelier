@@ -131,13 +131,13 @@ display: inline-block;
   overflow: hidden;
   color: #ddd;
 }
-.full-star {
+.empty-star{
   display: inline-block;
   position: relative;
   font-size: 1em;
   color: #ddd;
 }
-.full-star:after {
+.full-star {
   font-family: FontAwesome;
   content: "\f005";
 
@@ -162,8 +162,8 @@ display: inline-block;
 #star-50 {
   font-family: FontAwesome;
   content: "\f005";
-
-  position: absolute;
+  margin-bottom: -.1em;
+  position: relative;
   left: 0;
   top: 0;
   width: 50%;

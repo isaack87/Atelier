@@ -54,9 +54,7 @@ const getReviewsAPI = (productID, sortKind = 'helpful') => {
       });
 
 }
-const relevanceSort = (array) => {
-    console.log('sorting in relevance?')
-                
+const relevanceSort = (array) => {         
     for (let i = 0; i < array.length; i+2) {
         if (array[i + 1].helpfulness > array[i].helpfulness) {
             let one = array[i + 1];
@@ -64,10 +62,8 @@ const relevanceSort = (array) => {
             array[i] = one;
             array[i + 1] = two;
         }
-
     }
     return array;
-
 }
 
 const postReview = async (productID) => {
@@ -81,11 +77,7 @@ const postReview = async (productID) => {
         "email": "helena@yahoo.com",
         "photos": [],
         "characteristics":  { "14": 5, "15": 5}
-
-
     };
-
-
     let options = {
         method: 'post',
         url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews`,
@@ -99,7 +91,7 @@ const postReview = async (productID) => {
 }
 const postMarkHelpful= async (productID) => {
   
-    const options = {
+    let options = {
         method: 'PUT',
         url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/${productID}/helpful?count=100`,
         headers: { Authorization: config.gitToken },
@@ -113,9 +105,26 @@ const postMarkHelpful= async (productID) => {
         });
 
 }
+const getProductBreakdown = async (productID) => {
+    let options = {
+        method: 'GET',
+        url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/meta/?product_id=${productID}`,
+        headers: { Authorization: config.gitToken },
+        // data:params
+      };
+     return await axios(options)
+        .then((response) => {
+
+          return response.data;
+        })
+        .catch((err) => {
+          console.log( err);
+        });
+}
 
 module.exports = {
     getReviewsAPI,
      postReview,
-     postMarkHelpful
+     postMarkHelpful,
+     getProductBreakdown
 };

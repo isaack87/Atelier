@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const isaacAPI = require('./QuestionAnswerAPI');
 const louisAPI = require('./ProductOverviewAPI');
 const helenaAPI = require('./RatingsReviewsAPI');
+const { get } = require('jquery');
 
 app.use(express.static(`${__dirname} /../client/dist`));
 app.use(bodyParser.json());
@@ -144,6 +145,11 @@ app.post('/postReview', async(req, res) => {
 app.post('/markHelpful', async (req, res)=> {
   let productID = req.body.productID;
   res.status(200).send(await helenaAPI.postMarkHelpful(productID))
+})
+app.post('/productBreakdown', async (req, res) => {
+  let productID = req.body.productID;
+
+   res.status(200).send(await helenaAPI.getProductBreakdown(productID));
 })
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
