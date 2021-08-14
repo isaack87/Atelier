@@ -70,7 +70,8 @@ class Reviews extends React.Component {
                     //now we will render these reviews to be shown
                     this.renderReviews();
                 })
-            }}>Remove all filters</p>
+            }}><u id='clickable-link'>Remove all filters</u>
+            </p>
             </div>
         </div>
         this.setState({filterMessage: totalMessageDiv})
@@ -83,7 +84,7 @@ class Reviews extends React.Component {
         //now if all the filters are false, display the normal review
         if (this.doWeDisplayAllReviews()) {
             let normalReviews = this.state.allReviews;
-            this.setState({reviewsToBeShown: normalReviews, reviewsDiv: [],reviewsShownSoFar: [], currentReviewIndex: 0}, () => {
+            this.setState({reviewsToBeShown: normalReviews, reviewsDiv: [],reviewsShownSoFar: [], currentReviewIndex: 0, filterMessage: []}, () => {
                 this.renderReviews()
             });
             return;
