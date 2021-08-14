@@ -171,6 +171,7 @@ class QuestionsAnswersState extends React.Component {
       this.getQuestionsApi();
     }
   }
+  //
 
   search(term) {
     //sets search term as variable
