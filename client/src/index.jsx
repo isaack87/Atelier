@@ -42,6 +42,11 @@ class App extends React.Component {
     });
   }
 
+  toggleDark() {
+    const element = document.body;
+    element.classList.toggle('dark-mode');
+  }
+
   render() {
     return (
       <div className="App-container">
@@ -51,6 +56,7 @@ class App extends React.Component {
           <QuestionsAnswersState productId={this.state.productId} />
           <Reviews props={this.state} avgRatingFunc = {this.updateAvgRatingForProduct} />
         </ProductMainStateProvider>
+        <button onClick={this.toggleDark.bind(this)}>Toggle Dark Mode</button>
       </div>
     );
   }
