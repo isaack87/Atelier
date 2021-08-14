@@ -8,7 +8,7 @@ const AskQuestions = (props) => (
       loadMoreAnswers={props.loadMoreAnswers}
       btnvisible={props.btnvisible}
     />
-    <div className="buttons">
+    <div className="buttons buttoncontainers">
       <button className={props.btnvisibleq ? 'add-q-btn' : 'btndisappear'}
         onClick={props.loadMoreQuestions}
         type="submit">
