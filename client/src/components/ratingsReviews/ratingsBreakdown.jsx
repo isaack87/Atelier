@@ -49,7 +49,7 @@ class RatingsBreakdown extends React.Component {
     }
     getRatingBar() {
 
-        const starBar = helpers.createStarBar(this.props.props.allReviews, this.props.func);
+        const starBar = helpers.createStarBar(this.props.props.allReviews, this.props.handleFilter);
         this.setState({starBarDiv: starBar});
 
     }

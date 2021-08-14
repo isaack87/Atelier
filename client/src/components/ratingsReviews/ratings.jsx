@@ -21,6 +21,14 @@ class Reviews extends React.Component {
             moreReviewsButton: [],
             reviewDropdownSortDiv: [],
             avgRating: 0,
+            //holds which rating we would like to see when it's clicked
+            reviewsFilter: {
+                5: false,
+                4: false,
+                3: false,
+                2: false,
+                1: false
+            }
 
         }
         this.getReviews = this.getReviews.bind(this);
@@ -28,7 +36,17 @@ class Reviews extends React.Component {
         this.postReview = this.postReview.bind(this);
         this.showMoreReviewsButton = this.showMoreReviewsButton.bind(this);
         this.showReviewDropdownSort = this.showReviewDropdownSort.bind(this);
+        this.handleClickFilterReviews = this.handleClickFilterReviews.bind(this);
     
+    }
+    handleClickFilterReviews(rating) {
+        let newFilterView = !this.state.reviewsFilter[rating];
+        let prevState = this.state.reviewsFilter;
+        prevState[rating] = newFilterView;
+        this.setState({reviewsFilter: prevState}, () => {
+            console.log('filter', this.state.reviewsFilter)
+        });
+
     }
 
     //function to handle getting the reviews for the given product id
@@ -43,7 +61,6 @@ class Reviews extends React.Component {
             data: {productID, sortKind: sort}
         }).then(response => {
             //now take this and update reviews state
-            console.log('sort', sort, this.state);
             this.setState({allReviews: response.data,reviewsToBeShown: response.data, reviewsShownSoFar: [], currentReviewIndex: 0}, () => {
                 this.renderReviews();
             })
@@ -152,7 +169,7 @@ class Reviews extends React.Component {
             return (
                 <div id = 'reviews'>
                     <h1>{`Ratings & Reviews`}</h1>
-                     <RatingsBreakdown props = {this.state} getAvgRating = {this.props.avgRatingFunc}/> 
+                     <RatingsBreakdown props = {this.state} getAvgRating = {this.props.avgRatingFunc} handleFilter = {this.handleClickFilterReviews}/> 
                      <div id='reviews-scrollable'>
                          <p id='reviews-sorted-by-info'>{this.state.reviewsToBeShown.length} reviews, sorted by </p>
                     {this.state.reviewDropdownSortDiv}

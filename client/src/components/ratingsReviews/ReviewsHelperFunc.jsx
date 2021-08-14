@@ -93,7 +93,7 @@ const helpers = {
         return starDiv;
 
     },
-    createStarBar: (reviewsArray) => {
+    createStarBar: (reviewsArray, filterFunc) => {
         if (!reviewsArray || reviewsArray.length === 0) {
             return;
         }
@@ -113,22 +113,23 @@ const helpers = {
         });
 
         //now create five star bar
-        const displayFive = Math.abs(((fiveStar.length-1)/(reviewsArray.length - 1)*100)).toFixed(0);
-        const displayFour = Math.abs(((fourStar.length-1)/(reviewsArray.length - 1)*100)).toFixed(0);
+
         const allReviewsDiv = [];
-        allReviewsDiv.push(helpers.getBar(fiveStar, reviewsArray.length, '5'), helpers.getBar(fourStar, reviewsArray.length, '4'),
-        helpers.getBar(threeStar, reviewsArray.length, '3'), helpers.getBar(twoStar, reviewsArray.length, '2'), 
-        helpers.getBar(oneStar, reviewsArray.length, '1') )
+        allReviewsDiv.push(helpers.getBar(fiveStar, reviewsArray.length, '5', filterFunc), helpers.getBar(fourStar, reviewsArray.length, '4', filterFunc),
+        helpers.getBar(threeStar, reviewsArray.length, '3',filterFunc), helpers.getBar(twoStar, reviewsArray.length, '2', filterFunc), 
+        helpers.getBar(oneStar, reviewsArray.length, '1',filterFunc) )
        
       
         
        return <div>{allReviewsDiv} </div>;
 
     },
-    getBar: (starArr, totalReviews, starAmount) => {
+    getBar: (starArr, totalReviews, starAmount, filterFunc) => {
         const widthAmount = Math.abs(((starArr.length)/(totalReviews)*100)).toFixed(0);
         const returnDiv = 
-            <div>
+            <div onClick = {()=> {
+                filterFunc(starAmount)
+            }}>
                 <span id ='bar-type'>{starAmount} Stars</span>
                 <div id = 'bar'>
                     <div class="w3-light-grey">
