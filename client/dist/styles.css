@@ -969,3 +969,8 @@ label {
 .readAllReviews:hover {
   color: skyblue;
 }
+
+.dark-mode {
+  background-color: black;
+  color: white;
+}
