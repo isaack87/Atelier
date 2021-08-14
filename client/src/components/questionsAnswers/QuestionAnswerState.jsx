@@ -31,6 +31,15 @@ class QuestionsAnswersState extends React.Component {
     this.getQuestionsApi();
   }
 
+  componentDidUpdate() {
+    if (this.state.productId !== this.props.productId) {
+      this.getQuestionsApi();
+      this.setState({
+        productId: this.props.productId,
+      });
+    }
+  }
+
   getQuestionsApi() {
     fetch(`http://localhost:3000/questions?qid=${this.state.productId}`)
       .then((response) => response.json())

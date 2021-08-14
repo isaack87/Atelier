@@ -11,7 +11,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productId: 36300,
+      productId: 36304,
       user: '',
       stars: '',
       reportedArray: [],
@@ -26,7 +26,7 @@ class App extends React.Component {
   }
   search(term) {
     this.setState({
-      productId: term
+      productId: parseInt(term)
     }, () => {
       console.log('product id changed to ', this.state.productId);
     });
