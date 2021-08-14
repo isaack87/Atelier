@@ -37,6 +37,7 @@ class Reviews extends React.Component {
         this.showMoreReviewsButton = this.showMoreReviewsButton.bind(this);
         this.showReviewDropdownSort = this.showReviewDropdownSort.bind(this);
         this.handleClickFilterReviews = this.handleClickFilterReviews.bind(this);
+        this.grabReviewsForFilter = this.grabReviewsForFilter.bind(this);
     
     }
     handleClickFilterReviews(rating) {
@@ -45,7 +46,27 @@ class Reviews extends React.Component {
         prevState[rating] = newFilterView;
         this.setState({reviewsFilter: prevState}, () => {
             console.log('filter', this.state.reviewsFilter)
+            //now we have a filter of which reviews we want to see
+            //loop through all reviews and grab the reviews with 'true' in our reviewsFilter
+            const filteredReviews = this.grabReviewsForFilter();
+            console.log('filtered reviews list', filteredReviews)
+            this.setState({reviewsToBeShown: filteredReviews, reviewsShownSoFar: [], currentReviewIndex: 0}, () => {
+                //now we will render these reviews to be shown
+                this.renderReviews();
+            })
         });
+
+    }
+    grabReviewsForFilter() {
+        const allReviews = this.state.allReviews;
+        const listOfRatingsWeWanttoFilter = this.state.reviewsFilter;
+        let reviewsFiltered = [];
+        for (let elem in allReviews) {
+            if (listOfRatingsWeWanttoFilter[allReviews[elem].rating]) {
+                reviewsFiltered.push(allReviews[elem]);
+            }
+        }
+        return reviewsFiltered;
 
     }
 
@@ -86,9 +107,10 @@ class Reviews extends React.Component {
             this.setState({reviewDropdownSortDiv: div });
         }
     }
-    //function to handle rendering the reviews div
+    //function to handle rendering the reviews div, given any array of reviews in 'reviewsToBeShown'
     renderReviews() {
         let reviews = this.state.reviewsToBeShown;
+        console.log('reviews', reviews)
         let innerDiv = this.state.reviewsShownSoFar;
         if (reviews.length) {
             //helper func to generate 1 review
