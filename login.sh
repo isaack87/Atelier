@@ -1,0 +1,1 @@
+ssh -i "FECPROJECT.cer" ubuntu@ec2-3-141-19-77.us-east-2.compute.amazonaws.com
