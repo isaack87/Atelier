@@ -74,19 +74,21 @@ const helpers = {
         //get the quarterStarAmount
         const quarterStar = (helpers.getQuarterStarAmount(rating - fullStars))/100;
         //loop through full stars to create full star div
+        //first create 5 empty stars
+
         let fullStarDiv = []
         for (let i = 0; i < fullStars; i++) {
-            fullStarDiv.push(<span className= "fa fa-star full-star"></span>)
+            fullStarDiv.push(<span className= "fa fa-star empty-star full-star"></span>)
         }
         //add the quarter star div if we have quarter stars
         if (quarterStar > 0) {
-            fullStarDiv.push(<span className= "fa fa-star" id={"star-" + (quarterStar*100).toString()}/>);
+            fullStarDiv.push(<span className= "fa fa-star empty-star" id={"star-" + (quarterStar*100).toString()}/>);
         }
         //now test if we need any empty stars, like if the review is 2 out of 5 stars
         const emptyStars = Math.floor(5 - fullStars - quarterStar);
         if (emptyStars > 0) {
             for (let i = 0; i < emptyStars; i++) {
-                fullStarDiv.push(<span className= "fa fa-star full-star-empty"></span>)
+                fullStarDiv.push(<span className= "fa fa-star empty-star"></span>)
             }
         }
         let starDiv = <div key={key + 'star'}>{fullStarDiv}</div>;
