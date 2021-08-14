@@ -10,8 +10,12 @@ class Reviews extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            //holds all reviews for productID. do not modify
             allReviews: [],
+            //hold reviews that want to be shown, such as sorted
+            reviewsToBeShown: [],
             currentReviewIndex: 0,
+            //holds reviews div for what will be shown
             reviewsDiv: [],
             reviewsShownSoFar : [],
             moreReviewsButton: [],
@@ -40,7 +44,7 @@ class Reviews extends React.Component {
         }).then(response => {
             //now take this and update reviews state
             console.log('sort', sort, this.state);
-            this.setState({allReviews: response.data, reviewsShownSoFar: [], currentReviewIndex: 0}, () => {
+            this.setState({allReviews: response.data,reviewsToBeShown: response.data, reviewsShownSoFar: [], currentReviewIndex: 0}, () => {
                 this.renderReviews();
             })
 
@@ -48,18 +52,14 @@ class Reviews extends React.Component {
     }
     //handle rendering the sort dropdown only if we have reviews to show
     showReviewDropdownSort() {
-        if (this.state.allReviews.length > 0) {
+        if (this.state.reviewsToBeShown.length > 0) {
             let div = <select id="review-dropdown" onChange = {(e) => {
                 e.preventDefault();
                 const dropdownChoice = e.target.value.toString();
-   
                 //wipe the current reviews
-                this.setState({allReviews: [], reviewsDiv: []}, ()=> {
+                this.setState({reviewsToBeShown: [], reviewsDiv: []}, ()=> {
                     this.getReviews(dropdownChoice)
                 })
-                
-                
-
             }}>
             <option value="relevant">relevant</option>
             <option value="helpful">helpful</option>
@@ -71,7 +71,7 @@ class Reviews extends React.Component {
     }
     //function to handle rendering the reviews div
     renderReviews() {
-        let reviews = this.state.allReviews;
+        let reviews = this.state.reviewsToBeShown;
         let innerDiv = this.state.reviewsShownSoFar;
         if (reviews.length) {
             //helper func to generate 1 review
@@ -117,7 +117,7 @@ class Reviews extends React.Component {
     //handles showing the 'more reviews' button
     showMoreReviewsButton() {
         //if our current index is less than the amount of reviews we have, we will keep displaying this button
-        if (this.state.currentReviewIndex < this.state.allReviews.length) {
+        if (this.state.currentReviewIndex < this.state.reviewsToBeShown.length) {
             //create a button
             let button = <button onClick= {()=> {
                 this.renderReviews();
@@ -137,7 +137,7 @@ class Reviews extends React.Component {
            
         }).then(response => {
             //now take this and update reviews state
-            this.setState({allReviews: response.data.results}, ()=> {
+            this.setState({allReviews: response.data.results, reviewsToBeShown: response.data.results}, ()=> {
                 this.renderReviews();
             })
         })
@@ -154,7 +154,7 @@ class Reviews extends React.Component {
                     <h1>{`Ratings & Reviews`}</h1>
                      <RatingsBreakdown props = {this.state} getAvgRating = {this.props.avgRatingFunc}/> 
                      <div id='reviews-scrollable'>
-                         <p id='reviews-sorted-by-info'>{this.state.allReviews.length} reviews, sorted by </p>
+                         <p id='reviews-sorted-by-info'>{this.state.reviewsToBeShown.length} reviews, sorted by </p>
                     {this.state.reviewDropdownSortDiv}
                    <div id='reviewsList'> {this.state.reviewsDiv}</div>
                     {this.state.moreReviewsButton}
