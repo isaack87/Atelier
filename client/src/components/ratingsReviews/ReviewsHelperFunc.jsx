@@ -146,7 +146,7 @@ const helpers = {
         return returnDiv;
     },
     getProductBreakdownBar: (title, info) => {
-        console.log('reaching get product breakdown bar')
+
         //now get the characteristics
         let firstCharacterstic, secondCharacteristic, thirdCharacteristic;
         if (title === 'Width' || title ==='Comfort' || title === 'Quality' ) {
@@ -160,10 +160,16 @@ const helpers = {
             thirdCharacteristic = 'too big'
 
         }
-        console.log('first', firstCharacterstic, 'second', secondCharacteristic)
+
+        //find the percentage out of 100 of the rating
+        let rating = info.value;
+        const percentage = (rating/5) * 100;;
+        const rightEMval = (-18.5 + (percentage * 0.17)).toString() + 'em';
+  
         return(<div>
             <p>{title}</p>
             <div id = 'metadata-bar'>
+                <span id='triangle' style={{left: rightEMval}}>▲</span>
                 <div id = 'metadata-bar-individual'>
                     <div className="w3-light-grey">
                         <div className='w3-green metadata-bar-individual' style={{height:"2em", width:"0%"}}/>
@@ -184,9 +190,7 @@ const helpers = {
                   
                 </div>
                 <br></br>
-               <span>
-
-                   
+               <span>    
                    </span> 
             </div>
             <div id = 'first-characteristic'>{firstCharacterstic}</div> 
