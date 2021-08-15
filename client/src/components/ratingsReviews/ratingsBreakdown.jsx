@@ -68,7 +68,7 @@ class RatingsBreakdown extends React.Component {
             <div id='star-bars'>
                 {this.state.starBarDiv}
             </div>
-            <ReviewProductBreakdown product = {this.props.product}/>
+            <ReviewProductBreakdown product = {this.props.product} setProductInfo = {this.props.setProductInfo}/>
         </div>
     }
 }

@@ -15,7 +15,7 @@ class ProductInformation extends React.Component {
 
   }
   render() {
-    console.log('the props for product info',this.props.avgRating)
+
     let displayPrice;
     if (this.props.allResultsArray[this.props.currentStyleIndex]) {
       if (this.props.allResultsArray[this.props.currentStyleIndex].sale_price) {

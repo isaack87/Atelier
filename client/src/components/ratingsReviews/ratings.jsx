@@ -6,6 +6,7 @@ import moment from 'moment';
  import helpers from './ReviewsHelperFunc.jsx';
  import RatingsBreakdown from './ratingsBreakdown.jsx';
 import ReviewProductBreakdown from './reviewProductBreakdown.jsx';
+import AddReview from './addReview.jsx';
 
 class Reviews extends React.Component {
     constructor(props) {
@@ -31,7 +32,8 @@ class Reviews extends React.Component {
                 1: false
             },
             //displays a message saying which filters are on
-            filterMessage: []
+            filterMessage: [],
+            productInfo:[]
 
         }
         this.getReviews = this.getReviews.bind(this);
@@ -43,7 +45,14 @@ class Reviews extends React.Component {
         this.grabReviewsForFilter = this.grabReviewsForFilter.bind(this);
         this.doWeDisplayAllReviews = this.doWeDisplayAllReviews.bind(this);
         this.generateFilterMessage = this.generateFilterMessage.bind(this);
+        this.setProductInfo = this.setProductInfo.bind(this);
     
+    }
+    //
+    setProductInfo(info){
+        this.setState({productInfo: info}, ()=> {
+            console.log('set product info', this.state)
+        });
     }
     //loops through the reviewsFilter and generates a message for each 'true' value
     generateFilterMessage() {
@@ -167,7 +176,7 @@ class Reviews extends React.Component {
     //function to handle rendering the reviews div, given any array of reviews in 'reviewsToBeShown'
     renderReviews() {
         let reviews = this.state.reviewsToBeShown;
-        console.log('reviews', reviews)
+     
         let innerDiv = this.state.reviewsShownSoFar;
         if (reviews.length) {
             //helper func to generate 1 review
@@ -250,9 +259,7 @@ class Reviews extends React.Component {
                     <h1>{`Ratings & Reviews`}</h1>
                     {this.state.filterMessage} 
                     <div id ='breakdown-div'>
-                    <RatingsBreakdown props = {this.state} getAvgRating = {this.props.avgRatingFunc} handleFilter = {this.handleClickFilterReviews} product = {this.props.props.productId}/>
-                   
-
+                    <RatingsBreakdown props = {this.state} getAvgRating = {this.props.avgRatingFunc} handleFilter = {this.handleClickFilterReviews} product = {this.props.props.productId} setProductInfo= {this.setProductInfo}/>
                     </div>
                      
                      
@@ -261,6 +268,7 @@ class Reviews extends React.Component {
                     {this.state.reviewDropdownSortDiv}
                    <div id='reviewsList'> {this.state.reviewsDiv}</div>
                     {this.state.moreReviewsButton}
+                    <AddReview productId={this.props.props.productId} productName = {this.props.props} productInfo = {this.state.productInfo}/>
                     </div>
                
                 </div>

@@ -31,6 +31,22 @@
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(179, 179, 179, 0.9);
 }
+.modal-main {
+  position:fixed;
+  background: white;
+  width: 80%;
+  height: auto;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+}
+.display-block {
+  display: block;
+}
+
+.display-none {
+  display: none;
+}
 
 .modal-content {
   margin: auto;
@@ -193,6 +209,9 @@ margin-right: 2em;
   overflow: hidden;
   color: #f80;
 }
+.star-modal {
+  display: inline;
+}
 #clickable-link:hover {
   cursor:pointer;
 
@@ -203,11 +222,33 @@ margin-right: 2em;
 
 
 }
-
-
-
-
-
+#add-review-btn {
+  margin-top: 3em;
+  margin-bottom: 3em;
+}
+#text-explanation{
+  display: inline;
+}
+#star-div-modal {
+  display: inline-block;
+  margin-top:1em;
+}
+#text-explanation-paragraphs{
+  display: inline;
+  float: right;
+  
+}
+#review-bold{
+  font-weight: bold;
+  
+}
+#button-modal {
+  display: inline-block;
+  margin-bottom: 10em;
+}
+/* #txt-p{
+  display: inline;
+} */
 
 /* isaac */
 

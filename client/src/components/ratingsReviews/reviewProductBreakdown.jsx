@@ -27,7 +27,9 @@ class ReviewProductBreakdown extends React.Component {
            //set the state with this info and then generate the div
             this.setState({metaData: productMetadata}, () => {
                 this.generateProductMetadataDiv();
-            })
+            });
+            console.log('review product breakdown', this.props)
+            this.props.setProductInfo(productMetadata);
         })
         
     }

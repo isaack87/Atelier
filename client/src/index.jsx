@@ -15,10 +15,12 @@ class App extends React.Component {
       user: '',
       stars: '',
       reportedArray: [],
-      avgRating: 0
+      avgRating: 0,
+      productName: ''
     };
     this.search = this.search.bind(this);
     this.updateAvgRatingForProduct = this.updateAvgRatingForProduct.bind(this);
+    this.getProductName = this.getProductName.bind(this);
   }
     //handles updating avg rating for a product
     updateAvgRatingForProduct(rating){
@@ -30,6 +32,11 @@ class App extends React.Component {
     }, () => {
       console.log('product id changed to ', this.state.productId);
     });
+  }
+  //handles setting the state for product name
+  getProductName(name){
+    this.setState({productName: name});
+
   }
 
   random(cb) {
@@ -48,11 +55,12 @@ class App extends React.Component {
   }
 
   render() {
+
     return (
       <div className="App-container">
         <ProductMainStateProvider productId ={this.state.productId}>
           <TopSearchBar onSearch={this.search}/>
-          <ProductOverview productId={this.state.productId} random={this.random.bind(this)} avgRating = {this.state.avgRating}/>
+          <ProductOverview productId={this.state.productId} random={this.random.bind(this)} avgRating = {this.state.avgRating} getProductName = {this.getProductName}/>
           <QuestionsAnswersState productId={this.state.productId} />
           <Reviews props={this.state} avgRatingFunc = {this.updateAvgRatingForProduct} />
         </ProductMainStateProvider>
