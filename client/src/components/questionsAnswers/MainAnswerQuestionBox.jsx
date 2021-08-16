@@ -8,15 +8,15 @@ import HelpfulQuestionCount from './HelpfulQuestionCount.jsx';
 import AnswerForm from './AnswerForm.jsx';
 
 const MainAnswerQuestionBox = (props) => {
-  const QABOX = props.questionanswerslist.slice(0, props.visibleQuestions).map((data) => (
-    <div className='QABOX'>
+  const QABOX = props.questionanswerslist.slice(0, props.visibleQuestions).map((data, index) => (
+    <div key={index} className='QABOX'>
       <div key={data.qID}>
         <ul>
           <div className="questionbox">
               <b>
                 <p className={data.answers[0] ? 'question' : 'question'}> Q:  {data.question} </p>
               </b>
-            <p className="questionuserbar qbarspacing">
+            <div className="questionuserbar qbarspacing">
               <HelpfulQuestionCount
                 pid={props.productId}
                 id={data.qID}
@@ -24,8 +24,8 @@ const MainAnswerQuestionBox = (props) => {
               />
               <p>{ data.question_helpfulness}</p>
               <QuestionReport qid={data.qID} />
-              <AnswerForm pid={props.productId} qid={data.qID} />
-            </p>
+              <AnswerForm pid={props.productId} qid={data.qID} updateQuestions={props.updateQuestions}/>
+            </div>
           </div>
         </ul>
         <div>
@@ -34,13 +34,11 @@ const MainAnswerQuestionBox = (props) => {
               {data.answers.slice(0, props.visibleAnswers).map(answerlist => (
                 <div key={answerlist.id}>
                   <p className={answerlist.body[0] ? 'answerbox' : 'answerbox'}> A: {answerlist.body.toString().toLowerCase()}
-                    <br />
-                    <br />
                   </p>
                   <div className="userinfobox">
                     { answerlist.answerername.toLowerCase() === 'seller'
                       ? <b> {answerlist.answerername} </b>
-                      : <normal>{answerlist.answerername}</normal> }
+                      : answerlist.answerername}
                     <Moment format="MMMM-DD-YYYY" date={answerlist.date} />
                     <HelpfulAnswerCount
                       id={answerlist.id}
@@ -52,9 +50,9 @@ const MainAnswerQuestionBox = (props) => {
                   <div>
                     {answerlist.photos.map((photo, index) => {
                       return (
-                        <div className='img img-spacing' key={index}>
-                          <img src={photo} className='img' />
-                        </div>
+                        <div className='imagezoom iimg iimg-spacing' key={index}>
+                          <img src={photo} className='iimg' />
+                          </div>
                       );
                     })}
 
@@ -78,6 +76,7 @@ const MainAnswerQuestionBox = (props) => {
         btnvisible={props.btnvisible}
         btnvisibleq={props.btnvisibleq}
         mainProductId={props.productId}
+        updateQuestions={props.updateQuestions}
       />
     </div>
   );

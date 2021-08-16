@@ -12,8 +12,8 @@ class ProductInformation extends React.Component {
 
   moveToReviews() {
     document.getElementById('review-dropdown').scrollIntoView();
-
   }
+
   render() {
 
     let displayPrice;
@@ -25,16 +25,22 @@ class ProductInformation extends React.Component {
       }
     }
 
+    let ratings;
+    if (this.props.avgRating > 0) {
+      ratings =
+        <div onClick={this.moveToReviews.bind(this)} className='readAllReviews'>
+          <div>{helpers.calculateStarDiv(this.props.avgRating, 'test key')}</div>
+          <div className='extraSpace'></div>
+          <div><u>Read all reviews</u></div>
+        </div>;
+    }
+
     return (
       <div className='productInformation'>
-        <div onClick={this.moveToReviews.bind(this)} className='readAllReviews'>
-          ✭ ✭ ✭ ✭ ✭ <u><a >Read all reviews</a></u>
-          {helpers.calculateStarDiv(this.props.avgRating, 'test key')}
-        </div>
-
-        <div>{this.props.productInfo.category}</div>
-        <div><b>{this.props.productInfo.name}</b></div>
-        {displayPrice}
+        {ratings}
+        <div className='categoryName'>{this.props.productInfo.category}</div>
+        <div className='productName'><b>{this.props.productInfo.name.toUpperCase()}</b></div>
+        <div className='priceTag'>{displayPrice}</div>
       </div>
     );
   }

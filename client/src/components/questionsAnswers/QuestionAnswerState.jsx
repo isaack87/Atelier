@@ -31,6 +31,15 @@ class QuestionsAnswersState extends React.Component {
     this.getQuestionsApi();
   }
 
+  componentDidUpdate() {
+    if (this.state.productId !== this.props.productId) {
+      this.getQuestionsApi();
+      this.setState({
+        productId: this.props.productId,
+      });
+    }
+  }
+
   getQuestionsApi() {
     fetch(`http://localhost:3000/questions?qid=${this.state.productId}`)
       .then((response) => response.json())
@@ -196,7 +205,7 @@ class QuestionsAnswersState extends React.Component {
         <div className="search">
           <SearchBar onSearch={this.search} />
         </div>
-        <div className="q-a-box">
+        <div className={this.state.visibleQuestions  > 2 || this.state.visibleAnswers > 2 ? "q-a-box-scroll" : 'q-a-box'}>
           <MainAnswerQuestionBox
             questionsList={this.state.questionsList}
             answersList={this.state.answersList}
@@ -211,6 +220,7 @@ class QuestionsAnswersState extends React.Component {
             searched={this.state.searched}
             searchTerm={this.state.searchTerm}
             questionanswerslist={this.state.questionanswerslist}
+            updateQuestions={this.getQuestionsApi}
           />
         </div>
       </div>

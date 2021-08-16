@@ -54,7 +54,8 @@ class AnswerForm extends React.Component {
 
     $.ajax(options).done((response) => {
       var res = JSON.parse(response);
-      if (this.state.photo.length <= 5) {
+      alert(`Picture ${this.state.selectedFile.name} added successfully`)
+      if (this.state.photo.length < 5) {
         this.setState({
           photo: [...this.state.photo, res.data.url]
         });
@@ -63,7 +64,6 @@ class AnswerForm extends React.Component {
       }
     });
   }
-
   onClick() {
     this.setState({ showForm: true });
   }
@@ -123,11 +123,19 @@ class AnswerForm extends React.Component {
       });
     }
 
-    if (!email) {
-      validForm = false;
+    if (!email.includes('@') || !email.includes('.com')) {
+      validForm = false
+      alert('Email just be email format')
       this.setState({
         emailValid: false
       });
+    }
+
+    if (!email) {
+        validForm = false;
+        this.setState({
+          emailValid: false
+        });
     }
 
     if (name === 'undefined') {
@@ -146,6 +154,15 @@ class AnswerForm extends React.Component {
 
   addAnswer(e) {
     e.preventDefault();
+
+    // checks and alert user if any of these fields are empty
+    if (this.state.body === '') {
+      alert('Please enter a valid Answer');
+    } else if (this.state.email === '') {
+      alert(`Please enter a valid email`);
+    } else if (this.state.name === '') {
+      alert(`Please enter a valid UserName`);
+   }
 
     if (this.formValidation()) {
       const info = {
@@ -169,38 +186,48 @@ class AnswerForm extends React.Component {
             photos: [],
             showForm: false,
           });
-          console.log('add answer success post');
+          this.props.updateQuestions();
+          alert('Answers Have been Posted Successful');
         },
         error: () => {
           console.log('error in addAnswers');
         },
       });
-    } else {
-      alert('NOT VALID FORM');
-    }
-    }
 
+  }
 
+}
   showForm() {
     const divStyle = {
       margin: '0px',
-      height: '200px',
-      width: '279px',
-      fontSize: '1em'
+      height: '15vh',
+      width: '34vh',
+      fontSize: '1em',
     };
     const text = {
-      fontSize: '1em'
+      fontSize: '1em',
+      marginBottom: '-3em'
     };
+
+    const placeholdertext = {
+      fontSize: '1em',
+      width: '34vh'
+    }
+
+    const formlabeltext = {
+      fontSize: '2em',
+      textDecoration: 'none'
+    }
 
     return (
       <div className="aboxcenter">
         <form>
           <button type="submit" className='X' onClick={this.onCloseForm}>X</button>
           <h1 className='answerboxtitle'>Add Answer</h1>
-
-          <label className="field field_v1">
+          <label>
+          <p style={formlabeltext}> Enter UserName*</p>
             <input
-              className="field__input"
+              style={placeholdertext}
               value={this.state.name}
               onChange={this.onChangeName}
               type="text"
@@ -208,21 +235,13 @@ class AnswerForm extends React.Component {
               maxLength="60"
               placeholder="Example: jack543!**"
             />
-            <span className="field__label-wrap">
-              <span className="field__label">Enter UserName*</span>
-            </span>
           </label>
           < br/>
-
-          < br/>
           <label style={text}> For privacy reasons, do not use your full name or email address**</label>
-          < br/>
-
-
-          < br/>
-          <label className="field field_v1">
+          <label>
+          <p style={formlabeltext}> Enter Email Here*</p>
             <input
-              className="field__input"
+              style={placeholdertext}
               value={this.state.email}
               onChange={this.onChangeEmail}
               type="text"
@@ -230,21 +249,14 @@ class AnswerForm extends React.Component {
               placeholder="Example: jack@gmail.com*"
               pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/"
             />
-            <span className="field__label-wrap">
-              <span className="field__label">Enter Email Here*</span>
-            </span>
           </label>
-          < br/>
-
           < br/>
           <label style={text}> For authentication reasons, you will not be emailed**</label>
           < br/>
-
-
-          < br/>
-          <label className="field field_v1">
+          <label>
+          <p style={formlabeltext}> Enter Answer Here*</p>
             <textarea
-              className="field__input"
+              style={placeholdertext}
               value={this.state.body}
               onChange={this.onChangeBody}
               type="text"
@@ -254,34 +266,27 @@ class AnswerForm extends React.Component {
               style={divStyle}
               placeholder="Example: Is this pretty!**"
             />
-            <span className="field__label-wrap">
-              <span className="field__label center"> Enter Answer Here*</span>
-            </span>
           </label>
-
-          < br/>
-
-          <input className='answerbutton upload'
-            type="submit"
-            onClick={this.addAnswer}
-            value="Post Answer"
-          />
-
           <div className="upload">
             <div className="">
               <input type="file" onChange={this.fileSelectorHandler} accept="image/*" />
               <button onClick={this.fileUploaderHandler}> Upload Photo</button>
               < br/>
-
               {this.state.photo.map((photo, index) => {
                 return (
-                  <div className='uploadimg img-spacing' key={index}>
+                  <div className='imagezoom uploadimg img-spacing' key={index}>
                     <img src={photo} className='uploadimg' />
                   </div>
                 );
               })}
             </div>
           </div>
+        < br/>
+            <input className='answerbutton upload'
+              type="submit"
+              onClick={this.addAnswer}
+              value="Post Answer"
+            />
         </form>
       </div>
     );

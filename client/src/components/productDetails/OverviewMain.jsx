@@ -72,7 +72,7 @@ class ProductOverview extends React.Component {
     })
       .then((response) => {
         const styleId = response.data.results[0].style_id;
-console.log(response.data.results)
+        // console.log(response.data.results)
         // Extract photo links here ========================
         const fullPhotos = [];
         const smallPhotos = [];
@@ -118,6 +118,7 @@ console.log(response.data.results)
         }, () => {
           document.getElementsByClassName(this.state.currentMainThumbnail)[0].classList.add('clickedMarker');
           document.getElementsByClassName(this.state.currentCheckMarked)[0].classList.add('checkMark');
+          document.getElementsByClassName('imageThumb')[0].classList.add('selectedThumbnail');
         });
       })
       .catch((error) => {
@@ -225,6 +226,7 @@ console.log(response.data.results)
   }
 
   onChangeId() {
+    console.log('clicked')
     this.props.random(() => {
       this.getDataFromProductId(this.props.productId);
     });
@@ -250,21 +252,18 @@ console.log(response.data.results)
     return (
       <div className='products overviewContainer'>
 
-        <div className='containerProducts'>
-          <Carousel fullSizePhotos={this.state.fullSizePhotos} smallSizePhotos={this.state.smallSizePhotos} currentMainThumbnail={this.state.currentMainThumbnail} />
-
+        <Carousel fullSizePhotos={this.state.fullSizePhotos} smallSizePhotos={this.state.smallSizePhotos} currentMainThumbnail={this.state.currentMainThumbnail} />
           <div className='containerChild2'>
             <ProductInformation productInfo={this.state.productInfo} allResultsArray={this.state.allResultsArray} currentStyleIndex={this.state.currentStyleIndex} avgRating = {this.props.avgRating} updateProductName = {this.props.getProductName}/>
 
-            <div className='styleSelector'>
-              <StyleSelector styleNames={this.state.styleNames} thumbnails={this.state.thumbnails} styleIds={this.state.styleIds} currentStyleIndex={this.state.currentStyleIndex} changeStyleId={this.changeStyleId.bind(this)} />
-              <AddToCart currentQuantity={this.state.currentQuantity} skuIds={this.state.skuIds} skuCounts={this.state.skuCounts} renderQuantity={this.renderQuantity.bind(this)} onAddToCart={this.onAddToCart.bind(this)} />
-            </div>
-          </div>
+
+        <div className='selectorContainer'>
+          <StyleSelector styleNames={this.state.styleNames} thumbnails={this.state.thumbnails} styleIds={this.state.styleIds} currentStyleIndex={this.state.currentStyleIndex} changeStyleId={this.changeStyleId.bind(this)} />
+          <AddToCart currentQuantity={this.state.currentQuantity} skuIds={this.state.skuIds} skuCounts={this.state.skuCounts} renderQuantity={this.renderQuantity.bind(this)} onAddToCart={this.onAddToCart.bind(this)} />
         </div>
 
-        <ProductDescription productInfo={this.state.productInfo} />
         <button onClick={this.onChangeId.bind(this)}>Randomize Product ID</button>
+        <ProductDescription productInfo={this.state.productInfo} />
 
       </div>
     );

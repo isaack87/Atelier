@@ -22,13 +22,13 @@ class App extends React.Component {
     this.updateAvgRatingForProduct = this.updateAvgRatingForProduct.bind(this);
     this.getProductName = this.getProductName.bind(this);
   }
-    //handles updating avg rating for a product
-    updateAvgRatingForProduct(rating){
-      this.setState({avgRating:rating});
+  //handles updating avg rating for a product
+  updateAvgRatingForProduct(rating) {
+    this.setState({ avgRating: rating });
   }
   search(term) {
     this.setState({
-      productId: term
+      productId: parseInt(term)
     }, () => {
       console.log('product id changed to ', this.state.productId);
     });
@@ -40,7 +40,7 @@ class App extends React.Component {
   }
 
   random(cb) {
-    let number = Math.floor(Math.random() * (28230 - 28212) + 28212);
+    let number = Math.floor(Math.random() * (36320 - 36300) + 36300);
     this.setState({
       productId: number,
     }, () => {

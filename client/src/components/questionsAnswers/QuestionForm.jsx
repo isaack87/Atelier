@@ -78,6 +78,14 @@ class QuestionForm extends React.Component {
       });
     }
 
+    if (!email.includes('@') || !email.includes('.com')) {
+      validForm = false
+      alert('Email just be email format')
+      this.setState({
+        emailValid: false
+      });
+    }
+
     if (!email) {
       validForm = false;
       this.setState({
@@ -101,6 +109,17 @@ class QuestionForm extends React.Component {
 
   addQuestion(e) {
     e.preventDefault();
+
+
+    // checks and alert user if any of these fields are empty
+    if (this.state.body === '') {
+      alert('Please enter a valid Answer');
+    } else if (this.state.email === '') {
+      alert(`Please enter a valid email`);
+    } else if (this.state.name === '') {
+      alert(`Please enter a valid UserName`);
+    }
+
     if (this.formValidation()) {
       const info = {
         body: this.state.body,
@@ -121,104 +140,96 @@ class QuestionForm extends React.Component {
             email: '',
             photos: []
           });
-          alert('Question Posted');
-          console.log('addquestion success');
+          alert('Question Posted Successfully');
+          this.props.updateQuestions();
         },
         error: () => {
-          alert('incorret email format');
           console.log('error in addQuestion');
         },
       });
     } else {
-      alert('NOT VALID FORM');
     }
   }
 
   showForm() {
-
     const divStyle = {
       margin: '0px',
-      height: '119px',
-      width: '279px',
-      fontSize: '1em'
+      height: '15vh',
+      width: '34vh',
+      fontSize: '2.5em',
     };
     const text = {
-      fontSize: '1em'
+      fontSize: '2em',
+      marginBottom: '-3em'
     };
 
+    const placeholdertext = {
+      fontSize: '2.5em',
+      width: '34vh'
+    }
+
+    const formlabeltext = {
+      fontSize: '4em',
+      textDecoration: 'none'
+    }
+
     return (
-      <div className="qformcontainer">
-        <div className="qboxcenter">
-          <form>
-            <button type="submit" className='X' onClick={this.onCloseForm}>X</button>
-            <h1>Ask Your Question</h1>
+      <div className="qboxcenter">
+        <form>
+          <button type="submit" className='X' onClick={this.onCloseForm}>X</button>
+          <h1 className='questionboxtitle'>Add Question</h1>
 
-            <label className="field field_v1">
-              <input
-                value={this.state.name}
-                className="field__input"
-                onChange={this.onChangeName}
-                type="text"
-                maxLength="60"
-                name="name"
-                placeholder="Example: jackson11!**"
-              />
-              <span class="field__label-wrap">
-                <span class="field__label">Enter UserName*</span>
-              </span>
-            </label>
-            < br/>
-
-            < br/>
-            <label style={text}> For privacy reasons, do not use your full name or email address**</label>
-            < br/>
-
-            < br/>
-            <label className="field field_v1">
-              <input
-                value={this.state.email}
-                className="field__input"
-                onChange={this.onChangeEmail}
-                name="email"
-                type="text"
-                maxLength="60"
-                placeholder="Why did you like the product or not**"
-
-              />
-              <span class="field__label-wrap">
-                <span class="field__label">Enter Email*</span>
-              </span>
-            </label>
-            < br/>
-
-            < br/>
-            <label style={text}> For authentication reason, you will not be emailed** </label>
-            < br/>
-
-            <br />
-            <label className="field field_v1">
-              <textarea
-                value={this.state.body}
-                rows="10"
-                className="field__input"
-                onChange={this.onChangeBody}
-                name="body"
-                placeholder="Type your Message**"
-                style={divStyle}
-              />
-              <span class="field__label-wrap">
-                <span class="field__label"> Enter Question Here*</span>
-              </span>
-            </label>
-            < br/>
+          <label>
+          <p style={formlabeltext}> Enter UserName*</p>
             <input
-              className='Qsubmit'
-              type="submit"
-              onClick={this.addQuestion}
-              value="Post Question"
+              style={placeholdertext}
+              value={this.state.name}
+              onChange={this.onChangeName}
+              type="text"
+              name="name"
+              maxLength="60"
+              placeholder="Example: jack543!**"
             />
-          </form>
-        </div>
+          </label>
+          < br/>
+          <label style={text}> For privacy reasons, do not use your full name or email address**</label>
+
+          <label>
+          <p style={formlabeltext}> Enter Email Here*</p>
+            <input
+              style={placeholdertext}
+              value={this.state.email}
+              onChange={this.onChangeEmail}
+              type="text"
+              name="Email"
+              placeholder="Example: jack@gmail.com*"
+              pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/"
+            />
+          </label>
+          < br/>
+          <label style={text}> For authentication reasons, you will not be emailed**</label>
+          < br/>
+          <label>
+          <p style={formlabeltext}> Enter Question Here*</p>
+            <textarea
+              value={this.state.body}
+              onChange={this.onChangeBody}
+              type="text"
+              cols="50"
+              rows="50"
+              style={divStyle}
+              placeholder="Example: Is this pretty!**"
+            />
+          </label>
+
+          < br/>
+
+          <input className='questionbutton upload'
+            type="submit"
+            onClick={this.addQuestion}
+            value="Post Answer"
+          />
+        </form>
       </div>
     );
   }
@@ -226,7 +237,7 @@ class QuestionForm extends React.Component {
   render() {
     const { showForm } = this.state;
     return (
-      <div className="buttons">
+      <div className="buttons buttoncontainers">
         <button className="add-q-btn" type="submit" onClick={ this.onOpenForm }>
           ADD A QUESTION
           <img alt="plusimage" className="imgplus" src="plus.png" />
