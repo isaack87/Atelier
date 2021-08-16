@@ -52,8 +52,8 @@ const MainAnswerQuestionBox = (props) => {
                   <div>
                     {answerlist.photos.map((photo, index) => {
                       return (
-                        <div className='img img-spacing' key={index}>
-                          <img src={photo} className='img' />
+                        <div className='imagezoom iimg iimg-spacing' key={index}>
+                          <img src={photo} className='iimg' />
                         </div>
                       );
                     })}

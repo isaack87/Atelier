@@ -274,7 +274,7 @@ class AnswerForm extends React.Component {
               < br/>
               {this.state.photo.map((photo, index) => {
                 return (
-                  <div className='uploadimg img-spacing' key={index}>
+                  <div className='imagezoom uploadimg img-spacing' key={index}>
                     <img src={photo} className='uploadimg' />
                   </div>
                 );

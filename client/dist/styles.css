@@ -309,7 +309,7 @@ display: inline-block;
   margin-top: 1em;
 }
 /* answer image flexboxes  */
-.img {
+.iimg {
   display: inline-flex;
   flex-wrap: wrap;
   gap: .2em;
@@ -317,7 +317,8 @@ display: inline-block;
   width: 2.5em;
   padding: .1em;
   flex-direction: row;
-  margin-top: 1em;
+  margin-top: .4em;
+  margin-bottom: .2em;
 }
 .uploadimg {
   display: inline-flex;
@@ -332,9 +333,21 @@ display: inline-block;
   margin-left: auto;
   cursor: pointer;
 }
-.img-spacing{
+.iimg-spacing{
   margin-left: 1em;
   padding: .1em;
+
+}
+
+.imagezoom img:hover {
+  border: black .1em solid;
+  width: 5em;
+  height: 5em;
+  position: relative;
+  display: flex;
+  flex-grow: 2;
+  cursor: zoom-in;
+
 }
 .questionbox {
   align-items: center;
@@ -500,7 +513,6 @@ ul {
 .helpfulQuestionCounter {
   gap: 1em;
   display: flex;
-  cursor: pointer;
 }
 .answerhelpfulbtn {
   border: none;
