@@ -240,7 +240,7 @@ display: inline-block;
 /* Q SEACH BAR   */
 /*               */
 .searchfield {
-  display: flex;
+  display: inline-flex;
   width: 75em;
   outline: black;
   border-radius: 5px;
@@ -255,32 +255,28 @@ display: inline-block;
 }
 .search {
   display: flex;
-  margin-top: .8em;
-  padding: 30px;
+  margin-top: 1.5em;
+  padding: 15px;
   font-size: 2em;
   flex-direction: column;
 }
 .searchbar {
   display: flex;
-  padding: 1px;
-  box-sizing: border-box;
-  align-items: center;
+  padding: 30px;
+  margin-top: -3em;
+  margin-bottom: -1.5em;
+
   justify-content: center;
 
 }
 .searchbartitle {
   display:block;
+  position: relative;
   font-size: .6em;
   margin-top: .5em;
   font-family: sans-serif;
 }
-.searchbutton {
-  float: right;
-  border-radius: 5px;
-  background: transparent;
-  border: none;
-  outline: none;
-}
+
 .flex-container {
   box-sizing: border-box;
   flex-wrap: wrap;
@@ -299,6 +295,7 @@ display: inline-block;
   padding: .1em;
   flex-direction: column;
   grid-row-gap: 1em;
+  flex: 1
 }
 
 .q-a-box-scroll{
@@ -354,7 +351,11 @@ display: inline-block;
 .iimg-spacing{
   margin-left: 1em;
   padding: .1em;
-
+}
+.iimg-thumbspace{
+  margin-left: 1em;
+  margin-top: -3em;
+  padding: .1em;
 }
 
 .imagezoom img:hover {
@@ -562,7 +563,6 @@ ul {
   background-color: lightslategrey;
   border: solid .1em black
 }
-
 .aboxcenter {
   margin-left: -90em;
   display: flex;
@@ -573,16 +573,14 @@ ul {
   font-size: .5em;
   padding: 1em;
   position: absolute;
-  z-index: 99;
+  z-index: 101;
   grid-gap: 1px;
   background-color: lightslategrey;
   border: solid .1em black
 }
-
 .formlabeltext {
   font-size: 1em;
 }
-
 .questionbutton {
   display: flex;
   position: relative;
@@ -599,7 +597,6 @@ ul {
   margin-bottom: 4em;
   color: white;
 }
-
 .upload {
   display: flex;
   margin-bottom: 2em;
@@ -626,8 +623,6 @@ ul {
 }
 
 
-
-=======
 /* Louis CSS */
 
 
