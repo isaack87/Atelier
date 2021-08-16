@@ -59,6 +59,8 @@ class AddReview extends React.Component{
             },
             counter: [],
             filesAdded: 1,
+            availableCharacteristicsForProduct: [],
+            validImages: true
         } 
         this.showModal = this.showModal.bind(this);
         this.hideModal = this.hideModal.bind(this);
@@ -70,6 +72,7 @@ class AddReview extends React.Component{
         this.buildRadioBtnForm = this.buildRadioBtnForm.bind(this);
         this.buildCharacteristicsDiv = this.buildCharacteristicsDiv.bind(this);
         this.handleImageUpload = this.handleImageUpload.bind(this);
+        this.validateFormInput = this.validateFormInput.bind(this);
     }
     showModal(){
         this.setState({showModal: true}, ()=> {
@@ -90,7 +93,9 @@ class AddReview extends React.Component{
         const characteristics = this.props.productInfo;
         let characteristicsArr = [];
         let meaning;
+        let collectionOfCharacteristics= {};
         for (let elem in characteristics) {
+            collectionOfCharacteristics[elem] = true;
 
             meaning = [];
             if (elem === 'Size') {
@@ -107,34 +112,34 @@ class AddReview extends React.Component{
                 meaning.push(<div id='meaning'><span>1 = 'Runs tight', 5 = 'Runs long'</span></div>)
             }
             characteristicsArr.push(<div id={elem}>
-                <form>
+                <form >
                 <p id = 'review-bold'>{elem}</p>
                 <p id = {elem + '-info'}>None selected</p>
-                <input type='radio' name='radio' value='1' onClick = {()=> {
+                <input type='radio' name={elem} value='1' onClick = {()=> {
                     let info = this.state.allCharacteristicInfo[elem][1];
                     $(`#${elem}-info`).empty();
                     $(`#${elem}-info`).append(info);
                 }}></input>
                     <span>1</span>
-                <input type='radio' name='radio' value='2' onClick = {()=> {
+                <input type='radio' name={elem} value='2' onClick = {()=> {
                     let info = this.state.allCharacteristicInfo[elem][2];
                     $(`#${elem}-info`).empty();
                     $(`#${elem}-info`).append(info);
                 }}></input>
                     <span>2</span>
-                <input type='radio' name='radio' value='3' onClick = {()=> {
+                <input type='radio' name={elem} value='3' onClick = {()=> {
                     let info = this.state.allCharacteristicInfo[elem][3];
                     $(`#${elem}-info`).empty();
                     $(`#${elem}-info`).append(info);
                 }}></input>
                     <span>3</span>
-                <input type='radio' name='radio' value='4' onClick = {()=> {
+                <input type='radio' name={elem} value='4' onClick = {()=> {
                     let info = this.state.allCharacteristicInfo[elem][4];
                     $(`#${elem}-info`).empty();
                     $(`#${elem}-info`).append(info);
                 }}></input>
                     <span>4</span>
-                <input type='radio' name='radio' value='5' onClick = {()=> {
+                <input type='radio' name={elem} value='5' onClick = {()=> {
                     let info = this.state.allCharacteristicInfo[elem][5];
                     $(`#${elem}-info`).empty();
                     $(`#${elem}-info`).append(info);
@@ -145,7 +150,7 @@ class AddReview extends React.Component{
             </div>)
         }
         let charactInfoDiv = <div id='characteristics'>{characteristicsArr}</div>
-        this.setState({characteristicsDiv: characteristicsArr})
+        this.setState({characteristicsDiv: characteristicsArr, availableCharacteristicsForProduct: collectionOfCharacteristics})
 
     }
     //handles building the radio button form
@@ -167,6 +172,7 @@ class AddReview extends React.Component{
             starIconsDiv.push(
                 <span className= "fa fa-star empty-star star-modal" id={'star-icon' + i} onClick = {()=> {
                     console.log('star clicked', i);
+                    this.setState({overallRating: i });
                     this.updateStarIcon(i);
                 }}></span>
             )
@@ -248,6 +254,7 @@ class AddReview extends React.Component{
         let div = (
             <div className = {showHideClassName}>
                 <section className = 'modal-main'>
+                    <div id='items-inside-modal'>
                     <h2>Write Your Review</h2>
                     <h3>About the {this.props.productName.productName} </h3>
                     
@@ -291,35 +298,118 @@ class AddReview extends React.Component{
                             let src = URL.createObjectURL(e.target.files[0]);
                             let count = this.state.filesAdded;
                             if (count < 5) {
-                                console.log('count lesss than five', count)
                                 $('#image-thumbnails').append(`<img src=${src} height = '100' ></img>`);
                                 this.setState({filesAdded: count + 1});
                             } if (count === 5) {
-                                console.log('count is five', count)
                                 $('#image-thumbnails').append(`<img src=${src} height = '100' ></img>`);
                                 $('#add-files-form').empty();
-                                this.setState({filesAdded: 0})
+                                this.setState({filesAdded: 0, count: 0})
                             }
-                              
-                            
-                            
-                            //document.getElementById(imgId).src = src;
-
-                            
-  
-
+                            //run the validator here and put it in state
+                            const files = e.target.files[0];
+                            const fileType = files['type'];
+                            const validImageType = ['image/jpeg', 'image/png'];
+                            if (!validImageType.includes(fileType)) {
+                                //set the state
+                                this.setState({validImages: false});
+                            }
                         }}></input>
-
                     </form>
                     <div id='image-thumbnails'></div>
+                    <p>What is your nickname?</p>
+                    <textarea id='nickname-input' maxLength= '60'></textarea>
+                    <p>For privacy reasons, do not use your full name or email address</p>
+                    <p>Your email</p>
+                    <textarea id='email-input' maxLength= '60'></textarea>
+                    <p>For authentication reasons, you will not be emailed</p>
+                    <button type='button' id='submit-form-button' onClick = {()=> {
+                        this.validateFormInput()
+                    }}>Submit review</button>
                     <button type='button' id='button-modal' onClick = {()=> {
                         this.hideModal()
                     }}>x</button>
+                    </div>
                 </section>
 
             </div>
         );
         this.setState({modalToAddReview: div});
+    }
+    validateFormInput(){
+        //first grab all the stuff and put it into state
+        let overallRating = this.state.overallRating;
+        let recommend = document.querySelector('input[name="radio"]:checked').value;
+
+        let allCharacteristics = this.state.availableCharacteristicsForProduct;
+        //below are boolean values for things that are mandatory
+        let allCharacteristicsHaveReviews = true;
+        let hasReviewSummary = true;
+        let hasReviewBody = true;
+        let reviewBodyHasOver50Char = true;
+        let hasNickname = true;
+        let hasEmail = true;
+        //now check photos, below will return boolean
+        let validPhotos = this.state.validImages;
+        for (let elem in allCharacteristics) {
+            
+           
+            if (document.querySelector(`input[name="${elem}"]:checked`) === null) {
+                allCharacteristicsHaveReviews = false;
+            } else {
+                let value = document.querySelector(`input[name="${elem}"]:checked`).value;
+                allCharacteristics[elem] = value;
+            }
+            
+        }
+        //get review summary
+        let reviewSummary = document.getElementById("review-summary-text").value;
+        let reviewBody = document.getElementById("review-body-text").value;
+        console.log('review body trim for whitespace', reviewBody.trim().split(''))
+        if (document.getElementById("review-body-text") === null || (reviewBody.trim().split('').length <= 0) ) {
+            
+            hasReviewBody = false;
+        }
+        if (document.getElementById("review-body-text").value.split('').length < 50) {
+            reviewBodyHasOver50Char = false;
+
+        }
+
+        //check nickname exists and is at least 1 character
+        let nickname = document.getElementById("nickname-input").value;
+        if (document.getElementById("nickname-input") === null || nickname.trim().split('').length <= 0) {
+            hasNickname = false;
+        }
+        //check email exists and is at least 1 character
+        let email = document.getElementById("email-input").value;
+        if (document.getElementById("email-input") === null || email.trim().split('').length <= 0) {
+            hasEmail = false;
+        }
+        //now validate all
+        if (allCharacteristicsHaveReviews && hasReviewBody && reviewBodyHasOver50Char &&
+            hasNickname && hasEmail && validPhotos) {
+                //it's all valid, now submit form
+
+        } else {
+            //incoming stupid code but too late to refactor
+            let alertInfo = '';
+            if (!allCharacteristicsHaveReviews) {
+                alertInfo += ' characteristic reviews, '
+            } if(!hasReviewBody || !reviewBodyHasOver50Char ) {
+                alertInfo += 'review body, '
+            } if ( !hasNickname) {
+                alertInfo += 'nickname, '
+            } if (!hasEmail) {
+                alertInfo += 'email, '
+            } if (!validPhotos) {
+                alertInfo += 'valid image files, '
+            }
+            //now remove last 2 char from this string ', '
+            alertInfo = alertInfo.slice(0, -2);
+            alert(`You must enter the following: ${alertInfo}`)
+        }
+
+
+
     }
   
     componentDidMount(){
