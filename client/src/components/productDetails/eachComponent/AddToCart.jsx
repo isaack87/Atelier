@@ -14,8 +14,6 @@ class AddToCart extends React.Component {
   }
 
   addToCart() {
-
-
     const OpenSelectMenu = (element, maxSize) => {
       const preventDefault = (event) => {
         event.preventDefault();
@@ -73,19 +71,19 @@ class AddToCart extends React.Component {
   }
 
   render() {
-    let mappedArray;
-    // out of stock id: 28221
+    let sizeArray;
+
     if (this.props.skuIds[0] === 'null') {
-      mappedArray =
-        <select onChange={this.renderQuantity.bind(this)} defaultValue={'DEFAULT'} disabled>
+      sizeArray =
+        <select className='selectedSize' onChange={this.renderQuantity.bind(this)} defaultValue={'DEFAULT'} disabled>
           <option disabled>OUT OF STOCK!</option>;
-          {mappedArray}
+          {sizeArray}
         </select>;
       const tooltip = document.getElementsByClassName('cartButton')[0];
       tooltip.style.visibility = 'hidden';
     } else {
-      mappedArray =
-        <select onChange={this.renderQuantity.bind(this)} id='selectedSize' defaultValue={'DEFAULT'} required>
+      sizeArray =
+        <select className='selectedSize' onChange={this.renderQuantity.bind(this)} id='selectedSize' defaultValue={'DEFAULT'} required>
           <option value='DEFAULT' disabled>SELECT SIZE</option>
           {this.props.skuCounts.map((item, index) => (
             <option key={index} id={this.props.skuIds[index]}>{item.size}</option>
@@ -96,7 +94,7 @@ class AddToCart extends React.Component {
     let quantityArray;
     if (!this.props.currentQuantity) {
       quantityArray =
-      <select name="selectquantity" defaultValue={'DEFAULT'} disabled>
+      <select className='selectQuantity' name="selectquantity" defaultValue={'DEFAULT'} disabled>
         <option disabled> - </option>
       </select>;
     } else if (this.props.currentQuantity <= 15) {
@@ -104,7 +102,7 @@ class AddToCart extends React.Component {
       for (let i = 0; i < this.props.currentQuantity; i++) {
         quantityCount.push(i);
       }
-      quantityArray = <select name="selectquantity" id='selectedQuantity' defaultValue='DEFAULT' required>
+      quantityArray = <select className='selectQuantity' name="selectquantity" id='selectedQuantity' defaultValue='DEFAULT' required>
         <option value='DEFAULT' disabled> - </option>
         {quantityCount.map((item, index) => (
           <option key={index}> {index + 1} </option>
@@ -112,13 +110,12 @@ class AddToCart extends React.Component {
       </select>;
     } else if (this.props.currentQuantity >= 15) {
       const quantityCount = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
-      quantityArray = <select name="selectquantity" id='selectedQuantity' defaultValue='DEFAULT' required>
+      quantityArray = <select className='selectQuantity' name="selectquantity" id='selectedQuantity' defaultValue='DEFAULT' required>
         <option value='DEFAULT' disabled> - </option>
         {quantityCount.map((item, index) => (
           <option key={index}> {index + 1} </option>
         ))}
       </select>;
-
     }
 
     return (
@@ -127,11 +124,15 @@ class AddToCart extends React.Component {
           <div className='tooltip'>
             <span className='tooltiptext'>Please select a size</span>
           </div>
-          {mappedArray}
-
-          {quantityArray}
-          <button type='button' id='userCart' className='cartButton' onClick={this.addToCart.bind(this)}>ADD TO BAG +</button>
-          <button type='button' onClick={this.favorite.bind(this)}>★</button>
+          <div className='selectChoices'>
+            {sizeArray}
+            {quantityArray}
+          </div>
+          <br></br>
+          <div className='selectChoices'>
+            <button type='button' id='userCart' className='cartButton' onClick={this.addToCart.bind(this)}>ADD TO BAG</button>
+            <button className='favoriteButton' type='button' onClick={this.favorite.bind(this)}>★</button>
+          </div>
         </form>
       </div>
     );
