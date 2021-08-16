@@ -364,16 +364,12 @@ class AddReview extends React.Component{
         //get review summary
         let reviewSummary = document.getElementById("review-summary-text").value;
         let reviewBody = document.getElementById("review-body-text").value;
-        console.log('review body trim for whitespace', reviewBody.trim().split(''))
         if (document.getElementById("review-body-text") === null || (reviewBody.trim().split('').length <= 0) ) {
-            
             hasReviewBody = false;
         }
         if (document.getElementById("review-body-text").value.split('').length < 50) {
             reviewBodyHasOver50Char = false;
-
         }
-
         //check nickname exists and is at least 1 character
         let nickname = document.getElementById("nickname-input").value;
         if (document.getElementById("nickname-input") === null || nickname.trim().split('').length <= 0) {
@@ -384,10 +380,19 @@ class AddReview extends React.Component{
         if (document.getElementById("email-input") === null || email.trim().split('').length <= 0) {
             hasEmail = false;
         }
+         //now check email format
+         var re = /\S+@\S+\.\S+/;
+
+        let emailFormat =  re.test(email);
+        if (!emailFormat) {
+            hasEmail = false;
+
+
+        }
         //now validate all
         if (allCharacteristicsHaveReviews && hasReviewBody && reviewBodyHasOver50Char &&
             hasNickname && hasEmail && validPhotos) {
-                //it's all valid, now submit form
+                //it's all valid, now first submit images to imgur api
 
         } else {
             //incoming stupid code but too late to refactor
@@ -406,10 +411,8 @@ class AddReview extends React.Component{
             //now remove last 2 char from this string ', '
             alertInfo = alertInfo.slice(0, -2);
             alert(`You must enter the following: ${alertInfo}`)
+            //let's test if we can grab the image
         }
-
-
-
     }
   
     componentDidMount(){
