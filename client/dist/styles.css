@@ -189,11 +189,9 @@ display: inline-block;
 /* Main cs box div */
 .QABOX {
   display: flex;
-  margin-top: -4em;
+  margin-top: -3.4em;
   margin-left: 19em;
 }
-
-
 /*               */
 /* TOP SEACH BAR */
 /*               */
@@ -246,9 +244,7 @@ display: inline-block;
   width: 75em;
   outline: black;
   border-radius: 5px;
-}
-.parent {
-  display: flex;
+  cursor: pointer;
 }
 
 .question {
@@ -257,20 +253,23 @@ display: inline-block;
   margin-bottom: -4em;
 }
 .search {
-  margin: 1.5em;
-  padding: 20px;
+  display: flex;
+  margin-top: .8em;
+  padding: 30px;
   font-size: 2em;
   flex-direction: column;
 }
 .searchbar {
   display: flex;
-  padding: .5em;
+  padding: 15px;
   align-items: center;
   justify-content: center;
 
 }
 .searchbartitle {
+  display:block;
   font-size: .6em;
+  margin-top: .5em;
   font-family: sans-serif;
 }
 .searchbutton {
@@ -297,11 +296,11 @@ display: inline-block;
   flex-direction: column;
   grid-row-gap: 1em;
 }
-
 .userinfobox {
   display: flex;
   flex-wrap: wrap;
   gap: 1em;
+  position: relative;
   font-size: .5em;
   height: 1em;
   padding: .2em;
@@ -309,7 +308,6 @@ display: inline-block;
   margin-left: 1.5em;
   margin-top: 1em;
 }
-
 /* answer image flexboxes  */
 .img {
   display: inline-flex;
@@ -319,25 +317,21 @@ display: inline-block;
   width: 2.5em;
   padding: .1em;
   flex-direction: row;
-
-  margin-top: .3em;
-
+  margin-top: 1em;
 }
-
 .uploadimg {
   display: inline-flex;
   flex-wrap: wrap;
   gap: .2em;
   height:7em;
   width: 7em;
-  margin-bottom: -1em;
+  margin-bottom: -5em;
   margin-top: 1em;
   padding: .1em;
   flex-direction: row;
   margin-left: auto;
+  cursor: pointer;
 }
-
-
 .img-spacing{
   margin-left: 1em;
   padding: .1em;
@@ -377,6 +371,7 @@ display: inline-block;
 .questionuserbar {
   flex-direction: row;
   display: flex;
+  position: relative;
   gap: .5em;
   margin-bottom: .1em;
   height: .6em;
@@ -386,7 +381,10 @@ display: inline-block;
 }
 .button-group {
   margin-bottom: 20%;
+  justify-content: center;
+  text-align: center;
   position: relative;
+  cursor: pointer;
 }
 .imgmag{
   width: 20px;
@@ -395,14 +393,38 @@ display: inline-block;
   margin-left: 15px;
   height:center;
 }
+
+.buttoncontainers {
+  display: flex;
+  margin-right: -4em;
+  cursor: pointer;
+}
 .add-q-btn {
-  font-size: 12px;
-  margin-left: 6%;
-  margin-top: 11%;
-  height: 50px;
-  width: 200px;
-  background-color: white;
-  flex-direction: row;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  text-align: left;
+  outline: none;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-appearance: none;
+  font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;
+  border-radius: 24px;
+  display: inline-block;
+  font-size: .3em;
+  font-weight: bold;
+  width: 30em;
+  line-height: 1.5;
+  padding-top: 1px;
+  padding-bottom: 1fpx;
+  padding-left: 18px;
+  padding-right: 18px;
+  position: relative;
+  text-align: center;
+  vertical-align: middle;
+  z-index: 10;
+  cursor: pointer;
 }
 .imgplus{
   width: 20px;
@@ -424,95 +446,31 @@ ul {
 .buttons {
   margin-top: 5%;
   margin-left:4%;
-  width: 60%;
+  width: 10%;
   display: flex;
   flex-direction: row;
+  cursor: pointer;
 }
 .X {
-  margin-left: 90%;
-  margin-bottom: -20%;
+  margin-left: 95%;
+  cursor: pointer;
 }
-
-.form-box{
-	font: 95% Arial, Helvetica, sans-serif;
-	max-width: 50em;
-  max-height: 20em;
-	margin: -500%;
-  margin-left: -180%;
-	background: #F7F7F7;
+.formboxtext {
+  font-size: 3em;
 }
-.form-box h1{
-	background: #43D1AF;
-	padding: 20px 0;
-	font-size: 140%;
-	font-weight: 300;
-	text-align: center;
-	color: #fff;
-	margin: -16px -16px 16px -16px;
-}
-.form-box input[type="text"],
-.form-box input[type="email"],
-.form-box textarea,
-.form-box select
-{
-	-webkit-transition: all 0.30s ease-in-out;
-	-moz-transition: all 0.30s ease-in-out;
-	-ms-transition: all 0.30s ease-in-out;
-	-o-transition: all 0.30s ease-in-out;
-	outline: none;
-	box-sizing: border-box;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	width: 100%;
-	background: #fff;
-	margin-bottom: 4%;
-	border: 1px solid #ccc;
-	padding: 3%;
-	color: #555;
-	font: 95% Arial, Helvetica, sans-serif;
-}
-.form-box input[type="text"]:focus,
-.form-box input[type="email"]:focus,
-.form-box textarea:focus,
-.form-box select:focus
-{
-	box-shadow: 0 0 5px #43D1AF;
-	padding: 3%;
-	border: 1px solid #43D1AF;
-}
-.form-box input[type="submit"],
-.form-box input[type="button"]{
-	box-sizing: border-box;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	width: 100%;
-	padding: 3%;
-	background: #43D1AF;
-	border-bottom: 2px solid #30C29E;
-	border-top-style: none;
-	border-right-style: none;
-	border-left-style: none;
-	color: #fff;
-}
-.form-box input[type="submit"]:hover,
-.form-box input[type="button"]:hover{
-	background: #2EBC99;
-}
-label {
-  font-size:30px;
-}
-
 .reporthelpful-btn {
   border: none;
   padding: 0;
   background: none;
   text-decoration:underline;
+  cursor: pointer;
 }
 .addanswer {
   border: none;
   padding: 0;
   background: none;
   text-decoration:underline;
+  cursor: pointer;
 }
 .btndisappear{
   background: transparent;
@@ -525,8 +483,8 @@ label {
   background: none;
   display: flex;
   font-size: .6em;
-  margin-left: 3em;
   color: blue;
+  cursor: pointer;
 
 }
 .answerPhotos {
@@ -537,180 +495,78 @@ label {
   padding: .2em;
   background: none;
   text-decoration:underline;
+  cursor: pointer;
 }
 .helpfulQuestionCounter {
   gap: 1em;
   display: flex;
-
+  cursor: pointer;
 }
 .answerhelpfulbtn {
   border: none;
   padding: 0;
   background: none;
   text-decoration:underline;
+  cursor: pointer;
 }
 .false {
   visibility: hidden;
 }
-
-
 /*                     */
 /* answer box form css */
 /*                     */
 
 .qboxcenter {
+  margin-left: -15em;
+  margin-top: -150em;
   display: flex;
-  box-sizing: border-box;
-  height: 10%;
-  width: 20%;
-  padding: 1em;
-  margin-left: -25em;
-  margin-top: -10em;
-  position: absolute;
-  z-index: 99;
-  grid-gap: 1px;
+  align-items: center;
   justify-content: center;
-  background-color:rgba(179, 179, 179, 0.9)
-}
-
-.aboxcenter {
-  display: flex;
-  justify-content: center;
-  margin-left: -50em;
-  box-sizing: border-box;
-  height: 20%;
+  height: 90vh;
+  width: 100vh;
+  font-size: .5em;
   padding: 1em;
   position: absolute;
   z-index: 99;
   grid-gap: 1px;
   background-color: lightslategrey;
+  border: solid .1em black
 }
 
-.field__input{
-  --uiFieldPlaceholderColor: var(--fieldPlaceholderColor, #767676);
-  background-color: transparent;
-  border-radius: 0;
-  border: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  font-family: inherit;
-  font-size: inherit;
-}
-.field__input:focus::-webkit-input-placeholder{
-  color: var(--uiFieldPlaceholderColor);
-}
-.field__input:focus::-moz-placeholder{
-  color: var(--uiFieldPlaceholderColor);
-}
-.field{
-  --uiFieldBorderWidth: var(--fieldBorderWidth, 2px);
-  --uiFieldPaddingRight: var(--fieldPaddingRight, 1rem);
-  --uiFieldPaddingLeft: var(--fieldPaddingLeft, 1rem);
-  --uiFieldBorderColorActive: var(--fieldBorderColorActive, rgba(22, 22, 22, 1));
+.aboxcenter {
+  margin-left: -90em;
+  display: flex;
+  align-items: center;
   justify-content: center;
-  display: var(--fieldDisplay, inline-flex);
+  height: 95vh;
+  width: 100vh;
+  font-size: .5em;
+  padding: 1em;
+  position: absolute;
+  z-index: 99;
+  grid-gap: 1px;
+  background-color: lightslategrey;
+  border: solid .1em black
+}
+
+.formlabeltext {
+  font-size: 1em;
+}
+
+.questionbutton {
+  display: flex;
   position: relative;
-  font-size: var(--fieldFontSize, 1rem);
+  margin-left: 30em;
+  height: 3vh;
+  margin-bottom: 4em;
+  color: white
 }
-.field__input{
-  box-sizing: border-box;
-  width: var(--fieldWidth, 100%);
-  height: var(--fieldHeight, 3rem);
-  padding: var(--fieldPaddingTop, 1.25rem) var(--uiFieldPaddingRight) var(--fieldPaddingBottom, .5rem) var(--uiFieldPaddingLeft);
-  border-bottom: var(--uiFieldBorderWidth) solid var(--fieldBorderColor, rgba(0, 0, 0, .25));
-}
-.field__input:focus{
-  outline: none;
-}
-.field__input::-webkit-input-placeholder{
-  opacity: 0;
-  transition: opacity .2s ease-out;
-}
-.field__input::-moz-placeholder{
-  opacity: 0;
-  transition: opacity .2s ease-out;
-}
-.field__input:focus::-webkit-input-placeholder{
-  opacity: 1;
-  transition-delay: .2s;
-}
-.field__input:focus::-moz-placeholder{
-  opacity: 1;
-  transition-delay: .2s;
-}
-.field__label-wrap{
-  box-sizing: border-box;
-  pointer-events: none;
-  cursor: text;
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-}
-
-.field__label-wrap::after{
-  content: "";
-  box-sizing: border-box;
-  width: 100%;
-  height: 0;
-  opacity: 0;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-}
-.field__input:focus ~ .field__label-wrap::after{
-  opacity: 1;
-}
-.field__label{
-  position: absolute;
-  left: var(--uiFieldPaddingLeft);
-  top: calc(50% - .5em);
-  line-height: 1;
-  font-size: var(--fieldHintFontSize, inherit);
-  transition: top .2s cubic-bezier(0.9, -0.15, 0.1, 1.15), opacity .2s ease-out, font-size .2s ease-out;
-  will-change: bottom, opacity, font-size;
-}
-.field__input:focus ~ .field__label-wrap .field__label,
-.field__input:not(:placeholder-shown) ~ .field__label-wrap .field__label{
-  --fieldHintFontSize: var(--fieldHintFontSizeFocused, .75rem);
-  top: var(--fieldHintTopHover, .25rem);
-}
-.field_v1 .field__label-wrap::after{
-  border-bottom: var(--uiFieldBorderWidth) solid var(--uiFieldBorderColorActive);
-  transition: opacity .2s ease-out;
-  will-change: opacity;
-}
-.field_v2 .field__label-wrap{
-  overflow: hidden;
-}
-.field_v2 .field__label-wrap::after{
-  border-bottom: var(--uiFieldBorderWidth) solid var(--uiFieldBorderColorActive);
-  transform: translate3d(-105%, 0, 0);
-  will-change: transform, opacity;
-  transition: transform .285s ease-out .2s, opacity .2s ease-out .2s;
-}
-.field_v2 .field__input:focus ~ .field__label-wrap::after{
-  transform: translate3d(0, 0, 0);
-  transition-delay: 0;
-}
-.field_v3 .field__label-wrap::after{
-  border: var(--uiFieldBorderWidth) solid var(--uiFieldBorderColorActive);
-  will-change: opacity, height;
-  transition: height .2s ease-out, opacity .2s ease-out;
-}
-.field_v3 .field__input:focus ~ .field__label-wrap::after{
-  height: 100%;
-}
-.field{
-  --fieldBorderColor: #D1C4E9;
-  --fieldBorderColorActive: #673AB7;
-}
-
 .answerbutton {
   display: flex;
+  position: relative;
   margin-left: 10em;
-  margin-top: 6em;
+  height: 3vh;
+  margin-bottom: 4em;
   color: white;
 }
 
@@ -721,22 +577,28 @@ label {
   color: black;
   flex-direction: row;
 }
-
 .answerboxtitle {
+  font-size: 4em;
+  margin: auto;
   display: flex;
-  margin-bottom: 3em;
-  margin-left: 4em;
+  justify-content: center;
   color: white;
 }
-
+.questionboxtitle {
+  font-size: 4em;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  color: white;
+}
 .center {
   justify-content: center;
 }
 
 
 
-
-
+=======
+/* Louis CSS */
 
 
 /* Louis - CSS */

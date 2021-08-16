@@ -8,13 +8,13 @@ const AskQuestions = (props) => (
       loadMoreAnswers={props.loadMoreAnswers}
       btnvisible={props.btnvisible}
     />
-    <div className="buttons">
+    <div className="buttons buttoncontainers">
       <button className={props.btnvisibleq ? 'add-q-btn' : 'btndisappear'}
         onClick={props.loadMoreQuestions}
         type="submit">
         MORE ANSWERED QUESTIONs
       </button>
-      <QuestionForm mainProductId={props.mainProductId}/>
+      <QuestionForm mainProductId={props.mainProductId} updateQuestions={props.updateQuestions}/>
     </div>
   </div>
 );
