@@ -27,15 +27,15 @@ class SearchBar extends React.Component {
 
   render() {
     return (
-      <div className="cell">
+      <div>
         <div className="searchbar">
           <form>
             <p className="searchbartitle">QUESTIONS & ANSWERS
               <br />
               <input
                 onChange={this.onChange}
-                className="searchfield search parent largefont"
-                placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS ..."
+                className="searchfield search largefont"
+                placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS ...... 🔍"
               />
             </p>
           </form>

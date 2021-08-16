@@ -220,6 +220,7 @@ class QuestionsAnswersState extends React.Component {
             searched={this.state.searched}
             searchTerm={this.state.searchTerm}
             questionanswerslist={this.state.questionanswerslist}
+            updateQuestions={this.getQuestionsApi}
           />
         </div>
       </div>
