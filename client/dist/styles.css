@@ -609,9 +609,6 @@ ul {
 
 
 
-=======
-/* Louis CSS */
-
 
 /* Louis - CSS */
 .overviewContainer {
@@ -1139,6 +1136,12 @@ ul {
   /*set the size of the result div:*/
   width: 300px;
   height: 300px;
+}
+/* ======================== */
+
+.dark-mode {
+  background-color: black;
+  color: white;
 }
 /* ======================== */
 
