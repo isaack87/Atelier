@@ -256,14 +256,15 @@ display: inline-block;
 .search {
   display: flex;
   margin-top: .8em;
-  padding: 1px;
+  margin-bottom: -1em;
+  padding: 20px;
   font-size: 2em;
-  box-sizing: border-box;
   flex-direction: column;
 }
 .searchbar {
   display: flex;
   padding: 15px;
+  margin-top: -3em;
   align-items: center;
   justify-content: center;
 
@@ -309,9 +310,8 @@ display: inline-block;
   flex-direction: column;
   font-family: sans-serif;
   font-size: 1em;
-  overflow: scroll;
-  flex: 1;
-
+  overflow-y:scroll;
+  cursor: all-scroll;
 }
 .userinfobox {
   display: flex;
@@ -500,7 +500,7 @@ ul {
   background: none;
   display: flex;
   font-size: .6em;
-  color: blue;
+  color: grey;
   cursor: pointer;
 
 }
