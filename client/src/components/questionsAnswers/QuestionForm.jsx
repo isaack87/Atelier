@@ -78,6 +78,14 @@ class QuestionForm extends React.Component {
       });
     }
 
+    if (!email.includes('@') || !email.includes('.com')) {
+      validForm = false
+      alert('Email just be email format')
+      this.setState({
+        emailValid: false
+      });
+    }
+
     if (!email) {
       validForm = false;
       this.setState({
