@@ -12,7 +12,7 @@ class ProductDescription extends React.Component {
     return (
       <div className="descriptionParent">
         <div className='descriptionChild1'>
-          <div><b>{this.props.productInfo.slogan}</b></div>
+          <p><b>{this.props.productInfo.slogan}</b></p>
           <p>{this.props.productInfo.description}</p>
         </div>
         <div className='descriptionChild2'>

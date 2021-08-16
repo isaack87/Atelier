@@ -5,7 +5,19 @@
   border: .5em solid orange;
   flex-direction: column;
   z-index: 1;
-  position: relative
+  position: relative;
+
+}
+
+.logoAndNavigationContainer {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  /* border: .5em solid orange; */
+  flex-direction: column;
+  z-index: 1;
+  position: relative;
+  width: 70em;
 
 }
 
@@ -188,9 +200,40 @@ display: inline-block;
   margin-left: -1.7em;
 }
 .topsearchbar {
-  margin-right: 1em;
-  margin-top: 1.3em;
+  /* margin-right: 1em;
+  margin-top: 1.3em; */
+  /* margin-top: 1em; */
   width: 15em;
+  /* border: none; */
+  /* background: rgb(68, 65, 65); */
+  /* background-color: blue; */
+  /* border:none;
+    background-image:none;
+    background-color:transparent;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none; */
+    /* border: 2px solid red; */
+  border-radius: 1em;
+  padding: .2em 1.5em;
+  /* margin: 8px 0; */
+  margin-right: 1em;
+}
+.productIdSearchButton {
+  font-size: 1.4em;
+  cursor: pointer;
+  user-select: none;
+  /* padding: 0; */
+  /* border: .2em solid white; */
+  /* background: none; */
+  /* color: white; */
+  fill: white;
+  margin-right: .4em;
+}
+.productIdSearchButton:hover {
+  box-shadow: 0 1px 8px 0 rgb(35 34 34 /80%);
+  border-color: whitesmoke;
+
 }
 
 /*               */
@@ -553,68 +596,52 @@ ul {
 }
 
 
+
+=======
 /* Louis CSS */
+
 
 /* Louis - CSS */
 .overviewContainer {
   display: flex;
-  flex-flow: column wrap;
-  border: .2em solid purple;
+  height: 48em;
+  width: 70em;
+  flex-flow: row wrap;
+  /* border: .2em solid purple; */
 }
 .navigationBar {
   display: flex;
-  width: 702px;
-  flex-direction: row;
+  height: 5em;
+  width: 70em;
+  flex-flow: row;
   justify-content: space-between;
-  background: rgb(68, 65, 65);
-  box-shadow: 0 0 50px rgb(0, 0, 0, 0.15);
+  background: rgb(66, 64, 64);
+  box-shadow: 0 1px 6px 0 rgb(34 34 34 / 30%);
+  border-radius: .3em;
 }
 
 .navigation1 {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: flex-start;
   font-size: 18px;
-  list-style: none;
-  margin: 0;
-  background: rgb(68, 65, 65);
+  margin-left: 1em;
+  background-color: transparent;
+  margin-top: .3em;
 }
 
 .navigation2 {
+  margin-right: 1em;
+  justify-content: center;
+  align-items: center;
   display: flex;
-  flex-flow: row wrap;
-  justify-content: flex-end;
-  list-style: none;
-  margin: 0;
-  background: rgb(68, 65, 65);
+  flex-flow: row;
 }
 
 .navigation a {
   text-decoration: none;
-  display: block;
-  padding: 1em;
   color: white;
 }
 
 .navigation a:hover {
   background: #1565C0;
-}
-
-
-@media all and (max-width: 600px) {
-  .navigation {
-    flex-flow: column wrap;
-    padding: 0;
-  }
-  .navigation a {
-    text-align: center;
-    padding: 10px;
-    border-top: 1px solid rgba(255, 255, 255,0.3);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  }
-  .navigation li:last-of-type a {
-    border-bottom: none;
-  }
 }
 
 .announce {
@@ -626,51 +653,115 @@ ul {
 
 }
 
-.containerProducts {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  /* border: 3px solid black; */
-  width: 700px;
-  height: 400px;
-
-}
-
-.containerChild1 {
-  margin: auto;
-
-  padding: 2%;
-  height: 90%;
-  border: .2em dotted rgb(78, 78, 47);
-}
-.containerChild2 {
-  margin: auto;
-  border: .2em dotted darkolivegreen;
-}
-
 .carouselContainer {
+  height: 35em;
+  width: 45em;
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  background-color: lightgray;
+  background-color: rgb(231, 229, 229);
+  /* border: .2em dotted rgb(78, 78, 47); */
   box-shadow: 0 0 30px rgb(0, 0, 0, 0.15);
   border-radius: 6px;
 }
-
 .carouselChild1 {
-  margin: auto;
-  width: 30%;
+  height: 35em;
+  width: 5.3em;
+  /* border: .3em solid blue; */
+  display: flex;
+  flex-flow: column;
 }
 .carouselChild2 {
-  margin: auto;
-  width: 70%;
+  height: 35em;
+  width: 39.5em;
+  /* border: .3em solid green; */
+  display: flex;
+  flex-flow: row;
+  background-color: rgb(231, 229, 229);
+}
+
+.fullScreenCarousel {
+  height: 35em;
+  width: 65.5em;
+  /* border: .3em solid blue; */
+  display: flex;
+  flex-flow: row;
+  background-color: rgb(231, 229, 229);
+  position: relative;
+  z-index:1;
+}
+
+.fullscreenMainPhotoImage {
+  height: 34.3em;
+  width: 65.5em;
+  object-fit: contain;
+  /* border: .3em solid black; */
+  transition: width .5s;
+  filter: drop-shadow(0px 0px 5px rgba(0,0,0,.3))
+          drop-shadow(0px 0px 50px rgba(0,0,0,.3));
+}
+
+.selectorContainer {
+  margin-top: 1em;
+  margin-left: 1.5em;
+  /* border: .2em dotted darkolivegreen; */
+  height: 34em;
+  width: 23em;
+}
+
+.categoryName {
+  margin-top: .5em;
+}
+.productName {
+  margin-bottom: -.2em;
+  font-size: 2em;
+  /* border: .2em solid black; */
+  width: 15em;
+  height: 1.7em;
+}
+.priceTag {
+  margin-bottom: .5em;
+}
+
+.styleSelector {
+  display: flex;
+  flex-flow: column;
+}
+
+.thumbnailContainer1 {
+  display: flex;
+  flex-direction: row;
+  margin: 0em;
+  margin-left: -1em;
+  /* border: .2em solid black; */
+  height: 4.5em;
+  width: 20em;
+}
+.thumbnailContainer2 {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: -1em;
+  margin-top: -.3em;
+  margin-left: -1em;
+  /* border: .2em solid black; */
+  height: 4.5em;
+  width: 20em;
+}
+.thumbnailContainer3 {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: -1em;
+  margin-left: -1em;
+  /* border: .2em solid black; */
+  height: 4.5em;
+  width: 20em;
 }
 
 .descriptionParent {
   display: flex;
   flex-flow: row wrap;
-  justify-content: center;
-  border: .2em dotted magenta;
+  /* border: .2em dotted magenta; */
+  height: 13em;
+  width: 70em;
 }
 
 .descriptionChild1 {
@@ -685,35 +776,55 @@ ul {
   width: 50%;
 }
 
-
-.image {
-  height: 65%;
-  width: 65%;
-  border-radius: 18px;
-  box-shadow: 0 0 20px rgb(0, 0, 0, 0.15);
-  position: relative;
-  top: -22px;
-
+.mainPhotoImage {
+  height: 34.3em;
+  width: 35em;
+  object-fit: contain;
+  cursor: zoom-in;
+  /* border: .3em solid black; */
+  filter: drop-shadow(0px 0px 5px rgba(0,0,0,.3))
+          drop-shadow(0px 0px 50px rgba(0,0,0,.3));
 }
 .imageThumb {
   object-fit: cover;
-  height: 3em;
-  width: 3em;
+  height: 3.9em;
+  width: 3.9em;
   box-shadow: 0 0 20px rgb(0, 0, 0, 0.15);
   border-radius: 12px;
   cursor: pointer;
-  border: 1px solid rgb(90, 87, 87);
+  border: .1em solid rgb(36, 32, 32);
+  margin: .2em;
 }
+
+.selectedThumbnail {
+  border: 5px solid rgb(185, 105, 68);
+}
+
 .imageThumb:hover {
   box-shadow: 0 0 12px black;
+}
+.thumbnailDownLine {
+  height: 33em;
+  /* border: .2em solid red; */
+}
+.downArrow {
+  font-size: 2rem;
+  cursor: pointer;
+  user-select: none;
+  padding: 0;
+  border: none;
+  background: none;
+}
+.centerDownArrow {
+  margin-left: .7em;
+  height: 3em;
+  width: 3em;
+  /* border: .3em solid black; */
+  text-align: center;
 }
 
 
 .left-arrow {
-  position: relative;
-  top: 2px;
-  right: 55px;
-
   font-size: 2rem;
   cursor: pointer;
   user-select: none;
@@ -721,19 +832,34 @@ ul {
   border: none;
   background: none;
 }
+
 
 .right-arrow {
-
-  position: relative;
-  right: -200px;
-
   font-size: 2rem;
   cursor: pointer;
   user-select: none;
   padding: 0;
   border: none;
   background: none;
+
 }
+.fullscreenButton {
+  cursor: pointer;
+  position: relative;
+  right: 1em;
+  bottom: .1em;
+  height: 1.5em;
+  width: 1.5em;
+  font-size: 1.8em;
+  opacity: 50%;
+  z-index: 1;
+}
+.fullscreenButton:hover {
+  opacity: 80%;
+  transform: scale(1.1);
+
+}
+
 .slide {
   opacity: 0;
   transition-duration: 1s ease;
@@ -748,11 +874,11 @@ ul {
 .styleThumbnail {
   object-fit: cover;
   border-radius: 50%;
-  height: 3em;
-  width: 3em;
+  height: 3.2em;
+  width: 3.2em;
   cursor: pointer;
   border: 1px solid rgb(90, 87, 87);
-  margin-right: 7px;
+  margin-right: 1em;
 }
 .styleThumbnail:hover {
   box-shadow: 0 0 12px black;
@@ -762,16 +888,9 @@ ul {
   list-style-type: none;
 }
 
-.thumbnailContainer {
-  display: flex;
-  flex-direction: row;
-
-  height: 50%;
-  margin: -7%;
-}
-
 .clickedMarker {
-  box-shadow: 0 0 12px purple;
+  /* box-shadow: 0 0 .3em rgb(51, 40, 51); */
+  border: 5px solid rgb(185, 105, 68);
 }
 
 .salePrice {
@@ -780,20 +899,20 @@ ul {
 }
 
 .checkMark {
-  --borderWidth: 7px;
-  --height: 12px;
+  --borderWidth: 4px;
+  --height: 17px;
   --width: 6px;
-  --borderColor: #78b13f;
+  --borderColor: rgb(27, 44, 23);
+  box-shadow: 0 0 12px rgb(230, 221, 221);
 
   transform: rotate(45deg);
   height: var(--height);
   width: var(--width);
   border-bottom: var(--borderWidth) solid var(--borderColor);
   border-right: var(--borderWidth) solid var(--borderColor);
-
   position: relative;
   left: 65%;
-  top: -80%;
+  top: -140%;
 }
 
 .tooltip {
@@ -817,17 +936,199 @@ ul {
   z-index: 1;
 }
 
-.cartButton {
-  visibility: visible;
-}
 
 .readAllReviews {
   cursor: pointer;
+  display: flex;
+  flex-flow: row wrap;
+}
+.extraSpace {
+  margin-right: 1em;
 }
 
 .readAllReviews:hover {
   color: skyblue;
 }
+
+.selectChoices {
+  display: flex;
+  flex-flow: row;
+}
+
+.selectedSize {
+  box-shadow: 0 1px 6px 0 rgb(34 34 34 / 15%);
+  display: block;
+  font-size: 16px;
+  height: 3em;
+  padding-left: 12px;
+  padding-right: 36px;
+  width: 13em;
+  border-radius: 6px;
+  background: #FFFFFF;
+  border-color: rgba(34, 34, 34, 0.15);
+  border-style: solid;
+  border-width: 1px;
+  color: #222222;
+  text-indent: 0.01px;
+  cursor: pointer;
+  margin-right: 1em;
+}
+
+.addToCart {
+  margin-top: 3em;
+}
+.selectedSize:hover, .selectQuantity:hover, .favoriteButton:hover {
+  box-shadow: 0 1px 8px 0 rgb(35 34 34 /20%);
+  border-color: black;
+}
+.selectQuantity {
+  box-shadow: 0 1px 6px 0 rgb(34 34 34 / 15%);
+  display: block;
+  font-size: 16px;
+  height: 3em;
+  padding-left: 12px;
+  padding-right: 36px;
+  width: 7em;
+  border-radius: 6px;
+  background: #FFFFFF;
+  border-color: rgba(34, 34, 34, 0.15);
+  border-style: solid;
+  border-width: 1px;
+  color: #222222;
+  text-indent: 0.01px;
+  cursor: pointer;
+}
+.cartButton {
+  visibility: visible;
+  box-shadow: 0 1px 6px 0 rgb(34 34 34 / 15%);
+  display: block;
+  font-size: 16px;
+  height: 3em;
+  padding-left: 12px;
+  padding-right: 36px;
+  width: 17em;
+  border-radius: 6px;
+  background: rgb(27, 23, 23);
+  border-color: rgba(34, 34, 34, 0.15);
+  border-style: solid;
+  border-width: 1px;
+  color: white;
+  text-indent: 0.01px;
+  cursor: pointer;
+  margin-right: 1em;
+}
+
+.cartButton:hover {
+  box-shadow: 0 1px 8px 0 rgb(35 34 34 /80%);
+  border-color: whitesmoke;
+  transform: scale(1.03);
+}
+.favoriteButton {
+  visibility: visible;
+  box-shadow: 0 1px 6px 0 rgb(34 34 34 / 15%);
+  font-size: 1em;
+  height: 3em;
+  padding-left: 12px;
+  padding-right: 12px;
+  width: 3em;
+  border-radius: 6px;
+  background: #FFFFFF;
+  border-color: rgba(34, 34, 34, 0.15);
+  border-style: solid;
+  border-width: 1px;
+  color: #222222;
+  text-indent: 0.01px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.carouselBackground {
+  background: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+#myImg {
+  /* border-radius: 5px; */
+  cursor: zoom-in;
+  transition: 0.3s;
+}
+
+#myImg:hover {opacity: 0.7;}
+
+/* The Modal (background) */
+.overviewmodal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (Image) */
+/* .modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+} */
+
+@keyframes zoom {
+  from {transform:scale(0)}
+  to {transform:scale(1)}
+}
+
+/* The Close Button */
+.closeOverviewImage {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.closeOverviewImage:hover,
+.closeOverviewImage:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px){
+  .modal-content {
+    width: 100%;
+  }
+}
+
+
+.img-zoom-container {
+  position: relative;
+}
+
+.img-zoom-lens {
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  /*set the size of the lens:*/
+  width: 40px;
+  height: 40px;
+}
+
+.img-zoom-result {
+  border: 1px solid #d4d4d4;
+  /*set the size of the result div:*/
+  width: 300px;
+  height: 300px;
+}
+/* ======================== */
 
 .dark-mode {
   background-color: black;

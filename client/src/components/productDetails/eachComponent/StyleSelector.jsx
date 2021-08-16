@@ -24,7 +24,7 @@ class StyleSelector extends React.Component {
 
     const mappedArray = this.props.styleNames.map((item, index) => {
       let classes = this.props.thumbnails[index].slice(34, 85) + " styleThumbnail";
-      return <li className="removeBullets" key={index}><img className={classes} id={index} value={this.props.styleIds[index]} onClick={this.updateStyleId.bind(this)} src={this.props.thumbnails[index]} title={item}/><div class={this.props.thumbnails[index].slice(34, 90)}></div></li>
+      return <li className="removeBullets" key={index}><img className={classes} id={index} value={this.props.styleIds[index]} onClick={this.updateStyleId.bind(this)} src={this.props.thumbnails[index]} title={item}/><div className={this.props.thumbnails[index].slice(34, 90)}></div></li>
     })
 
     let currentStyleName = this.props.styleNames[this.state.current];
@@ -44,15 +44,15 @@ class StyleSelector extends React.Component {
     }
 
     return (
-        <div>
-          <b>STYLE ></b> {currentStyleName}
-          <ul className="thumbnailContainer">
+        <div className='styleSelector'>
+          <div><b>STYLE ></b> {currentStyleName}</div>
+          <ul className="thumbnailContainer1">
             {thumbnailArray1}
           </ul>
-          <ul className="thumbnailContainer">
+          <ul className="thumbnailContainer2">
             {thumbnailArray2}
           </ul>
-          <ul className="thumbnailContainer">
+          <ul className="thumbnailContainer3">
             {thumbnailArray3}
           </ul>
         </div>
