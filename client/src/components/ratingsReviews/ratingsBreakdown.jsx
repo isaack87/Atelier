@@ -1,6 +1,7 @@
 
 import React from 'react';
 import helpers from './ReviewsHelperFunc.jsx';
+import ReviewProductBreakdown from './reviewProductBreakdown.jsx';
 
 
 class RatingsBreakdown extends React.Component {
@@ -56,6 +57,7 @@ class RatingsBreakdown extends React.Component {
     componentDidMount() {
         this.getAvgRating();
         this.getRatingBar();
+        console.log('this props', this.props)
 
     }
     render() {
@@ -66,6 +68,7 @@ class RatingsBreakdown extends React.Component {
             <div id='star-bars'>
                 {this.state.starBarDiv}
             </div>
+            <ReviewProductBreakdown product = {this.props.product} setProductInfo = {this.props.setProductInfo}/>
         </div>
     }
 }

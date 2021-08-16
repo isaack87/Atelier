@@ -1,20 +1,17 @@
 import React from 'react';
 import axios from 'axios';
+import helpers from '../ratingsReviews/ReviewsHelperFunc.jsx';
 
 class ReviewProductBreakdown extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            sizeDiv: [],
-            widthDiv: [],
-            comfortDiv: [],
-            qualityDiv: [],
-            lengthDiv: [],
-            fitDiv: []
+            metaData: [],
+            metaDataDiv: []
 
         }
         this.getProductReviewMetadata = this.getProductReviewMetadata.bind(this);
-        // this.generateProductMetadataDiv = this.generateProductMetadataDiv.bind(this);
+         this.generateProductMetadataDiv = this.generateProductMetadataDiv.bind(this);
     }
     getProductReviewMetadata() {
         const productID = this.props.product;
@@ -26,9 +23,28 @@ class ReviewProductBreakdown extends React.Component {
             data: {productID}
         }).then(response => {
            console.log('response', response.data.characteristics);
-
+           let productMetadata = response.data.characteristics;
+           //set the state with this info and then generate the div
+            this.setState({metaData: productMetadata}, () => {
+                this.generateProductMetadataDiv();
+            });
+            console.log('review product breakdown', this.props)
+            this.props.setProductInfo(productMetadata);
         })
         
+    }
+    generateProductMetadataDiv() {
+        let productMetadata = this.state.metaData;
+        //now we loop through this obj and create an empty bar for each, along with the title
+        let infoDiv = [];
+        for (let elem in productMetadata) {
+            infoDiv.push(helpers.getProductBreakdownBar(elem, productMetadata[elem]));
+
+        }
+        console.log('info div', infoDiv)
+        this.setState({metaDataDiv: infoDiv})
+
+
     }
     componentDidMount(){
         this.getProductReviewMetadata();
@@ -37,11 +53,8 @@ class ReviewProductBreakdown extends React.Component {
 
         return <div>
           
-            {this.state.sizeDiv}
-            {this.state.widthDiv}
-            {this.state.comfortDiv}
-            {this.state.lengthDiv}
-            {this.state.fitDiv}
+            {this.state.metaDataDiv}
+           
             
         </div>
     }

@@ -50,6 +50,9 @@ class ProductOverview extends React.Component {
       data: { id: productId },
     })
       .then((response) => {
+       
+         this.props.getProductName(response.data.name)
+
         this.setState({
           productInfo: response.data,
           features: response.data.features,
@@ -250,12 +253,11 @@ class ProductOverview extends React.Component {
       <div className='products overviewContainer'>
 
         <Carousel fullSizePhotos={this.state.fullSizePhotos} smallSizePhotos={this.state.smallSizePhotos} currentMainThumbnail={this.state.currentMainThumbnail} />
+          <div className='containerChild2'>
+            <ProductInformation productInfo={this.state.productInfo} allResultsArray={this.state.allResultsArray} currentStyleIndex={this.state.currentStyleIndex} avgRating = {this.props.avgRating} updateProductName = {this.props.getProductName}/>
 
 
         <div className='selectorContainer'>
-          <ProductInformation productInfo={this.state.productInfo} allResultsArray={this.state.allResultsArray} currentStyleIndex={this.state.currentStyleIndex} avgRating = {this.props.avgRating}/>
-
-
           <StyleSelector styleNames={this.state.styleNames} thumbnails={this.state.thumbnails} styleIds={this.state.styleIds} currentStyleIndex={this.state.currentStyleIndex} changeStyleId={this.changeStyleId.bind(this)} />
           <AddToCart currentQuantity={this.state.currentQuantity} skuIds={this.state.skuIds} skuCounts={this.state.skuCounts} renderQuantity={this.renderQuantity.bind(this)} onAddToCart={this.onAddToCart.bind(this)} />
         </div>

@@ -14,6 +14,7 @@ const getReviewsAPI = (productID, sortKind = 'helpful') => {
       };
       return axios(options)
       .then(response => {
+
           let sortedArr;
           if (response.data === undefined) {
               return;
