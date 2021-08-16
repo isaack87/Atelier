@@ -24,7 +24,7 @@ const MainAnswerQuestionBox = (props) => {
               />
               <p>{ data.question_helpfulness}</p>
               <QuestionReport qid={data.qID} />
-              <AnswerForm pid={props.productId} qid={data.qID} />
+              <AnswerForm pid={props.productId} qid={data.qID} updateQuestions={props.updateQuestions}/>
             </div>
           </div>
         </ul>
@@ -78,6 +78,7 @@ const MainAnswerQuestionBox = (props) => {
         btnvisible={props.btnvisible}
         btnvisibleq={props.btnvisibleq}
         mainProductId={props.productId}
+        updateQuestions={props.updateQuestions}
       />
     </div>
   );
