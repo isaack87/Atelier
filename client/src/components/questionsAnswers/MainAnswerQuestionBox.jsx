@@ -34,8 +34,6 @@ const MainAnswerQuestionBox = (props) => {
               {data.answers.slice(0, props.visibleAnswers).map(answerlist => (
                 <div key={answerlist.id}>
                   <p className={answerlist.body[0] ? 'answerbox' : 'answerbox'}> A: {answerlist.body.toString().toLowerCase()}
-                    <br />
-                    <br />
                   </p>
                   <div className="userinfobox">
                     { answerlist.answerername.toLowerCase() === 'seller'
@@ -54,7 +52,7 @@ const MainAnswerQuestionBox = (props) => {
                       return (
                         <div className='imagezoom iimg iimg-spacing' key={index}>
                           <img src={photo} className='iimg' />
-                        </div>
+                          </div>
                       );
                     })}
 
