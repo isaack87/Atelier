@@ -2,7 +2,6 @@
   align-items: center;
   justify-content: center;
   display: flex;
-  border: .5em solid orange;
   flex-direction: column;
   z-index: 1;
   position: relative;
