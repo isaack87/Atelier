@@ -1,4 +1,5 @@
 import React from 'react';
+import interact from './Interaction.jsx';
 
 const LoadMoreAnswers = (props) => (
   <div>

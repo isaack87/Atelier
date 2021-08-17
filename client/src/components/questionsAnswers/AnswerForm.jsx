@@ -1,6 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
 import config from '../../../../config.js';
+import interact from './Interaction.jsx';
 
 class AnswerForm extends React.Component {
   constructor(props) {
@@ -40,6 +41,8 @@ class AnswerForm extends React.Component {
 
   fileUploaderHandler(e) {
     e.preventDefault();
+    interact('div', 'fileUploaderHandler');
+
     var form = new FormData();
     form.append("image", this.state.selectedFile);
     console.log('this.state.selectedFile', this.state.selectedFile)
@@ -77,10 +80,11 @@ class AnswerForm extends React.Component {
 
   onCloseForm() {
     if (this.state.showForm === true) {
-      console.log('clciked');
+      console.log('clicked');
       this.setState({
         showForm: false,
-      });
+      }, () =>
+      interact('div', 'onCloseForm'));
     }
   }
 
@@ -155,7 +159,7 @@ class AnswerForm extends React.Component {
 
   addAnswer(e) {
     e.preventDefault();
-
+    interact('div', 'addAnswer')
     // checks and alert user if any of these fields are empty
     if (this.state.body === '') {
       alert('Please enter a valid Answer');
@@ -164,7 +168,6 @@ class AnswerForm extends React.Component {
     } else if (this.state.name === '') {
       alert(`Please enter a valid UserName`);
    }
-
     if (this.formValidation()) {
       const info = {
         body: this.state.body,
@@ -173,7 +176,6 @@ class AnswerForm extends React.Component {
         photos: this.state.photo,
         question_id: this.state.currentQID
       };
-
       $.ajax({
         method: 'POST',
         url: 'http://localhost:3000/addAnswer',
@@ -193,11 +195,10 @@ class AnswerForm extends React.Component {
         error: () => {
           console.log('error in addAnswers');
         },
-      });
-
+      })
   }
-
 }
+
   showForm() {
     const divStyle = {
       margin: '0px',

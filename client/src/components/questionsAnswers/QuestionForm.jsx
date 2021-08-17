@@ -1,5 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
+import interact from './Interaction.jsx';
 
 class QuestionForm extends React.Component {
   constructor(props) {
@@ -28,6 +29,7 @@ class QuestionForm extends React.Component {
 
   onOpenForm() {
     this.setState({ showForm: true });
+    interact('form', 'add question form')
   }
 
   onChangeBody(e) {

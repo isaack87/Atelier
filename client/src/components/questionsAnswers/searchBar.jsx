@@ -1,4 +1,5 @@
 import React from 'react';
+import interact from './Interaction.jsx';
 
 class SearchBar extends React.Component {
   constructor(props) {
@@ -34,6 +35,7 @@ class SearchBar extends React.Component {
               <br />
               <input
                 onChange={this.onChange}
+                onClick={() => {interact('input', 'searchBarClicked')}}
                 className="searchfield search largefont"
                 placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS ...... 🔍"
               />

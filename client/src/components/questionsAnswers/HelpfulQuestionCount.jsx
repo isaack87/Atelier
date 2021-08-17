@@ -1,5 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
+import interact from './Interaction.jsx'
 
 class HelpfulQuestionCount extends React.Component {
   constructor(props) {
@@ -41,7 +42,8 @@ class HelpfulQuestionCount extends React.Component {
 
   render() {
     return (
-      <div className=" helpfulQuestionCounter">
+      <div onClick={() => {interact('div', 'helpfulQuestionCounter')}}
+        className=" helpfulQuestionCounter">
         Helpful?
         <button
           type="submit"
