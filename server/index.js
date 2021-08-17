@@ -88,6 +88,19 @@ app.post('/addQuestion', (req, res) => {
   res.send('question post success');
 });
 
+app.get('/interaction', (req, res) => {
+  res.send('interaction  success');
+});
+
+app.post('/interaction', (req, res) => {
+  console.log(req.body, '🙂');
+  const data = req.body
+  isaacAPI.interactionLogger(data)
+  res.send('interaction  success');
+});
+
+
+
 app.get('/productdetails', (req, res) => {
   res.send('success');
 });

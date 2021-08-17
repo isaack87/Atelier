@@ -17,6 +17,7 @@ class TopSearchBar extends React.Component {
   }
 
   search(e) {
+    console.log('search clicked')
     e.preventDefault();
     this.props.onSearch(this.state.searchTerm);
   }

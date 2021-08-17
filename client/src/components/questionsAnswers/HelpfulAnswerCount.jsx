@@ -1,5 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
+import interact from './Interaction.jsx'
 
 class HelpfulAnswerCount extends React.Component {
   constructor(props) {
@@ -40,11 +41,9 @@ class HelpfulAnswerCount extends React.Component {
     }
   }
 
-
-
   render() {
     return (
-      <div className='helpfulQuestionCounter'>
+      <div onClick={() => {interact('div', 'helpfulQuestionCounter')}} className='helpfulQuestionCounter'>
         HelpFul?
         <button type="submit" onClick={this.helpfulAincrementer} className="helpfulQuestionCounter answerhelpfulbtn">Yes</button>
         ({this.state.ahelpfulcount})

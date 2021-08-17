@@ -36,7 +36,6 @@ class App extends React.Component {
   //handles setting the state for product name
   getProductName(name){
     this.setState({productName: name});
-
   }
 
   random(cb) {
@@ -55,13 +54,14 @@ class App extends React.Component {
   }
 
   render() {
-
     return (
       <div className="App-container">
         <ProductMainStateProvider productId ={this.state.productId}>
           <TopSearchBar onSearch={this.search}/>
           <ProductOverview productId={this.state.productId} random={this.random.bind(this)} avgRating = {this.state.avgRating} getProductName = {this.getProductName}/>
-          <QuestionsAnswersState productId={this.state.productId} />
+          <QuestionsAnswersState
+            productId={this.state.productId}
+            />
           <Reviews props={this.state} avgRatingFunc = {this.updateAvgRatingForProduct} />
         </ProductMainStateProvider>
         <button onClick={this.toggleDark.bind(this)}>Toggle Dark Mode</button>

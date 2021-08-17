@@ -45,7 +45,7 @@ const MainAnswerQuestionBox = (props) => {
                       pid={props.productId}
                       defaultcounter={answerlist.helpfulness}
                     />
-                    <AnswerReport aID={answerlist.id} />
+                    <AnswerReport aID={answerlist.id}/>
                   </div>
                   <div>
                     {answerlist.photos.map((photo, index) => {
@@ -55,20 +55,18 @@ const MainAnswerQuestionBox = (props) => {
                           </div>
                       );
                     })}
-
                   </div>
                 </div>
               ))}
             </ul>
           </div>
-
         </div>
       </div>
     </div>
   ));
 
   return (
-    <div className="flex-container">
+    <div className="flex-container" >
       {QABOX}
       <AskQuestions
         loadMoreAnswers={props.loadMoreAnswers}

@@ -59,6 +59,26 @@ const getAnswerCounter = (params, cb) => {
     });
 };
 
+const interactionLogger = (data) => {
+    const params = {
+      element: data.element,
+      widget: data.widget,
+      time: data.time,
+    };
+    axios.post(`${apiURL}interactions`, params, {
+      headers: {
+        Authorization: config.gitToken,
+      },
+    })
+      .then(() => {
+        console.log(`${params}`, 'interaction clicked')
+        console.log('interaction created in API');
+      })
+      .catch(() => {
+        console.log('interaction error');
+      });
+  };
+
 const getIsReportedStatus = (params, cb) => {
   const options = {
     method: 'GET',
@@ -195,4 +215,5 @@ module.exports = {
   putAnswerHelpful,
   putReportAnswer,
   getQuestionHelpCounter,
+  interactionLogger
 };

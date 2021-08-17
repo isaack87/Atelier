@@ -1,9 +1,9 @@
 import React from 'react';
+import interact from './Interaction.jsx';
 
 class AnswerReport extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       reported: false,
       reportedArray: [],
@@ -11,7 +11,6 @@ class AnswerReport extends React.Component {
     };
     this.reportedBtn = this.reportedBtn.bind(this);
   }
-
   reportedBtn() {
     if (!this.state.reportedArray.includes(this.state.reportedID)) {
       this.setState({
@@ -23,10 +22,9 @@ class AnswerReport extends React.Component {
       });
     }
   }
-
   render() {
     return (
-      <div>
+      <div onClick={() => {interact('div', 'AnswerReportButton')}}>
         <button type="submit" onClick={this.reportedBtn} className=" reporthelpful-btn">
           {this.state.reported ? 'Reported' : 'Report'}
         </button>
@@ -34,5 +32,4 @@ class AnswerReport extends React.Component {
     );
   }
 }
-
 export default AnswerReport;

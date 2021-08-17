@@ -68,7 +68,6 @@ class QuestionsAnswersState extends React.Component {
   }
 
   getQuestionAnswerList() {
-
     const list = this.state.questionsList;
     const newObj = [];
     list.map(e => {
@@ -167,7 +166,6 @@ class QuestionsAnswersState extends React.Component {
     this.setState((prev) => ({ visibleAnswers: prev.visibleAnswers + 2 }));
   }
 
-
   loadMoreQuestions() {
     // checks to see question displayed length is equal or greater than list of questions
     if (this.state.visibleQuestions > this.state.questionanswerslist.length) {
@@ -203,7 +201,9 @@ class QuestionsAnswersState extends React.Component {
     return (
       <div>
         <div className="search">
-          <SearchBar onSearch={this.search} />
+          <SearchBar
+            onSearch={this.search}
+          />
         </div>
         <div className={this.state.visibleQuestions  > 2 || this.state.visibleAnswers > 2 ? "q-a-box-scroll" : 'q-a-box'}>
           <MainAnswerQuestionBox
