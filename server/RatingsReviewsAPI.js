@@ -1,5 +1,7 @@
 const axios = require('axios');
 const config = require('../config');
+const ajax = require('ajax');
+
 
 const apiURL = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/`
 const getReviewsAPI = (productID, sortKind = 'helpful') => {
@@ -36,15 +38,18 @@ const getReviewsAPI = (productID, sortKind = 'helpful') => {
             if (sortOne === undefined) {
                 return;
             }
+            
             //now we run our relevance sort for half the length of the sortOne array. that will push up the helpful reviews, but not all the way up
             for (let i = 0; i < (Math.floor(sortOne.length / 2)); i++) {
                 for (let a = 0; a < length; a+=2) {
+                    if (sortOne[a + 1] !== undefined) {
                     if (sortOne[a + 1].helpfulness > sortOne[a].helpfulness) {
                         let one = sortOne[a + 1];
                         let two = sortOne[a];
                         sortOne[a] = one;
                         sortOne[a + 1] = two;
                     }
+                }
                 }
             }
             sortedArr = sortOne;
@@ -122,10 +127,31 @@ const getProductBreakdown = async (productID) => {
           console.log( err);
         });
 }
+const uploadImages = async(base64) => {
+    console.log('base 64 in upload images')
+    let settings = {
+        "url": `https://api.imgbb.com/1/upload?key=${config.imgBBKey}`,
+        "method": "POST",
+        "method": "POST",
+        "timeout": 0,
+        "processData": false,
+        "mimeType": "multipart/form-data",
+        "contentType": false,
+        "image": base64
+        
+    };
+    axios({settings}).done(function (response) {
+        console.log(response);
+        var jx = JSON.parse(response);
+        console.log(jx.data.url);
+    })
+}
 
 module.exports = {
     getReviewsAPI,
      postReview,
      postMarkHelpful,
-     getProductBreakdown
+     getProductBreakdown,
+     uploadImages
+
 };

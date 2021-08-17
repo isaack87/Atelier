@@ -151,6 +151,11 @@ app.post('/productBreakdown', async (req, res) => {
 
    res.status(200).send(await helenaAPI.getProductBreakdown(productID));
 })
+app.post('/uploadimage', async (req, res) => {
+  let image = req.body.base64;
+
+   res.status(200).send(await helenaAPI.uploadImages(image));
+})
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });

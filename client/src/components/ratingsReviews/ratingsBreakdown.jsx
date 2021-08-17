@@ -38,8 +38,9 @@ class RatingsBreakdown extends React.Component {
             {avgStars}
             </span></div>;
         avgRating = avgRating.toFixed(1);
+
  
-        recommendations = <span>{((recommendations/reviewsArray.length) * 100) + '% of reviews recommend this product'}</span>;
+        recommendations = <span>{((recommendations/reviewsArray.length) * 100).toFixed(1) + '% of reviews recommend this product'}</span>;
    
         this.setState({avgReviewDiv:avgDiv, avgRating, percentageRec: recommendations}
 
