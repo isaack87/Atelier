@@ -46,7 +46,7 @@ class ProductOverview extends React.Component {
   getDataFromProductId(productId) {
     axios({
       method: 'post',
-      url: 'http://localhost:3000/productdetails',
+      url: '/productdetails',
       data: { id: productId },
     })
       .then((response) => {
@@ -68,7 +68,7 @@ class ProductOverview extends React.Component {
   getDataFromStyleId(productId) {
     axios({
       method: 'get',
-      url: `http://localhost:3000/product/styles?pid=${productId}`,
+      url: `/product/styles?pid=${productId}`,
     })
       .then((response) => {
         const styleId = response.data.results[0].style_id;
@@ -129,7 +129,7 @@ class ProductOverview extends React.Component {
   renderPhotosOnClick(productId, styleId) {
     axios({
       method: 'get',
-      url: `http://localhost:3000/product/styles?pid=${productId}`,
+      url: `/product/styles?pid=${productId}`,
     })
       .then((response) => {
         // Update photos array =============================
@@ -173,7 +173,7 @@ class ProductOverview extends React.Component {
 
     axios({
       method: 'get',
-      url: `http://localhost:3000/product/styles?pid=${this.props.productId}`,
+      url: `/product/styles?pid=${this.props.productId}`,
     })
       .then((response) => {
         // Update SKUs and StyleId

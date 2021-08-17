@@ -14,7 +14,7 @@ const interact = (element, widget) => {
     };
   $.ajax({
     method: 'POST',
-    url: 'http://localhost:3000/interaction',
+    url: '/interaction',
     contentType: 'application/json',
     data: JSON.stringify(info),
     success: () => {
