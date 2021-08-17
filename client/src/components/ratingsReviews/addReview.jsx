@@ -1,5 +1,10 @@
 import React from 'react';
 import $ from 'jquery';
+import axios from 'axios';
+const config = require('../../../../config.js');
+const reader = new FileReader();
+import ajax from 'ajax';
+
 
 
 class AddReview extends React.Component{
@@ -60,7 +65,10 @@ class AddReview extends React.Component{
             counter: [],
             filesAdded: 1,
             availableCharacteristicsForProduct: [],
-            validImages: true
+            validImages: true,
+            imagesURL: [],
+            characteristicsIdValueObject: {},
+            overallRating: 0
         } 
         this.showModal = this.showModal.bind(this);
         this.hideModal = this.hideModal.bind(this);
@@ -94,8 +102,11 @@ class AddReview extends React.Component{
         let characteristicsArr = [];
         let meaning;
         let collectionOfCharacteristics= {};
+        let charIdValueObject = this.state.characteristicsIdValueObject;
+        console.log('characteristics', characteristics)
         for (let elem in characteristics) {
-            collectionOfCharacteristics[elem] = true;
+
+            charIdValueObject[characteristics[elem].id.toString()] = parseInt(characteristics[elem].value);
 
             meaning = [];
             if (elem === 'Size') {
@@ -150,7 +161,7 @@ class AddReview extends React.Component{
             </div>)
         }
         let charactInfoDiv = <div id='characteristics'>{characteristicsArr}</div>
-        this.setState({characteristicsDiv: characteristicsArr, availableCharacteristicsForProduct: collectionOfCharacteristics})
+        this.setState({characteristicsDiv: characteristicsArr, availableCharacteristicsForProduct: collectionOfCharacteristics, characteristicsIdValueObject: charIdValueObject})
 
     }
     //handles building the radio button form
@@ -294,8 +305,10 @@ class AddReview extends React.Component{
                     <p id= 'counter-review-body'>Minimum required characters left: 50</p>
                     <form id ='add-files-form'>
                         <p>Upload photos</p>
-                        <input  type='file' onChange = {(e) => {
-                            let src = URL.createObjectURL(e.target.files[0]);
+                        <input  type='file' onChange = { async (e) => {
+                           let src = URL.createObjectURL(e.target.files[0]);
+                          
+                
                             let count = this.state.filesAdded;
                             if (count < 5) {
                                 $('#image-thumbnails').append(`<img src=${src} height = '100' ></img>`);
@@ -313,6 +326,55 @@ class AddReview extends React.Component{
                                 //set the state
                                 this.setState({validImages: false});
                             }
+                    
+                            //now try uploading the files to imgur
+                            // let form = new FormData();
+                            // form.append('image', files);
+                            //format as binary, base64, or image url
+                            const toBase64 = file => new Promise((resolve, reject) => {
+                                reader.readAsDataURL(file);
+                                reader.onload = () => resolve(reader.result);
+                                reader.onerror = error => reject(error);
+                            });
+                            async function getBase64() {
+                                let converted =  await toBase64(files);
+                                return converted;
+                            }
+                            let base64 = await getBase64();
+                            console.log('base 64', base64)
+                 
+
+
+                            // axios({
+                            //     method: 'post',
+                            //     url: 'http://localhost:3000/uploadimage',
+                            //     //for testing purposes we use this default productID
+                            //     data: base64
+                            // }).then(response=> {
+                            //     console.log('axios response', response)
+                            // })
+
+                            //we should not put this in the client but i will refactor later if i have time
+                            var form = new FormData();
+                            form.append("image", files);
+                            var settings = {
+                                "url": `https://api.imgbb.com/1/upload?key=${config.imgBBKey}`,
+                                "method": "POST",
+                                "timeout": 0,
+                                "processData": false,
+                                "mimeType": "multipart/form-data",
+                                "contentType": false,
+                                "data": form
+                              };
+                              $.ajax(settings).done((response) => {
+                                  response = JSON.parse(response)
+                                  console.log('respose', response)
+                                let url = response.data.display_url;
+                                let imagesArr = this.state.imagesURL;
+                                imagesArr.push(url);
+                                this.setState({imagesURL: imagesArr})
+                              });
+                                
                         }}></input>
                     </form>
                     <div id='image-thumbnails'></div>
@@ -335,10 +397,15 @@ class AddReview extends React.Component{
         );
         this.setState({modalToAddReview: div});
     }
-    validateFormInput(){
+   async validateFormInput(){
         //first grab all the stuff and put it into state
-        let overallRating = this.state.overallRating;
+        let overallRating = parseInt(this.state.overallRating);
         let recommend = document.querySelector('input[name="radio"]:checked').value;
+        if (recommend === 'Yes') {
+            recommend = true;
+        } else {
+            recommend = false;
+        }
 
         let allCharacteristics = this.state.availableCharacteristicsForProduct;
         //below are boolean values for things that are mandatory
@@ -392,7 +459,35 @@ class AddReview extends React.Component{
         //now validate all
         if (allCharacteristicsHaveReviews && hasReviewBody && reviewBodyHasOver50Char &&
             hasNickname && hasEmail && validPhotos) {
-                //it's all valid, now first submit images to imgur api
+                //it's all valid, grab the array of images that we have url for
+                let imagesArray = this.state.imagesURL;
+                console.log('this state validate', this.state)
+                let characteristics = {};
+                //need to calculate overall rating from all the individual rcharacterustuc ratubgs
+
+                //now make request to post a review
+                let params =  {
+                    "product_id": this.props.productId,
+                    "rating": overallRating,
+                    "summary": reviewSummary,
+                    "body": reviewBody,
+                    "recommend": recommend,
+                    "name": nickname,
+                    "email": email,
+                    "photos": this.state.imagesURL,
+                    "characteristics":  this.state.characteristicsIdValueObject
+                };
+                console.log('params', params)
+                let options = {
+                    method: 'post',
+                    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews`,
+                    headers: { Authorization: config.gitToken},
+                    data: params
+                  };
+                   await axios(options)
+                  .then(response => {
+                      console.log('posting review', response);
+                  })
 
         } else {
             //incoming stupid code but too late to refactor

@@ -42,6 +42,7 @@ class AnswerForm extends React.Component {
     e.preventDefault();
     var form = new FormData();
     form.append("image", this.state.selectedFile);
+    console.log('this.state.selectedFile', this.state.selectedFile)
     var options = {
       "url": `https://api.imgbb.com/1/upload?key=${config.imgBBTokeb}`,
       "method": "POST",
