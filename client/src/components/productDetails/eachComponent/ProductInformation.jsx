@@ -11,7 +11,7 @@ class ProductInformation extends React.Component {
   }
 
   moveToReviews() {
-    document.getElementById('review-dropdown').scrollIntoView();
+    document.getElementById('reviews').scrollIntoView();
   }
 
   render() {
@@ -19,7 +19,7 @@ class ProductInformation extends React.Component {
     let displayPrice;
     if (this.props.allResultsArray[this.props.currentStyleIndex]) {
       if (this.props.allResultsArray[this.props.currentStyleIndex].sale_price) {
-        displayPrice = <div><del>$ {this.props.allResultsArray[this.props.currentStyleIndex].original_price}</del> SALE!! <span className='salePrice'>$ {this.props.allResultsArray[this.props.currentStyleIndex].sale_price}</span></div>;
+        displayPrice = <div><del>$ {this.props.allResultsArray[this.props.currentStyleIndex].original_price}</del><span className='salePrice'> $ {this.props.allResultsArray[this.props.currentStyleIndex].sale_price}</span></div>;
       } else {
         displayPrice = <div>$ {this.props.allResultsArray[this.props.currentStyleIndex].original_price}</div>;
       }

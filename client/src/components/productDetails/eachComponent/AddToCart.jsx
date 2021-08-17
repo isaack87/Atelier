@@ -4,7 +4,10 @@ class AddToCart extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      quantitySelected: false,
+      rerenderSize: false,
     };
+    this.openSuccessModal = this.openSuccessModal.bind(this);
   }
 
   renderQuantity(event) {
@@ -13,7 +16,39 @@ class AddToCart extends React.Component {
     tooltip.style.visibility = 'hidden';
   }
 
+  closeModal() {
+    let modal = document.getElementById("myCartModal");
+    modal.style.display = "none";
+  }
+
+  openSuccessModal(productName, style, size, quantity) {
+    let itemsAdded = '✓ ' + quantity + 'x ' + 'Size: ' + size + ' | ' + productName + ' - ' + style;
+    document.getElementsByClassName('cartInnerText')[0].innerText = itemsAdded;
+
+    let modal = document.getElementById("myCartModal");
+
+    // Get the <span> element that closes the modal
+    let span = document.getElementsByClassName("closeCartModal")[0];
+
+    // When the user clicks on the button, open the modal
+    modal.style.display = "block";
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+      modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+
+  }
+
   addToCart() {
+    // OpenSelectMenu is a function that will open the size select menu if 'Add to bag' has been clicked but no size is selected
     const OpenSelectMenu = (element, maxSize) => {
       const preventDefault = (event) => {
         event.preventDefault();
@@ -57,23 +92,72 @@ class AddToCart extends React.Component {
 
     if (selectedSize !== 'DEFAULT') {
       if (selectedQuantity !== 'DEFAULT') {
-        this.props.onAddToCart(skuId, selectedSize, selectedQuantity);
+
+        this.props.onAddToCart(skuId, selectedSize, selectedQuantity, () => {
+          this.setState({
+            rerenderSize: true,
+          })
+          let productName = document.getElementsByClassName('productName')[0].innerText;
+          let style = this.props.styleNames[this.props.currentStyleIndex];
+          this.openSuccessModal(productName, style, selectedSize, selectedQuantity);
+        });
       }
-    } else if (selectedSize === 'DEFAULT') {
+    }
+    if (selectedSize === 'DEFAULT' && selectedQuantity === 'DEFAULT') {
+      OpenSelectMenu(document.getElementById('selectedSize'), 3).open();
+      const tooltip = document.getElementsByClassName('tooltiptext')[0];
+      tooltip.style.visibility = 'visible';
+
+      const tooltip2 = document.getElementsByClassName('tooltiptext2')[0];
+      tooltip2.style.visibility = 'visible';
+    }
+    if (selectedSize === 'DEFAULT' && selectedQuantity !== 'DEFAULT') {
       OpenSelectMenu(document.getElementById('selectedSize'), 3).open();
       const tooltip = document.getElementsByClassName('tooltiptext')[0];
       tooltip.style.visibility = 'visible';
     }
+    if (selectedSize !== 'DEFAULT' && selectedQuantity === 'DEFAULT') {
+      const tooltip2 = document.getElementsByClassName('tooltiptext2')[0];
+      tooltip2.style.visibility = 'visible';
+    }
   }
 
   favorite() {
+    // Just a placeholder for the favorite button to do nothing when clicked
     console.log('added to favorites');
+  }
+
+  setIfQuantitySelected() {
+    this.setState({
+      quantitySelected: true,
+    }, () => {
+      const tooltip2 = document.getElementsByClassName('tooltiptext2')[0];
+      tooltip2.style.visibility = 'hidden';
+    });
   }
 
   render() {
     let sizeArray;
 
-    if (this.props.skuIds[0] === 'null') {
+    if (this.props.skuIds[0] === 'null' && this.state.rerenderSize === false) {
+      sizeArray =
+        <select className='selectedSize' onChange={this.renderQuantity.bind(this)} defaultValue={'DEFAULT'} disabled>
+          <option disabled>OUT OF STOCK!</option>;
+          {sizeArray}
+        </select>;
+      const tooltip = document.getElementsByClassName('cartButton')[0];
+      tooltip.style.visibility = 'hidden';
+    } else {
+      sizeArray =
+        <select className='selectedSize' onChange={this.renderQuantity.bind(this)} id='selectedSize' defaultValue={'DEFAULT'} required>
+          <option value='DEFAULT' disabled>SELECT SIZE</option>
+          {this.props.skuCounts.map((item, index) => (
+            <option key={index} id={this.props.skuIds[index]}>{item.size}</option>
+          ))}
+        </select>;
+    }
+
+    if (this.props.skuIds[0] === 'null' && this.state.rerenderSize === true) {
       sizeArray =
         <select className='selectedSize' onChange={this.renderQuantity.bind(this)} defaultValue={'DEFAULT'} disabled>
           <option disabled>OUT OF STOCK!</option>;
@@ -102,7 +186,7 @@ class AddToCart extends React.Component {
       for (let i = 0; i < this.props.currentQuantity; i++) {
         quantityCount.push(i);
       }
-      quantityArray = <select className='selectQuantity' name="selectquantity" id='selectedQuantity' defaultValue='DEFAULT' required>
+      quantityArray = <select onChange={this.setIfQuantitySelected.bind(this)} className='selectQuantity' name="selectquantity" id='selectedQuantity' defaultValue='DEFAULT' required>
         <option value='DEFAULT' disabled> - </option>
         {quantityCount.map((item, index) => (
           <option key={index}> {index + 1} </option>
@@ -110,7 +194,7 @@ class AddToCart extends React.Component {
       </select>;
     } else if (this.props.currentQuantity >= 15) {
       const quantityCount = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
-      quantityArray = <select className='selectQuantity' name="selectquantity" id='selectedQuantity' defaultValue='DEFAULT' required>
+      quantityArray = <select onChange={this.setIfQuantitySelected.bind(this)} className='selectQuantity' name="selectquantity" id='selectedQuantity' defaultValue='DEFAULT' required>
         <option value='DEFAULT' disabled> - </option>
         {quantityCount.map((item, index) => (
           <option key={index}> {index + 1} </option>
@@ -124,6 +208,9 @@ class AddToCart extends React.Component {
           <div className='tooltip'>
             <span className='tooltiptext'>Please select a size</span>
           </div>
+          <div className='tooltip2'>
+            <span className='tooltiptext2'>Please select a quantity</span>
+          </div>
           <div className='selectChoices'>
             {sizeArray}
             {quantityArray}
@@ -134,6 +221,24 @@ class AddToCart extends React.Component {
             <button className='favoriteButton' type='button' onClick={this.favorite.bind(this)}>★</button>
           </div>
         </form>
+
+        <div id="myCartModal" class="cartModal">
+          {/* Modal content */}
+          <div className="cartModalContent">
+            <b><p>The following items have been added to your shopping cart!</p></b>
+            <span className="closeCartModal">[x]</span>
+            <p className='cartInnerText'>Some text in the Modal..</p>
+            <div className='modalButtonscheckout'>
+              <div>
+                <button onClick={this.closeModal.bind(this)} className='proceedToCheckout'>Proceed to checkout</button>
+              </div>
+              <div>
+                <button onClick={this.closeModal.bind(this)} className='keepShopping'>Keep Shopping</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     );
   }
