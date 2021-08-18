@@ -20,6 +20,7 @@ class RatingsBreakdown extends React.Component {
     }
     getAvgRating() {
         const reviewsArray = this.props.props.allReviews;
+        this.props.getNumOfReviews(reviewsArray.length);
         let totalRating = 0;
         let recommendations = 0;
         reviewsArray.forEach(review => {

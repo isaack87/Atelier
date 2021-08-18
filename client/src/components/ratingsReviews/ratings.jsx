@@ -259,7 +259,7 @@ class Reviews extends React.Component {
                     <h1>{`Ratings & Reviews`}</h1>
                     {this.state.filterMessage}
                     <div id ='breakdown-div'>
-                    <RatingsBreakdown props = {this.state} getAvgRating = {this.props.avgRatingFunc} handleFilter = {this.handleClickFilterReviews} product = {this.props.props.productId} setProductInfo= {this.setProductInfo}/>
+                    <RatingsBreakdown props = {this.state} getAvgRating = {this.props.avgRatingFunc} handleFilter = {this.handleClickFilterReviews} product = {this.props.props.productId} setProductInfo= {this.setProductInfo} getNumOfReviews = {this.props.getNumOfReviews}/>
                     </div>
 
 
