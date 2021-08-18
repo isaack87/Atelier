@@ -339,10 +339,14 @@ margin-right: 2em;
 }
 
 .question {
+  width: 32em;
   display:flex;
+  flex-wrap: wrap;
+  flex-grow: 1;
+  word-break: break-all;
   margin-top: 3em;
   margin-bottom: -4em;
-  font-size: 1.2em;
+  font-size: 1em;
 }
 .search {
   display: flex;
@@ -407,7 +411,7 @@ margin-right: 2em;
   flex-wrap: wrap;
   gap: 1em;
   position: relative;
-  font-size: .5em;
+  font-size: .35em;
   height: 1em;
   padding: .2em;
   flex-direction: row;
@@ -420,6 +424,7 @@ margin-right: 2em;
   flex-wrap: wrap;
   gap: .2em;
   height: 2.5em;
+  object-fit: cover;
   width: 2.5em;
   padding: .1em;
   flex-direction: row;
@@ -449,28 +454,96 @@ margin-right: 2em;
   padding: .1em;
 }
 
-.imagezoom img:hover {
-  border: black .1em solid;
-  width: 5em;
-  height: 5em;
-  position: relative;
-  display: flex;
-  flex-grow: 2;
-  cursor: zoom-in;
+.add-q-btn {
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  text-align: left;
+  outline: none;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-appearance: none;
+  font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;
+  border-radius: 24px;
 
+  font-size: .3em;
+  font-weight: bold;
+  width: 30em;
+  line-height: 1.5;
+  padding-top: 1px;
+  padding-bottom: 1fpx;
+  padding-left: 18px;
+  padding-right: 18px;
+  position: relative;
+  text-align: center;
+  vertical-align: middle;
+  z-index: 10;
+  cursor: pointer;
 }
+
+
+.addqbtn {
+  visibility: visible;
+  box-shadow: 0 1px 6px 0 rgb(34 34 34 / 15%);
+  display: inline-block;
+  font-size: 16px;
+  height: 3em;
+  padding-left: 12px;
+  padding-right: 36px;
+  width: 17em;
+  border-radius: 6px;
+  background: rgb(27, 23, 23);
+  border-color: rgba(34, 34, 34, 0.15);
+  border-style: solid;
+  border-width: 1px;
+  color: white;
+  text-indent: 0.01px;
+  cursor: pointer;
+  justify-content: center;
+  text-align: center;
+}
+
+.loadanswers {
+  visibility: visible;
+  box-shadow: 0 1px 6px 0 rgb(34 34 34 / 15%);
+  display: inline-block;
+  font-size: 16px;
+  height: 3em;
+  padding-left: 12px;
+  padding-right: 36px;
+  width: 17em;
+  border-radius: 6px;
+  background: rgb(27, 23, 23);
+  border-color: rgba(34, 34, 34, 0.15);
+  border-style: solid;
+  border-width: 1px;
+  color: white;
+  text-indent: 0.01px;
+  cursor: pointer;
+  justify-content: center;
+  text-align: center;
+}
+
+.loadanswers:hover {
+  box-shadow: 0 1px 8px 0 rgb(35 34 34 /80%);
+  border-color: whitesmoke;
+  transform: scale(1.03);
+}
+
 .questionbox {
   align-items: center;
   justify-content: center;
   display: flex;
   width: 59em;
   height: 2em;
-  padding: 1em;
+  padding: .7em;
   font-size: .5em;
   flex-direction: row;
   margin-bottom: -7em;
   margin-left: -2em;
 }
+
 .answerbox {
   display: flex;
   width: 59em;
@@ -522,33 +595,7 @@ margin-right: 2em;
   margin-right: -4em;
   cursor: pointer;
 }
-.add-q-btn {
-  background: none;
-  color: inherit;
-  font: inherit;
-  cursor: pointer;
-  text-align: left;
-  outline: none;
-  text-decoration: none;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-appearance: none;
-  font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;
-  border-radius: 24px;
-  display: inline-block;
-  font-size: .3em;
-  font-weight: bold;
-  width: 30em;
-  line-height: 1.5;
-  padding-top: 1px;
-  padding-bottom: 1fpx;
-  padding-left: 18px;
-  padding-right: 18px;
-  position: relative;
-  text-align: center;
-  vertical-align: middle;
-  z-index: 10;
-  cursor: pointer;
-}
+
 .imgplus{
   width: 20px;
   height: 20px;
@@ -603,6 +650,7 @@ ul {
 .loadmoreanswers {
   border: none;
   padding: 0;
+  margin-left: 4em;
   background: none;
   display: flex;
   font-size: .6em;
@@ -639,14 +687,13 @@ ul {
 /*                     */
 
 .qboxcenter {
-  margin-left: -15em;
-  margin-top: -150em;
+  margin-top: -90em;
   display: flex;
   align-items: center;
   justify-content: center;
   height: 90vh;
   width: 100vh;
-  font-size: .5em;
+  font-size: .3em;
   padding: 1em;
   position: absolute;
   z-index: 99;
