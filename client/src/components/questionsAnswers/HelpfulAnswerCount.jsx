@@ -27,7 +27,7 @@ class HelpfulAnswerCount extends React.Component {
     if (!this.state.answerVoted) {
       $.ajax({
         method: 'POST',
-        url: 'http://localhost:3000/ahelpful',
+        url: '/ahelpful',
         contentType: 'application/json',
         data: JSON.stringify({ ahelpid: this.state.ahelpid }),
         success: () => {
