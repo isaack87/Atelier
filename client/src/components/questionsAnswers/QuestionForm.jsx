@@ -131,7 +131,7 @@ class QuestionForm extends React.Component {
       };
       $.ajax({
         method: 'POST',
-        url: 'http://localhost:3000/addQuestion',
+        url: '/addQuestion',
         contentType: 'application/json',
         data: JSON.stringify(info),
         success: () => {

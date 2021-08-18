@@ -26,7 +26,7 @@ class HelpfulQuestionCount extends React.Component {
     if (!this.state.questionVoted) {
       $.ajax({
         method: 'POST',
-        url: 'http://localhost:3000/qhelpful',
+        url: '/qhelpful',
         contentType: 'application/json',
         data: JSON.stringify({ qhelpid: this.state.qhelpid }),
         success: () => {

@@ -17,19 +17,19 @@ class Reviews extends React.Component {
         const productID = 1;
         axios({
             method: 'Get',
-            url: 'http://localhost:3000/getReviews'
+            url: '/getReviews'
         }).then(response => {
             console.log('response');
         })
 
-        
+
     }
     componentDidMount() {
         this.getReviews();
     }
 
     render() {
-        
+
         return (
             <div>
                 <h1>reviews module</h1>

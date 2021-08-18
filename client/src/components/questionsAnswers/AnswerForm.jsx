@@ -178,7 +178,7 @@ class AnswerForm extends React.Component {
       };
       $.ajax({
         method: 'POST',
-        url: 'http://localhost:3000/addAnswer',
+        url: '/addAnswer',
         contentType: 'application/json',
         data: JSON.stringify(info),
         success: () => {
