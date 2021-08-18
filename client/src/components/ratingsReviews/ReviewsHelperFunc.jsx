@@ -5,7 +5,7 @@ const helpfulReviewsClicked = {};
 const helpers = {
 
     reviewResponse: (response) => {
-        
+
         if (response !== null && response !== "") {
             return (<div id = 'response'>
                 <h3>Response from seller</h3>
@@ -18,7 +18,7 @@ const helpers = {
             return (<p>✓ I recommend this product</p>);
         }
     },
-    
+
     //checks if the review has already been clicked for helpfulness already
     checkIfHelpfulnessClicked : (id) => {
         if (helpfulReviewsClicked[id]) {
@@ -43,14 +43,14 @@ const helpers = {
                     }
                 }> Yes (<span id= {"helpfulness-" + id } class = "helpful-link">{helpNum}</span>)</span>
                 </span>
-                
+
             </div>)
         }
     },
     markHelpfulAPI: (productID) => {
         axios({
             method: "POST",
-            url:'http://localhost:3000/markHelpful',
+            url:'/markHelpful',
             data: {productID}
         }).then(response => {
             return true;
@@ -58,7 +58,7 @@ const helpers = {
 
     },
     getQuarterStarAmount: (value)=> {
-       
+
         if (value <= 0) {
             return 0;
         } if (value < .5) {
@@ -118,17 +118,17 @@ const helpers = {
 
         const allReviewsDiv = [];
         allReviewsDiv.push(helpers.getBar(fiveStar, reviewsArray.length, '5', filterFunc), helpers.getBar(fourStar, reviewsArray.length, '4', filterFunc),
-        helpers.getBar(threeStar, reviewsArray.length, '3',filterFunc), helpers.getBar(twoStar, reviewsArray.length, '2', filterFunc), 
+        helpers.getBar(threeStar, reviewsArray.length, '3',filterFunc), helpers.getBar(twoStar, reviewsArray.length, '2', filterFunc),
         helpers.getBar(oneStar, reviewsArray.length, '1',filterFunc) )
-       
-      
-        
+
+
+
        return <div>{allReviewsDiv} </div>;
 
     },
     getBar: (starArr, totalReviews, starAmount, filterFunc) => {
         const widthAmount = Math.abs(((starArr.length)/(totalReviews)*100)).toFixed(0);
-        const returnDiv = 
+        const returnDiv =
             <div onClick = {()=> {
                 filterFunc(starAmount)
             }} id='breakdown-star-count'>
@@ -139,8 +139,10 @@ const helpers = {
                         </div>
                     </div>
                 </div>
+
                 <span id ='reviews-total-bar'>{starArr.length + ' reviews total'}</span>
                 
+
                 <br></br>
             </div>;
         return returnDiv;
@@ -165,7 +167,7 @@ const helpers = {
         let rating = info.value;
         const percentage = (rating/5) * 100;;
         const rightEMval = (-18.5 + (percentage * 0.17)).toString() + 'em';
-  
+
         return(<div>
             <p>{title}</p>
             <div id = 'metadata-bar'>
@@ -173,33 +175,35 @@ const helpers = {
                 <div id = 'metadata-bar-individual'>
                     <div className="w3-light-grey">
                         <div className='w3-green metadata-bar-individual' style={{height:"2em", width:"0%"}}/>
-                    </div>  
+                    </div>
                  </div>
 
-                 
+
                 <div id = 'metadata-bar-individual'>
                     <div className="w3-light-grey">
                         <div className='w3-green metadata-bar-individual' style={{height:"2em", width:"0%"}}/>
-                    </div>  
-            
+                    </div>
+
                 </div>
                 <div id = 'metadata-bar-individual'>
                     <div className="w3-light-grey">
                         <div className='w3-green metadata-bar-individual' style={{height:"2em", width:"0%"}}/>
-                    </div>  
-                  
+                    </div>
+
                 </div>
                 <br></br>
-               <span>    
-                   </span> 
+               <span>
+                   </span>
             </div>
+
             <br></br>
             <div id = 'first-characteristic'>{firstCharacterstic}</div> 
+
                <div id = 'third-characteristic'>{thirdCharacteristic}</div>
                <br></br>
 
         </div>)
-        
+
 
     }
 

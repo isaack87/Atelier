@@ -46,7 +46,7 @@ class ProductOverview extends React.Component {
   getDataFromProductId(productId) {
     axios({
       method: 'post',
-      url: 'http://localhost:3000/productdetails',
+      url: '/productdetails',
       data: { id: productId },
     })
       .then((response) => {
@@ -68,7 +68,7 @@ class ProductOverview extends React.Component {
   getDataFromStyleId(productId) {
     axios({
       method: 'get',
-      url: `http://localhost:3000/product/styles?pid=${productId}`,
+      url: `/product/styles?pid=${productId}`,
     })
       .then((response) => {
         const styleId = response.data.results[0].style_id;
@@ -129,7 +129,7 @@ class ProductOverview extends React.Component {
   renderPhotosOnClick(productId, styleId) {
     axios({
       method: 'get',
-      url: `http://localhost:3000/product/styles?pid=${productId}`,
+      url: `/product/styles?pid=${productId}`,
     })
       .then((response) => {
         // Update photos array =============================
@@ -173,7 +173,7 @@ class ProductOverview extends React.Component {
 
     axios({
       method: 'get',
-      url: `http://localhost:3000/product/styles?pid=${this.props.productId}`,
+      url: `/product/styles?pid=${this.props.productId}`,
     })
       .then((response) => {
         // Update SKUs and StyleId
@@ -232,7 +232,7 @@ class ProductOverview extends React.Component {
     });
   }
 
-  onAddToCart(skuId, size, quantity) {
+  onAddToCart(skuId, size, quantity, cb) {
     $.ajax({
       method: 'POST',
       url: '/addToCart',
@@ -241,6 +241,7 @@ class ProductOverview extends React.Component {
         console.log('🛒 ', quantity + 'x - Size: ' + size + ' -', this.state.styleNames[this.state.currentStyleIndex], '| ' + this.state.productInfo.name, 'added to the shopping cart!');
         document.getElementById('selectedSize').selectedIndex = 0;
         document.getElementById('selectedQuantity').selectedIndex = 0;
+        cb();
       },
       error: (error) => {
         console.log('Failed to add to cart', error);
@@ -254,15 +255,13 @@ class ProductOverview extends React.Component {
 
         <Carousel fullSizePhotos={this.state.fullSizePhotos} smallSizePhotos={this.state.smallSizePhotos} currentMainThumbnail={this.state.currentMainThumbnail} />
 
-
-
         <div className='selectorContainer'>
-        <ProductInformation productInfo={this.state.productInfo} allResultsArray={this.state.allResultsArray} currentStyleIndex={this.state.currentStyleIndex} avgRating = {this.props.avgRating}/>
+          <ProductInformation productInfo={this.state.productInfo} allResultsArray={this.state.allResultsArray} currentStyleIndex={this.state.currentStyleIndex} avgRating = {this.props.avgRating}/>
           <StyleSelector styleNames={this.state.styleNames} thumbnails={this.state.thumbnails} styleIds={this.state.styleIds} currentStyleIndex={this.state.currentStyleIndex} changeStyleId={this.changeStyleId.bind(this)} />
-          <AddToCart currentQuantity={this.state.currentQuantity} skuIds={this.state.skuIds} skuCounts={this.state.skuCounts} renderQuantity={this.renderQuantity.bind(this)} onAddToCart={this.onAddToCart.bind(this)} />
+          <AddToCart styleNames={this.state.styleNames} currentStyleIndex={this.state.currentStyleIndex} currentQuantity={this.state.currentQuantity} skuIds={this.state.skuIds} skuCounts={this.state.skuCounts} renderQuantity={this.renderQuantity.bind(this)} onAddToCart={this.onAddToCart.bind(this)} />
         </div>
 
-        <button onClick={this.onChangeId.bind(this)}>Randomize Product ID</button>
+        {/* <button onClick={this.onChangeId.bind(this)}>Randomize Product ID</button> */}
         <ProductDescription productInfo={this.state.productInfo} />
 
       </div>

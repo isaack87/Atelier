@@ -18,7 +18,7 @@ class ReviewProductBreakdown extends React.Component {
         //make a get request to endpoint for product metadata
         axios({
             method: 'post',
-            url: 'http://localhost:3000/productBreakdown',
+            url: '/productBreakdown',
             //for testing purposes we use this default productID
             data: {productID}
         }).then(response => {
@@ -31,7 +31,7 @@ class ReviewProductBreakdown extends React.Component {
             console.log('review product breakdown', this.props)
             this.props.setProductInfo(productMetadata);
         })
-        
+
     }
     generateProductMetadataDiv() {
         let productMetadata = this.state.metaData;
@@ -52,10 +52,10 @@ class ReviewProductBreakdown extends React.Component {
     render() {
 
         return <div>
-          
+
             {this.state.metaDataDiv}
-           
-            
+
+
         </div>
     }
 }

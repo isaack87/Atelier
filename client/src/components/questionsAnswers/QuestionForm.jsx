@@ -131,7 +131,7 @@ class QuestionForm extends React.Component {
       };
       $.ajax({
         method: 'POST',
-        url: 'http://localhost:3000/addQuestion',
+        url: '/addQuestion',
         contentType: 'application/json',
         data: JSON.stringify(info),
         success: () => {
@@ -240,9 +240,8 @@ class QuestionForm extends React.Component {
     const { showForm } = this.state;
     return (
       <div className="buttons buttoncontainers">
-        <button className="add-q-btn" type="submit" onClick={ this.onOpenForm }>
-          ADD A QUESTION
-          <img alt="plusimage" className="imgplus" src="plus.png" />
+        <button className="addqbtn" type="submit" onClick={ this.onOpenForm }>
+          ADD A QUESTION➕
           {showForm && this.showForm()}
         </button>
       </div>
