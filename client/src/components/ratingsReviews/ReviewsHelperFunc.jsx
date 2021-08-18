@@ -139,7 +139,7 @@ const helpers = {
                         </div>
                     </div>
                 </div>
-                <span id ='reviews-total-bar'>{starArr.length + 'reviews total'}</span>
+                <span id ='reviews-total-bar'>{starArr.length + ' reviews total'}</span>
                 
                 <br></br>
             </div>;
@@ -193,8 +193,10 @@ const helpers = {
                <span>    
                    </span> 
             </div>
+            <br></br>
             <div id = 'first-characteristic'>{firstCharacterstic}</div> 
                <div id = 'third-characteristic'>{thirdCharacteristic}</div>
+               <br></br>
 
         </div>)
         
