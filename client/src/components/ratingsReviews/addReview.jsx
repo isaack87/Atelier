@@ -160,7 +160,6 @@ class AddReview extends React.Component{
                     {meaning}
             </div>)
         }
-        let charactInfoDiv = <div id='characteristics'>{characteristicsArr}</div>
         this.setState({characteristicsDiv: characteristicsArr, availableCharacteristicsForProduct: collectionOfCharacteristics, characteristicsIdValueObject: charIdValueObject})
 
     }
@@ -182,13 +181,11 @@ class AddReview extends React.Component{
         for (let i = 1; i <= 5; i++) {
             starIconsDiv.push(
                 <span className= "fa fa-star empty-star star-modal" id={'star-icon' + i} onClick = {()=> {
-                    console.log('star clicked', i);
                     this.setState({overallRating: i });
                     this.updateStarIcon(i);
                 }}></span>
             )
         }
-        
         this.setState({starIcons: <div><div id ='star-div-modal'>{starIconsDiv}</div><span id='text-explanation'></span></div>})
 
     }
@@ -331,28 +328,7 @@ class AddReview extends React.Component{
                             // let form = new FormData();
                             // form.append('image', files);
                             //format as binary, base64, or image url
-                            const toBase64 = file => new Promise((resolve, reject) => {
-                                reader.readAsDataURL(file);
-                                reader.onload = () => resolve(reader.result);
-                                reader.onerror = error => reject(error);
-                            });
-                            async function getBase64() {
-                                let converted =  await toBase64(files);
-                                return converted;
-                            }
-                            let base64 = await getBase64();
-                            console.log('base 64', base64)
-                 
 
-
-                            // axios({
-                            //     method: 'post',
-                            //     url: 'http://localhost:3000/uploadimage',
-                            //     //for testing purposes we use this default productID
-                            //     data: base64
-                            // }).then(response=> {
-                            //     console.log('axios response', response)
-                            // })
 
                             //we should not put this in the client but i will refactor later if i have time
                             var form = new FormData();
@@ -368,7 +344,6 @@ class AddReview extends React.Component{
                               };
                               $.ajax(settings).done((response) => {
                                   response = JSON.parse(response)
-                                  console.log('respose', response)
                                 let url = response.data.display_url;
                                 let imagesArr = this.state.imagesURL;
                                 imagesArr.push(url);
@@ -477,7 +452,7 @@ class AddReview extends React.Component{
                     "photos": this.state.imagesURL,
                     "characteristics":  this.state.characteristicsIdValueObject
                 };
-                console.log('params', params)
+             
                 let options = {
                     method: 'post',
                     url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews`,
@@ -486,7 +461,12 @@ class AddReview extends React.Component{
                   };
                    await axios(options)
                   .then(response => {
-                      console.log('posting review', response);
+                  
+                      this.hideModal();
+                      //and then close the modal
+                      //now need to update the reviews 
+                      this.props.getAndRenderReviews();
+                      return;
                   })
 
         } else {
