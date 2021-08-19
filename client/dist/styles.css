@@ -820,7 +820,6 @@ ul {
   justify-content: center;
   font-size: small;
   width: 700px;
-
 }
 
 .carouselContainer {
@@ -1094,7 +1093,6 @@ ul {
 .salePrice {
   color: red;
   font-weight: bold;
-
 }
 
 .checkMark {
@@ -1103,7 +1101,6 @@ ul {
   --width: 6px;
   --borderColor: rgb(27, 44, 23);
   box-shadow: 0 0 12px rgb(230, 221, 221);
-
   transform: rotate(45deg);
   height: var(--height);
   width: var(--width);
@@ -1127,7 +1124,6 @@ ul {
   text-align: center;
   border-radius: 6px;
   padding: 5px 0;
-
   /* Position the tooltip */
   position: absolute;
   z-index: 1;
@@ -1146,7 +1142,6 @@ ul {
   text-align: center;
   border-radius: 6px;
   padding: 5px 0;
-
   /* Position the tooltip */
   position: absolute;
   z-index: 1;
@@ -1275,8 +1270,6 @@ ul {
 }
 .myImg2:hover {opacity: 0.7;}
 
-
-
 /* The Modal (background) */
 .cartModal {
   display: none;
@@ -1355,7 +1348,11 @@ ul {
   cursor: pointer;
   margin-left: 1.5em;
 }
+.proceedToCheckout:hover, .keepShopping:hover {
+  box-shadow: 0 0 30px rgb(0, 0, 0, 0.15);
+  transform: scale(1.03);
 
+}
 .modalButtonscheckout {
   display: flex;
   flex-flow: row;
@@ -1410,8 +1407,6 @@ ul {
   height: 5em;
   margin-top: .2em;
   margin-left: .2em;
-  /* border: .2em solid green; */
-  /* background-color: white; */
 }
 .relatedProductsArrow {
   font-size: 1em;
