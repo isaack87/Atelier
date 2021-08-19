@@ -51,7 +51,7 @@ class ProductOverview extends React.Component {
     })
       .then((response) => {
 
-         this.props.getProductName(response.data.name)
+        this.props.getProductName(response.data.name)
 
         this.setState({
           productInfo: response.data,

@@ -1,7 +1,7 @@
 import React from 'react';
-import LoadMoreAnswers from './LoadMoreAnswers.jsx'
-import QuestionForm from './QuestionForm.jsx'
-import interact from './Interaction.jsx'
+import LoadMoreAnswers from './LoadMoreAnswers.jsx';
+import QuestionForm from './QuestionForm.jsx';
+import interact from './Interaction.jsx';
 
 const AskQuestions = (props) => (
   <div className='loadmore-a'>
@@ -11,7 +11,7 @@ const AskQuestions = (props) => (
     />
     <div
       className="buttons buttoncontainers">
-      <button onClick={() => {interact('button', 'MORE ANSWERED QUESTIONS')}} className={props.btnvisibleq ? 'loadanswers' : 'btndisappear'}
+      <button onClick={() => { interact('button', 'MORE ANSWERED QUESTIONS'); }} className={props.btnvisibleq ? 'loadanswers' : 'btndisappear'}
         onClick={props.loadMoreQuestions}
         type="submit">
         MORE ANSWERED QUESTIONS

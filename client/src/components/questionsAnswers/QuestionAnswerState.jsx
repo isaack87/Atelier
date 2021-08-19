@@ -72,9 +72,9 @@ class QuestionsAnswersState extends React.Component {
     const newObj = [];
     list.map(e => {
       let answersList = Object.values(e.answers);
-      let sellerListPriority = []
+      let sellerListPriority = [];
       let sortedAnswersByHelpfulCount = [];
-      let sellerAndHelpfulCounterSorted =[];
+      let sellerAndHelpfulCounterSorted = [];
 
       //create new answer list to be sorted
       answersList.map(e => {
@@ -90,15 +90,15 @@ class QuestionsAnswersState extends React.Component {
           });
         } else {
         // if not seller push to array
-        sortedAnswersByHelpfulCount.push({
-          answerername: e.answerer_name,
-          body: e.body,
-          date: e.date,
-          helpfulness: e.helpfulness,
-          id: e.id,
-          photos: e.photos
-        });
-      }
+          sortedAnswersByHelpfulCount.push({
+            answerername: e.answerer_name,
+            body: e.body,
+            date: e.date,
+            helpfulness: e.helpfulness,
+            id: e.id,
+            photos: e.photos
+          });
+        }
         // sorting answer list by helpful counter
         sortedAnswersByHelpfulCount.sort(function(a,b) {
           return b.helpfulness - a.helpfulness;
@@ -205,7 +205,7 @@ class QuestionsAnswersState extends React.Component {
             onSearch={this.search}
           />
         </div>
-        <div className={this.state.visibleQuestions  > 2 || this.state.visibleAnswers > 2 ? "q-a-box-scroll" : 'q-a-box'}>
+        <div className={this.state.visibleQuestions > 2 || this.state.visibleAnswers > 2 ? 'q-a-box-scroll' : 'q-a-box'}>
           <MainAnswerQuestionBox
             questionsList={this.state.questionsList}
             answersList={this.state.answersList}

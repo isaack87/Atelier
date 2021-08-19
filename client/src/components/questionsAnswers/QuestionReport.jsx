@@ -7,9 +7,8 @@ const QuestionReport = (props) => {
   const reportedBtn = () => {
     reportStatus = 'Reported';
     serverhelper.putReportQuestion(props.qid);
-    interact('btn', 'QuestionReportButton')
-  }
-
+    interact('btn', 'QuestionReportButton');
+  };
 
   return (
     <div>

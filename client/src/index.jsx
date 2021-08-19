@@ -24,9 +24,8 @@ class App extends React.Component {
     this.getProductName = this.getProductName.bind(this);
     this.getNumberOfReviews = this.getNumberOfReviews.bind(this);
   }
-  getNumberOfReviews(num){
-    this.setState({numberOfReviews: num});
-
+  getNumberOfReviews(num) {
+    this.setState( {numberOfReviews: num} );
   }
   //handles updating avg rating for a product
   updateAvgRatingForProduct(rating) {
@@ -40,7 +39,7 @@ class App extends React.Component {
     });
   }
   //handles setting the state for product name
-  getProductName(name){
+  getProductName(name) {
     this.setState({productName: name});
   }
 
@@ -67,7 +66,7 @@ class App extends React.Component {
           <ProductOverview productId={this.state.productId} random={this.random.bind(this)} avgRating = {this.state.avgRating} getProductName = {this.getProductName}/>
           <QuestionsAnswersState
             productId={this.state.productId}
-            />
+          />
           <Reviews props={this.state} avgRatingFunc = {this.updateAvgRatingForProduct} getNumOfReviews = {this.getNumberOfReviews}/>
         </ProductMainStateProvider>
         <button onClick={this.toggleDark.bind(this)}>Toggle Dark Mode</button>

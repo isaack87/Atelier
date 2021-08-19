@@ -1,6 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
-import interact from './Interaction.jsx'
+import interact from './Interaction.jsx';
 
 class HelpfulQuestionCount extends React.Component {
   constructor(props) {
@@ -41,15 +41,14 @@ class HelpfulQuestionCount extends React.Component {
   }
 
   render() {
-
     const margins = {
-      marginTop: "-.2em",
-      marginLeft: "-.8em",
-      marginRight: "-1.4em"
-    }
+      marginTop: '-.2em',
+      marginLeft: '-.8em',
+      marginRight: '-1.4em'
+    };
 
     return (
-      <div onClick={() => {interact('div', 'helpfulQuestionCounter')}}
+      <div onClick={() => {interact('div', 'helpfulQuestionCounter'); }}
         className=" helpfulQuestionCounter">
         Helpful? |
         <button

@@ -10,26 +10,25 @@ import AnswerForm from './AnswerForm.jsx';
 const MainAnswerQuestionBox = (props) => {
 
   const margins = {
-    marginRight: "-.3em",
-    marginLeft: "-.3em",
-  }
+    marginRight: '-.3em',
+    marginLeft: '-.3em',
+  };
 
   const QABOX = props.questionanswerslist.slice(0, props.visibleQuestions).map((data, index) => (
     <div key={index} className='QABOX'>
       <div key={data.qID}>
         <ul>
           <div className="questionbox">
-              <b>
-                <p className={data.answers[0] ? 'question' : 'question'}> Q:  {data.question} </p>
-              </b>
+            <b>
+              <p className={data.answers[0] ? 'question' : 'question'}> Q:  {data.question} </p>
+            </b>
             <div className="questionuserbar qbarspacing">
-
               <div style={margins}>
-              <HelpfulQuestionCount
-                pid={props.productId}
-                id={data.qID}
-                defaultcounter={data.questionHelpful}
-              />
+                <HelpfulQuestionCount
+                  pid={props.productId}
+                  id={data.qID}
+                  defaultcounter={data.questionHelpful}
+                />
               </div>
               |
               <p>{ data.question_helpfulness}</p>
@@ -47,11 +46,11 @@ const MainAnswerQuestionBox = (props) => {
                   <p className={answerlist.body[0] ? 'answerbox' : 'answerbox'}> <b>A:‍‍ _‍</b>   {answerlist.body.toString().toLowerCase()}
                   </p>
                   <div className="userinfobox">
-                    by:{" "}
+                    by:{' '}
                     { answerlist.answerername.toLowerCase() === 'seller'
                       ? <b> {answerlist.answerername} </b>
                       : answerlist.answerername}
-                      {" "}|
+                    {' '}|
                     <Moment format="MMMM-DD-YYYY" date={answerlist.date} />
                     |
                     <HelpfulAnswerCount
@@ -67,7 +66,7 @@ const MainAnswerQuestionBox = (props) => {
                       return (
                         <div className='imagezoom iimg iimg-spacing' key={index}>
                           <img src={photo} className='iimg' />
-                          </div>
+                        </div>
                       );
                     })}
                   </div>
