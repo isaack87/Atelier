@@ -85,6 +85,10 @@
   width: 100%;
 
 }
+h1{
+  margin-left: 4em;
+
+}
 #ratings-breakdown {
 
   margin-right: 5em;
@@ -95,7 +99,15 @@ display: inline-block;
   background-color: green;
 }
 #breakdown-div{
-  display: inline-block;
+  display: inline;
+  margin-left: 7em;
+  margin-right: 2em;
+  float:left;
+  
+}
+#ratings-header{
+  margin-left: 2em;
+  margin-top: 4em;
 }
 #reviews-scrollable {
   width: 60%;
@@ -115,33 +127,29 @@ display: inline-block;
 }
 #bar {
   display: inline-block;
-  width: 40%;
+  width: 39%;
   /* position:relative; */
 }
   /* left: 7em;
 } */
-/* .w3-light-grey, .w3-green {
-  display:inline;
-} */
+
 #reviews-total-bar {
   display: inline;
   float: right;
 }
-/* #metadata-bar {
-  display: inline-block;
-  width: 40%;
-} */
+
 
 #metadata-bar-individual {
   display: inline;
-  width:30%;
+  width:27%;
   float:left;
   margin-right: 0.3em;
 
 }
 #first-characteristic {
-  width: 30%;
+  /* width: 30%; */
   display: inline;
+  float: left;
 
 
 }
@@ -173,6 +181,7 @@ margin-right: 2em;
 #reviewsList {
   height: 40em;
   overflow: auto;
+
 }
 
 .empty-star {
@@ -214,7 +223,7 @@ margin-right: 2em;
   overflow: hidden;
   color: #f80;
 }
-#star-75 {
+#star-75:after {
   font-family: FontAwesome;
   content: "\f005";
 
