@@ -187,6 +187,7 @@ class AddReview extends React.Component{
             )
         }
 
+
         this.setState({starIcons: <div><div id ='star-div-modal'>{starIconsDiv}</div><span id='text-explanation'></span></div>})
 
     }

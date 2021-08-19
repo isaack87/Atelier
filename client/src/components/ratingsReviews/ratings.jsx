@@ -185,7 +185,6 @@ class Reviews extends React.Component {
                 <p id= 'review-username'>{review.reviewer_name}</p>
                 <p>{moment(review.date).format('MMMM Do YYYY')}</p>
                 </div>
-               {review.rating}
                 {review.body}
                 <div><Images props= {review.photos}/></div>
 
@@ -254,8 +253,11 @@ class Reviews extends React.Component {
         if (this.state.allReviews.length > 0) {
             return (
                 <div id = 'reviews'>
-                    <h1>{`Ratings & Reviews`}</h1>
-                    {this.state.filterMessage}
+
+                    <h1 id='ratings-header'>{`Ratings & Reviews`}</h1>
+                    {this.state.filterMessage} 
+
+
                     <div id ='breakdown-div'>
                     <RatingsBreakdown props = {this.state} getAvgRating = {this.props.avgRatingFunc} handleFilter = {this.handleClickFilterReviews} product = {this.props.props.productId} setProductInfo= {this.setProductInfo} getNumOfReviews = {this.props.getNumOfReviews}/>
                     </div>
