@@ -44,21 +44,21 @@ class AnswerForm extends React.Component {
     interact('div', 'fileUploaderHandler');
 
     var form = new FormData();
-    form.append("image", this.state.selectedFile);
-    console.log('this.state.selectedFile', this.state.selectedFile)
+    form.append('image', this.state.selectedFile);
+    console.log('this.state.selectedFile', this.state.selectedFile);
     var options = {
-      "url": `https://api.imgbb.com/1/upload?key=${config.imgBBTokeb}`,
-      "method": "POST",
-      "timeout": 0,
-      "processData": false,
-      "mimeType": "multipart/form-data",
-      "contentType": false,
-      "data": form
+      'url': `https://api.imgbb.com/1/upload?key=${config.imgBBTokeb}`,
+      'method': 'POST',
+      'timeout': 0,
+      'processData': false,
+      'mimeType': 'multipart/form-data',
+      'contentType': false,
+      'data': form
     };
 
     $.ajax(options).done((response) => {
       var res = JSON.parse(response);
-      alert(`Picture ${this.state.selectedFile.name} added successfully`)
+      alert(`Picture ${this.state.selectedFile.name} added successfully`);
       if (this.state.photo.length < 5) {
         this.setState({
           photo: [...this.state.photo, res.data.url]
@@ -68,6 +68,7 @@ class AnswerForm extends React.Component {
       }
     });
   }
+
   onClick() {
     this.setState({ showForm: true });
   }
@@ -84,7 +85,7 @@ class AnswerForm extends React.Component {
       this.setState({
         showForm: false,
       }, () =>
-      interact('div', 'onCloseForm'));
+        interact('div', 'onCloseForm'));
     }
   }
 
@@ -129,18 +130,18 @@ class AnswerForm extends React.Component {
     }
 
     if (!email.includes('@') || !email.includes('.com')) {
-      validForm = false
-      alert('Email just be email format')
+      validForm = false;
+      alert('Email just be email format');
       this.setState({
         emailValid: false
       });
     }
 
     if (!email) {
-        validForm = false;
-        this.setState({
-          emailValid: false
-        });
+      validForm = false;
+      this.setState({
+        emailValid: false
+      });
     }
 
     if (name === 'undefined') {
@@ -159,7 +160,7 @@ class AnswerForm extends React.Component {
 
   addAnswer(e) {
     e.preventDefault();
-    interact('div', 'addAnswer')
+    interact('div', 'addAnswer');
     // checks and alert user if any of these fields are empty
     if (this.state.body === '') {
       alert('Please enter a valid Answer');
@@ -167,7 +168,7 @@ class AnswerForm extends React.Component {
       alert(`Please enter a valid email`);
     } else if (this.state.name === '') {
       alert(`Please enter a valid UserName`);
-   }
+    }
     if (this.formValidation()) {
       const info = {
         body: this.state.body,
@@ -195,9 +196,9 @@ class AnswerForm extends React.Component {
         error: () => {
           console.log('error in addAnswers');
         },
-      })
+      });
+    }
   }
-}
 
   showForm() {
     const divStyle = {
@@ -214,12 +215,12 @@ class AnswerForm extends React.Component {
     const placeholdertext = {
       fontSize: '1em',
       width: '34vh'
-    }
+    };
 
     const formlabeltext = {
       fontSize: '2em',
       textDecoration: 'none'
-    }
+    };
 
     return (
       <div className="aboxcenter">
@@ -227,7 +228,7 @@ class AnswerForm extends React.Component {
           <button type="submit" className='X' onClick={this.onCloseForm}>X</button>
           <h1 className='answerboxtitle'>Add Answer</h1>
           <label>
-          <p style={formlabeltext}> Enter UserName*</p>
+            <p style={formlabeltext}> Enter UserName*</p>
             <input
               style={placeholdertext}
               value={this.state.name}
@@ -241,7 +242,7 @@ class AnswerForm extends React.Component {
           < br/>
           <label style={text}> For privacy reasons, do not use your full name or email address**</label>
           <label>
-          <p style={formlabeltext}> Enter Email Here*</p>
+            <p style={formlabeltext}> Enter Email Here*</p>
             <input
               style={placeholdertext}
               value={this.state.email}
@@ -256,7 +257,7 @@ class AnswerForm extends React.Component {
           <label style={text}> For authentication reasons, you will not be emailed**</label>
           < br/>
           <label>
-          <p style={formlabeltext}> Enter Answer Here*</p>
+            <p style={formlabeltext}> Enter Answer Here*</p>
             <textarea
               style={placeholdertext}
               value={this.state.body}
@@ -283,12 +284,12 @@ class AnswerForm extends React.Component {
               })}
             </div>
           </div>
-        < br/>
-            <input className='answerbutton upload'
-              type="submit"
-              onClick={this.addAnswer}
-              value="Post Answer"
-            />
+          < br/>
+          <input className='answerbutton upload'
+            type="submit"
+            onClick={this.addAnswer}
+            value="Post Answer"
+          />
         </form>
       </div>
     );

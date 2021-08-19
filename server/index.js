@@ -43,7 +43,6 @@ app.get('/ahelpful', (req, res) => {
 
 app.post('/ahelpful', (req, res) => {
   const ahelpfulId = req.body.ahelpid;
-  // console.log(req.body);
   isaacAPI.putAnswerHelpful(ahelpfulId, () => {
     res.send('answerhelp post success');
   });
@@ -52,7 +51,6 @@ app.post('/ahelpful', (req, res) => {
 
 app.get('/qhelpful', (req, res) => {
   const pid = req.query.qid;
-  // console.log(pid, '😅😅😅');
   isaacAPI.getQuestionHelpCounter(pid, (cb) => {
     res.send(cb);
   });
@@ -72,7 +70,6 @@ app.get('/addAnswer', (req, res) => {
 
 app.post('/addAnswer', (req, res) => {
   const data = req.body;
-  // console.log(data, '😁');
   isaacAPI.postanswerAPI(data);
   res.send('answer post success');
 });
@@ -83,7 +80,6 @@ app.get('/addQuestion', (req, res) => {
 });
 
 app.post('/addQuestion', (req, res) => {
-  // console.log(req.body, '🙂');
   isaacAPI.postquestionAPI(req.body);
   res.send('question post success');
 });
@@ -93,7 +89,6 @@ app.get('/interaction', (req, res) => {
 });
 
 app.post('/interaction', (req, res) => {
-  console.log(req.body, '🙂');
   const data = req.body
   isaacAPI.interactionLogger(data)
   res.send('interaction  success');

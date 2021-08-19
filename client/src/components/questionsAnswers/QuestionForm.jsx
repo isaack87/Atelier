@@ -168,21 +168,20 @@ class QuestionForm extends React.Component {
     const placeholdertext = {
       fontSize: '2.5em',
       width: '34vh'
-    }
+    };
 
     const formlabeltext = {
       fontSize: '4em',
       textDecoration: 'none'
-    }
+    };
 
     return (
       <div className="qboxcenter">
         <form>
           <button type="submit" className='X' onClick={this.onCloseForm}>X</button>
           <h1 className='questionboxtitle'>Add Question</h1>
-
           <label>
-          <p style={formlabeltext}> Enter UserName*</p>
+            <p style={formlabeltext}> Enter UserName*</p>
             <input
               style={placeholdertext}
               value={this.state.name}
@@ -195,9 +194,8 @@ class QuestionForm extends React.Component {
           </label>
           < br/>
           <label style={text}> For privacy reasons, do not use your full name or email address**</label>
-
           <label>
-          <p style={formlabeltext}> Enter Email Here*</p>
+            <p style={formlabeltext}> Enter Email Here*</p>
             <input
               style={placeholdertext}
               value={this.state.email}
@@ -212,7 +210,7 @@ class QuestionForm extends React.Component {
           <label style={text}> For authentication reasons, you will not be emailed**</label>
           < br/>
           <label>
-          <p style={formlabeltext}> Enter Question Here*</p>
+            <p style={formlabeltext}> Enter Question Here*</p>
             <textarea
               value={this.state.body}
               onChange={this.onChangeBody}
@@ -223,9 +221,7 @@ class QuestionForm extends React.Component {
               placeholder="Example: Is this pretty!**"
             />
           </label>
-
           < br/>
-
           <input className='questionbutton upload'
             type="submit"
             onClick={this.addQuestion}
