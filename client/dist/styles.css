@@ -103,7 +103,7 @@ display: inline-block;
   margin-left: 7em;
   margin-right: 2em;
   float:left;
-  
+
 }
 #ratings-header{
   margin-left: 2em;
@@ -1275,10 +1275,7 @@ ul {
 }
 .myImg2:hover {opacity: 0.7;}
 
-.dark-mode {
-  background-color: black;
-  color: white;
-}
+
 
 /* The Modal (background) */
 .cartModal {
@@ -1364,8 +1361,89 @@ ul {
   flex-flow: row;
 }
 
+/* Related Products */
+.relatedProductsTitle {
+  width: 70em;
+  height: 3em;
+  margin-left: 3em;
+  font-size: 1.3em;
+  /* border: .3em solid purple; */
+
+}
+.relatedProducts {
+  width: 70em;
+  display: flex;
+  flex-flow: row wrap;
+  /* border: .2em solid black; */
+  justify-content: center;
+}
+
+.firstRelated, .secondRelated, .thirdRelated, .fourthRelated {
+  width: 14em;
+  height: 24em;
+  border: .1em solid rgb(175, 169, 169);
+  margin-left: 1em;
+  margin-right: 1em;
+  margin-bottom: 1em;
+  display: flex;
+  flex-flow: column;
+  box-shadow: 0 0 30px rgb(0, 0, 0, 0.15);
+  cursor: pointer;
+}
+
+.relatedProductsPic {
+  background-color: rgb(231, 229, 229);
+  width: 13.8em;
+  height: 17em;
+  /* border: .2em solid orange; */
+  object-fit: contain;
+  margin-top: -2.95em;
+}
+.relatedProductsPic:hover {
+  opacity: 65%;
+}
+.firstRelated:hover, .secondRelated:hover, .thirdRelated:hover, .fourthRelated:hover {
+  box-shadow: 0 1px 8px 0 rgb(35 34 34 /20%);
+}
+.relatedProductsInfo {
+  width: 14em;
+  height: 5em;
+  margin-top: .2em;
+  margin-left: .2em;
+  /* border: .2em solid green; */
+  /* background-color: white; */
+}
+.relatedProductsArrow {
+  font-size: 1em;
+  justify-content: center;
+  position: relative;
+  align-items: center;
+  font-size: 2rem;
+  cursor: pointer;
+  top: 4.6em;
+}
+.relatedProductsArrow:hover {
+  opacity: 80%;
+  transform: scale(1.01);
+
+}
+.relatedProductsStar {
+  z-index: 3;
+  font-size: 2em;
+  bottom: 0.1em;
+  left: 5.8em;
+  position: relative;
+  color: rgb(121, 113, 43);
+}
+.relatedProductsStar:hover {
+  transform: scale(1.01);
+}
 /* ======================== */
 
 * {
   font-family:Georgia, 'Times New Roman', Times, serif;
+}
+.dark-mode {
+  background-color: black;
+  color: white;
 }

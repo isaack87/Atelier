@@ -27,8 +27,12 @@ class ProductOverview extends React.Component {
       currentStyleIndex: 0,
       allResultsArray: [],
       currentCheckMarked: 0,
+      productIdNumber: props.productId,
+
     };
     this.getDataFromProductId = this.getDataFromProductId.bind(this);
+    this.getDataFromProductIdOnDidUpdate = this.getDataFromProductIdOnDidUpdate.bind(this);
+    this.getDataFromProductIdOnDidUpdate = this.getDataFromProductIdOnDidUpdate.bind(this);
     this.getDataFromStyleId = this.getDataFromStyleId.bind(this);
     this.changeMainPageStyle = this.changeMainPageStyle.bind(this);
     this.renderPhotosOnClick = this.renderPhotosOnClick.bind(this);
@@ -36,12 +40,20 @@ class ProductOverview extends React.Component {
   }
 
   componentDidMount() {
-    this.getDataFromProductId(this.props.productId);
+    this.getDataFromProductId(this.state.productIdNumber);
   }
 
-  // componentDidUpdate() {
-  //   this.getDataFromProductId(this.props.productId);
-  // }
+  componentDidUpdate() {
+    if (this.state.productIdNumber !== this.props.productId) {
+
+      this.setState({
+        productIdNumber: this.props.productId,
+        currentStyleIndex: 0,
+      }, () => {
+        this.getDataFromProductIdOnDidUpdate(this.state.productIdNumber);
+      });
+    }
+  }
 
   getDataFromProductId(productId) {
     axios({
@@ -50,18 +62,121 @@ class ProductOverview extends React.Component {
       data: { id: productId },
     })
       .then((response) => {
-
-        this.props.getProductName(response.data.name)
+        this.props.getProductName(response.data.name);
 
         this.setState({
           productInfo: response.data,
           features: response.data.features,
         }, () => {
-          this.getDataFromStyleId(this.props.productId);
+          this.getDataFromStyleId(this.state.productIdNumber);
         });
       })
       .catch((error) => {
         console.log('Error in getting data from getDataFromProductId', error);
+      });
+  }
+
+  getDataFromProductIdOnDidUpdate(productId) {
+    axios({
+      method: 'post',
+      url: '/productdetails',
+      data: { id: productId },
+    })
+      .then((response) => {
+        this.props.getProductName(response.data.name);
+
+        let thumbnails = document.getElementsByClassName('imageThumb');
+        for (let i = 0; i < thumbnails.length; i++) {
+          document.getElementsByClassName('imageThumb')[i].classList.remove('selectedThumbnail');
+        }
+
+        if (document.getElementById('selectedSize')) {
+          document.getElementById('selectedSize').selectedIndex = 0;
+          if (document.getElementById('selectedQuantity').selectedIndex) {
+            document.getElementById('selectedQuantity').selectedIndex = 0;
+          }
+          const tooltip = document.getElementsByClassName('tooltiptext')[0];
+          tooltip.style.visibility = 'hidden';
+        }
+
+        this.setState({
+          productInfo: response.data,
+          features: response.data.features,
+        }, () => {
+          this.getDataFromStyleIdUpdate(this.state.productIdNumber);
+        });
+      })
+      .catch((error) => {
+        console.log('Error in getting data from getDataFromProductId', error);
+      });
+  }
+
+  getDataFromStyleIdUpdate(productId) {
+    axios({
+      method: 'get',
+      url: `/product/styles?pid=${productId}`,
+    })
+      .then((response) => {
+        const styleId = response.data.results[0].style_id;
+        // console.log(response.data.results)
+        // Extract photo links here ========================
+        const fullPhotos = [];
+        const smallPhotos = [];
+        for (let i = 0; i < response.data.results.length; i++) {
+          if (response.data.results[i].style_id === styleId) {
+            for (let j = 0; j < response.data.results[i].photos.length; j++) {
+              fullPhotos.push(response.data.results[i].photos[j].url);
+              smallPhotos.push(response.data.results[i].photos[j].thumbnail_url);
+            }
+          }
+        }
+
+        // Getting style names, thumbnails, and skus ============
+        const names = response.data.results.map((item) => ( item.name ));
+        const thumbnails = response.data.results.map((item) => (
+          item.photos[0].thumbnail_url
+        ));
+        const styleIds = response.data.results.map((item) => ( item.style_id ));
+        const skusObject = response.data.results[0].skus;
+        let skuIds = [];
+        let skuCounts = [];
+        for (let key in skusObject) {
+          skuIds.push(key);
+          skuCounts.push(skusObject[key]);
+        }
+
+        // ==================================================
+        return [fullPhotos, smallPhotos, names, thumbnails, skuIds, skuCounts, styleIds, skuCounts[0].quantity, smallPhotos[0].slice(34, 85), response.data.results, smallPhotos[0].slice(34, 90)];
+      })
+      .then((result) => {
+        this.setState({
+          fullSizePhotos: result[0],
+          smallSizePhotos: result[1],
+          styleNames: result[2],
+          thumbnails: result[3],
+          skuIds: result[4],
+          skuCounts: result[5],
+          styleIds: result[6],
+          currentQuantity: result[7],
+          currentMainThumbnail: result[8],
+          allResultsArray: result[9],
+          currentCheckMarked: result[10],
+        }, () => {
+          if (this.state.currentQuantity !== 'null') {
+            const tooltip = document.getElementsByClassName('cartButton')[0];
+            tooltip.style.visibility = 'hidden';
+          }
+          if (this.state.currentQuantity > 0) {
+            const tooltip = document.getElementsByClassName('cartButton')[0];
+            tooltip.style.visibility = 'visible';
+          }
+          document.getElementsByClassName(this.state.currentMainThumbnail)[0].classList.add('clickedMarker');
+          document.getElementsByClassName(this.state.currentCheckMarked)[0].classList.add('checkMark');
+          document.getElementsByClassName('imageThumb')[0].classList.add('selectedThumbnail');
+        });
+      })
+      .catch((error) => {
+        console.log('Error in getting data from ProductID Styles, getDataFromStyleId', error);
       });
   }
 
@@ -160,7 +275,7 @@ class ProductOverview extends React.Component {
     this.setState({
       currentSelectedStyleId: passInStyleId,
     }, () => {
-      this.renderPhotosOnClick(this.props.productId, this.state.currentSelectedStyleId);
+      this.renderPhotosOnClick(this.state.productIdNumber, this.state.currentSelectedStyleId);
     });
   }
 
@@ -173,7 +288,7 @@ class ProductOverview extends React.Component {
 
     axios({
       method: 'get',
-      url: `/product/styles?pid=${this.props.productId}`,
+      url: `/product/styles?pid=${this.state.productIdNumber}`,
     })
       .then((response) => {
         // Update SKUs and StyleId
@@ -200,7 +315,10 @@ class ProductOverview extends React.Component {
           // reset size and quantity to default
           if (document.getElementById('selectedSize')) {
             document.getElementById('selectedSize').selectedIndex = 0;
-            document.getElementById('selectedQuantity').selectedIndex = 0;
+            if (document.getElementById('selectedQuantity')) {
+              document.getElementById('selectedQuantity').selectedIndex = 0;
+            }
+
             const tooltip = document.getElementsByClassName('tooltiptext')[0];
             tooltip.style.visibility = 'hidden';
           }
@@ -226,9 +344,8 @@ class ProductOverview extends React.Component {
   }
 
   onChangeId() {
-    console.log('clicked')
     this.props.random(() => {
-      this.getDataFromProductId(this.props.productId);
+      this.getDataFromProductId(this.state.productIdNumber);
     });
   }
 
@@ -253,12 +370,12 @@ class ProductOverview extends React.Component {
     return (
       <div className='products overviewContainer'>
 
-        <Carousel fullSizePhotos={this.state.fullSizePhotos} smallSizePhotos={this.state.smallSizePhotos} currentMainThumbnail={this.state.currentMainThumbnail} />
+        <Carousel fullSizePhotos={this.state.fullSizePhotos} smallSizePhotos={this.state.smallSizePhotos} currentMainThumbnail={this.state.currentMainThumbnail} productId={this.props.productId}/>
 
         <div className='selectorContainer'>
-          <ProductInformation productInfo={this.state.productInfo} allResultsArray={this.state.allResultsArray} currentStyleIndex={this.state.currentStyleIndex} avgRating = {this.props.avgRating}/>
+          <ProductInformation numberOfReviews={this.props.numberOfReviews} productInfo={this.state.productInfo} allResultsArray={this.state.allResultsArray} currentStyleIndex={this.state.currentStyleIndex} avgRating = {this.props.avgRating}/>
           <StyleSelector styleNames={this.state.styleNames} thumbnails={this.state.thumbnails} styleIds={this.state.styleIds} currentStyleIndex={this.state.currentStyleIndex} changeStyleId={this.changeStyleId.bind(this)} />
-          <AddToCart styleNames={this.state.styleNames} currentStyleIndex={this.state.currentStyleIndex} currentQuantity={this.state.currentQuantity} skuIds={this.state.skuIds} skuCounts={this.state.skuCounts} renderQuantity={this.renderQuantity.bind(this)} onAddToCart={this.onAddToCart.bind(this)} />
+          <AddToCart productId={this.props.productId} styleNames={this.state.styleNames} currentStyleIndex={this.state.currentStyleIndex} currentQuantity={this.state.currentQuantity} skuIds={this.state.skuIds} skuCounts={this.state.skuCounts} renderQuantity={this.renderQuantity.bind(this)} onAddToCart={this.onAddToCart.bind(this)} />
         </div>
 
         {/* <button onClick={this.onChangeId.bind(this)}>Randomize Product ID</button> */}

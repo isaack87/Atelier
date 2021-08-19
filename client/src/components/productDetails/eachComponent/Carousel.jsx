@@ -1,6 +1,6 @@
 import React from 'react';
 import $ from 'jquery';
-import Zoom from 'react-img-zoom'
+import Zoom from 'react-img-zoom';
 
 class Carousel extends React.Component {
   constructor(props) {
@@ -12,9 +12,19 @@ class Carousel extends React.Component {
       screenSize: 'normal',
       displayThumbnails: 'yes',
       displayIcons: 'no',
+      productIdNumber: props.productId,
     };
     this.nextSlide = this.nextSlide.bind(this);
     this.prevSlide = this.prevSlide.bind(this);
+  }
+
+  componentDidUpdate() {
+    if (this.state.productIdNumber !== this.props.productId) {
+      this.setState({
+        current: 0,
+        productIdNumber: this.props.productId,
+      });
+    }
   }
 
   nextSlide() {

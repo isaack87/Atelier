@@ -6,8 +6,19 @@ class AddToCart extends React.Component {
     this.state = {
       quantitySelected: false,
       rerenderSize: false,
+      productIdNumber: props.productId,
     };
     this.openSuccessModal = this.openSuccessModal.bind(this);
+  }
+
+
+  componentDidUpdate() {
+    if (this.state.productIdNumber !== this.props.productId) {
+      this.setState({
+        productIdNumber: this.props.productId,
+        rerenderSize: true,
+      });
+    }
   }
 
   renderQuantity(event) {
@@ -139,12 +150,11 @@ class AddToCart extends React.Component {
   render() {
     let sizeArray;
 
-    if (this.props.skuIds[0] === 'null' && this.state.rerenderSize === false) {
+    if ((this.props.skuIds[0] === 'null' || this.props.currentQuantity === null) && this.state.rerenderSize === false) {
       sizeArray =
-        <select className='selectedSize' onChange={this.renderQuantity.bind(this)} defaultValue={'DEFAULT'} disabled>
-          <option disabled>OUT OF STOCK!</option>;
-          {sizeArray}
-        </select>;
+      <select className='selectedSize' onChange={this.renderQuantity.bind(this)} defaultValue={'DEFAULT'} disabled>
+        <option disabled>OUT OF STOCK!</option>;
+      </select>;
       const tooltip = document.getElementsByClassName('cartButton')[0];
       tooltip.style.visibility = 'hidden';
     } else {
@@ -161,11 +171,10 @@ class AddToCart extends React.Component {
       sizeArray =
         <select className='selectedSize' onChange={this.renderQuantity.bind(this)} defaultValue={'DEFAULT'} disabled>
           <option disabled>OUT OF STOCK!</option>;
-          {sizeArray}
         </select>;
       const tooltip = document.getElementsByClassName('cartButton')[0];
       tooltip.style.visibility = 'hidden';
-    } else {
+    } else if (this.props.currentQuantity !== null) {
       sizeArray =
         <select className='selectedSize' onChange={this.renderQuantity.bind(this)} id='selectedSize' defaultValue={'DEFAULT'} required>
           <option value='DEFAULT' disabled>SELECT SIZE</option>
