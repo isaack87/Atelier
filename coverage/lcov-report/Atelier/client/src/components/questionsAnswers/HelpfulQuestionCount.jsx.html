@@ -15,41 +15,41 @@
         }
     </style>
 </head>
-    
+
 <body>
 <div class='wrapper'>
     <div class='pad1'>
         <h1><a href="../../../../../index.html">All files</a> / <a href="index.html">Atelier/client/src/components/questionsAnswers</a> HelpfulQuestionCount.jsx</h1>
         <div class='clearfix'>
-            
+
             <div class='fl pad1y space-right2'>
                 <span class="strong">41.67% </span>
                 <span class="quiet">Statements</span>
                 <span class='fraction'>5/12</span>
             </div>
-        
-            
+
+
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
                 <span class='fraction'>0/2</span>
             </div>
-        
-            
+
+
             <div class='fl pad1y space-right2'>
                 <span class="strong">28.57% </span>
                 <span class="quiet">Functions</span>
                 <span class='fraction'>2/7</span>
             </div>
-        
-            
+
+
             <div class='fl pad1y space-right2'>
                 <span class="strong">41.67% </span>
                 <span class="quiet">Lines</span>
                 <span class='fraction'>5/12</span>
             </div>
-        
-            
+
+
         </div>
         <p class="quiet">
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
@@ -204,7 +204,7 @@ class HelpfulQuestionCount extends React.Component {
 <span class="cstat-no" title="statement not covered" >    if (!this.state.questionVoted) {</span>
 <span class="cstat-no" title="statement not covered" >      $.ajax({</span>
         method: 'POST',
-        url: 'http://localhost:3000/qhelpful',
+        url: '/qhelpful',
         contentType: 'application/json',
         data: JSON.stringify({ qhelpid: this.state.qhelpid }),
         success: <span class="fstat-no" title="function not covered" >()</span> =&gt; {
@@ -257,4 +257,3 @@ export default HelpfulQuestionCount;</pre></td></tr></table></pre>
         <script src="../../../../../block-navigation.js"></script>
     </body>
 </html>
-    

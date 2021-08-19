@@ -26,7 +26,7 @@ class HelpfulQuestionCount extends React.Component {
     if (!this.state.questionVoted) {
       $.ajax({
         method: 'POST',
-        url: 'http://localhost:3000/qhelpful',
+        url: '/qhelpful',
         contentType: 'application/json',
         data: JSON.stringify({ qhelpid: this.state.qhelpid }),
         success: () => {
@@ -41,10 +41,17 @@ class HelpfulQuestionCount extends React.Component {
   }
 
   render() {
+
+    const margins = {
+      marginTop: "-.2em",
+      marginLeft: "-.8em",
+      marginRight: "-1.4em"
+    }
+
     return (
       <div onClick={() => {interact('div', 'helpfulQuestionCounter')}}
         className=" helpfulQuestionCounter">
-        Helpful?
+        Helpful? |
         <button
           type="submit"
           className="helpfulQuestionCounter questionhelpfulbtn"
@@ -52,7 +59,7 @@ class HelpfulQuestionCount extends React.Component {
             this.helpfulQincrementer();
           }}
         >
-          Yes
+          <div style={margins}>Yes</div>
         </button>
         ({this.state.qhelpfulcount})
       </div>

@@ -69,7 +69,7 @@ class AddReview extends React.Component{
             imagesURL: [],
             characteristicsIdValueObject: {},
             overallRating: 0
-        } 
+        }
         this.showModal = this.showModal.bind(this);
         this.hideModal = this.hideModal.bind(this);
         this.buildModal = this.buildModal.bind(this);
@@ -186,6 +186,7 @@ class AddReview extends React.Component{
                 }}></span>
             )
         }
+
         this.setState({starIcons: <div><div id ='star-div-modal'>{starIconsDiv}</div><span id='text-explanation'></span></div>})
 
     }
@@ -200,7 +201,7 @@ class AddReview extends React.Component{
         for (let a = 5; a > i; a--) {
             $(`#star-icon${a}`).removeClass('full-star');
         }
-        const textExplanation = 
+        const textExplanation =
         `<div id='text-explanation-paragraphs'>
         <p>
         1 star = "Poor"
@@ -221,7 +222,7 @@ class AddReview extends React.Component{
         $(`#text-explanation`).empty()
         $(`#text-explanation`).append(textExplanation)
     // this.buildStarExplanation()
-       
+
     }
     buildStarExplanation() {
         const textExplanation = <span id='text-explanation'>
@@ -242,7 +243,7 @@ class AddReview extends React.Component{
     </p>
         </span>;
         this.setState({starInfo: textExplanation});
-   
+
 
     }
     addReviewButton() {
@@ -265,7 +266,7 @@ class AddReview extends React.Component{
                     <div id='items-inside-modal'>
                     <h2>Write Your Review</h2>
                     <h3>About the {this.props.productName.productName} </h3>
-                    
+
                     {this.state.starIcons}
                     {this.state.starInfo}
                     <div id='radio-form'>
@@ -274,11 +275,11 @@ class AddReview extends React.Component{
                         <input type='radio' name='radio' value='yes' defaultChecked></input>
                             <span>Yes</span>
                             <br></br>
-                       
+
                         <input type='radio' name='radio' value='no'></input>
                             <span>No</span>
                             </form>
-                   
+
                     </div>
                     {this.state.characteristicsDiv}
                     <form>
@@ -304,8 +305,8 @@ class AddReview extends React.Component{
                         <p>Upload photos</p>
                         <input  type='file' onChange = { async (e) => {
                            let src = URL.createObjectURL(e.target.files[0]);
-                          
-                
+
+
                             let count = this.state.filesAdded;
                             if (count < 5) {
                                 $('#image-thumbnails').append(`<img src=${src} height = '100' ></img>`);
@@ -323,7 +324,7 @@ class AddReview extends React.Component{
                                 //set the state
                                 this.setState({validImages: false});
                             }
-                    
+
                             //now try uploading the files to imgur
                             // let form = new FormData();
                             // form.append('image', files);
@@ -349,7 +350,7 @@ class AddReview extends React.Component{
                                 imagesArr.push(url);
                                 this.setState({imagesURL: imagesArr})
                               });
-                                
+
                         }}></input>
                     </form>
                     <div id='image-thumbnails'></div>
@@ -393,15 +394,15 @@ class AddReview extends React.Component{
         //now check photos, below will return boolean
         let validPhotos = this.state.validImages;
         for (let elem in allCharacteristics) {
-            
-           
+
+
             if (document.querySelector(`input[name="${elem}"]:checked`) === null) {
                 allCharacteristicsHaveReviews = false;
             } else {
                 let value = document.querySelector(`input[name="${elem}"]:checked`).value;
                 allCharacteristics[elem] = value;
             }
-            
+
         }
         //get review summary
         let reviewSummary = document.getElementById("review-summary-text").value;
@@ -489,7 +490,7 @@ class AddReview extends React.Component{
             //let's test if we can grab the image
         }
     }
-  
+
     componentDidMount(){
         this.setState({productInfo: this.props.productInfo}, ()=> {
             this.buildStarIcons();
@@ -505,9 +506,9 @@ class AddReview extends React.Component{
     }
     render() {
 
-        
+
         if (Object.keys(this.props.productInfo).length > 0) {
-            
+
             return <div>
             {this.state.addReviewButtonDiv}
             {this.state.modalToAddReview}
@@ -515,7 +516,7 @@ class AddReview extends React.Component{
 
         } else {
             return <p>loading...</p>
-        }  
+        }
     }
 }
 

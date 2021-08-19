@@ -41,7 +41,7 @@ class QuestionsAnswersState extends React.Component {
   }
 
   getQuestionsApi() {
-    fetch(`http://localhost:3000/questions?qid=${this.state.productId}`)
+    fetch(`/questions?qid=${this.state.productId}`)
       .then((response) => response.json())
       .then((questions) => {
         // more than 2 questions, load more question button will not appear
@@ -136,7 +136,7 @@ class QuestionsAnswersState extends React.Component {
     const productID = { pid: this.state.productId };
     $.ajax({
       method: 'POST',
-      url: 'http://localhost:3000/questions',
+      url: '/questions',
       contentType: 'application/json',
       data: JSON.stringify(productID),
       success: () => {

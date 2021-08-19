@@ -2,7 +2,6 @@
   align-items: center;
   justify-content: center;
   display: flex;
-  border: .5em solid orange;
   flex-direction: column;
   z-index: 1;
   position: relative;
@@ -340,10 +339,14 @@ margin-right: 2em;
 }
 
 .question {
+  width: 32em;
   display:flex;
+  flex-wrap: wrap;
+  flex-grow: 1;
+  word-break: break-all;
   margin-top: 3em;
   margin-bottom: -4em;
-  font-size: 1.2em;
+  font-size: 1em;
 }
 .search {
   display: flex;
@@ -408,7 +411,7 @@ margin-right: 2em;
   flex-wrap: wrap;
   gap: 1em;
   position: relative;
-  font-size: .5em;
+  font-size: .35em;
   height: 1em;
   padding: .2em;
   flex-direction: row;
@@ -421,6 +424,7 @@ margin-right: 2em;
   flex-wrap: wrap;
   gap: .2em;
   height: 2.5em;
+  object-fit: cover;
   width: 2.5em;
   padding: .1em;
   flex-direction: row;
@@ -450,28 +454,96 @@ margin-right: 2em;
   padding: .1em;
 }
 
-.imagezoom img:hover {
-  border: black .1em solid;
-  width: 5em;
-  height: 5em;
-  position: relative;
-  display: flex;
-  flex-grow: 2;
-  cursor: zoom-in;
+.add-q-btn {
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  text-align: left;
+  outline: none;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-appearance: none;
+  font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;
+  border-radius: 24px;
 
+  font-size: .3em;
+  font-weight: bold;
+  width: 30em;
+  line-height: 1.5;
+  padding-top: 1px;
+  padding-bottom: 1fpx;
+  padding-left: 18px;
+  padding-right: 18px;
+  position: relative;
+  text-align: center;
+  vertical-align: middle;
+  z-index: 10;
+  cursor: pointer;
 }
+
+
+.addqbtn {
+  visibility: visible;
+  box-shadow: 0 1px 6px 0 rgb(34 34 34 / 15%);
+  display: inline-block;
+  font-size: 16px;
+  height: 3em;
+  padding-left: 12px;
+  padding-right: 36px;
+  width: 17em;
+  border-radius: 6px;
+  background: rgb(27, 23, 23);
+  border-color: rgba(34, 34, 34, 0.15);
+  border-style: solid;
+  border-width: 1px;
+  color: white;
+  text-indent: 0.01px;
+  cursor: pointer;
+  justify-content: center;
+  text-align: center;
+}
+
+.loadanswers {
+  visibility: visible;
+  box-shadow: 0 1px 6px 0 rgb(34 34 34 / 15%);
+  display: inline-block;
+  font-size: 16px;
+  height: 3em;
+  padding-left: 12px;
+  padding-right: 36px;
+  width: 17em;
+  border-radius: 6px;
+  background: rgb(27, 23, 23);
+  border-color: rgba(34, 34, 34, 0.15);
+  border-style: solid;
+  border-width: 1px;
+  color: white;
+  text-indent: 0.01px;
+  cursor: pointer;
+  justify-content: center;
+  text-align: center;
+}
+
+.loadanswers:hover {
+  box-shadow: 0 1px 8px 0 rgb(35 34 34 /80%);
+  border-color: whitesmoke;
+  transform: scale(1.03);
+}
+
 .questionbox {
   align-items: center;
   justify-content: center;
   display: flex;
   width: 59em;
   height: 2em;
-  padding: 1em;
+  padding: .7em;
   font-size: .5em;
   flex-direction: row;
   margin-bottom: -7em;
   margin-left: -2em;
 }
+
 .answerbox {
   display: flex;
   width: 59em;
@@ -523,33 +595,7 @@ margin-right: 2em;
   margin-right: -4em;
   cursor: pointer;
 }
-.add-q-btn {
-  background: none;
-  color: inherit;
-  font: inherit;
-  cursor: pointer;
-  text-align: left;
-  outline: none;
-  text-decoration: none;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-appearance: none;
-  font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Droid Sans", "Segoe UI", "Helvetica", Arial, sans-serif;
-  border-radius: 24px;
-  display: inline-block;
-  font-size: .3em;
-  font-weight: bold;
-  width: 30em;
-  line-height: 1.5;
-  padding-top: 1px;
-  padding-bottom: 1fpx;
-  padding-left: 18px;
-  padding-right: 18px;
-  position: relative;
-  text-align: center;
-  vertical-align: middle;
-  z-index: 10;
-  cursor: pointer;
-}
+
 .imgplus{
   width: 20px;
   height: 20px;
@@ -604,6 +650,7 @@ ul {
 .loadmoreanswers {
   border: none;
   padding: 0;
+  margin-left: 4em;
   background: none;
   display: flex;
   font-size: .6em;
@@ -640,14 +687,13 @@ ul {
 /*                     */
 
 .qboxcenter {
-  margin-left: -15em;
-  margin-top: -150em;
+  margin-top: -90em;
   display: flex;
   align-items: center;
   justify-content: center;
   height: 90vh;
   width: 100vh;
-  font-size: .5em;
+  font-size: .3em;
   padding: 1em;
   position: absolute;
   z-index: 99;
@@ -756,7 +802,7 @@ ul {
 }
 
 .navigation a:hover {
-  background: #1565C0;
+  background: #3c4958;
 }
 
 .announce {
@@ -806,7 +852,7 @@ ul {
 }
 
 .fullscreenMainPhotoImage {
-  height: 34.3em;
+  height: 35em;
   width: 65.5em;
   object-fit: contain;
   /* border: .3em solid black; */
@@ -873,27 +919,33 @@ ul {
 
 .descriptionParent {
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: row;
   /* border: .2em dotted magenta; */
   height: 13em;
   width: 70em;
+  margin-top: 2em;
+}
+.descriptionChild0 {
+  height: 9em;
+  width: 8em;
+  /* border: .3em solid purple; */
 }
 
 .descriptionChild1 {
-  margin: auto;
-  justify-content: flex-end;
-  width: 50%
+  /* border: .3em solid blue; */
+  width: 48em;
+  height: 9em;
+
 }
 .descriptionChild2 {
-  margin: auto;
-  flex-flow: column;
-  justify-content: flex-end;
-  width: 50%;
+  width: 30em;
+  height: 9em;
+  border-left: .1em solid lightgrey;
 }
 
 .mainPhotoImage {
-  height: 34.3em;
-  width: 35em;
+  height: 35em;
+  width: 34em;
   object-fit: contain;
   cursor: zoom-in;
   /* border: .3em solid black; */
@@ -912,7 +964,7 @@ ul {
 }
 
 .selectedThumbnail {
-  border: 5px solid rgb(185, 105, 68);
+  border: 6px solid rgb(150, 157, 212);
 }
 
 .imageThumb:hover {
@@ -932,12 +984,12 @@ ul {
 }
 .centerDownArrow {
   margin-left: .7em;
+  margin-bottom: .8em;
   height: 3em;
   width: 3em;
   /* border: .3em solid black; */
   text-align: center;
 }
-
 
 .left-arrow {
   font-size: 2rem;
@@ -946,8 +998,13 @@ ul {
   padding: 0;
   border: none;
   background: none;
+  margin-left: .3em;
+  margin-right: .3em;
 }
-
+.left-arrow:hover, .downArrow:hover, .right-arrow:hover {
+  opacity: 70%;
+  transform: scale(1.5);
+}
 
 .right-arrow {
   font-size: 2rem;
@@ -956,12 +1013,14 @@ ul {
   padding: 0;
   border: none;
   background: none;
+  margin-left: .3em;
+  margin-right: .3em;
 
 }
 .fullscreenButton {
   cursor: pointer;
   position: relative;
-  right: 1em;
+  right: .4em;
   bottom: .1em;
   height: 1.5em;
   width: 1.5em;
@@ -972,7 +1031,21 @@ ul {
 .fullscreenButton:hover {
   opacity: 80%;
   transform: scale(1.1);
-
+}
+.closefullscreenbutton {
+  cursor: pointer;
+  position: relative;
+  right: 1em;
+  bottom: .1em;
+  height: 1.5em;
+  width: 1.5em;
+  font-size: 1.8em;
+  opacity: 50%;
+  z-index: 1;
+}
+.closefullscreenbutton:hover {
+  opacity: 80%;
+  transform: scale(1.1);
 }
 
 .slide {
@@ -1004,13 +1077,15 @@ ul {
 }
 
 .clickedMarker {
-  /* box-shadow: 0 0 .3em rgb(51, 40, 51); */
-  border: 5px solid rgb(185, 105, 68);
+  border: 5px solid rgb(150, 157, 212);;
 }
-
+.clickOutZoom {
+  cursor: zoom-out;
+}
 .salePrice {
   color: red;
   font-weight: bold;
+
 }
 
 .checkMark {
@@ -1031,10 +1106,8 @@ ul {
 }
 
 .tooltip {
-  position: absolute;
-  top: 25%;
-  display: inline-block;
-  border-bottom: 1px dotted black;
+  position: relative;
+  top: -4em;
 }
 
 .tooltip .tooltiptext {
@@ -1050,7 +1123,25 @@ ul {
   position: absolute;
   z-index: 1;
 }
+.tooltip2 {
+  position: relative;
+  top: -4em;
+  left: 15em;
+}
 
+.tooltip2 .tooltiptext2 {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
 
 .readAllReviews {
   cursor: pointer;
@@ -1163,92 +1254,107 @@ ul {
   background-repeat: no-repeat;
 }
 
-#myImg {
-  /* border-radius: 5px; */
+.myImg {
   cursor: zoom-in;
   transition: 0.3s;
 }
+.myImg:hover {opacity: 0.7;}
 
-#myImg:hover {opacity: 0.7;}
-
-/* The Modal (background) */
-.overviewmodal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
-}
-
-/* Modal Content (Image) */
-/* .modal-content {
-  margin: auto;
-  display: block;
-  width: 80%;
-  max-width: 700px;
-} */
-
-@keyframes zoom {
-  from {transform:scale(0)}
-  to {transform:scale(1)}
-}
-
-/* The Close Button */
-.closeOverviewImage {
-  position: absolute;
-  top: 15px;
-  right: 35px;
-  color: #f1f1f1;
-  font-size: 40px;
-  font-weight: bold;
+.myImg2 {
+  cursor: crosshair;
   transition: 0.3s;
 }
-
-.closeOverviewImage:hover,
-.closeOverviewImage:focus {
-  color: #bbb;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-/* 100% Image Width on Smaller Screens */
-@media only screen and (max-width: 700px){
-  .modal-content {
-    width: 100%;
-  }
-}
-
-
-.img-zoom-container {
-  position: relative;
-}
-
-.img-zoom-lens {
-  position: absolute;
-  border: 1px solid #d4d4d4;
-  /*set the size of the lens:*/
-  width: 40px;
-  height: 40px;
-}
-
-.img-zoom-result {
-  border: 1px solid #d4d4d4;
-  /*set the size of the result div:*/
-  width: 300px;
-  height: 300px;
-}
-/* ======================== */
+.myImg2:hover {opacity: 0.7;}
 
 .dark-mode {
   background-color: black;
   color: white;
 }
+
+/* The Modal (background) */
+.cartModal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
+}
+
+/* Modal Content/Box */
+.cartModalContent {
+  background-color: #fefefe;
+  box-shadow: 0 1px 6px 0 rgb(34 34 34 / 15%);
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 45em;
+  height: 12em;
+  border-radius: 1.5em;
+  font-size: 1.2em;
+}
+
+/* The Close Button */
+.closeCartModal {
+  color: #aaa;
+  float: right;
+  font-size: 1.1em;
+  top: 20em;
+}
+
+.closeCartModal:hover,
+.closeCartModal:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+  transform: scale(1.02);
+}
+.proceedToCheckout {
+  box-shadow: 0 1px 6px 0 rgb(34 34 34 / 15%);
+  display: block;
+  font-size: 16px;
+  height: 3em;
+  padding-left: 12px;
+  padding-right: 36px;
+  width: 17em;
+  border-radius: 6px;
+  background: rgb(119, 65, 14);
+  border-color: rgb(196, 183, 183);
+  border-style: solid;
+  border-width: 1px;
+  color: white;
+  text-indent: 0.01px;
+  cursor: pointer;
+}
+
+.keepShopping {
+  box-shadow: 0 1px 6px 0 rgb(34 34 34 / 15%);
+  display: block;
+  font-size: 16px;
+  height: 3em;
+  padding-left: 12px;
+  padding-right: 36px;
+  width: 17em;
+  border-radius: 6px;
+  background: #FFFFFF;
+  border-color: rgba(34, 34, 34, 0.15);
+  border-style: solid;
+  border-width: 1px;
+  color: #222222;
+  text-indent: 0.01px;
+  cursor: pointer;
+  margin-left: 1.5em;
+}
+
+.modalButtonscheckout {
+  display: flex;
+  flex-flow: row;
+}
+
 /* ======================== */
 
 * {

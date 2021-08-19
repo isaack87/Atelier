@@ -15,41 +15,41 @@
         }
     </style>
 </head>
-    
+
 <body>
 <div class='wrapper'>
     <div class='pad1'>
         <h1><a href="../../../../../index.html">All files</a> / <a href="index.html">Atelier/client/src/components/ratingsReviews</a> ReviewsHelperFunc.jsx</h1>
         <div class='clearfix'>
-            
+
             <div class='fl pad1y space-right2'>
                 <span class="strong">10.53% </span>
                 <span class="quiet">Statements</span>
                 <span class='fraction'>2/19</span>
             </div>
-        
-            
+
+
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
                 <span class='fraction'>0/12</span>
             </div>
-        
-            
+
+
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
                 <span class='fraction'>0/7</span>
             </div>
-        
-            
+
+
             <div class='fl pad1y space-right2'>
                 <span class="strong">10.53% </span>
                 <span class="quiet">Lines</span>
                 <span class='fraction'>2/19</span>
             </div>
-        
-            
+
+
         </div>
         <p class="quiet">
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
@@ -188,7 +188,7 @@ const helpfulReviewsClicked = {};
 const helpers = {
 &nbsp;
     reviewResponse: <span class="fstat-no" title="function not covered" >(r</span>esponse) =&gt; {
-        
+
 <span class="cstat-no" title="statement not covered" >        if (response !== null &amp;&amp; response !== "") {</span>
 <span class="cstat-no" title="statement not covered" >            return (&lt;div id = 'response'&gt;</span>
                 &lt;h3&gt;Response from seller&lt;/h3&gt;
@@ -201,7 +201,7 @@ const helpers = {
 <span class="cstat-no" title="statement not covered" >            return (&lt;p&gt;✓ I recommend this product&lt;/p&gt;);</span>
         }
     },
-    
+
     //checks if the review has already been clicked for helpfulness already
     checkIfHelpfulnessClicked : <span class="fstat-no" title="function not covered" >(i</span>d) =&gt; {
 <span class="cstat-no" title="statement not covered" >        if (helpfulReviewsClicked[id]) {</span>
@@ -223,21 +223,21 @@ const helpers = {
 <span class="cstat-no" title="statement not covered" >                            $('#helpfulness-' + id).text(helpNum + 1);</span>
 <span class="cstat-no" title="statement not covered" >                            helpfulReviewsClicked[id] = true;</span>
                         }
-                        
+
                     }
                 }&gt;Yes (&lt;span id= {"helpfulness-" + id } class = "helpful-link"&gt;{helpNum}&lt;/span&gt;)&lt;/p&gt;
                 &lt;/span&gt;
-                
+
             &lt;/div&gt;)
         }
     },
     markHelpfulAPI: <span class="fstat-no" title="function not covered" >(p</span>roductID) =&gt; {
 <span class="cstat-no" title="statement not covered" >        axios({</span>
             method: "POST",
-            url:'http://localhost:3000/markHelpful',
+            url:'/markHelpful',
             data: {productID}
         }).then(<span class="fstat-no" title="function not covered" >re</span>sponse =&gt; {
-            
+
 <span class="cstat-no" title="statement not covered" >            return true;</span>
         })
 &nbsp;
@@ -263,4 +263,3 @@ export default helpers;</pre></td></tr></table></pre>
         <script src="../../../../../block-navigation.js"></script>
     </body>
 </html>
-    

@@ -16,11 +16,17 @@ class App extends React.Component {
       stars: '',
       reportedArray: [],
       avgRating: 0,
-      productName: ''
+      productName: '',
+      numberOfReviews:0
     };
     this.search = this.search.bind(this);
     this.updateAvgRatingForProduct = this.updateAvgRatingForProduct.bind(this);
     this.getProductName = this.getProductName.bind(this);
+    this.getNumberOfReviews = this.getNumberOfReviews.bind(this);
+  }
+  getNumberOfReviews(num){
+    this.setState({numberOfReviews: num});
+
   }
   //handles updating avg rating for a product
   updateAvgRatingForProduct(rating) {
@@ -62,7 +68,7 @@ class App extends React.Component {
           <QuestionsAnswersState
             productId={this.state.productId}
             />
-          <Reviews props={this.state} avgRatingFunc = {this.updateAvgRatingForProduct} />
+          <Reviews props={this.state} avgRatingFunc = {this.updateAvgRatingForProduct} getNumOfReviews = {this.getNumberOfReviews}/>
         </ProductMainStateProvider>
         <button onClick={this.toggleDark.bind(this)}>Toggle Dark Mode</button>
       </div>

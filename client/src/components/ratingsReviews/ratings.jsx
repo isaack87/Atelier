@@ -46,7 +46,7 @@ class Reviews extends React.Component {
         this.doWeDisplayAllReviews = this.doWeDisplayAllReviews.bind(this);
         this.generateFilterMessage = this.generateFilterMessage.bind(this);
         this.setProductInfo = this.setProductInfo.bind(this);
-    
+
     }
     //
     setProductInfo(info){
@@ -96,7 +96,7 @@ class Reviews extends React.Component {
             });
             return;
         }
-        
+
         this.setState({reviewsFilter: prevState}, () => {
             this.generateFilterMessage();
             //now we have a filter of which reviews we want to see
@@ -141,7 +141,7 @@ class Reviews extends React.Component {
         //    const productID = 28221;
           axios({
             method: 'post',
-            url: 'http://localhost:3000/reviews',
+            url: '/reviews',
             //for testing purposes we use this default productID
             data: {productID, sortKind: sort}
         }).then(response => {
@@ -166,7 +166,7 @@ class Reviews extends React.Component {
             <option value="relevant">relevant</option>
             <option value="helpful">helpful</option>
             <option value="newest">newest</option>
-           
+
         </select>;
             this.setState({reviewDropdownSortDiv: div });
         }
@@ -174,24 +174,24 @@ class Reviews extends React.Component {
     //function to handle rendering the reviews div, given any array of reviews in 'reviewsToBeShown'
     renderReviews() {
         let reviews = this.state.reviewsToBeShown;
-     
+
         let innerDiv = this.state.reviewsShownSoFar;
         if (reviews.length) {
             //helper func to generate 1 review
         let generateReview = review => {
-            let paragraph = <div key={review.review_id}> 
+            let paragraph = <div key={review.review_id}>
                 <div id= 'review-heading'>
-                <p className="review-summary">{review.summary}</p> 
-                <p id= 'review-username'>{review.reviewer_name}</p> 
+                <p className="review-summary">{review.summary}</p>
+                <p id= 'review-username'>{review.reviewer_name}</p>
                 <p>{moment(review.date).format('MMMM Do YYYY')}</p>
                 </div>
                {review.rating}
                 {review.body}
                 <div><Images props= {review.photos}/></div>
-          
+
                 {helpers.generateHelpfulness(review.helpfulness, review.review_id)}
                 <Stars rating = {review.rating} starKey = {review.review_id}/>
-             
+
                 {helpers.generateRecommend(review.recommend, )}
                 {helpers.reviewResponse(review.response)}
                 </div>;
@@ -214,7 +214,7 @@ class Reviews extends React.Component {
         });
 
         }
-        
+
 
     }
     //handles showing the 'more reviews' button
@@ -231,13 +231,13 @@ class Reviews extends React.Component {
         }
 
     }
-    
+
     //handles posting review
     postReview() {
         axios({
             method: 'post',
-            url: 'http://localhost:3000/postreview',
-           
+            url: '/postreview',
+
         }).then(response => {
             //now take this and update reviews state
             this.setState({allReviews: response.data.results, reviewsToBeShown: response.data.results}, ()=> {
@@ -247,7 +247,7 @@ class Reviews extends React.Component {
     }
     componentDidMount() {
        this.getReviews();
-    
+
     }
 
     render() {
@@ -255,12 +255,12 @@ class Reviews extends React.Component {
             return (
                 <div id = 'reviews'>
                     <h1>{`Ratings & Reviews`}</h1>
-                    {this.state.filterMessage} 
+                    {this.state.filterMessage}
                     <div id ='breakdown-div'>
-                    <RatingsBreakdown props = {this.state} getAvgRating = {this.props.avgRatingFunc} handleFilter = {this.handleClickFilterReviews} product = {this.props.props.productId} setProductInfo= {this.setProductInfo}/>
+                    <RatingsBreakdown props = {this.state} getAvgRating = {this.props.avgRatingFunc} handleFilter = {this.handleClickFilterReviews} product = {this.props.props.productId} setProductInfo= {this.setProductInfo} getNumOfReviews = {this.props.getNumOfReviews}/>
                     </div>
-                     
-                     
+
+
                      <div id='reviews-scrollable'>
                          <p id='reviews-sorted-by-info'>{this.state.reviewsToBeShown.length} reviews, sorted by </p>
                     {this.state.reviewDropdownSortDiv}
@@ -268,13 +268,13 @@ class Reviews extends React.Component {
                     {this.state.moreReviewsButton}
                     <AddReview productId={this.props.props.productId} productName = {this.props.props} productInfo = {this.state.productInfo} getAndRenderReviews= {this.getReviews}/>
                     </div>
-               
+
                 </div>
             )
 
         }
         return null;
- 
+
     }
 }
 export default Reviews;

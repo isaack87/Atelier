@@ -15,41 +15,41 @@
         }
     </style>
 </head>
-    
+
 <body>
 <div class='wrapper'>
     <div class='pad1'>
         <h1><a href="../../../../../index.html">All files</a> / <a href="index.html">Atelier/client/src/components/productDetails</a> OverviewMain.jsx</h1>
         <div class='clearfix'>
-            
+
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
                 <span class='fraction'>0/84</span>
             </div>
-        
-            
+
+
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
                 <span class='fraction'>0/6</span>
             </div>
-        
-            
+
+
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
                 <span class='fraction'>0/28</span>
             </div>
-        
-            
+
+
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
                 <span class='fraction'>0/77</span>
             </div>
-        
-            
+
+
         </div>
         <p class="quiet">
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
@@ -587,7 +587,7 @@ class ProductOverview extends React.Component {
 <span class="fstat-no" title="function not covered" >  ge</span>tDataFromProductId(productId) {
 <span class="cstat-no" title="statement not covered" >    axios({</span>
       method: 'post',
-      url: 'http://localhost:3000/productdetails',
+      url: '/productdetails',
       data: { id: productId },
     })
       .then(<span class="fstat-no" title="function not covered" >(r</span>esponse) =&gt; {
@@ -606,7 +606,7 @@ class ProductOverview extends React.Component {
 <span class="fstat-no" title="function not covered" >  ge</span>tDataFromStyleId(productId) {
 <span class="cstat-no" title="statement not covered" >    axios({</span>
       method: 'get',
-      url: `http://localhost:3000/product/styles?pid=${productId}`,
+      url: `/product/styles?pid=${productId}`,
     })
       .then(<span class="fstat-no" title="function not covered" >(r</span>esponse) =&gt; {
         const styleId = <span class="cstat-no" title="statement not covered" >response.data.results[0].style_id;</span>
@@ -666,7 +666,7 @@ class ProductOverview extends React.Component {
 <span class="fstat-no" title="function not covered" >  re</span>nderPhotosOnClick(productId, styleId) {
 <span class="cstat-no" title="statement not covered" >    axios({</span>
       method: 'get',
-      url: `http://localhost:3000/product/styles?pid=${productId}`,
+      url: `/product/styles?pid=${productId}`,
     })
       .then(<span class="fstat-no" title="function not covered" >(r</span>esponse) =&gt; {
         // Update photos array =============================
@@ -710,7 +710,7 @@ class ProductOverview extends React.Component {
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    axios({</span>
       method: 'get',
-      url: `http://localhost:3000/product/styles?pid=${this.props.productId}`,
+      url: `/product/styles?pid=${this.props.productId}`,
     })
       .then(<span class="fstat-no" title="function not covered" >(r</span>esponse) =&gt; {
         // Update SKUs and StyleId
@@ -806,4 +806,3 @@ export default ProductOverview;
         <script src="../../../../../block-navigation.js"></script>
     </body>
 </html>
-    

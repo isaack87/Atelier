@@ -15,41 +15,41 @@
         }
     </style>
 </head>
-    
+
 <body>
 <div class='wrapper'>
     <div class='pad1'>
         <h1><a href="../../../../index.html">All files</a> / <a href="index.html">client/src/components/ratingsReviews</a> ratings.jsx</h1>
         <div class='clearfix'>
-            
+
             <div class='fl pad1y space-right2'>
                 <span class="strong">25% </span>
                 <span class="quiet">Statements</span>
                 <span class='fraction'>10/40</span>
             </div>
-        
-            
+
+
             <div class='fl pad1y space-right2'>
                 <span class="strong">14.29% </span>
                 <span class="quiet">Branches</span>
                 <span class='fraction'>1/7</span>
             </div>
-        
-            
+
+
             <div class='fl pad1y space-right2'>
                 <span class="strong">26.67% </span>
                 <span class="quiet">Functions</span>
                 <span class='fraction'>4/15</span>
             </div>
-        
-            
+
+
             <div class='fl pad1y space-right2'>
                 <span class="strong">25.64% </span>
                 <span class="quiet">Lines</span>
                 <span class='fraction'>10/39</span>
             </div>
-        
-            
+
+
         </div>
         <p class="quiet">
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
@@ -358,18 +358,18 @@ class Reviews extends React.Component {
      getReviews(sort = 'helpful') {
           axios({
             method: 'post',
-            url: 'http://localhost:3000/reviews',
+            url: '/reviews',
             //for testing purposes we use this default productID
             data: {productID: 28215, sortKind: sort}
 &nbsp;
         }).then(<span class="fstat-no" title="function not covered" >re</span>sponse =&gt; {
- 
+
             //now take this and update reviews state
 <span class="cstat-no" title="statement not covered" >            this.setState({allReviews: response.data.results}, <span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >                this.renderReviews();</span>
 <span class="cstat-no" title="statement not covered" >                this.showReviewDropdownSort();</span>
             })
-          
+
         })
     }
     //handle rendering the sort dropdown only if we have reviews to show
@@ -410,9 +410,9 @@ class Reviews extends React.Component {
 <span class="cstat-no" title="statement not covered" >                innerDiv.push(generateReview(review));</span>
 <span class="cstat-no" title="statement not covered" >                index ++;</span>
             }
-            
+
         }
-        
+
 <span class="cstat-no" title="statement not covered" >        this.setState({currentReviewIndex: index}, <span class="fstat-no" title="function not covered" >as</span>ync () =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >            await this.showMoreReviewsButton();</span>
         });
@@ -434,15 +434,15 @@ class Reviews extends React.Component {
         }
 &nbsp;
     }
-    
+
     //handles posting review
 <span class="fstat-no" title="function not covered" >    po</span>stReview() {
 <span class="cstat-no" title="statement not covered" >        axios({</span>
             method: 'post',
-            url: 'http://localhost:3000/postreview',
-           
+            url: '/postreview',
+
         }).then(<span class="fstat-no" title="function not covered" >re</span>sponse =&gt; {
-       
+
             //now take this and update reviews state
 <span class="cstat-no" title="statement not covered" >            this.setState({allReviews: response.data.results}, <span class="fstat-no" title="function not covered" >()</span>=&gt; {</span>
 <span class="cstat-no" title="statement not covered" >                this.renderReviews();</span>
@@ -455,14 +455,14 @@ class Reviews extends React.Component {
     }
 &nbsp;
     render() {
-        
+
         return (
             &lt;div&gt;
                 &lt;h1&gt;reviews module&lt;/h1&gt;
                 {this.state.reviewDropdownSortDiv}
                &lt;div id='reviewsList'&gt; {this.state.reviewsDiv}&lt;/div&gt;
                 {this.state.moreReviewsButton}
-           
+
             &lt;/div&gt;
         )
     }
@@ -488,4 +488,3 @@ export default Reviews;
         <script src="../../../../block-navigation.js"></script>
     </body>
 </html>
-    
