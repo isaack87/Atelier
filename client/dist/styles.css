@@ -223,7 +223,7 @@ margin-right: 2em;
   overflow: hidden;
   color: #f80;
 }
-#star-75 {
+#star-75:after {
   font-family: FontAwesome;
   content: "\f005";
 
