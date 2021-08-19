@@ -180,7 +180,20 @@ class Reviews extends React.Component {
         let innerDiv = this.state.reviewsShownSoFar;
         if (reviews.length) {
             //helper func to generate 1 review
+
         let generateReview = review => {
+                        //grab first 250 char of review body
+                        let first250 = <span id = {'review-body-'+ review.review_id}>{review.body.substring(0, 250)}</span>
+                        let afterFirst250 = review.body.substring(250);
+                        let button;
+                        if (afterFirst250.length > 0) {
+                            button = <button type='button' id = {review.review_id} onClick = {()=> {
+                        
+                                document.getElementById(`review-body-${review.review_id}`).innerText = review.body.substring(0, 5) + afterFirst250;
+                                document.getElementById(`${review.review_id}`).remove();
+                            } }>Show more</button>
+                        }
+                
             let paragraph = <div key={review.review_id}>
                 <div id= 'review-heading'>
                 <p className="review-summary">{review.summary}</p>
@@ -188,7 +201,14 @@ class Reviews extends React.Component {
                 <p>{moment(review.date).format('MMMM Do YYYY')}</p>
                 </div>
                {review.rating}
-                {review.body}
+               {/* want to only display first 250 char of review. first grab first 250 and display that
+                */}
+                
+               <span id = 'review-body'>{first250}
+               {button}
+               
+               
+               </span> 
                 <div><Images props= {review.photos}/></div>
 
                 {helpers.generateHelpfulness(review.helpfulness, review.review_id)}
