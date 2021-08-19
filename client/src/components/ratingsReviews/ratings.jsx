@@ -50,7 +50,9 @@ class Reviews extends React.Component {
     }
     //
     setProductInfo(info){
-        this.setState({productInfo: info});
+        this.setState({productInfo: info}, ()=> {
+            console.log('set product info', this.state)
+        });
     }
     //loops through the reviewsFilter and generates a message for each 'true' value
     generateFilterMessage() {
@@ -178,14 +180,35 @@ class Reviews extends React.Component {
         let innerDiv = this.state.reviewsShownSoFar;
         if (reviews.length) {
             //helper func to generate 1 review
+
         let generateReview = review => {
+                        //grab first 250 char of review body
+                        let first250 = <span id = {'review-body-'+ review.review_id}>{review.body.substring(0, 250)}</span>
+                        let afterFirst250 = review.body.substring(250);
+                        let button;
+                        if (afterFirst250.length > 0) {
+                            button = <button type='button' id = {review.review_id} onClick = {()=> {
+                        
+                                document.getElementById(`review-body-${review.review_id}`).innerText = review.body.substring(0, 5) + afterFirst250;
+                                document.getElementById(`${review.review_id}`).remove();
+                            } }>Show more</button>
+                        }
+                
             let paragraph = <div key={review.review_id}>
                 <div id= 'review-heading'>
                 <p className="review-summary">{review.summary}</p>
                 <p id= 'review-username'>{review.reviewer_name}</p>
                 <p>{moment(review.date).format('MMMM Do YYYY')}</p>
                 </div>
-                {review.body}
+               {review.rating}
+               {/* want to only display first 250 char of review. first grab first 250 and display that
+                */}
+                
+               <span id = 'review-body'>{first250}
+               {button}
+               
+               
+               </span> 
                 <div><Images props= {review.photos}/></div>
 
                 {helpers.generateHelpfulness(review.helpfulness, review.review_id)}
@@ -253,11 +276,8 @@ class Reviews extends React.Component {
         if (this.state.allReviews.length > 0) {
             return (
                 <div id = 'reviews'>
-
-                    <h1 id='ratings-header'>{`Ratings & Reviews`}</h1>
-                    {this.state.filterMessage} 
-
-
+                    <h1>{`Ratings & Reviews`}</h1>
+                    {this.state.filterMessage}
                     <div id ='breakdown-div'>
                     <RatingsBreakdown props = {this.state} getAvgRating = {this.props.avgRatingFunc} handleFilter = {this.handleClickFilterReviews} product = {this.props.props.productId} setProductInfo= {this.setProductInfo} getNumOfReviews = {this.props.getNumOfReviews}/>
                     </div>
@@ -268,7 +288,7 @@ class Reviews extends React.Component {
                     {this.state.reviewDropdownSortDiv}
                    <div id='reviewsList'> {this.state.reviewsDiv}</div>
                     {this.state.moreReviewsButton}
-                    <AddReview productId={this.props.props.productId} productName = {this.props.props} productInfo = {this.state.productInfo} getAndRenderReviews= {this.getReviews}/>
+                    <AddReview productId={this.props.props.productId} productName = {this.props.props} productInfo = {this.state.productInfo}/>
                     </div>
 
                 </div>
