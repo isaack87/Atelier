@@ -6,6 +6,7 @@ import QuestionsAnswersState from './components/questionsAnswers/QuestionAnswerS
 import ProductOverview from './components/productDetails/OverviewMain.jsx';
 import { ProductMainStateProvider } from './components/questionsAnswers/productState.jsx';
 import TopSearchBar from './components/TopSearchBar.jsx';
+import RelatedProducts from './components/relatedItems/related.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -43,13 +44,12 @@ class App extends React.Component {
     this.setState({productName: name});
   }
 
-  random(cb) {
-    let number = Math.floor(Math.random() * (36320 - 36300) + 36300);
+  changeMainProductId(clickedProductId) {
     this.setState({
-      productId: number,
+      productId: clickedProductId,
     }, () => {
       console.log('product id changed to: ', this.state.productId);
-      cb();
+
     });
   }
 
@@ -63,7 +63,8 @@ class App extends React.Component {
       <div className="App-container">
         <ProductMainStateProvider productId ={this.state.productId}>
           <TopSearchBar onSearch={this.search}/>
-          <ProductOverview productId={this.state.productId} random={this.random.bind(this)} avgRating = {this.state.avgRating} getProductName = {this.getProductName}/>
+          <ProductOverview numberOfReviews={this.state.numberOfReviews} productId={this.state.productId} avgRating = {this.state.avgRating} getProductName = {this.getProductName}/>
+          <RelatedProducts changeMainProductId={this.changeMainProductId.bind(this)} productId={this.state.productId} avgRating = {this.state.avgRating}/>
           <QuestionsAnswersState
             productId={this.state.productId}
           />

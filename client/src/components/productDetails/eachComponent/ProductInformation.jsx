@@ -31,7 +31,7 @@ class ProductInformation extends React.Component {
         <div onClick={this.moveToReviews.bind(this)} className='readAllReviews'>
           <div>{helpers.calculateStarDiv(this.props.avgRating, 'test key')}</div>
           <div className='extraSpace'></div>
-          <div><u>Read all reviews</u></div>
+          <div><u>Read all [<b>{this.props.numberOfReviews}</b>] review(s)</u></div>
         </div>;
     }
 
