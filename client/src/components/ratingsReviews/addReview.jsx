@@ -404,7 +404,7 @@ class AddReview extends React.Component{
         //get review summary
         let reviewSummary = document.getElementById("review-summary-text").value;
         let reviewBody = document.getElementById("review-body-text").value;
-        console.log('review body', reviewBody)
+        
         if (document.getElementById("review-body-text") === null || (reviewBody.trim().split('').length <= 0) ) {
             hasReviewBody = false;
         }

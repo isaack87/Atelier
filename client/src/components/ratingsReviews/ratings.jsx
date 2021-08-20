@@ -293,7 +293,7 @@ class Reviews extends React.Component {
                     <h1>{`Ratings & Reviews`}</h1>
                     {this.state.filterMessage}
                     <div id ='breakdown-div'>
-                    <RatingsBreakdown props = {this.state} getAvgRating = {this.props.avgRatingFunc} handleFilter = {this.handleClickFilterReviews} product = {this.state.productId} setProductInfo= {this.setProductInfo} getNumOfReviews = {this.props.getNumOfReviews}/>
+                    <RatingsBreakdown allReviews = {this.state.allReviews} props = {this.state} getAvgRating = {this.props.avgRatingFunc} handleFilter = {this.handleClickFilterReviews} product = {this.state.productId} setProductInfo= {this.setProductInfo} getNumOfReviews = {this.props.getNumOfReviews}/>
                     </div>
 
 
@@ -310,8 +310,22 @@ class Reviews extends React.Component {
                 </div>
             )
 
+        } else {
+            return (
+                <div id = 'reviews'>
+                   
+                     <div id='reviews-scrollable'>
+                         <p>No reviews for this item currently.</p>
+
+
+                    <AddReview productId={this.state.productId} productName = {this.props.props} productInfo = {this.state.productInfo } getAndRenderReviews= {this.getReviews}/>
+
+                    </div>
+
+                </div>
+            )
         }
-        return null;
+
 
     }
 }

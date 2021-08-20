@@ -35,8 +35,6 @@ class App extends React.Component {
   search(term) {
     this.setState({
       productId: parseInt(term)
-    }, () => {
-      console.log('product id changed to ', this.state.productId);
     });
   }
   //handles setting the state for product name
@@ -47,9 +45,6 @@ class App extends React.Component {
   changeMainProductId(clickedProductId) {
     this.setState({
       productId: clickedProductId,
-    }, () => {
-      console.log('product id changed to: ', this.state.productId);
-
     });
   }
 

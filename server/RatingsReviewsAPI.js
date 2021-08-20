@@ -17,7 +17,6 @@ const getReviewsAPI = (productID, sortKind = 'helpful') => {
       };
       return axios(options)
       .then(response => {
-        console.log('response from api', response)
           let sortedArr;
           if (response.data === undefined) {
               return;
@@ -55,7 +54,7 @@ const getReviewsAPI = (productID, sortKind = 'helpful') => {
             }
             sortedArr = sortOne;
         }
-        //  console.log('sorted array we got from api', sortedArr)
+
          return sortedArr;
 
       });
@@ -91,10 +90,8 @@ const postReview = async (productID) => {
         headers: { Authorization: config.gitToken},
         data: params
       };
-       await axios(options)
-      .then(response => {
-          console.log('posting review', response);
-      })
+       await axios(options);
+
 }
 const postMarkHelpful= async (productID) => {
   
@@ -129,7 +126,7 @@ const getProductBreakdown = async (productID) => {
         });
 }
 const uploadImages = async(base64) => {
-    console.log('base 64 in upload images')
+
     let settings = {
         "url": `https://api.imgbb.com/1/upload?key=${config.imgBBKey}`,
         "method": "POST",
@@ -142,9 +139,9 @@ const uploadImages = async(base64) => {
         
     };
     axios({settings}).done(function (response) {
-        console.log(response);
+     
         var jx = JSON.parse(response);
-        console.log(jx.data.url);
+    
     })
 }
 
