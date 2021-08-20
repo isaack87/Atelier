@@ -92,18 +92,14 @@ class AddReview extends React.Component{
             this.buildModal(this.state.showModal);
         });
     }
-    handleImageUpload(){
-            // let src = URL.createObjectURL(this.files[0]);
-                            // document.getElementById('image').src = src;
-        console.log('this files??', this.files)
-    }
+
     buildCharacteristicsDiv(){
         const characteristics = this.props.productInfo;
         let characteristicsArr = [];
         let meaning;
         let collectionOfCharacteristics= {};
         let charIdValueObject = this.state.characteristicsIdValueObject;
-        console.log('characteristics', characteristics)
+ 
         for (let elem in characteristics) {
 
             charIdValueObject[characteristics[elem].id.toString()] = parseInt(characteristics[elem].value);
@@ -345,7 +341,8 @@ class AddReview extends React.Component{
                                 "data": form
                               };
                               $.ajax(settings).done((response) => {
-                                  response = JSON.parse(response)
+                                  response = JSON.parse(response);
+                                
                                 let url = response.data.display_url;
                                 let imagesArr = this.state.imagesURL;
                                 imagesArr.push(url);
@@ -408,6 +405,7 @@ class AddReview extends React.Component{
         //get review summary
         let reviewSummary = document.getElementById("review-summary-text").value;
         let reviewBody = document.getElementById("review-body-text").value;
+        console.log('review body', reviewBody)
         if (document.getElementById("review-body-text") === null || (reviewBody.trim().split('').length <= 0) ) {
             hasReviewBody = false;
         }
@@ -437,9 +435,9 @@ class AddReview extends React.Component{
         if (allCharacteristicsHaveReviews && hasReviewBody && reviewBodyHasOver50Char &&
             hasNickname && hasEmail && validPhotos) {
                 //it's all valid, grab the array of images that we have url for
-                let imagesArray = this.state.imagesURL;
-                console.log('this state validate', this.state)
-                let characteristics = {};
+   
+              
+          
                 //need to calculate overall rating from all the individual rcharacterustuc ratubgs
 
                 //now make request to post a review
@@ -454,6 +452,7 @@ class AddReview extends React.Component{
                     "photos": this.state.imagesURL,
                     "characteristics":  this.state.characteristicsIdValueObject
                 };
+
              
                 let options = {
                     method: 'post',
@@ -463,11 +462,11 @@ class AddReview extends React.Component{
                   };
                    await axios(options)
                   .then(response => {
-                  
+                    
                       this.hideModal();
                       //and then close the modal
                       //now need to update the reviews 
-                      this.props.getAndRenderReviews();
+                      this.props.getAndRenderReviews('newest');
                       return;
                   })
 
