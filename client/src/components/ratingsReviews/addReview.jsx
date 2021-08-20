@@ -79,7 +79,6 @@ class AddReview extends React.Component{
         this.buildStarExplanation = this.buildStarExplanation.bind(this);
         this.buildRadioBtnForm = this.buildRadioBtnForm.bind(this);
         this.buildCharacteristicsDiv = this.buildCharacteristicsDiv.bind(this);
-        this.handleImageUpload = this.handleImageUpload.bind(this);
         this.validateFormInput = this.validateFormInput.bind(this);
     }
     showModal(){
@@ -99,7 +98,7 @@ class AddReview extends React.Component{
         let meaning;
         let collectionOfCharacteristics= {};
         let charIdValueObject = this.state.characteristicsIdValueObject;
- 
+
         for (let elem in characteristics) {
 
             charIdValueObject[characteristics[elem].id.toString()] = parseInt(characteristics[elem].value);
@@ -342,7 +341,7 @@ class AddReview extends React.Component{
                               };
                               $.ajax(settings).done((response) => {
                                   response = JSON.parse(response);
-                                
+
                                 let url = response.data.display_url;
                                 let imagesArr = this.state.imagesURL;
                                 imagesArr.push(url);
@@ -435,9 +434,9 @@ class AddReview extends React.Component{
         if (allCharacteristicsHaveReviews && hasReviewBody && reviewBodyHasOver50Char &&
             hasNickname && hasEmail && validPhotos) {
                 //it's all valid, grab the array of images that we have url for
-   
-              
-          
+
+
+
                 //need to calculate overall rating from all the individual rcharacterustuc ratubgs
 
                 //now make request to post a review
@@ -453,7 +452,7 @@ class AddReview extends React.Component{
                     "characteristics":  this.state.characteristicsIdValueObject
                 };
 
-             
+
                 let options = {
                     method: 'post',
                     url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews`,
@@ -465,7 +464,7 @@ class AddReview extends React.Component{
 
                       this.hideModal();
                       //and then close the modal
-                      //now need to update the reviews 
+                      //now need to update the reviews
                       this.props.getAndRenderReviews('newest');
                       return;
                   })

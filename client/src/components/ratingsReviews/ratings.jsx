@@ -33,7 +33,8 @@ class Reviews extends React.Component {
             },
             //displays a message saying which filters are on
             filterMessage: [],
-            productInfo:[]
+            productInfo:[],
+            productId: props.productId
 
         }
         this.getReviews = this.getReviews.bind(this);
@@ -48,7 +49,17 @@ class Reviews extends React.Component {
         this.setProductInfo = this.setProductInfo.bind(this);
 
     }
-    
+
+    componentDidUpdate() {
+        if (this.state.productId !== this.props.productId) {
+          this.setState({
+            productId: this.props.productId,
+          }, () => {
+              this.getReviews('newest');
+          });
+        }
+    }
+
     //
     setProductInfo(info){
         this.setState({productInfo: info});
@@ -136,7 +147,7 @@ class Reviews extends React.Component {
 
     //function to handle getting the reviews for the given product id
      getReviews(sort = 'relevant') {
-        const productID = this.props.props.productId;
+        const productID = this.state.productId;
         console.log(
         'product id', productID
         )
@@ -191,27 +202,27 @@ class Reviews extends React.Component {
                         let button;
                         if (afterFirst250.length > 0) {
                             button = <button type='button' id = {review.review_id} onClick = {()=> {
-                        
+
                                 document.getElementById(`review-body-${review.review_id}`).innerText = review.body.substring(0, 5) + afterFirst250;
                                 document.getElementById(`${review.review_id}`).remove();
                             } }>Show more</button>
                         }
-                
+
             let paragraph = <div key={review.review_id}>
                 <div id= 'review-heading'>
                 <p className="review-summary">{review.summary}</p>
                 <p id= 'review-username'>{review.reviewer_name}</p>
                 <p>{moment(review.date).format('MMMM Do YYYY')}</p>
                 </div>
-               {review.rating}
+
                {/* want to only display first 250 char of review. first grab first 250 and display that
                 */}
-                
+
                <span id = 'review-body'>{first250}
                {button}
-               
-               
-               </span> 
+
+
+               </span>
                 <div><Images props= {review.photos}/></div>
 
                 {helpers.generateHelpfulness(review.helpfulness, review.review_id)}
@@ -282,7 +293,7 @@ class Reviews extends React.Component {
                     <h1>{`Ratings & Reviews`}</h1>
                     {this.state.filterMessage}
                     <div id ='breakdown-div'>
-                    <RatingsBreakdown props = {this.state} getAvgRating = {this.props.avgRatingFunc} handleFilter = {this.handleClickFilterReviews} product = {this.props.props.productId} setProductInfo= {this.setProductInfo} getNumOfReviews = {this.props.getNumOfReviews}/>
+                    <RatingsBreakdown props = {this.state} getAvgRating = {this.props.avgRatingFunc} handleFilter = {this.handleClickFilterReviews} product = {this.state.productId} setProductInfo= {this.setProductInfo} getNumOfReviews = {this.props.getNumOfReviews}/>
                     </div>
 
 
@@ -292,7 +303,7 @@ class Reviews extends React.Component {
                    <div id='reviewsList'> {this.state.reviewsDiv}</div>
                     {this.state.moreReviewsButton}
 
-                    <AddReview productId={this.props.props.productId} productName = {this.props.props} productInfo = {this.state.productInfo } getAndRenderReviews= {this.getReviews}/>
+                    <AddReview productId={this.state.productId} productName = {this.props.props} productInfo = {this.state.productInfo } getAndRenderReviews= {this.getReviews}/>
 
                     </div>
 

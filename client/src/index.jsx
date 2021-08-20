@@ -68,7 +68,7 @@ class App extends React.Component {
           <QuestionsAnswersState
             productId={this.state.productId}
           />
-          <Reviews props={this.state} avgRatingFunc = {this.updateAvgRatingForProduct} getNumOfReviews = {this.getNumberOfReviews}/>
+          <Reviews props={this.state} productId={this.state.productId} avgRatingFunc = {this.updateAvgRatingForProduct} getNumOfReviews = {this.getNumberOfReviews}/>
         </ProductMainStateProvider>
       </div>
     );
