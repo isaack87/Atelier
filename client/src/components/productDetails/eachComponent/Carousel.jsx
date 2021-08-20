@@ -1,6 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
 import Zoom from 'react-img-zoom';
+import saveClickedInteraction from './UserClickInteractions.jsx';
 
 class Carousel extends React.Component {
   constructor(props) {
@@ -28,6 +29,7 @@ class Carousel extends React.Component {
   }
 
   nextSlide() {
+    saveClickedInteraction('Right Arrow button', 'Photo Gallery - Product Overview');
     const length = this.props.fullSizePhotos.length;
     let placeholder = this.state.current + 1;
     if (this.state.current === length - 1) {
@@ -48,7 +50,7 @@ class Carousel extends React.Component {
       }, () => {
         document.getElementsByClassName('imageThumb')[this.state.listTwoCurrent].classList.add('selectedThumbnail');
         if (this.state.screenSize === 'full') {
-          let thumbnailsArray = document.getElementsByClassName('imageThumb')
+          let thumbnailsArray = document.getElementsByClassName('imageThumb');
           for (let i = 0; i < thumbnailsArray.length; i++) {
             document.getElementsByClassName('imageThumb')[i].style.height = '2.3em';
             document.getElementsByClassName('imageThumb')[i].style.width = '2.3em';
@@ -70,6 +72,7 @@ class Carousel extends React.Component {
   }
 
   prevSlide() {
+    saveClickedInteraction('Left Arrow button', 'Photo Gallery - Product Overview');
     const length = this.props.fullSizePhotos.length;
     let first = length - 1;
     let second = this.state.current - 1;
@@ -98,7 +101,7 @@ class Carousel extends React.Component {
       }, () => {
         document.getElementsByClassName('imageThumb')[this.state.current].classList.add('selectedThumbnail');
         if (this.state.screenSize === 'full') {
-          let thumbnailsArray = document.getElementsByClassName('imageThumb')
+          let thumbnailsArray = document.getElementsByClassName('imageThumb');
           for (let i = 0; i < thumbnailsArray.length; i++) {
             document.getElementsByClassName('imageThumb')[i].style.height = '2.3em';
             document.getElementsByClassName('imageThumb')[i].style.width = '2.3em';
@@ -116,6 +119,7 @@ class Carousel extends React.Component {
   }
 
   nextSetOfThumbnails() {
+    saveClickedInteraction('More Photos at current Style div', 'Photo Gallery - Product Overview');
     if (this.state.currentPage === 1) {
       document.getElementsByClassName('imageThumb')[this.state.current].classList.remove('selectedThumbnail');
       this.setState({
@@ -139,6 +143,7 @@ class Carousel extends React.Component {
 
   // When main image or the fullscreen button is clicked
   changeFullscreen() {
+    saveClickedInteraction('Fullscreen button', 'Photo Gallery - Product Overview');
     if (this.state.screenSize === 'normal') {
       // Remove the old CSS sizing of the current main image and change it to the fullscreen size settings
       document.getElementsByClassName('photoCarouselChild')[0].classList.remove('carouselChild2');
@@ -153,7 +158,7 @@ class Carousel extends React.Component {
         document.getElementsByClassName('changePhotoToFull')[0].classList.remove('myImg');
         document.getElementsByClassName('changePhotoToFull')[0].classList.add('myImg2');
 
-        let thumbnailsArray = document.getElementsByClassName('imageThumb')
+        let thumbnailsArray = document.getElementsByClassName('imageThumb');
         for (let i = 0; i < thumbnailsArray.length; i++) {
           document.getElementsByClassName('imageThumb')[i].style.height = '2.3em';
           document.getElementsByClassName('imageThumb')[i].style.width = '2.3em';
@@ -173,7 +178,7 @@ class Carousel extends React.Component {
       }, () => {
         document.getElementsByClassName('changePhotoToFull')[0].classList.remove('myImg2');
         document.getElementsByClassName('changePhotoToFull')[0].classList.add('myImg');
-        let thumbnailsArray = document.getElementsByClassName('imageThumb')
+        let thumbnailsArray = document.getElementsByClassName('imageThumb');
         for (let i = 0; i < thumbnailsArray.length; i++) {
           document.getElementsByClassName('imageThumb')[i].style.height = '3.9em';
           document.getElementsByClassName('imageThumb')[i].style.width = '3.9em';
@@ -185,6 +190,7 @@ class Carousel extends React.Component {
 
   // Changes the currently shown main image depending on the current index of the style's array
   changeMainPhoto(event) {
+    saveClickedInteraction('Change main photo thumbnail img', 'Photo Gallery - Product Overview');
     if (this.state.currentPage === 1) {
       const clickedIndex = parseInt(event.currentTarget.id);
       // remove marker from current selected thumbnail and add to newly clicked one
@@ -209,6 +215,7 @@ class Carousel extends React.Component {
 
   // Functions for when zooming in and out 2.5x for the main selected image
   zoomTwoTimes() {
+    saveClickedInteraction('Zoom in 2.5x on photo img', 'Photo Gallery - Product Overview');
     this.setState({
       screenSize: 'zoom',
       displayThumbnails: 'no',
@@ -220,7 +227,7 @@ class Carousel extends React.Component {
       screenSize: 'full',
       displayThumbnails: 'yes',
     }, () => {
-      let thumbnailsArray = document.getElementsByClassName('imageThumb')
+      let thumbnailsArray = document.getElementsByClassName('imageThumb');
       for (let i = 0; i < thumbnailsArray.length; i++) {
         document.getElementsByClassName('imageThumb')[i].style.height = '2.3em';
         document.getElementsByClassName('imageThumb')[i].style.width = '2.3em';
@@ -248,18 +255,18 @@ class Carousel extends React.Component {
           listTwoCurrent: newIndex2,
         }, () => {
           document.getElementsByClassName('imageThumb')[this.state.listTwoCurrent].classList.add('selectedThumbnail');
-        })
+        });
       }
     } else if (this.state.currentPage === 1) {
       if (this.props.fullSizePhotos.length <= this.state.current) {
-        console.log('is more')
+        console.log('is more');
         document.getElementsByClassName('imageThumb')[this.state.current].classList.remove('selectedThumbnail');
         let newIndex = this.props.fullSizePhotos.length - 1;
         this.setState({
           current: newIndex,
         }, () => {
           document.getElementsByClassName('imageThumb')[this.state.current].classList.add('selectedThumbnail');
-        })
+        });
       }
     }
 
@@ -270,13 +277,16 @@ class Carousel extends React.Component {
     } else if (this.state.screenSize === 'full') {
       mainImage = <img onClick={this.zoomTwoTimes.bind(this)} src={this.props.fullSizePhotos[this.state.current]} className='changePhotoToFull fullscreenMainPhotoImage myImg'/>;
     } else if (this.state.screenSize === 'zoom') {
-      mainImage = <div className='clickOutZoom' onClick={this.clickOutZoom.bind(this)}><Zoom
-      onClick={this.clickOutZoom.bind(this)}
-      img={this.props.fullSizePhotos[this.state.current]}
-      zoomScale={2.5}
-      width={928}
-      height={525}
-      /></div>
+      mainImage =
+      <div className='clickOutZoom' onClick={this.clickOutZoom.bind(this)}>
+        <Zoom
+          onClick={this.clickOutZoom.bind(this)}
+          img={this.props.fullSizePhotos[this.state.current]}
+          zoomScale={2.5}
+          width={928}
+          height={525}
+        />
+      </div>;
     }
 
     // conditional rendering of the thumbnails depending at what stage (normal, fullscreen, zoomed) the main image is at
@@ -307,7 +317,7 @@ class Carousel extends React.Component {
         });
       }
     } else if (this.state.displayThumbnails === 'no') {
-      currentThumbnails = <div></div>
+      currentThumbnails = <div></div>;
     }
 
     // conditional rendering of arrows depending on the current state of the main image and index of the shown image
@@ -356,7 +366,7 @@ class Carousel extends React.Component {
           {mainImage}
           {rightArrow}
         </div>
-          {displayExpandButton}
+        {displayExpandButton}
       </div>
     );
   }

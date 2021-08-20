@@ -1,6 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
 import helpers from '../../ratingsReviews/ReviewsHelperFunc.jsx';
+import saveClickedInteraction from './UserClickInteractions.jsx';
 
 class ProductInformation extends React.Component {
 
@@ -12,6 +13,7 @@ class ProductInformation extends React.Component {
 
   moveToReviews() {
     document.getElementById('reviews').scrollIntoView();
+    saveClickedInteraction('Read All Reviews div', 'Product Information - Product Overview');
   }
 
   render() {

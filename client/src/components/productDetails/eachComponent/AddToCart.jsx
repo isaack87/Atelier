@@ -1,4 +1,5 @@
 import React from 'react';
+import saveClickedInteraction from './UserClickInteractions.jsx';
 
 class AddToCart extends React.Component {
   constructor(props) {
@@ -22,43 +23,45 @@ class AddToCart extends React.Component {
   }
 
   renderQuantity(event) {
+    saveClickedInteraction('Size Select', 'Add to Cart - Product Overview');
     this.props.renderQuantity(event.currentTarget.value);
     const tooltip = document.getElementsByClassName('tooltiptext')[0];
     tooltip.style.visibility = 'hidden';
   }
 
   closeModal() {
-    let modal = document.getElementById("myCartModal");
-    modal.style.display = "none";
+    let modal = document.getElementById('myCartModal');
+    modal.style.display = 'none';
   }
 
   openSuccessModal(productName, style, size, quantity) {
     let itemsAdded = '✓ ' + quantity + 'x ' + 'Size: ' + size + ' | ' + productName + ' - ' + style;
     document.getElementsByClassName('cartInnerText')[0].innerText = itemsAdded;
 
-    let modal = document.getElementById("myCartModal");
+    let modal = document.getElementById('myCartModal');
 
     // Get the <span> element that closes the modal
-    let span = document.getElementsByClassName("closeCartModal")[0];
+    let span = document.getElementsByClassName('closeCartModal')[0];
 
     // When the user clicks on the button, open the modal
-    modal.style.display = "block";
+    modal.style.display = 'block';
 
     // When the user clicks on <span> (x), close the modal
     span.onclick = function() {
-      modal.style.display = "none";
-    }
+      modal.style.display = 'none';
+    };
 
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function(event) {
       if (event.target == modal) {
-        modal.style.display = "none";
+        modal.style.display = 'none';
       }
-    }
+    };
 
   }
 
   addToCart() {
+    saveClickedInteraction('Add to cart button', 'Add to Cart - Product Overview');
     // OpenSelectMenu is a function that will open the size select menu if 'Add to bag' has been clicked but no size is selected
     const OpenSelectMenu = (element, maxSize) => {
       const preventDefault = (event) => {
@@ -107,7 +110,7 @@ class AddToCart extends React.Component {
         this.props.onAddToCart(skuId, selectedSize, selectedQuantity, () => {
           this.setState({
             rerenderSize: true,
-          })
+          });
           let productName = document.getElementsByClassName('productName')[0].innerText;
           let style = this.props.styleNames[this.props.currentStyleIndex];
           this.openSuccessModal(productName, style, selectedSize, selectedQuantity);
@@ -134,6 +137,7 @@ class AddToCart extends React.Component {
   }
 
   favorite() {
+    saveClickedInteraction('Favorite Start button', 'Add to Cart - Product Overview');
     // Just a placeholder for the favorite button to do nothing when clicked
     console.log('added to favorites');
   }
