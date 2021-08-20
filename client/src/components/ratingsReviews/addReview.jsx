@@ -462,7 +462,7 @@ class AddReview extends React.Component{
                   };
                    await axios(options)
                   .then(response => {
-                    
+
                       this.hideModal();
                       //and then close the modal
                       //now need to update the reviews 

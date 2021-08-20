@@ -420,7 +420,7 @@ margin-right: 2em;
   flex-wrap: wrap;
   gap: 1em;
   position: relative;
-  font-size: .35em;
+  font-size: .5em;
   height: 1em;
   padding: .2em;
   flex-direction: row;
@@ -577,12 +577,12 @@ margin-right: 2em;
   flex-direction: row;
   display: flex;
   position: relative;
-  gap: .5em;
+  gap: .2em;
   margin-bottom: .1em;
   height: .6em;
   padding: .2em;
   margin-left: auto;
-  margin-bottom: -8em;
+  margin-bottom: -5em;
 }
 .button-group {
   margin-bottom: 20%;
@@ -785,7 +785,7 @@ ul {
   width: 70em;
   flex-flow: row;
   justify-content: space-between;
-  background: rgb(66, 64, 64);
+  background: rgb(85, 82, 82);
   box-shadow: 0 1px 6px 0 rgb(34 34 34 / 30%);
   border-radius: .3em;
 }
@@ -794,7 +794,7 @@ ul {
   font-size: 18px;
   margin-left: 1em;
   background-color: transparent;
-  margin-top: .3em;
+  margin-top: -0.1em;
 }
 
 .navigation2 {
@@ -820,7 +820,6 @@ ul {
   justify-content: center;
   font-size: small;
   width: 700px;
-
 }
 
 .carouselContainer {
@@ -1094,7 +1093,6 @@ ul {
 .salePrice {
   color: red;
   font-weight: bold;
-
 }
 
 .checkMark {
@@ -1103,7 +1101,6 @@ ul {
   --width: 6px;
   --borderColor: rgb(27, 44, 23);
   box-shadow: 0 0 12px rgb(230, 221, 221);
-
   transform: rotate(45deg);
   height: var(--height);
   width: var(--width);
@@ -1127,7 +1124,6 @@ ul {
   text-align: center;
   border-radius: 6px;
   padding: 5px 0;
-
   /* Position the tooltip */
   position: absolute;
   z-index: 1;
@@ -1146,7 +1142,6 @@ ul {
   text-align: center;
   border-radius: 6px;
   padding: 5px 0;
-
   /* Position the tooltip */
   position: absolute;
   z-index: 1;
@@ -1275,8 +1270,6 @@ ul {
 }
 .myImg2:hover {opacity: 0.7;}
 
-
-
 /* The Modal (background) */
 .cartModal {
   display: none;
@@ -1355,7 +1348,11 @@ ul {
   cursor: pointer;
   margin-left: 1.5em;
 }
+.proceedToCheckout:hover, .keepShopping:hover {
+  box-shadow: 0 0 30px rgb(0, 0, 0, 0.15);
+  transform: scale(1.03);
 
+}
 .modalButtonscheckout {
   display: flex;
   flex-flow: row;
@@ -1410,8 +1407,6 @@ ul {
   height: 5em;
   margin-top: .2em;
   margin-left: .2em;
-  /* border: .2em solid green; */
-  /* background-color: white; */
 }
 .relatedProductsArrow {
   font-size: 1em;
@@ -1444,6 +1439,15 @@ ul {
   font-family:Georgia, 'Times New Roman', Times, serif;
 }
 .dark-mode {
-  background-color: black;
+  background-color: rgb(31, 26, 26);
   color: white;
+}
+
+.logoSize {
+  font-size: 1.3em;
+  margin-bottom: 1em;
+  position: absolute;
+}
+.toggleDarkMode {
+  cursor: pointer;
 }

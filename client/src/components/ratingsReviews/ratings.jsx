@@ -48,6 +48,7 @@ class Reviews extends React.Component {
         this.setProductInfo = this.setProductInfo.bind(this);
 
     }
+    
     //
     setProductInfo(info){
         this.setState({productInfo: info});
@@ -135,7 +136,10 @@ class Reviews extends React.Component {
 
     //function to handle getting the reviews for the given product id
      getReviews(sort = 'relevant') {
-           const productID = this.props.props.productId;
+        const productID = this.props.props.productId;
+        console.log(
+        'product id', productID
+        )
            //uncomment below for testing purpose only
         //    const productID = 28221;
           axios({
@@ -144,6 +148,8 @@ class Reviews extends React.Component {
             //for testing purposes we use this default productID
             data: {productID, sortKind: sort}
         }).then(response => {
+            console.log('we got the reviews now', response
+            )
             //now take this and update reviews state
             this.setState({allReviews: response.data,reviewsToBeShown: response.data, reviewsShownSoFar: [], currentReviewIndex: 0}, () => {
                 this.renderReviews();
@@ -285,7 +291,9 @@ class Reviews extends React.Component {
                     {this.state.reviewDropdownSortDiv}
                    <div id='reviewsList'> {this.state.reviewsDiv}</div>
                     {this.state.moreReviewsButton}
+
                     <AddReview productId={this.props.props.productId} productName = {this.props.props} productInfo = {this.state.productInfo } getAndRenderReviews= {this.getReviews}/>
+
                     </div>
 
                 </div>

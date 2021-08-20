@@ -95,14 +95,13 @@ app.post('/interaction', (req, res) => {
 });
 
 
+// Louis Routes
 
 app.get('/productdetails', (req, res) => {
   res.send('success');
 });
 
 app.post('/productdetails', (req, res) => {
-  // console.log('get request');
-  // console.log(req.body);
   louisAPI.getProductDetails(req.body.id)
     .then((data) => {
       // console.log('😈 data', data.data);
@@ -114,9 +113,7 @@ app.post('/productdetails', (req, res) => {
 });
 
 app.get('/product/styles', (req, res) => {
-  // console.log(req.query);
   louisAPI.getProductIdStyles(req.query.pid, (data) => {
-
     res.send(data.data);
   });
 });
@@ -134,9 +131,12 @@ app.post('/addToCart', (req, res) => {
   });
 });
 
-
-
-// Louis Routes
+app.post('/userclick', (req, res) => {
+  louisAPI.sendUserClickedData(req.body, (data) => {
+    // console.log('data after adding interactions click', data)
+    res.sendStatus(200);
+  });
+});
 
 
 // Helena Routes
