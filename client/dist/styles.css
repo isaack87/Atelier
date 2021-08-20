@@ -420,7 +420,7 @@ margin-right: 2em;
   flex-wrap: wrap;
   gap: 1em;
   position: relative;
-  font-size: .35em;
+  font-size: .5em;
   height: 1em;
   padding: .2em;
   flex-direction: row;
@@ -577,12 +577,12 @@ margin-right: 2em;
   flex-direction: row;
   display: flex;
   position: relative;
-  gap: .5em;
+  gap: .2em;
   margin-bottom: .1em;
   height: .6em;
   padding: .2em;
   margin-left: auto;
-  margin-bottom: -8em;
+  margin-bottom: -5em;
 }
 .button-group {
   margin-bottom: 20%;
