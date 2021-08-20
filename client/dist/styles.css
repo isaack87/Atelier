@@ -5,6 +5,7 @@
   flex-direction: column;
   z-index: 1;
   position: relative;
+  /* border: .3em solid black; */
 
 }
 
@@ -82,7 +83,8 @@
   display: inline-block;
 }
 #reviews {
-  width: 100%;
+  width: 80%;
+  /* display: flex; */
 
 }
 h1{
@@ -91,7 +93,7 @@ h1{
 }
 #ratings-breakdown {
 
-  margin-right: 5em;
+  margin-right: 2em;
 
 display: inline-block;
 }
@@ -110,7 +112,7 @@ display: inline-block;
   margin-top: 4em;
 }
 #reviews-scrollable {
-  width: 60%;
+  width: 40%;
   float: right;
 }
 #reviews-sorted-by-info {
