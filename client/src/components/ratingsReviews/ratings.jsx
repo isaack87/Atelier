@@ -51,9 +51,7 @@ class Reviews extends React.Component {
     
     //
     setProductInfo(info){
-        this.setState({productInfo: info}, ()=> {
-            console.log('set product info', this.state)
-        });
+        this.setState({productInfo: info});
     }
     //loops through the reviewsFilter and generates a message for each 'true' value
     generateFilterMessage() {
@@ -67,7 +65,6 @@ class Reviews extends React.Component {
         let totalMessageDiv = <div>Filter/s applied: {messageDiv}
         <div id='remove-filters'>
             <p onClick = {() => {
-                console.log('remove all filters');
                 this.setState({reviewsFilter: {
                     5: false,
                     4: false,
@@ -294,7 +291,9 @@ class Reviews extends React.Component {
                     {this.state.reviewDropdownSortDiv}
                    <div id='reviewsList'> {this.state.reviewsDiv}</div>
                     {this.state.moreReviewsButton}
-                    <AddReview productId={this.props.props.productId} productName = {this.props.props} productInfo = {this.state.productInfo} getAndRenderReviews = {this.getReviews}/>
+
+                    <AddReview productId={this.props.props.productId} productName = {this.props.props} productInfo = {this.state.productInfo } getAndRenderReviews= {this.getReviews}/>
+
                     </div>
 
                 </div>

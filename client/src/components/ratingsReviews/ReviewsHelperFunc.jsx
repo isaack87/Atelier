@@ -172,20 +172,20 @@ const helpers = {
             <p>{title}</p>
             <div id = 'metadata-bar'>
                 <span id='triangle' style={{left: rightEMval}}>▲</span>
-                <div id = 'metadata-bar-individual'>
+                <div id = 'metadata-bar-individual' key = { title + 'bar1'}>
                     <div className="w3-light-grey">
                         <div className='w3-green metadata-bar-individual' style={{height:"2em", width:"0%"}}/>
                     </div>
                  </div>
 
 
-                <div id = 'metadata-bar-individual'>
+                <div id = 'metadata-bar-individual' key = { title + 'bar2'}>
                     <div className="w3-light-grey">
                         <div className='w3-green metadata-bar-individual' style={{height:"2em", width:"0%"}}/>
                     </div>
 
                 </div>
-                <div id = 'metadata-bar-individual'>
+                <div id = 'metadata-bar-individual' key = { title + 'bar3'}>
                     <div className="w3-light-grey">
                         <div className='w3-green metadata-bar-individual' style={{height:"2em", width:"0%"}}/>
                     </div>

@@ -11,12 +11,13 @@ const getReviewsAPI = (productID, sortKind = 'helpful') => {
 
      let options = {
         method: 'GET',
-        url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?product_id=${productID}&sort=${sortKind}$count=100`,
+        url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?product_id=${productID}&sort=${sortKind}&count=100`,
         headers: { Authorization: config.gitToken },
+      
       };
       return axios(options)
       .then(response => {
-
+        console.log('response from api', response)
           let sortedArr;
           if (response.data === undefined) {
               return;
@@ -54,7 +55,7 @@ const getReviewsAPI = (productID, sortKind = 'helpful') => {
             }
             sortedArr = sortOne;
         }
-        // console.log('sorted array', sortedArr)
+        //  console.log('sorted array we got from api', sortedArr)
          return sortedArr;
 
       });
