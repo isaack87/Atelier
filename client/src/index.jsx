@@ -62,7 +62,7 @@ class App extends React.Component {
     return (
       <div className="App-container">
         <ProductMainStateProvider productId ={this.state.productId}>
-          <TopSearchBar onSearch={this.search}/>
+          <TopSearchBar onSearch={this.search} toggleDark={this.toggleDark}/>
           <ProductOverview numberOfReviews={this.state.numberOfReviews} productId={this.state.productId} avgRating = {this.state.avgRating} getProductName = {this.getProductName}/>
           <RelatedProducts changeMainProductId={this.changeMainProductId.bind(this)} productId={this.state.productId} avgRating = {this.state.avgRating}/>
           <QuestionsAnswersState
@@ -70,7 +70,6 @@ class App extends React.Component {
           />
           <Reviews props={this.state} avgRatingFunc = {this.updateAvgRatingForProduct} getNumOfReviews = {this.getNumberOfReviews}/>
         </ProductMainStateProvider>
-        <button onClick={this.toggleDark.bind(this)}>Toggle Dark Mode</button>
       </div>
     );
   }

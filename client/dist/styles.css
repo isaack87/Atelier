@@ -785,7 +785,7 @@ ul {
   width: 70em;
   flex-flow: row;
   justify-content: space-between;
-  background: rgb(66, 64, 64);
+  background: rgb(85, 82, 82);
   box-shadow: 0 1px 6px 0 rgb(34 34 34 / 30%);
   border-radius: .3em;
 }
@@ -794,7 +794,7 @@ ul {
   font-size: 18px;
   margin-left: 1em;
   background-color: transparent;
-  margin-top: .3em;
+  margin-top: -0.1em;
 }
 
 .navigation2 {
@@ -1439,6 +1439,15 @@ ul {
   font-family:Georgia, 'Times New Roman', Times, serif;
 }
 .dark-mode {
-  background-color: black;
+  background-color: rgb(31, 26, 26);
   color: white;
+}
+
+.logoSize {
+  font-size: 1.3em;
+  margin-bottom: 1em;
+  position: absolute;
+}
+.toggleDarkMode {
+  cursor: pointer;
 }
