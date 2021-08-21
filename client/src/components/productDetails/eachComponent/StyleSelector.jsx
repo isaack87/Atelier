@@ -28,7 +28,7 @@ class StyleSelector extends React.Component {
       let classes = this.props.thumbnails[index].slice(34, 85) + ' styleThumbnail';
       return (
         <li className='removeBullets' key={index}>
-          <img className={classes} id={index} value={this.props.styleIds[index]} onClick={this.updateStyleId.bind(this)} src={this.props.thumbnails[index]} title={item}/>
+          <img className={classes} id={index} value={this.props.styleIds[index]} onClick={this.updateStyleId.bind(this)} src={this.props.thumbnails[index]} alt='thumbnail' title={item}/>
           <div className={this.props.thumbnails[index].slice(34, 90)}></div>
         </li>);
     });

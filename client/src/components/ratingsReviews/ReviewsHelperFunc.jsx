@@ -28,7 +28,7 @@ const helpers = {
     },
     generateHelpfulness: (helpNum = 0, id) => {
 
-       
+
             return (<div id="helpful">
                 <span id="helpful-question">Helpful?
                 <span id= {"helpful-link" + id} onClick = {
@@ -41,11 +41,11 @@ const helpers = {
                             helpfulReviewsClicked[id] = true;
                         }
                     }
-                }> Yes (<span id= {"helpfulness-" + id } class = "helpful-link">{helpNum}</span>)</span>
+                }> Yes (<span id= {"helpfulness-" + id } className = "helpful-link">{helpNum}</span>)</span>
                 </span>
 
             </div>)
-  
+
 
     },
     markHelpfulAPI: (productID) => {
@@ -79,17 +79,17 @@ const helpers = {
 
         let fullStarDiv = []
         for (let i = 0; i < fullStars; i++) {
-            fullStarDiv.push(<span className= "fa fa-star empty-star full-star"></span>)
+            fullStarDiv.push(<span key={i} className= "fa fa-star empty-star full-star"></span>)
         }
         //add the quarter star div if we have quarter stars
         if (quarterStar > 0) {
-            fullStarDiv.push(<span className= "fa fa-star empty-star" id={"star-" + (quarterStar*100).toString()}/>);
+            fullStarDiv.push(<span key={quarterStar} className= "fa fa-star empty-star" id={"star-" + (quarterStar*100).toString()}/>);
         }
         //now test if we need any empty stars, like if the review is 2 out of 5 stars
         const emptyStars = Math.floor(5 - fullStars - quarterStar);
         if (emptyStars > 0) {
             for (let i = 0; i < emptyStars; i++) {
-                fullStarDiv.push(<span className= "fa fa-star empty-star"></span>)
+                fullStarDiv.push(<span key={i + 1777} className= "fa fa-star empty-star"></span>)
             }
         }
         let starDiv = <div key={key + 'star'}>{fullStarDiv}</div>;
@@ -135,14 +135,14 @@ const helpers = {
             }} id='breakdown-star-count'>
                 <span id ='bar-type' key ='bar-type'>{starAmount} Stars</span>
                 <div id = 'bar' key = 'bar'>
-                    <div class="w3-light-grey">
+                    <div className="w3-light-grey">
                         <div className='w3-green' style={{height:"1em", width:`${widthAmount + "%"}`}}>
                         </div>
                     </div>
                 </div>
 
                 <span id ='reviews-total-bar'>{starArr.length + ' reviews total'}</span>
-                
+
 
                 <br></br>
             </div>;
@@ -196,7 +196,7 @@ const helpers = {
             </div>
 
             <br></br>
-            <div id = 'first-characteristic' key= 'first-characteristic'>{firstCharacterstic} </div> 
+            <div id = 'first-characteristic' key= 'first-characteristic'>{firstCharacterstic} </div>
 
                <div id = 'third-characteristic'key= 'second-characteristic'>{thirdCharacteristic}</div>
                <br></br>

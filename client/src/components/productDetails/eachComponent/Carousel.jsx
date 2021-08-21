@@ -273,9 +273,9 @@ class Carousel extends React.Component {
     // conditional rendering of the main image depending at what stage (normal, fullscreen, zoomed) the main image is at
     let mainImage;
     if (this.state.screenSize === 'normal') {
-      mainImage = <img onClick={this.changeFullscreen.bind(this)} src={this.props.fullSizePhotos[this.state.current]} className='changePhotoToFull mainPhotoImage myImg'/>;
+      mainImage = <img onClick={this.changeFullscreen.bind(this)} src={this.props.fullSizePhotos[this.state.current]} alt='main photo' className='changePhotoToFull mainPhotoImage myImg'/>;
     } else if (this.state.screenSize === 'full') {
-      mainImage = <img onClick={this.zoomTwoTimes.bind(this)} src={this.props.fullSizePhotos[this.state.current]} className='changePhotoToFull fullscreenMainPhotoImage myImg'/>;
+      mainImage = <img onClick={this.zoomTwoTimes.bind(this)} src={this.props.fullSizePhotos[this.state.current]} alt='main photo' className='changePhotoToFull fullscreenMainPhotoImage myImg'/>;
     } else if (this.state.screenSize === 'zoom') {
       mainImage =
       <div className='clickOutZoom' onClick={this.clickOutZoom.bind(this)}>
@@ -298,21 +298,21 @@ class Carousel extends React.Component {
       if (this.props.smallSizePhotos.length <= 7) {
         currentThumbnails = this.props.smallSizePhotos.map((slide, index) => {
           return (
-            <img key={index} onClick={this.changeMainPhoto.bind(this)} src={slide} className='imageThumb' id={index} />
+            <img key={index} onClick={this.changeMainPhoto.bind(this)} src={slide} alt='slide' className='imageThumb' id={index} />
           );
         });
       } else if (this.state.currentPage === 1) {
         first7Pics = this.props.smallSizePhotos.slice(0, 7);
         currentThumbnails = first7Pics.map((slide, index) => {
           return (
-            <img key={index} onClick={this.changeMainPhoto.bind(this)} src={slide} className='imageThumb' id={index} />
+            <img key={index} onClick={this.changeMainPhoto.bind(this)} src={slide} alt='slide' className='imageThumb' id={index} />
           );
         });
       } else if (this.state.currentPage === 2) {
         secondSetPics = this.props.smallSizePhotos.slice(7, 14);
         currentThumbnails = secondSetPics.map((slide, index) => {
           return (
-            <img key={index} onClick={this.changeMainPhoto.bind(this)} src={slide} className='imageThumb' id={index + 7} />
+            <img key={index} onClick={this.changeMainPhoto.bind(this)} src={slide} alt='slide' className='imageThumb' id={index + 7} />
           );
         });
       }

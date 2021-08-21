@@ -20,11 +20,11 @@ class RatingsBreakdown extends React.Component {
 
     }
     getAvgRating() {
-  
+
             const reviewsArray = this.props.allReviews;
             console.log('all reviews,', reviewsArray)
 
-            
+
         this.props.getNumOfReviews(reviewsArray.length);
         let totalRating = 0;
         let recommendations = 0;
@@ -48,8 +48,8 @@ class RatingsBreakdown extends React.Component {
         this.setState({avgReviewDiv:avgDiv, avgRating, percentageRec: recommendations}
 
         );
-    
-        
+
+
     }
 
     getRatingBar() {
@@ -62,8 +62,8 @@ class RatingsBreakdown extends React.Component {
             this.getRatingBar();
         })
 
-        
-       
+
+
     }
     componentDidUpdate(){
 
