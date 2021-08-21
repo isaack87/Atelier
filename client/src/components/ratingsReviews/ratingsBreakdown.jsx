@@ -17,10 +17,14 @@ class RatingsBreakdown extends React.Component {
         }
         this.getAvgRating = this.getAvgRating.bind(this);
         this.getRatingBar = this.getRatingBar.bind(this);
-        this.getPercentageRecommendations = this.getPercentageRecommendations.bind(this);
+
     }
     getAvgRating() {
-        const reviewsArray = this.props.props.allReviews;
+  
+            const reviewsArray = this.props.allReviews;
+            console.log('all reviews,', reviewsArray)
+
+            
         this.props.getNumOfReviews(reviewsArray.length);
         let totalRating = 0;
         let recommendations = 0;
@@ -32,37 +36,48 @@ class RatingsBreakdown extends React.Component {
         });
         //need to put this in normal state
         let avgRating = (totalRating/(reviewsArray.length));
+
         this.props.getAvgRating(avgRating);
-
-
         const avgStars = helpers.calculateStarDiv(avgRating, 'avg-rating');
         const avgDiv = <div><span id='avg-rating'>
             {avgStars}
             </span></div>;
         avgRating = avgRating.toFixed(1);
-
-
         recommendations = <span>{((recommendations/reviewsArray.length) * 100).toFixed(1) + '% of reviews recommend this product'}</span>;
 
         this.setState({avgReviewDiv:avgDiv, avgRating, percentageRec: recommendations}
 
-        )
+        );
+    
+        
     }
-    getPercentageRecommendations(){
 
-    }
     getRatingBar() {
-
         const starBar = helpers.createStarBar(this.props.props.allReviews, this.props.handleFilter);
         this.setState({starBarDiv: starBar});
-
     }
     componentDidMount() {
-        this.getAvgRating();
-        this.getRatingBar();
-        console.log('this props', this.props)
+        this.setState({allReviews: this.props.props.allReviews}, ()=> {
+            this.getAvgRating();
+            this.getRatingBar();
+        })
+
+        
+       
+    }
+    componentDidUpdate(){
+
+        if (this.props.props.allReviews !== undefined) {
+            if (this.props.allReviews !== this.state.allReviews) {
+                this.getAvgRating();
+                this.getRatingBar();
+                this.setState({allReviews: this.props.allReviews})
+            }
+
+        }
 
     }
+
     render() {
         return <div id= 'ratings-breakdown'>
            <h2>{this.state.avgRating}</h2>

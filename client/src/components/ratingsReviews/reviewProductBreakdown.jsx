@@ -22,13 +22,13 @@ class ReviewProductBreakdown extends React.Component {
             //for testing purposes we use this default productID
             data: {productID}
         }).then(response => {
-           console.log('response', response.data.characteristics);
+         
            let productMetadata = response.data.characteristics;
            //set the state with this info and then generate the div
             this.setState({metaData: productMetadata}, () => {
                 this.generateProductMetadataDiv();
             });
-            console.log('review product breakdown', this.props)
+          
             this.props.setProductInfo(productMetadata);
         })
 
@@ -39,9 +39,7 @@ class ReviewProductBreakdown extends React.Component {
         let infoDiv = [];
         for (let elem in productMetadata) {
             infoDiv.push(helpers.getProductBreakdownBar(elem, productMetadata[elem]));
-
         }
-        console.log('info div', infoDiv)
         this.setState({metaDataDiv: infoDiv})
 
 

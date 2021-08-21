@@ -26,9 +26,9 @@ const helpers = {
         }
         return false;
     },
-    generateHelpfulness: (helpNum, id) => {
+    generateHelpfulness: (helpNum = 0, id) => {
 
-        if (helpNum > 0) {
+       
             return (<div id="helpful">
                 <span id="helpful-question">Helpful?
                 <span id= {"helpful-link" + id} onClick = {
@@ -45,7 +45,8 @@ const helpers = {
                 </span>
 
             </div>)
-        }
+  
+
     },
     markHelpfulAPI: (productID) => {
         axios({
@@ -132,8 +133,8 @@ const helpers = {
             <div onClick = {()=> {
                 filterFunc(starAmount)
             }} id='breakdown-star-count'>
-                <span id ='bar-type'>{starAmount} Stars</span>
-                <div id = 'bar'>
+                <span id ='bar-type' key ='bar-type'>{starAmount} Stars</span>
+                <div id = 'bar' key = 'bar'>
                     <div class="w3-light-grey">
                         <div className='w3-green' style={{height:"1em", width:`${widthAmount + "%"}`}}>
                         </div>
@@ -171,35 +172,33 @@ const helpers = {
         return(<div>
             <p>{title}</p>
             <div id = 'metadata-bar'>
-                <span id='triangle' style={{left: rightEMval}}>▲</span>
+                <span id='triangle' style={{left: rightEMval}} key="triangle">▲</span>
                 <div id = 'metadata-bar-individual' key = { title + 'bar1'}>
-                    <div className="w3-light-grey">
-                        <div className='w3-green metadata-bar-individual' style={{height:"2em", width:"0%"}}/>
+                    <div className="w3-light-grey" key={'light-grey-default'+title + '1'}>
+                        <div className='w3-green metadata-bar-individual' key={'light-green-default'+title + '1'} style={{height:"2em", width:"0%"}}/>
                     </div>
                  </div>
 
 
                 <div id = 'metadata-bar-individual' key = { title + 'bar2'}>
-                    <div className="w3-light-grey">
-                        <div className='w3-green metadata-bar-individual' style={{height:"2em", width:"0%"}}/>
+                    <div className="w3-light-grey" key={'light-grey-default'+title + '2'}>
+                        <div className='w3-green metadata-bar-individual' key={'light-green-default'+title + '2'} style={{height:"2em", width:"0%"}}/>
                     </div>
 
                 </div>
                 <div id = 'metadata-bar-individual' key = { title + 'bar3'}>
-                    <div className="w3-light-grey">
-                        <div className='w3-green metadata-bar-individual' style={{height:"2em", width:"0%"}}/>
+                    <div className="w3-light-grey" key={'light-grey-default'+title + '3'}>
+                        <div className='w3-green metadata-bar-individual' key={'light-green-default'+title + '3'} style={{height:"2em", width:"0%"}}/>
                     </div>
 
                 </div>
                 <br></br>
-               <span>
-                   </span>
             </div>
 
             <br></br>
-            <div id = 'first-characteristic'>{firstCharacterstic}</div> 
+            <div id = 'first-characteristic' key= 'first-characteristic'>{firstCharacterstic} </div> 
 
-               <div id = 'third-characteristic'>{thirdCharacteristic}</div>
+               <div id = 'third-characteristic'key= 'second-characteristic'>{thirdCharacteristic}</div>
                <br></br>
 
         </div>)
