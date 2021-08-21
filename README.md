@@ -20,10 +20,10 @@ This project is a shopping website simulation such as popular sites like Amazon.
 
 Our application allows the user to click through products and styles to add to their shopping carts. In addition, users can see the current questions asked for the selected product as well as add their own questions & answers. At the very bottom, users can view reviews written by other customers. There is a star rating for each product. The user can add their own rating and review to the products. Overall, there is a click tracker that logs the users’ click interactions into an API.
 
-i[1](https://drive.google.com/file/d/1zSMJHchizBsGa6XvoR4FXMU3S69duP0U/view?usp=sharing)
-i[2](https://drive.google.com/file/d/1EAG5o22Gthe4lYWJL0oDVWhMcElWBVJn/view?usp=sharing)
-i[3](https://drive.google.com/file/d/1ExO-i97Aetyt327Yb0ejFAbSmywOiZq3/view?usp=sharing)
-i[4](https://drive.google.com/file/d/1q0LMcGiWqykarMl14SBvnI4I9W56g5e0/view?usp=sharing)
+![1](https://drive.google.com/file/d/1zSMJHchizBsGa6XvoR4FXMU3S69duP0U/view?usp=sharing)
+![2](https://drive.google.com/file/d/1EAG5o22Gthe4lYWJL0oDVWhMcElWBVJn/view?usp=sharing)
+![3](https://drive.google.com/file/d/1ExO-i97Aetyt327Yb0ejFAbSmywOiZq3/view?usp=sharing)
+![4](https://drive.google.com/file/d/1q0LMcGiWqykarMl14SBvnI4I9W56g5e0/view?usp=sharing)
 
 ***Installation* - How can another developer get your project up and running on their own? What dependencies are required? Are there environmental requirements? Be specific, and outline steps to take in order to get the project running.**
 
