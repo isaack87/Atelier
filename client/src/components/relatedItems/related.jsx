@@ -49,7 +49,7 @@ class RelatedProducts extends React.Component {
         return (
           <div key={index} className='firstRelated' id={item.key} onClick={this.changeMainProductId.bind(this)}>
             <div className='relatedProductsStar'>✭</div>
-            <img src={placeholder[item.value].pic} className='relatedProductsPic'/>
+            <img src={placeholder[item.value].pic} alt='related product' className='relatedProductsPic'/>
             <div className='relatedProductsInfo'>
               {placeholder[item.value].category}
               <br></br>

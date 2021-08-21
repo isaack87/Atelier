@@ -235,7 +235,7 @@ class AddToCart extends React.Component {
           </div>
         </form>
 
-        <div id="myCartModal" class="cartModal">
+        <div id="myCartModal" className="cartModal">
           {/* Modal content */}
           <div className="cartModalContent">
             <b><p>The following items have been added to your shopping cart!</p></b>
