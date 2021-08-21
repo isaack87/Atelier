@@ -14,7 +14,7 @@ const AskQuestions = (props) => (
       <button onClick={() => { interact('button', 'MORE ANSWERED QUESTIONS'); }} className={props.btnvisibleq ? 'loadanswers' : 'btndisappear'}
         onClick={props.loadMoreQuestions}
         type="submit">
-        MORE ANSWERED QUESTIONS
+        MORE QUESTIONS
       </button>
       <QuestionForm mainProductId={props.mainProductId} updateQuestions={props.updateQuestions}/>
     </div>
