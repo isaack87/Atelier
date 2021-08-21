@@ -1,14 +1,15 @@
 const express = require('express');
-
 const app = express();
-
 const port = 3000;
 const bodyParser = require('body-parser');
+const fs = require('fs');
+const compression = require('compression');
 const isaacAPI = require('./QuestionAnswerAPI');
 const louisAPI = require('./ProductOverviewAPI');
 const helenaAPI = require('./RatingsReviewsAPI');
 const { get } = require('jquery');
 
+app.use(compression())
 app.use(express.static(`${__dirname} /../client/dist`));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
