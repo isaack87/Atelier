@@ -20,10 +20,10 @@ This project is a shopping website simulation such as popular sites like Amazon.
 
 Our application allows the user to click through products and styles to add to their shopping carts. In addition, users can see the current questions asked for the selected product as well as add their own questions & answers. At the very bottom, users can view reviews written by other customers. There is a star rating for each product. The user can add their own rating and review to the products. Overall, there is a click tracker that logs the users’ click interactions into an API.
 
-![alt text](https://github.com/FEC-Manchego/Atelier/blob/main/screenshots/Screen%20Shot%202021-08-21%20at%201.16.59%20PM.png?raw=true)
-![alt text](https://github.com/FEC-Manchego/Atelier/blob/main/screenshots/Screen%20Shot%202021-08-21%20at%201.17.55%20PM.png?raw=true)
-![alt text](https://github.com/FEC-Manchego/Atelier/blob/main/screenshots/Screen%20Shot%202021-08-21%20at%201.18.09%20PM.png?raw=true)
-![alt text](https://github.com/FEC-Manchego/Atelier/blob/main/screenshots/Screen%20Shot%202021-08-21%20at%201.18.17%20PM.png?raw=true)
+![alt text](https://github.com/FEC-Manchego/Atelier/blob/main/screenshots/ProductOverview.png?raw=true)
+![alt text](https://github.com/FEC-Manchego/Atelier/blob/main/screenshots/RelatedProducts.png?raw=true)
+![alt text](https://github.com/FEC-Manchego/Atelier/blob/main/screenshots/QuestionsAnswers.png?raw=true)
+![alt text](https://github.com/FEC-Manchego/Atelier/blob/main/screenshots/RatingsReviews.png?raw=true)
 
 ***Installation* - How can another developer get your project up and running on their own? What dependencies are required? Are there environmental requirements? Be specific, and outline steps to take in order to get the project running.**
 
