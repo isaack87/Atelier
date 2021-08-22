@@ -29,6 +29,17 @@ Our application allows the user to click through products and styles to add to t
 
 Our application uses Express, Axios, jQuery,  webpack, and babelrc mainly. The developer needs node installed and would just need to run an npm install and then run the npm commands to start webpack and the server. The developer would also need their own config files with a imgBB key in order to use the image upload function.
 
+1) Install all packages by running the following commands in your terminal.
+`npm install`
+
+2) Start the server.
+`npm run server`
+
+3) On a separate terminal, run webpack.
+`npm run webpack`
+
+4) Open the project in your web browser.
+http://localhost:3000/
 
 ***Usage* - Further details on how the project is meant to be used may be helpful. For a library or framework, this section would outline how to use the library within another project (see socket.io  ). For a service that is meant to be used within a larger project architecture, instructions on how to integrate may be necessary (see node-statsD  ).**
 *
@@ -58,7 +69,7 @@ Database integration with user data via MongoDB
 
 *License - If open source, state how the project is licensed.*
 
-*Copyright (c) 2021, <FEC Manchego>*
+*Copyright (c) 2021, FEC Manchego*
 *All rights reserved.*
 
 *This source code is licensed under the BSD-style license found in the*
