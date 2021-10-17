@@ -1,3 +1,5 @@
+#Front-End Capstone w/React
+
 Project Title - The name of the project
 # Project Atelier - Team Manchego
 
